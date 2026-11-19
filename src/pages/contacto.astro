@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import { EMPRESA } from '../data/empresa';
+import { ZONAS_ASTURIAS } from '../data/tarifas';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+} from '../lib/schema';
+
+const pageUrl = `${EMPRESA.dominio}/contacto/`;
+const title = 'Contacto y Presupuesto de Reforma en Asturias | MBL Gijón';
+const description =
+  'Contacta con Construcciones MBL en Gijón (Cristasa, Av. Argentina 132) o llama al 684 675 898. Solicita visita técnica gratuita y presupuesto en Asturias.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Contacto', url: '/contacto/' },
+];
+
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header mode="solid" currentPath="/contacto/" />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Atención directa en Gijón, Oviedo, Avilés y toda Asturias</span>
+    <h1 class="sec-title" style="font-size:clamp(38px,5vw,66px)">
+      Contacto · Solicita Tu Visita Técnica Gratuita
+    </h1>
+
+    <ResumenDirecto
+      texto={`Nuestra oficina técnica se encuentra en ${EMPRESA.direccion.completa}. Atendemos de ${EMPRESA.horario.resumen} en el teléfono ${EMPRESA.telefonoVisible}, por WhatsApp o mediante el formulario inferior para concertar visitas gratuitas en toda Asturias.`}
+    />
+
+    <div class="article-layout" style="margin-top:32px">
+      <form id="contact-lead-form" class="eeat-card" style="background:var(--white)" novalidate>
+        <span class="sec-kicker">Respuesta en menos de 24-48 h laborables</span>
+        <h2 class="sec-title" style="font-size:32px;margin-bottom:14px">
+          Cuéntanos Tu Proyecto
+        </h2>
+
+        <div class="hp-field" aria-hidden="true">
+          <label for="cnt-hp">No rellenar</label>
+          <input id="cnt-hp" name="empresa_web" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="cnt-nombre">Nombre y apellidos *</label>
+            <input id="cnt-nombre" name="nombre" type="text" class="input-ctrl" required minlength="2" placeholder="Tu nombre" />
+          </div>
+
+          <div class="input-group">
+            <label for="cnt-telefono">Teléfono *</label>
+            <input id="cnt-telefono" name="telefono" type="tel" class="input-ctrl" required minlength="9" placeholder="Ej. 684 675 898" />
+          </div>
+
+          <div class="input-group">
+            <label for="cnt-email">Correo electrónico *</label>
+            <input id="cnt-email" name="email" type="email" class="input-ctrl" required placeholder="tu@correo.es" />
+          </div>
+
+          <div class="input-group">
+            <label for="cnt-zona">Concejo / Localidad en Asturias *</label>
+            <select id="cnt-zona" name="zona" class="input-ctrl">
+              {ZONAS_ASTURIAS.map((z) => (
+                <option value={z}>{z}</option>
+              ))}
+            </select>
+          </div>
+
+          <div class="input-group full">
+            <label for="cnt-mensaje">¿En qué podemos ayudarte? *</label>
+            <textarea
+              id="cnt-mensaje"
+              name="mensaje"
+              rows="4"
+              class="input-ctrl"
+              required
+              minlength="10"
+              placeholder="Indícanos qué tipo de reforma o construcción necesitas, superficie aproximada y ubicación..."
+            ></textarea>
+          </div>
+
+          <div class="input-group full">
+            <label class="check-row">
+              <input id="cnt-privacidad" name="privacidad" type="checkbox" required />
+              <span>
+                He leído y acepto la{' '}
+                <a href="/politica-de-privacidad/" style="text-decoration:underline;font-weight:500">
+                  Política de Privacidad
+                </a>{' '}
+                para que Construcciones MBL atienda mi consulta. *
+              </span>
+            </label>
+          </div>
+
+          <div class="input-group full">
+            <button type="submit" class="btn-dark" id="cnt-submit-btn" style="width:100%;padding:14px 24px;font-size:15px">
+              Enviar consulta →
+            </button>
+          </div>
+        </div>
+
+        <div id="cnt-form-status" class="form-status" hidden role="status" aria-live="polite"></div>
+      </form>
+
+      <aside class="toc-box" style="display:grid;gap:16px">
+        <div>
+          <span class="sec-kicker">Oficina Técnica Central</span>
+          <h2 style="font-size:18px;margin-bottom:6px">{EMPRESA.marca}</h2>
+          <p style="font-size:14px;color:#333">
+            {EMPRESA.direccion.calle}<br />
+            {EMPRESA.direccion.codigoPostal} {EMPRESA.direccion.localidad}, {EMPRESA.direccion.provincia}
+          </p>
+        </div>
+
+        <div style="border-top:1px solid var(--line);padding-top:14px">
+          <strong style="font-size:13.5px;display:block;margin-bottom:4px">Teléfono y WhatsApp</strong>
+          <p style="font-size:15px;font-weight:600">
+            <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel" style="text-decoration:underline">
+              {EMPRESA.telefonoVisible}
+            </a>
+          </p>
+        </div>
+
+        <div style="border-top:1px solid var(--line);padding-top:14px">
+          <strong style="font-size:13.5px;display:block;margin-bottom:4px">Correo electrónico</strong>
+          <p style="font-size:14px">
+            <a href={`mailto:${EMPRESA.email}`} style="text-decoration:underline">{EMPRESA.email}</a>
+          </p>
+        </div>
+
+        <div style="border-top:1px solid var(--line);padding-top:14px">
+          <strong style="font-size:13.5px;display:block;margin-bottom:4px">Horario de atención</strong>
+          <p style="font-size:13.5px;color:#333">{EMPRESA.horario.resumen}</p>
+        </div>
+
+        <div style="border-top:1px solid var(--line);padding-top:14px;display:grid;gap:10px">
+          <a
+            class="btn-dark"
+            href={EMPRESA.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="wa"
+          >
+            Escribir por WhatsApp →
+          </a>
+          <a
+            class="btn-outline"
+            href={EMPRESA.googleBusiness.hasMap}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Cómo llegar en Google Maps →
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-lead-form') as HTMLFormElement | null;
+  const statusBox = document.getElementById('cnt-form-status') as HTMLElement | null;
+  const submitBtn = document.getElementById('cnt-submit-btn') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    if (!statusBox || !submitBtn) return;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const fd = new FormData(form);
+    const payload = {
+      origen: 'contacto',
+      nombre: String(fd.get('nombre') || '').trim(),
+      telefono: String(fd.get('telefono') || '').trim(),
+      email: String(fd.get('email') || '').trim(),
+      zona: String(fd.get('zona') || 'Asturias').trim(),
+      mensaje: String(fd.get('mensaje') || '').trim(),
+      privacidad: (document.getElementById('cnt-privacidad') as HTMLInputElement).checked,
+      empresa_web: String(fd.get('empresa_web') || ''),
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando mensaje...';
+    statusBox.hidden = true;
+
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        statusBox.className = 'form-status ok';
+        statusBox.textContent =
+          data.message ||
+          '¡Gracias por contactar con Construcciones MBL! Hemos recibido tu consulta y te responderemos en menos de 24-48 h laborables.';
+        statusBox.hidden = false;
+        form.reset();
+        (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({
+          event: 'submit_contacto',
+          zona: payload.zona,
+        });
+      } else {
+        statusBox.className = 'form-status err';
+        statusBox.textContent =
+          data.error ||
+          'No se pudo completar el envío en este momento. Llámanos o escríbenos por WhatsApp al 684 675 898.';
+        statusBox.hidden = false;
+      }
+    } catch (_e) {
+      statusBox.className = 'form-status err';
+      statusBox.textContent =
+        'Error de red al enviar el mensaje. Por favor, llámanos directamente al 684 675 898.';
+      statusBox.hidden = false;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar consulta →';
+    }
+  });
+</script>

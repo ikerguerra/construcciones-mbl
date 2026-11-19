@@ -1,0 +1,187 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import TablaComparativa from '../components/TablaComparativa.astro';
+import BloqueFaq from '../components/BloqueFaq.astro';
+import EquipoEEAT from '../components/EquipoEEAT.astro';
+import CtaSimulador from '../components/CtaSimulador.astro';
+import { EMPRESA, isPromoDuchaActive } from '../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+  buildServiceNode,
+  buildFaqNode,
+} from '../lib/schema';
+import duchaHeroImg from '../assets/images/servicios/servicio-plato-ducha-48h.webp';
+
+const promos = await getCollection('promociones');
+const promo = promos.find((p) => p.data.id === 'plato-ducha-48h')!;
+const showPromoBanner = isPromoDuchaActive(promo.data.activa);
+
+const slug = 'cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas';
+const pageUrl = `${EMPRESA.dominio}/${slug}/`;
+const title = 'Cambio de Bañera por Plato de Ducha en Asturias 48h | MBL';
+const description =
+  'Cambio de bañera por plato de ducha en Asturias en 48 horas. Plato de carga mineral antideslizante Clase 3, retirada de escombros y garantía por escrito.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/servicios/' },
+  { name: 'Cambio de bañera por plato de ducha 48 h', url: `/${slug}/` },
+];
+
+const faqs = [
+  {
+    pregunta: '¿Realmente tardáis solo 48 horas en cambiar la bañera por plato de ducha?',
+    respuesta:
+      'Sí. El primer día retiramos la bañera, adaptamos la válvula y tubería de desagüe, colocamos el plato de carga mineral e impermeabilizamos y alicatamos el hueco descubierto. El segundo día rejuntamos, instalamos grifería y mampara y dejamos el baño limpio.',
+  },
+  {
+    pregunta: '¿Qué tipo de plato de ducha instaláis para evitar resbalones?',
+    respuesta:
+      'Instalamos platos de resina con carga mineral extraplanos (3 cm de grosor) con certificación antideslizante Grado 3 (el máximo nivel de seguridad), antibacterianos y templados al tacto.',
+  },
+  {
+    pregunta: '¿Qué pasa si ya no tengo azulejos iguales a los de mi baño?',
+    respuesta:
+      'Es lo más habitual. Combinamos la franja de la ducha con un revestimiento cerámico en contraste o tono neutro armonizado hasta la altura necesaria, logrando un acabado estético moderno e integrado.',
+  },
+  {
+    pregunta: '¿Qué garantía tiene el cambio de bañera por plato de ducha?',
+    respuesta:
+      'Entregamos garantía por escrito de 3 años en la instalación y estanqueidad, además de la garantía oficial del fabricante en plato, mampara y columna termostática.',
+  },
+];
+
+const faqNode = buildFaqNode(faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  buildServiceNode({
+    name: 'Cambio de Bañera por Plato de Ducha en Asturias en 48 Horas',
+    description,
+    url: pageUrl,
+    priceText: promo.data.precioDesde,
+  }),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <header class="hero hero-sub">
+    <Image
+      src={duchaHeroImg}
+      alt="Cambio de bañera por plato de ducha extraplano antideslizante en Asturias en 48 horas"
+      class="hero-bg"
+      widths={[640, 1024, 1440]}
+      sizes="(max-width: 1280px) 100vw, 1248px"
+      loading="eager"
+    />
+    <Header mode="overlay" currentPath={`/${slug}/`} />
+
+    <div class="hero-body">
+      <div>
+        <small>Servicio Exprés en 48 Horas · Gijón, Oviedo, Avilés y toda Asturias</small>
+        <h1>Cambio de Bañera por Plato de Ducha en Asturias en 48 Horas</h1>
+      </div>
+      <div>
+        <p class="lead">
+          Gana accesibilidad, seguridad antideslizante y amplitud en tu baño sin meterte en semanas de obra ni polvo en el resto de tu vivienda.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="pill pill-white"
+            href="/calcula-el-precio-de-tu-reforma-en-asturias/?tipo=plato-ducha"
+          >
+            Calcular mi plato de ducha →
+          </a>
+          <a class="pill" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+            Llamar {EMPRESA.telefonoVisible}
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+
+    {showPromoBanner && (
+      <div class="promo-strip" style="margin-top:0;margin-bottom:24px">
+        <div>
+          <span class="sec-kicker" style="color:var(--warm);margin-bottom:4px">
+            Campaña activa en Asturias
+          </span>
+          <h3>Pack Cambio Exprés 48 Horas · {promo.data.precioDesde}</h3>
+          <p>{promo.data.condiciones}</p>
+        </div>
+        <a class="pill pill-white" href="/contacto/">Solicitar visita gratuita →</a>
+      </div>
+    )}
+
+    <ResumenDirecto
+      texto="El servicio de cambio de bañera por plato de ducha en Asturias de Construcciones MBL se completa en 48 horas desde 1.190 € (sustitución base) hasta 2.300 € en paquete completo todo incluido con plato de carga mineral antideslizante Grado 3, mampara de vidrio templado antical, revestimiento cerámico de la zona descubierta y 3 años de garantía escrita."
+    />
+
+    <div style="margin-top:32px">
+      <span class="sec-kicker">Qué incluye la actuación en 48 horas</span>
+      <h2 class="sec-title">Seguridad, Accesibilidad y Limpieza</h2>
+      <ul style="margin-top:18px;display:grid;gap:10px;padding-left:20px;font-size:15px;color:#222">
+        {promo.data.incluye.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div style="margin-top:44px">
+      <span class="sec-kicker">Opciones transparentes</span>
+      <h2 class="sec-title">Precios Orientativos de Cambio de Bañera por Ducha</h2>
+      <TablaComparativa
+        caption="Configuraciones habituales para cambio de bañera por plato de ducha en Asturias (2026)"
+        columnas={['Configuración', 'Importe orientativo', 'Plazo de obra', 'Equipamiento incluido']}
+        filas={[
+          [
+            'Sustitución base (plato + albañilería)',
+            '1.190 – 1.550 €',
+            '24 – 48 horas',
+            'Retirada de bañera, desagüe nuevo, plato carga mineral C3 y alicatado hueco',
+          ],
+          [
+            'Sustitución + Mampara vidrio templado',
+            '1.580 – 2.050 €',
+            '48 horas',
+            'Sustitución base + mampara fija o corredera con tratamiento antical',
+          ],
+          [
+            'Pack Completo Todo Incluido MBL',
+            '1.850 – 2.300 €',
+            '48 horas',
+            'Plato C3 + azulejo hasta 2 m² + mampara cristal templado + grifería termostática',
+          ],
+        ]}
+      />
+    </div>
+
+    <div class="prose" style="margin-top:36px">
+      <h2>Guías recomendadas sobre platos de ducha en Asturias</h2>
+      <p>
+        Antes de decidir, puedes consultar nuestra{' '}
+        <a href="/reformas-de-banos/cambio-de-banera-por-plato-de-ducha-en-asturias-2026-guia-completa/">
+          guía completa sobre cambio de bañera por plato de ducha en Asturias
+        </a>{' '}
+        y nuestros consejos prácticos en la{' '}
+        <a href="/mantenimiento/guia-de-mantenimiento-para-tu-nuevo-plato-de-ducha-cuidalo-y-durara-toda-la-vida/">
+          guía de mantenimiento para que tu nuevo plato de ducha dure toda la vida
+        </a>.
+      </p>
+    </div>
+  </section>
+
+  <EquipoEEAT compact />
+  <CtaSimulador tipoPorDefecto="plato-ducha" />
+  <BloqueFaq titulo="Preguntas Frecuentes sobre el Cambio a Plato de Ducha" faqs={faqs} />
+</BaseLayout>

@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { EMPRESA } from '../data/empresa';
+
+const pageUrl = `${EMPRESA.dominio}/mensaje-enviado/`;
+const title = 'Consulta Recibida | Construcciones MBL Asturias';
+const description =
+  'Confirmación de envío de consulta a Construcciones MBL en Asturias. Nuestro equipo técnico revisará tu solicitud.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={pageUrl}
+  robots="noindex, nofollow"
+>
+  <Header mode="solid" currentPath="/mensaje-enviado/" />
+
+  <section class="sec" style="text-align:center;max-width:680px;margin:0 auto">
+    <span class="sec-kicker">Construcciones MBL · Asturias</span>
+    <h1 class="sec-title" style="font-size:clamp(38px,5vw,60px);margin-bottom:16px">
+      Gracias por Enviarnos Tu Consulta
+    </h1>
+    <p style="font-size:16px;color:#333;margin-bottom:28px">
+      Hemos recibido correctamente tus datos. Nuestro equipo técnico en Gijón revisará tu solicitud y se pondrá en contacto contigo en menos de 24 a 48 horas laborables para dar el siguiente paso.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+      <a class="btn-dark" href="/">Volver a inicio</a>
+      <a class="btn-outline" href="/proyectos/">Ver proyectos finalizados</a>
+      <a class="btn-outline" href="/innovacion-sostenible/">Leer guías técnicas</a>
+    </div>
+  </section>
+</BaseLayout>

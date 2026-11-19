@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import TablaComparativa from '../components/TablaComparativa.astro';
+import { EMPRESA } from '../data/empresa';
+import { buildOrganizationNode, buildBreadcrumbNode } from '../lib/schema';
+
+const pageUrl = `${EMPRESA.dominio}/politica-de-cookies/`;
+const title = 'Política de Cookies y Consentimiento | Construcciones MBL';
+const description =
+  'Información detallada sobre las cookies técnicas y de analítica (Google Consent Mode v2) utilizadas en construccionesmbl.com y cómo configurarlas.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Política de Cookies', url: '/politica-de-cookies/' },
+];
+
+const schemaGraph = [buildOrganizationNode(), buildBreadcrumbNode(breadcrumbs, pageUrl)];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header mode="solid" currentPath="/politica-de-cookies/" />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Transparencia · Guía AEPD y LSSI-CE</span>
+    <h1 class="sec-title" style="margin-bottom:24px">Política de Cookies</h1>
+
+    <div class="prose">
+      <h2>1. ¿Qué son las cookies y el almacenamiento local?</h2>
+      <p>
+        Las cookies y tecnologías similares (como <code>localStorage</code> del navegador) son pequeños archivos o registros que el sitio web almacena en su dispositivo para recordar sus preferencias de privacidad y, únicamente si usted lo autoriza de forma expresa, obtener estadísticas anónimas de uso.
+      </p>
+
+      <h2>2. Cómo aplicamos el consentimiento previo</h2>
+      <p>
+        En {EMPRESA.marca} aplicamos un gestor de consentimiento nativo con <strong>Google Consent Mode v2</strong> configurado por defecto en estado denegado (<code>denied</code>). Mientras no pulse «Aceptar todas» o active la casilla de analítica en el panel de configuración, no se carga ningún script de medición ni se instalan cookies analíticas en su navegador.
+      </p>
+
+      <p style="margin:20px 0">
+        <button type="button" class="btn-dark" data-open-cookies>
+          Abrir panel de configuración de cookies
+        </button>
+      </p>
+
+      <h2>3. Inventario de cookies y registros utilizados</h2>
+    </div>
+
+    <TablaComparativa
+      caption="Detalle de almacenamiento local y cookies en construccionesmbl.com"
+      columnas={['Nombre', 'Titular', 'Categoría', 'Duración', 'Finalidad']}
+      filas={[
+        [
+          'mbl_consent_v1',
+          'Propia (construccionesmbl.com)',
+          'Técnica necesaria (localStorage)',
+          '12 meses',
+          'Guarda su decisión de aceptar o rechazar las cookies analíticas para no mostrarle el banner en cada página.',
+        ],
+        [
+          '_ga / _ga_*',
+          'Google Ireland Limited (cuenta propia de MBL)',
+          'Analítica (opcional)',
+          'Hasta 2 años',
+          'Solo se activan si acepta la medición. Permiten distinguir visitas únicas y páginas más consultadas de forma agregada.',
+        ],
+      ]}
+    />
+
+    <div class="prose" style="margin-top:24px">
+      <h2>4. Cómo eliminar o bloquear las cookies desde su navegador</h2>
+      <p>
+        Además de utilizar nuestro botón «Configurar cookies» disponible permanentemente en el pie de página, puede borrar o bloquear las cookies desde las opciones de privacidad de su navegador (Google Chrome, Mozilla Firefox, Apple Safari o Microsoft Edge).
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,190 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ResumenDirecto from '../../components/ResumenDirecto.astro';
+import BloqueFaq from '../../components/BloqueFaq.astro';
+import CtaSimulador from '../../components/CtaSimulador.astro';
+import { AUTORES, EMPRESA } from '../../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+  buildBlogPostingNode,
+  buildFaqNode,
+} from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: {
+      categoria: post.data.categoria,
+      slug: post.data.slug,
+    },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const autor = AUTORES[post.data.autor];
+const h2Headings = headings.filter((h) => h.depth === 2);
+
+const catArchiveSlug =
+  post.data.categoria === 'consejos-practicos'
+    ? 'reforma-integral'
+    : post.data.categoria === 'mantenimiento'
+      ? 'reformas-de-banos'
+      : post.data.categoria;
+
+const todosPosts = await getCollection('blog');
+const relacionados = todosPosts
+  .filter(
+    (p) =>
+      p.data.slug !== post.data.slug &&
+      (post.data.articulosRelacionados.includes(`/${p.data.categoria}/${p.data.slug}/`) ||
+        p.data.categoria === post.data.categoria)
+  )
+  .slice(0, 3);
+
+const pageUrl = `${EMPRESA.dominio}/${post.data.categoria}/${post.data.slug}/`;
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Innovación Sostenible', url: '/innovacion-sostenible/' },
+  { name: post.data.categoriaNombre, url: `/category/${catArchiveSlug}/` },
+  { name: post.data.titulo, url: `/${post.data.categoria}/${post.data.slug}/` },
+];
+
+const faqNode = buildFaqNode(post.data.faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  buildBlogPostingNode({
+    title: post.data.titulo,
+    description: post.data.metaDescription,
+    url: pageUrl,
+    imageUrl: `${EMPRESA.dominio}${post.data.imagen.src}`,
+    datePublished: post.data.datePublished,
+    dateModified: post.data.dateModified,
+    authorName: autor.nombre,
+    authorRole: autor.rol,
+    section: post.data.categoriaNombre,
+  }),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout
+  title={post.data.metaTitle}
+  description={post.data.metaDescription}
+  canonical={pageUrl}
+  ogType="article"
+  ogImage={post.data.imagen.src}
+  schemaGraph={schemaGraph}
+>
+  <Header mode="solid" currentPath="/innovacion-sostenible/" />
+
+  <article class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <span class="sec-kicker">{post.data.categoriaNombre} · Guía técnica verificada</span>
+    <h1 class="sec-title" style="font-size:clamp(34px,4.5vw,58px);max-width:26ch">
+      {post.data.titulo}
+    </h1>
+
+    <div class="article-meta">
+      <span>Por <strong>{autor.nombre}</strong></span>
+      <span>Publicado: <time datetime={post.data.datePublished}>{post.data.datePublished}</time></span>
+      <span>Actualizado: <time datetime={post.data.dateModified}>{post.data.dateModified}</time></span>
+      <span>Lectura: {post.data.tiempoLectura} min</span>
+    </div>
+
+    <div class="photo-tile" style="max-height:460px;margin-bottom:28px">
+      <Image
+        src={post.data.imagen}
+        alt={post.data.imagenAlt}
+        widths={[640, 1024, 1360]}
+        sizes="(max-width: 1280px) 100vw, 1180px"
+        loading="eager"
+      />
+    </div>
+
+    <ResumenDirecto texto={post.data.resumenAeo} etiqueta="En resumen (Respuesta directa)" />
+
+    <div class="article-layout" style="margin-top:32px">
+      <div class="prose">
+        <Content />
+
+        <div class="eeat-card" style="margin-top:40px">
+          <span class="sec-kicker">Revisión técnica y autoría</span>
+          <h3>{autor.nombre}</h3>
+          <p class="eeat-role">{autor.rol}</p>
+          <p style="font-size:14px;color:#333;margin-bottom:12px">{autor.bio}</p>
+          <a class="btn-dark" href={post.data.servicioRelacionado}>
+            Ver servicio: {post.data.servicioRelacionadoNombre} →
+          </a>
+        </div>
+      </div>
+
+      <aside class="toc-box" aria-label="Tabla de contenidos">
+        <h2>En esta guía</h2>
+        {h2Headings.length > 0 && (
+          <ol>
+            {h2Headings.map((h) => (
+              <li>
+                <a href={`#${h.slug}`}>{h.text}</a>
+              </li>
+            ))}
+          </ol>
+        )}
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">
+          <p style="font-size:13px;color:#333;margin-bottom:10px">
+            <strong>¿Tienes una obra en mente en Asturias?</strong> Obtén tu estimación en 2 minutos.
+          </p>
+          <a
+            class="btn-dark"
+            href="/calcula-el-precio-de-tu-reforma-en-asturias/"
+            style="width:100%"
+          >
+            Calcular reforma →
+          </a>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <BloqueFaq
+    titulo="Preguntas Frecuentes de Esta Guía"
+    faqs={post.data.faqs}
+  />
+
+  {relacionados.length > 0 && (
+    <section class="sec" style="padding-top:0" aria-labelledby="rel-guides-title">
+      <span class="sec-kicker">Sigue profundizando</span>
+      <h2 class="sec-title" id="rel-guides-title">Guías Relacionadas en Asturias</h2>
+      <div class="zonas-grid">
+        {relacionados.map((rel) => (
+          <article class="zona-card">
+            <div class="zona-card-body">
+              <span class="sec-kicker">{rel.data.categoriaNombre}</span>
+              <h3 style="font-family:var(--f-body);text-transform:none;font-size:18px;font-weight:600">
+                <a href={`/${rel.data.categoria}/${rel.data.slug}/`}>{rel.data.titulo}</a>
+              </h3>
+              <p>{rel.data.metaDescription}</p>
+              <a
+                class="btn-outline"
+                href={`/${rel.data.categoria}/${rel.data.slug}/`}
+                style="margin-top:auto"
+              >
+                Leer guía →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <CtaSimulador />
+</BaseLayout>

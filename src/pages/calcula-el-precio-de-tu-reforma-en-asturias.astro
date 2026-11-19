@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import SimuladorReforma from '../components/SimuladorReforma.astro';
+import TablaComparativa from '../components/TablaComparativa.astro';
+import BloqueFaq from '../components/BloqueFaq.astro';
+import { EMPRESA } from '../data/empresa';
+import { TARIFAS } from '../data/tarifas';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+  buildFaqNode,
+} from '../lib/schema';
+
+const slug = 'calcula-el-precio-de-tu-reforma-en-asturias';
+const pageUrl = `${EMPRESA.dominio}/${slug}/`;
+const title = 'Calcula el Precio de tu Reforma en Asturias | Simulador MBL';
+const description =
+  'Simulador online gratuito para calcular el precio de tu reforma integral, cocina, baño, plato de ducha o local en Asturias en 2 minutos y pedir visita.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Calcula el precio de tu reforma', url: `/${slug}/` },
+];
+
+const filasReferencia = Object.values(TARIFAS).map((t) => [
+  t.nombre,
+  t.rangoVisible,
+  t.plazoEstimado,
+  t.garantia,
+]);
+
+const faqs = [
+  {
+    pregunta: '¿Qué fiabilidad tiene el precio que muestra el simulador online?',
+    respuesta:
+      'El simulador utiliza nuestras horquillas reales de ejecución en Asturias (2026) por metro cuadrado y nivel de calidades. Sirve para conocer la inversión realista antes de nuestra visita técnica gratuita, en la que cerramos el presupuesto exacto por partidas.',
+  },
+  {
+    pregunta: '¿Solicitar la visita técnica desde el simulador tiene algún coste?',
+    respuesta:
+      'No. La visita técnica, medición en el inmueble (en Gijón, Oviedo, Avilés y resto de Asturias) y entrega del presupuesto desglosado en 48 horas son totalmente gratuitas y sin compromiso.',
+  },
+  {
+    pregunta: '¿Los importes orientativos del simulador incluyen IVA?',
+    respuesta:
+      'Las horquillas mostradas son importes base antes de impuestos. En reformas de vivienda particular, siempre que el coste de los materiales aportados no supere el 40 % del total, suele aplicarse el IVA reducido del 10 % en lugar del 21 %.',
+  },
+];
+
+const faqNode = buildFaqNode(faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header mode="solid" currentPath={`/${slug}/`} />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Calculadora interactiva · Tarifas Asturias 2026</span>
+    <h1 class="sec-title" style="font-size:clamp(38px,5vw,66px)">
+      Calcula el Precio de Tu Reforma en Asturias
+    </h1>
+
+    <ResumenDirecto
+      texto="Selecciona el tipo de obra, concejo en Asturias, superficie aproximada y nivel de acabados para obtener al instante una horquilla orientativa real y su desglose por partidas. Si el resultado encaja con tu idea, solicita tu visita técnica gratuita con confirmación inmediata."
+    />
+
+    <div style="margin-top:32px">
+      <SimuladorReforma />
+    </div>
+
+    <div style="margin-top:56px">
+      <span class="sec-kicker">Tabla resumen de referencia</span>
+      <h2 class="sec-title">Tarifas Orientativas Unificadas en Asturias (2026)</h2>
+      <TablaComparativa
+        caption="Horquillas base utilizadas por el simulador de Construcciones MBL en Asturias"
+        columnas={['Tipo de actuación', 'Rango orientativo', 'Plazo estimado', 'Garantía escrita']}
+        filas={filasReferencia}
+      />
+    </div>
+  </section>
+
+  <BloqueFaq
+    titulo="Preguntas Frecuentes sobre el Simulador de Presupuestos"
+    faqs={faqs}
+  />
+</BaseLayout>

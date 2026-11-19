@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { EMPRESA } from '../data/empresa';
+
+const title = 'Página No Encontrada (404) | Construcciones MBL Asturias';
+const description =
+  'La página que buscas no existe o ha cambiado de ubicación. Explora nuestros servicios de reformas integrales, cocinas y baños en Asturias.';
+---
+
+<BaseLayout title={title} description={description} robots="noindex, nofollow">
+  <Header mode="solid" />
+
+  <section class="sec" style="text-align:center;max-width:720px;margin:0 auto">
+    <span class="sec-kicker">Error 404 · Página no encontrada</span>
+    <h1 class="sec-title" style="font-size:clamp(44px,6vw,78px);margin-bottom:14px">
+      Esta Ruta No Está Disponible
+    </h1>
+    <p style="font-size:15.5px;color:#333;margin-bottom:28px">
+      Es posible que el enlace haya cambiado tras nuestra actualización web. Aquí tienes acceso directo a nuestras secciones principales en Asturias:
+    </p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+      <a class="btn-dark" href="/">Ir a la portada</a>
+      <a class="btn-outline" href="/servicios/">Servicios en Asturias</a>
+      <a class="btn-outline" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
+        Simulador de reformas
+      </a>
+      <a class="btn-outline" href="/innovacion-sostenible/">Guías Innovación Sostenible</a>
+      <a class="btn-outline" href="/contacto/">Contacto ({EMPRESA.telefonoVisible})</a>
+    </div>
+  </section>
+</BaseLayout>

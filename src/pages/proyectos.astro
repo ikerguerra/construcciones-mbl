@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import CtaSimulador from '../components/CtaSimulador.astro';
+import { EMPRESA } from '../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+} from '../lib/schema';
+
+const proyectos = (await getCollection('proyectos')).sort((a, b) => a.data.orden - b.data.orden);
+
+const title = 'Proyectos de Reformas y Construcción en Asturias | MBL';
+const description =
+  'Galería de proyectos reales de Construcciones MBL en Asturias: reformas integrales, cocinas a medida, baños impermeabilizados y locales comerciales.';
+const pageUrl = `${EMPRESA.dominio}/proyectos/`;
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Proyectos realizados', url: '/proyectos/' },
+];
+
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header mode="solid" currentPath="/proyectos/" />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Trabajos reales ejecutados en Asturias</span>
+    <h1 class="sec-title" style="font-size:clamp(40px,5vw,68px)">
+      Proyectos de Reforma y Construcción en Asturias
+    </h1>
+
+    <ResumenDirecto
+      texto="Muestra de obras reales ejecutadas por el equipo propio de Construcciones MBL en Gijón, Oviedo, Avilés y resto de Asturias. Todas nuestras actuaciones se entregan con presupuesto cerrado por partidas y garantía por escrito."
+    />
+
+    <div class="tabs" role="tablist" aria-label="Filtrar proyectos por categoría">
+      <button type="button" class="tab on" role="tab" aria-selected="true" data-proj-tab="todos">
+        Todos ({proyectos.length})
+      </button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-proj-tab="integral">
+        Reforma integral
+      </button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-proj-tab="cocina">
+        Cocinas
+      </button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-proj-tab="bano">
+        Baños y duchas
+      </button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-proj-tab="local">
+        Locales comerciales
+      </button>
+    </div>
+
+    <div class="zonas-grid" id="proyectos-grid">
+      {proyectos.map((proy) => (
+        <article class="zona-card" data-proj-cat={proy.data.categoria}>
+          <div class="zona-card-img" style="height:240px">
+            <Image
+              src={proy.data.imagen}
+              alt={proy.data.imagenAlt}
+              widths={[460, 780]}
+              sizes="(max-width: 900px) 100vw, 390px"
+            />
+          </div>
+          <div class="zona-card-body">
+            <span class="sec-kicker" style="margin-bottom:0">
+              {proy.data.categoriaEtiqueta} · {proy.data.municipio}
+            </span>
+            <h2 style="font-family:var(--f-body);text-transform:none;font-size:18.5px;font-weight:600;line-height:1.3">
+              {proy.data.titulo}
+            </h2>
+            <p>{proy.data.resumen}</p>
+            <p style="font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:8px">
+              Superficie: <strong>{proy.data.superficieM2}</strong> · Plazo de ejecución:{' '}
+              <strong>{proy.data.plazo}</strong>
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CtaSimulador />
+</BaseLayout>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('[data-proj-tab]');
+  const cards = document.querySelectorAll<HTMLElement>('#proyectos-grid [data-proj-cat]');
+
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-proj-tab') ?? 'todos';
+      btns.forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle('on', active);
+        b.setAttribute('aria-selected', String(active));
+      });
+      cards.forEach((card) => {
+        const itemCat = card.getAttribute('data-proj-cat');
+        card.style.display = cat === 'todos' || itemCat === cat ? '' : 'none';
+      });
+    });
+  });
+</script>

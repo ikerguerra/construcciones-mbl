@@ -1,0 +1,207 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ResumenDirecto from '../../components/ResumenDirecto.astro';
+import CtaSimulador from '../../components/CtaSimulador.astro';
+import { AUTORES, EMPRESA } from '../../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+} from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const categorias: Array<{
+    slug: string;
+    nombre: string;
+    metaTitle: string;
+    metaDescription: string;
+    resumen: string;
+  }> = [
+    {
+      slug: 'reforma-integral',
+      nombre: 'Reforma Integral',
+      metaTitle: 'Guías de Reforma Integral en Asturias | Construcciones MBL',
+      metaDescription:
+        'Artículos técnicos sobre reformas integrales en Asturias: precios reales por m², licencias en Gijón, seguros de hogar, errores a evitar y rehabilitación.',
+      resumen:
+        'Guías prácticas redactadas por la dirección técnica de Construcciones MBL para planificar tu reforma integral en Asturias con presupuesto cerrado, plazos claros y máxima eficiencia.',
+    },
+    {
+      slug: 'vivienda-sostenible',
+      nombre: 'Vivienda Sostenible',
+      metaTitle: 'Vivienda Sostenible y Confort en Asturias | Guías MBL',
+      metaDescription:
+        'Soluciones de vivienda sostenible en Asturias: eliminación de condensaciones y moho, pavimentos eficientes, ahorro energético y materiales saludables.',
+      resumen:
+        'Artículos especializados en mejorar la salubridad, estanqueidad e impermeabilidad de viviendas en Asturias frente a la humedad atlántica.',
+    },
+    {
+      slug: 'aislamiento-termico',
+      nombre: 'Aislamiento Térmico',
+      metaTitle: 'Aislamiento Térmico, Ventanas y Fachadas en Asturias | MBL',
+      metaDescription:
+        'Guías sobre aislamiento térmico en Asturias: trasdosados interiores, insuflado, fachadas SATE, cubiertas y elección de ventanas PVC o aluminio RPT.',
+      resumen:
+        'Claves técnicas para reducir hasta un 55 % la pérdida de calefacción y suprimir puentes térmicos en pisos y viviendas unifamiliares del Principado.',
+    },
+    {
+      slug: 'construccion-casa',
+      nombre: 'Construcción de Casas',
+      metaTitle: 'Construcción de Casas en Asturias: Precios y Normativa | MBL',
+      metaDescription:
+        'Todo sobre construir una vivienda unifamiliar en Asturias: costes reales por m² en 2026, normativa de casas prefabricadas y diseño bioclimático.',
+      resumen:
+        'Información rigurosa sobre costes por metro cuadrado, licencias urbanísticas, viabilidad de parcelas y construcción sostenible de viviendas en Asturias.',
+    },
+    {
+      slug: 'reformas-de-banos',
+      nombre: 'Reformas de Baños',
+      metaTitle: 'Guías sobre Reformas de Baños y Duchas en Asturias | MBL',
+      metaDescription:
+        'Guías prácticas para reformar tu baño o cambiar bañera por plato de ducha en Asturias en 48 horas: materiales antihumedad, precios y mantenimiento.',
+      resumen:
+        'Recomendaciones técnicas sobre impermeabilización, platos de carga mineral antideslizantes Grado 3, ventilación y materiales duraderos para baños.',
+    },
+    {
+      slug: 'reformas-de-cocinas',
+      nombre: 'Reformas de Cocinas',
+      metaTitle: 'Guías sobre Reformas de Cocinas en Asturias | Precios 2026',
+      metaDescription:
+        'Cuánto cuesta reformar una cocina en Asturias por partidas, elección de encimeras, distribución ergonómica e instalaciones eléctricas y de fontanería.',
+      resumen:
+        'Desglose de presupuestos, materiales resistentes a la humedad y consejos de distribución para renovar el corazón de tu vivienda en Asturias.',
+    },
+    {
+      slug: 'reformas-locales-comerciales',
+      nombre: 'Locales Comerciales',
+      metaTitle: 'Guías para Reformar Locales Comerciales en Asturias | MBL',
+      metaDescription:
+        'Cómo reformar y abrir un local comercial en Asturias paso a paso: viabilidad del bajo, accesibilidad PMR, insonorización, licencias municipales y plazos.',
+      resumen:
+        'Todo lo que necesitas revisar antes de alquilar o reformar un bajo comercial en Gijón, Oviedo, Avilés o cualquier municipio asturiano.',
+    },
+    {
+      slug: 'ayudas-y-subvenciones',
+      nombre: 'Ayudas y Subvenciones',
+      metaTitle: 'Ayudas y Subvenciones para Reformas en Asturias 2026 | MBL',
+      metaDescription:
+        'Guía actualizada de ayudas, subvenciones autonómicas y deducciones IRPF (20 %, 40 % y 60 %) para reformas de eficiencia energética y accesibilidad en Asturias.',
+      resumen:
+        'Requisitos técnicos, certificados energéticos previos y errores a evitar para aprovechar las deducciones fiscales y subvenciones de rehabilitación en Asturias.',
+    },
+    {
+      slug: 'tarimas-y-suelos',
+      nombre: 'Tarimas y Suelos',
+      metaTitle: 'Tarimas Flotantes y Suelos Vinílicos SPC en Asturias | MBL',
+      metaDescription:
+        'Comparativas y precios por m² de suelos para reformas en Asturias: suelo vinílico SPC impermeable, tarima laminada AC5 hidrófuga y gres porcelánico.',
+      resumen:
+        'Guías comparativas para elegir el pavimento más resistente a la humedad ambiental, mascotas y calefacción en viviendas de Asturias.',
+    },
+  ];
+
+  return categorias.map((cat) => ({
+    params: { categoria: cat.slug },
+    props: { cat },
+  }));
+}
+
+const { cat } = Astro.props;
+const todosPosts = await getCollection('blog');
+
+const slugsSuelos = new Set([
+  'suelo-vinilico-en-asturias-ventajas-tipos-y-por-que-debes-confiar-en-un-profesional',
+  'tarima-flotante-o-suelo-vinilico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias',
+  'como-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m2-guia-2026',
+]);
+
+const articulos = todosPosts
+  .filter((p) => {
+    if (cat.slug === 'tarimas-y-suelos') return slugsSuelos.has(p.data.slug);
+    if (cat.slug === 'reforma-integral') {
+      return p.data.categoria === 'reforma-integral' || p.data.categoria === 'consejos-practicos';
+    }
+    if (cat.slug === 'reformas-de-banos') {
+      return p.data.categoria === 'reformas-de-banos' || p.data.categoria === 'mantenimiento';
+    }
+    return p.data.categoria === cat.slug;
+  })
+  .sort((a, b) => b.data.datePublished.localeCompare(a.data.datePublished));
+
+const pageUrl = `${EMPRESA.dominio}/category/${cat.slug}/`;
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Innovación Sostenible', url: '/innovacion-sostenible/' },
+  { name: cat.nombre, url: `/category/${cat.slug}/` },
+];
+
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+];
+---
+
+<BaseLayout
+  title={cat.metaTitle}
+  description={cat.metaDescription}
+  canonical={pageUrl}
+  schemaGraph={schemaGraph}
+>
+  <Header mode="solid" currentPath="/innovacion-sostenible/" />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Categoría editorial · Innovación Sostenible</span>
+    <h1 class="sec-title" style="font-size:clamp(38px,5vw,64px)">
+      Guías sobre {cat.nombre} en Asturias
+    </h1>
+
+    <ResumenDirecto texto={cat.resumen} />
+
+    <div style="margin-bottom:24px">
+      <a class="btn-outline" href="/innovacion-sostenible/">← Ver todas las categorías y guías</a>
+    </div>
+
+    <div class="zonas-grid">
+      {articulos.map((post) => {
+        const autor = AUTORES[post.data.autor];
+        return (
+          <article class="zona-card">
+            <div class="zona-card-img">
+              <Image
+                src={post.data.imagen}
+                alt={post.data.imagenAlt}
+                widths={[420, 720]}
+                sizes="(max-width: 900px) 100vw, 380px"
+              />
+            </div>
+            <div class="zona-card-body">
+              <span class="sec-kicker" style="margin-bottom:0">
+                {post.data.categoriaNombre} · {post.data.tiempoLectura} min lectura
+              </span>
+              <h2 style="font-family:var(--f-body);text-transform:none;font-size:18px;font-weight:600;line-height:1.35">
+                <a href={`/${post.data.categoria}/${post.data.slug}/`}>{post.data.titulo}</a>
+              </h2>
+              <p>{post.data.metaDescription}</p>
+              <p style="font-size:12px;color:var(--muted);margin-top:auto;padding-top:6px">
+                Por {autor.nombre}
+              </p>
+              <a
+                class="btn-outline"
+                href={`/${post.data.categoria}/${post.data.slug}/`}
+                style="margin-top:8px"
+              >
+                Leer guía →
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <CtaSimulador />
+</BaseLayout>

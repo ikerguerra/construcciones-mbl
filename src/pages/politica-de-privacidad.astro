@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { EMPRESA } from '../data/empresa';
+import { buildOrganizationNode, buildBreadcrumbNode } from '../lib/schema';
+
+const pageUrl = `${EMPRESA.dominio}/politica-de-privacidad/`;
+const title = 'Política de Privacidad y Protección de Datos | MBL Asturias';
+const description =
+  'Política de privacidad y tratamiento de datos personales (RGPD y LOPDGDD) de MBL CONSTRUCCIONES S.L. para solicitudes de presupuesto y contacto en Asturias.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Política de Privacidad', url: '/politica-de-privacidad/' },
+];
+
+const schemaGraph = [buildOrganizationNode(), buildBreadcrumbNode(breadcrumbs, pageUrl)];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header mode="solid" currentPath="/politica-de-privacidad/" />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">RGPD (UE) 2016/679 · LOPDGDD 3/2018</span>
+    <h1 class="sec-title" style="margin-bottom:24px">Política de Privacidad</h1>
+
+    <div class="prose">
+      <h2>1. Responsable del tratamiento</h2>
+      <p>
+        En cumplimiento del Reglamento (UE) 2016/679 General de Protección de Datos (RGPD) y de la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), le informamos de que los datos personales facilitados a través de este sitio web son tratados por:
+      </p>
+      <ul>
+        <li><strong>Responsable:</strong> {EMPRESA.razonSocial} ({EMPRESA.marca})</li>
+        <li><strong>NIF / CIF:</strong> {EMPRESA.cif}</li>
+        <li><strong>Domicilio:</strong> {EMPRESA.direccion.completa}</li>
+        <li><strong>Teléfono:</strong> {EMPRESA.telefonoVisible}</li>
+        <li><strong>Correo electrónico:</strong> {EMPRESA.email}</li>
+      </ul>
+
+      <h2>2. Finalidad del tratamiento de sus datos</h2>
+      <p>
+        Tratamos los datos identificativos y de contacto que nos facilita a través del formulario de contacto, del simulador de presupuestos o por correo electrónico/WhatsApp con las siguientes finalidades:
+      </p>
+      <ul>
+        <li>Atender sus consultas técnicas, solicitudes de visita en obra y peticiones de presupuesto de reforma o construcción en Asturias.</li>
+        <li>Remitirle por correo electrónico la confirmación y resumen de la estimación calculada en nuestro simulador cuando así lo solicita.</li>
+        <li>Gestionar la relación precontractual, contractual, administrativa, contable y fiscal en caso de contratación de nuestros servicios.</li>
+      </ul>
+
+      <h2>3. Legitimación para el tratamiento</h2>
+      <p>
+        La base legal para el tratamiento de sus datos es su <strong>consentimiento expreso</strong> otorgado al marcar la casilla de aceptación en nuestros formularios (art. 6.1.a RGPD), así como la aplicación de <strong>medidas precontractuales</strong> a petición del interesado al solicitar un presupuesto o visita técnica (art. 6.1.b RGPD).
+      </p>
+
+      <h2>4. Plazo de conservación de los datos</h2>
+      <p>
+        Los datos relativos a solicitudes de información o presupuesto se conservarán durante el tiempo necesario para atender su petición y realizar el seguimiento comercial de la oferta (máximo 12 meses si no llega a formalizarse encargo), o durante los plazos legales de garantía (LOE / Código Civil) y prescripción fiscal cuando exista relación contractual.
+      </p>
+
+      <h2>5. Destinatarios y encargados de tratamiento</h2>
+      <p>
+        Sus datos no se venderán ni cederán a terceros salvo obligación legal (Administración Tributaria, Ayuntamientos para tramitación de licencias de obra en nombre del cliente cuando se contrate). Para la operación técnica del sitio web contamos con proveedores que actúan como encargados del tratamiento bajo garantías RGPD: alojamiento estático y funciones serverless en Cloudflare, Inc. y envío transaccional de correo mediante Resend.
+      </p>
+
+      <h2>6. Derechos del interesado</h2>
+      <p>
+        Puede ejercer en cualquier momento sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, así como retirar su consentimiento, enviando una comunicación escrita a <strong>{EMPRESA.email}</strong> o a nuestra dirección postal en {EMPRESA.direccion.completa}. Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>).
+      </p>
+    </div>
+  </section>
+</BaseLayout>

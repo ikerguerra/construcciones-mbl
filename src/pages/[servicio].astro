@@ -1,0 +1,189 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import TablaComparativa from '../components/TablaComparativa.astro';
+import BloqueFaq from '../components/BloqueFaq.astro';
+import EquipoEEAT from '../components/EquipoEEAT.astro';
+import CtaSimulador from '../components/CtaSimulador.astro';
+import { EMPRESA } from '../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+  buildServiceNode,
+  buildFaqNode,
+} from '../lib/schema';
+
+export async function getStaticPaths() {
+  const servicios = await getCollection('servicios');
+  return servicios.map((servicio) => ({
+    params: { servicio: servicio.data.slug },
+    props: { servicio },
+  }));
+}
+
+const { servicio } = Astro.props;
+const { Content } = await render(servicio);
+
+const todosServicios = (await getCollection('servicios'))
+  .filter((s) => s.data.slug !== servicio.data.slug)
+  .sort((a, b) => a.data.orden - b.data.orden)
+  .slice(0, 3);
+
+const guiasRelacionadas = (await getCollection('blog'))
+  .filter((b) => b.data.servicioRelacionado === `/${servicio.data.slug}/`)
+  .slice(0, 3);
+
+const pageUrl = `${EMPRESA.dominio}/${servicio.data.slug}/`;
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/servicios/' },
+  { name: servicio.data.tituloCorto, url: `/${servicio.data.slug}/` },
+];
+
+const faqNode = buildFaqNode(servicio.data.faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  buildServiceNode({
+    name: servicio.data.titulo,
+    description: servicio.data.metaDescription,
+    url: pageUrl,
+    priceText: servicio.data.precioDesde,
+  }),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout
+  title={servicio.data.metaTitle}
+  description={servicio.data.metaDescription}
+  canonical={pageUrl}
+  schemaGraph={schemaGraph}
+>
+  <header class="hero hero-sub">
+    <Image
+      src={servicio.data.imagen}
+      alt={servicio.data.imagenAlt}
+      class="hero-bg"
+      widths={[640, 1024, 1440]}
+      sizes="(max-width: 1280px) 100vw, 1248px"
+      loading="eager"
+    />
+    <Header mode="overlay" currentPath={`/${servicio.data.slug}/`} />
+
+    <div class="hero-body">
+      <div>
+        <small>Plazo estimado: {servicio.data.plazoVisible} · Garantía: {servicio.data.garantia}</small>
+        <h1>{servicio.data.h1}</h1>
+      </div>
+      <div>
+        <p class="lead">{servicio.data.metaDescription}</p>
+        <div class="hero-actions">
+          <a
+            class="pill pill-white"
+            href={`/calcula-el-precio-de-tu-reforma-en-asturias/?tipo=${servicio.data.tarifaKey}`}
+          >
+            Calcular {servicio.data.tituloCorto.toLowerCase()} →
+          </a>
+          <a class="pill" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+            {EMPRESA.telefonoVisible}
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <ResumenDirecto texto={servicio.data.resumenAeo} />
+
+    <div class="prose" style="max-width:82ch;margin-top:24px">
+      <Content />
+    </div>
+
+    <div style="margin-top:36px">
+      <span class="sec-kicker">Alcance técnico del servicio</span>
+      <h2 class="sec-title">¿Qué Incluye Nuestro Servicio?</h2>
+      <ul style="margin-top:20px;display:grid;gap:12px;padding-left:20px;font-size:15px;color:#222">
+        {servicio.data.incluye.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div style="margin-top:44px">
+      <span class="sec-kicker">Referencias reales en Asturias</span>
+      <h2 class="sec-title">Precios y Plazos Orientativos</h2>
+      <TablaComparativa
+        caption={servicio.data.tablaTarifas.caption}
+        columnas={servicio.data.tablaTarifas.columnas}
+        filas={servicio.data.tablaTarifas.filas}
+      />
+    </div>
+
+    <div style="margin-top:44px">
+      <span class="sec-kicker">Metodología paso a paso</span>
+      <h2 class="sec-title">Así Trabajamos en Tu Proyecto</h2>
+      <div class="eeat-grid" style="margin-top:20px">
+        {servicio.data.pasos.map((p) => (
+          <article class="eeat-card">
+            <h3>{p.titulo}</h3>
+            <p style="font-size:14.5px;color:#333">{p.detalle}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {guiasRelacionadas.length > 0 && (
+    <section class="sec" style="padding-top:0" aria-labelledby="guias-rel-title">
+      <span class="sec-kicker">Guías técnicas de Innovación Sostenible</span>
+      <h2 class="sec-title" id="guias-rel-title">Artículos Relacionados en Asturias</h2>
+      <div class="zonas-grid">
+        {guiasRelacionadas.map((g) => (
+          <article class="zona-card">
+            <div class="zona-card-body">
+              <span class="sec-kicker">{g.data.categoriaNombre}</span>
+              <h3 style="font-family:var(--f-body);text-transform:none;font-size:18px;font-weight:600">
+                <a href={`/${g.data.categoria}/${g.data.slug}/`}>{g.data.titulo}</a>
+              </h3>
+              <p>{g.data.metaDescription}</p>
+              <a class="btn-outline" href={`/${g.data.categoria}/${g.data.slug}/`} style="margin-top:auto">
+                Leer guía →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="sec" style="padding-top:0" aria-labelledby="otros-serv-title">
+    <span class="sec-kicker">Soluciones complementarias</span>
+    <h2 class="sec-title" id="otros-serv-title">Otros Servicios en Asturias</h2>
+    <div class="zonas-grid">
+      {todosServicios.map((s) => (
+        <article class="zona-card">
+          <div class="zona-card-body">
+            <h3><a href={`/${s.data.slug}/`}>{s.data.tituloCorto}</a></h3>
+            <p>{s.data.metaDescription}</p>
+            <a class="btn-outline" href={`/${s.data.slug}/`} style="margin-top:auto">
+              Ver {s.data.tituloCorto.toLowerCase()} →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <EquipoEEAT compact />
+  <CtaSimulador tipoPorDefecto={servicio.data.tarifaKey} />
+  <BloqueFaq
+    titulo={`Preguntas Frecuentes sobre ${servicio.data.tituloCorto}`}
+    faqs={servicio.data.faqs}
+  />
+</BaseLayout>

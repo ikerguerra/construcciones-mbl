@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { EMPRESA } from '../data/empresa';
+import { buildOrganizationNode, buildBreadcrumbNode } from '../lib/schema';
+
+const pageUrl = `${EMPRESA.dominio}/aviso-legal/`;
+const title = 'Aviso Legal y Condiciones de Uso | Construcciones MBL';
+const description =
+  'Información legal y condiciones generales de uso del portal web de MBL CONSTRUCCIONES S.L. (Construcciones MBL) con domicilio en Gijón, Asturias.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Aviso Legal', url: '/aviso-legal/' },
+];
+
+const schemaGraph = [buildOrganizationNode(), buildBreadcrumbNode(breadcrumbs, pageUrl)];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header mode="solid" currentPath="/aviso-legal/" />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Información legal · LSSI-CE</span>
+    <h1 class="sec-title" style="margin-bottom:24px">Aviso Legal</h1>
+
+    <div class="prose">
+      <h2>1. Datos identificativos del titular</h2>
+      <p>
+        En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos identificativos del titular del sitio web:
+      </p>
+      <ul>
+        <li><strong>Denominación social:</strong> {EMPRESA.razonSocial}</li>
+        <li><strong>Nombre comercial:</strong> {EMPRESA.marca}</li>
+        <li><strong>NIF / CIF:</strong> {EMPRESA.cif}</li>
+        <li><strong>Datos registrales:</strong> {EMPRESA.registroMercantil}</li>
+        <li><strong>Domicilio social:</strong> {EMPRESA.direccion.completa}</li>
+        <li><strong>Teléfono de contacto:</strong> {EMPRESA.telefonoVisible}</li>
+        <li><strong>Correo electrónico:</strong> {EMPRESA.email}</li>
+        <li><strong>Dominio web:</strong> {EMPRESA.dominio}</li>
+      </ul>
+
+      <h2>2. Usuarios y condiciones de uso</h2>
+      <p>
+        El acceso y/o uso de este sitio web atribuye la condición de Usuario, que acepta las presentes Condiciones Generales de Uso. El Usuario se compromete a hacer un uso adecuado de los contenidos y herramientas (incluido el simulador orientativo de presupuestos) que {EMPRESA.razonSocial} ofrece a través de su portal, absteniéndose de emplearlos para actividades ilícitas, contrarias a la buena fe o que puedan dañar los sistemas físicos y lógicos del titular.
+      </p>
+
+      <h2>3. Carácter orientativo del simulador y tablas de precios</h2>
+      <p>
+        Los importes, horquillas y plazos mostrados en las páginas informativas y en el simulador de reformas tienen carácter estrictamente orientativo y no constituyen una oferta contractual vinculante. Todo presupuesto definitivo de {EMPRESA.razonSocial} requiere visita técnica previa, medición in situ y emisión de documento presupuestario formal firmado por ambas partes.
+      </p>
+
+      <h2>4. Propiedad intelectual e industrial</h2>
+      <p>
+        {EMPRESA.razonSocial} es titular de los derechos de propiedad intelectual e industrial de su página web, así como de los elementos contenidos en la misma (textos técnicos, fotografías propias de obras, logotipos, código y diseño gráfico). Queda expresamente prohibida la reproducción, distribución y comunicación pública de la totalidad o parte de los contenidos con fines comerciales sin autorización expresa.
+      </p>
+
+      <h2>5. Exclusión de garantías y responsabilidad</h2>
+      <p>
+        {EMPRESA.razonSocial} adopta todas las medidas técnicas y de seguridad necesarias para garantizar el correcto funcionamiento del sitio web, sin que pueda asumir responsabilidad por interrupciones temporales ajenas a su control o por el contenido de enlaces externos de terceros.
+      </p>
+
+      <h2>6. Legislación aplicable y jurisdicción</h2>
+      <p>
+        La relación entre {EMPRESA.razonSocial} y el Usuario se regirá por la normativa española vigente, sometiéndose cualquier controversia a los Juzgados y Tribunales de Gijón (Asturias), salvo que la normativa de consumidores y usuarios establezca otro fuero imperativo.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

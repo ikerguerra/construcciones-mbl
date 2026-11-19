@@ -1,0 +1,159 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import TablaComparativa from '../components/TablaComparativa.astro';
+import BloqueFaq from '../components/BloqueFaq.astro';
+import EquipoEEAT from '../components/EquipoEEAT.astro';
+import CtaSimulador from '../components/CtaSimulador.astro';
+import { EMPRESA, FAQS_GENERALES } from '../data/empresa';
+import { TARIFAS } from '../data/tarifas';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+  buildFaqNode,
+} from '../lib/schema';
+import heroServiciosImg from '../assets/images/servicios/hero-servicios-construcciones-mbl.webp';
+
+const servicios = (await getCollection('servicios')).sort((a, b) => a.data.orden - b.data.orden);
+const localidades = await getCollection('localidades');
+
+const title = 'Servicios de Reformas y Construcción en Asturias | MBL';
+const description =
+  'Catálogo de servicios de Construcciones MBL en Asturias: reformas integrales, cocinas, baños, plato de ducha 48 h, locales comerciales y vivienda nueva.';
+const pageUrl = `${EMPRESA.dominio}/servicios/`;
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/servicios/' },
+];
+
+const filasComparativa = Object.values(TARIFAS).map((t) => [
+  t.nombre,
+  t.rangoVisible,
+  t.plazoEstimado,
+  t.garantia,
+]);
+
+const faqNode = buildFaqNode(FAQS_GENERALES, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <header class="hero hero-sub">
+    <Image
+      src={heroServiciosImg}
+      alt="Servicios profesionales de reformas y construcción en Asturias por Construcciones MBL"
+      class="hero-bg"
+      widths={[640, 1024, 1440]}
+      sizes="(max-width: 1280px) 100vw, 1248px"
+      loading="eager"
+    />
+    <Header mode="overlay" currentPath="/servicios/" />
+
+    <div class="hero-body">
+      <div>
+        <small>Ejecución integral en Gijón, Oviedo, Avilés y toda Asturias</small>
+        <h1>Servicios de Reformas y Construcción en Asturias</h1>
+      </div>
+      <div>
+        <p class="lead">
+          Coordinamos todos los gremios bajo presupuesto cerrado por partidas, gestionando licencias municipales y entregando garantía por escrito.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <ResumenDirecto
+      texto="Construcciones MBL ejecuta reformas integrales (650–1.050 €/m²), cocinas (6.500–14.500 €), baños completos (3.800–7.500 €), cambio de bañera por ducha en 48 h (desde 1.190 €), reformas parciales, locales comerciales y construcción de vivienda unifamiliar en Asturias, siempre con visita técnica gratuita y garantía escrita."
+    />
+
+    <h2 class="sec-title" style="margin:32px 0 24px">Especialidades Llave en Mano</h2>
+
+    <div class="cards">
+      {servicios.map((srv) => (
+        <article class="card">
+          <Image
+            src={srv.data.imagen}
+            alt={srv.data.imagenAlt}
+            class="card-img"
+            widths={[440, 760]}
+            sizes="(max-width: 900px) 100vw, 380px"
+          />
+          <span class="card-badge">⏱ {srv.data.plazoVisible}</span>
+          <div class="txt">
+            <h3><a href={`/${srv.data.slug}/`}>{srv.data.titulo}</a></h3>
+            <p>{srv.data.metaDescription}</p>
+          </div>
+          <a class="price" href={`/${srv.data.slug}/`}>{srv.data.precioDesde}</a>
+        </article>
+      ))}
+    </div>
+
+    <div class="promo-strip">
+      <div>
+        <span class="sec-kicker" style="color:var(--warm);margin-bottom:4px">Actuación rápida sin obras largas</span>
+        <h3>Cambio de Bañera por Plato de Ducha en 48 Horas</h3>
+        <p>
+          Retirada de bañera, plato de carga mineral antideslizante Clase 3, adaptación de grifería y revestimiento cerámico en cualquier concejo de Asturias.
+        </p>
+      </div>
+      <a
+        class="pill pill-white"
+        href="/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/"
+      >
+        Ver servicio plato de ducha 48 h →
+      </a>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <span class="sec-kicker">Tarifas y plazos orientativos 2026</span>
+    <h2 class="sec-title">Tabla Comparativa de Precios y Plazos en Asturias</h2>
+    <TablaComparativa
+      caption="Referencia unificada de inversión, duración estimada y garantía por tipo de obra en Asturias"
+      columnas={['Servicio', 'Rango orientativo', 'Plazo estimado', 'Garantía por escrito']}
+      filas={filasComparativa}
+    />
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <span class="sec-kicker">Atención por municipio</span>
+    <h2 class="sec-title">Servicio Local en los Principales Concejos</h2>
+    <div class="zonas-grid">
+      {localidades.map((loc) => (
+        <article class="zona-card">
+          <div class="zona-card-img">
+            <Image
+              src={loc.data.imagen}
+              alt={loc.data.imagenAlt}
+              widths={[400, 700]}
+              sizes="(max-width: 900px) 100vw, 380px"
+            />
+          </div>
+          <div class="zona-card-body">
+            <h3><a href={`/${loc.data.slug}/`}>Reformas en {loc.data.municipio}</a></h3>
+            <p>{loc.data.subtituloHero}</p>
+            <a class="btn-outline" href={`/${loc.data.slug}/`} style="margin-top:auto">
+              Ver reformas en {loc.data.municipio} →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <EquipoEEAT compact />
+  <CtaSimulador />
+  <BloqueFaq faqs={FAQS_GENERALES} />
+</BaseLayout>

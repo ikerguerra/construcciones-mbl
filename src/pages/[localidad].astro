@@ -1,0 +1,191 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import TablaComparativa from '../components/TablaComparativa.astro';
+import BloqueFaq from '../components/BloqueFaq.astro';
+import EquipoEEAT from '../components/EquipoEEAT.astro';
+import CtaSimulador from '../components/CtaSimulador.astro';
+import { EMPRESA } from '../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+  buildServiceNode,
+  buildFaqNode,
+} from '../lib/schema';
+
+export async function getStaticPaths() {
+  const localidades = await getCollection('localidades');
+  return localidades.map((loc) => ({
+    params: { localidad: loc.data.slug },
+    props: { loc },
+  }));
+}
+
+const { loc } = Astro.props;
+const { Content } = await render(loc);
+const servicios = (await getCollection('servicios')).sort((a, b) => a.data.orden - b.data.orden);
+const otrasLocalidades = (await getCollection('localidades')).filter(
+  (l) => l.data.slug !== loc.data.slug
+);
+
+const pageUrl = `${EMPRESA.dominio}/${loc.data.slug}/`;
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Servicios', url: '/servicios/' },
+  { name: `Reformas en ${loc.data.municipio}`, url: `/${loc.data.slug}/` },
+];
+
+const faqNode = buildFaqNode(loc.data.faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  buildServiceNode({
+    name: `Reformas Integrales, Cocinas y Baños en ${loc.data.municipio}`,
+    description: loc.data.metaDescription,
+    url: pageUrl,
+    areaServed: [loc.data.municipio, 'Asturias'],
+    priceText: 'Desde 650 €/m² en reforma integral',
+  }),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout
+  title={loc.data.metaTitle}
+  description={loc.data.metaDescription}
+  canonical={pageUrl}
+  schemaGraph={schemaGraph}
+>
+  <header class="hero hero-sub">
+    <Image
+      src={loc.data.imagen}
+      alt={loc.data.imagenAlt}
+      class="hero-bg"
+      widths={[640, 1024, 1440]}
+      sizes="(max-width: 1280px) 100vw, 1248px"
+      loading="eager"
+    />
+    <Header mode="overlay" currentPath={`/${loc.data.slug}/`} />
+
+    <div class="hero-body">
+      <div>
+        <small>Visita técnica gratuita en {loc.data.municipio} · Presupuesto cerrado en 48 h</small>
+        <h1>{loc.data.h1}</h1>
+      </div>
+      <div>
+        <p class="lead">{loc.data.subtituloHero}</p>
+        <div class="hero-actions">
+          <a
+            class="pill pill-white"
+            href={`/calcula-el-precio-de-tu-reforma-en-asturias/?zona=${encodeURIComponent(loc.data.municipio)}`}
+          >
+            Calcular reforma en {loc.data.municipio} →
+          </a>
+          <a class="pill" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+            {EMPRESA.telefonoVisible}
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <ResumenDirecto texto={loc.data.resumenAeo} />
+
+    <div class="prose" style="max-width:82ch;margin-top:24px">
+      <Content />
+    </div>
+
+    <div class="eeat-grid" style="margin-top:36px">
+      <article class="eeat-card">
+        <h3>Barrios y zonas que atendemos en {loc.data.municipio}</h3>
+        <ul style="margin-top:12px;padding-left:18px;display:grid;gap:6px;font-size:14.5px;color:#222">
+          {loc.data.barrios.map((b) => (
+            <li>{b}</li>
+          ))}
+        </ul>
+      </article>
+
+      <article class="eeat-card">
+        <h3>Licencias y trámites ante el {loc.data.ayuntamiento}</h3>
+        <p style="margin-top:10px;font-size:14.5px;color:#333;line-height:1.6">
+          {loc.data.licenciasInfo}
+        </p>
+        {loc.data.guiaRelacionadaUrl && (
+          <p style="margin-top:14px;font-size:14px">
+            <a
+              href={loc.data.guiaRelacionadaUrl}
+              style="font-weight:600;text-decoration:underline"
+            >
+              Leer guía: {loc.data.guiaRelacionadaTitulo} →
+            </a>
+          </p>
+        )}
+      </article>
+    </div>
+
+    <div style="margin-top:44px">
+      <span class="sec-kicker">Particularidades constructivas en {loc.data.municipio}</span>
+      <h2 class="sec-title">Soluciones Adaptadas al Parque de Viviendas Local</h2>
+      <ul style="margin-top:18px;padding-left:20px;display:grid;gap:10px;font-size:15px;color:#222">
+        {loc.data.tipologias.map((tip) => (
+          <li>{tip}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div style="margin-top:44px">
+      <span class="sec-kicker">Precios de referencia en {loc.data.municipio}</span>
+      <h2 class="sec-title">Tarifas Orientativas y Plazos</h2>
+      <TablaComparativa
+        caption={loc.data.tablaLocal.caption}
+        columnas={loc.data.tablaLocal.columnas}
+        filas={loc.data.tablaLocal.filas}
+      />
+    </div>
+
+    <div style="margin-top:44px">
+      <span class="sec-kicker">Catálogo de especialidades</span>
+      <h2 class="sec-title">Servicios Disponibles en {loc.data.municipio}</h2>
+      <div class="zonas-grid">
+        {servicios.map((s) => (
+          <article class="zona-card">
+            <div class="zona-card-body">
+              <h3><a href={`/${s.data.slug}/`}>{s.data.tituloCorto}</a></h3>
+              <p>{s.data.metaDescription}</p>
+              <a class="btn-outline" href={`/${s.data.slug}/`} style="margin-top:auto">
+                {s.data.precioDesde} · Ver detalle →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div style="margin-top:40px">
+      <p style="font-size:14px;color:var(--muted)">
+        También trabajamos a diario en:{' '}
+        {otrasLocalidades.map((o, idx) => (
+          <>
+            {idx > 0 && ' · '}
+            <a href={`/${o.data.slug}/`} style="text-decoration:underline;color:var(--black)">
+              Reformas en {o.data.municipio}
+            </a>
+          </>
+        ))}
+      </p>
+    </div>
+  </section>
+
+  <EquipoEEAT compact />
+  <CtaSimulador />
+  <BloqueFaq
+    titulo={`Preguntas Frecuentes sobre Reformas en ${loc.data.municipio}`}
+    faqs={loc.data.faqs}
+  />
+</BaseLayout>

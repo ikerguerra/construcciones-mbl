@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import CtaSimulador from '../components/CtaSimulador.astro';
+import { AUTORES, EMPRESA } from '../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+} from '../lib/schema';
+
+const articulos = (await getCollection('blog')).sort((a, b) =>
+  b.data.datePublished.localeCompare(a.data.datePublished)
+);
+
+const categoriasActivas = [
+  { slug: 'reforma-integral', nombre: 'Reforma Integral' },
+  { slug: 'vivienda-sostenible', nombre: 'Vivienda Sostenible' },
+  { slug: 'aislamiento-termico', nombre: 'Aislamiento Térmico' },
+  { slug: 'construccion-casa', nombre: 'Construcción de Casas' },
+  { slug: 'reformas-de-banos', nombre: 'Reformas de Baños' },
+  { slug: 'reformas-de-cocinas', nombre: 'Reformas de Cocinas' },
+  { slug: 'reformas-locales-comerciales', nombre: 'Locales Comerciales' },
+  { slug: 'ayudas-y-subvenciones', nombre: 'Ayudas y Subvenciones' },
+  { slug: 'tarimas-y-suelos', nombre: 'Tarimas y Suelos' },
+];
+
+const title = 'Innovación Sostenible: Guías de Reformas en Asturias | MBL';
+const description =
+  'Guías técnicas sobre reformas integrales, precios por m², aislamiento térmico, licencias, subvenciones y vivienda sostenible en Asturias por Construcciones MBL.';
+const pageUrl = `${EMPRESA.dominio}/innovacion-sostenible/`;
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Innovación Sostenible', url: '/innovacion-sostenible/' },
+];
+
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header mode="solid" currentPath="/innovacion-sostenible/" />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Biblioteca técnica de Construcciones MBL</span>
+    <h1 class="sec-title" style="font-size:clamp(40px,5vw,68px)">
+      Innovación Sostenible y Guías de Reforma en Asturias
+    </h1>
+
+    <ResumenDirecto
+      texto="Consulta nuestras 23 guías técnicas actualizadas a 2026 sobre precios reales por metro cuadrado, licencias municipales en Gijón, Oviedo y Avilés, aislamiento contra la humedad asturiana, elección de suelos y subvenciones disponibles."
+    />
+
+    <nav class="tabs" aria-label="Categorías de Innovación Sostenible">
+      <a class="tab on" href="/innovacion-sostenible/">Todas ({articulos.length})</a>
+      {categoriasActivas.map((cat) => (
+        <a class="tab" href={`/category/${cat.slug}/`}>{cat.nombre}</a>
+      ))}
+    </nav>
+
+    <div class="zonas-grid">
+      {articulos.map((post) => {
+        const autor = AUTORES[post.data.autor];
+        return (
+          <article class="zona-card">
+            <div class="zona-card-img">
+              <Image
+                src={post.data.imagen}
+                alt={post.data.imagenAlt}
+                widths={[420, 720]}
+                sizes="(max-width: 900px) 100vw, 380px"
+              />
+            </div>
+            <div class="zona-card-body">
+              <span class="sec-kicker" style="margin-bottom:0">
+                {post.data.categoriaNombre} · {post.data.tiempoLectura} min lectura
+              </span>
+              <h2 style="font-family:var(--f-body);text-transform:none;font-size:18px;font-weight:600;line-height:1.35">
+                <a href={`/${post.data.categoria}/${post.data.slug}/`}>{post.data.titulo}</a>
+              </h2>
+              <p>{post.data.metaDescription}</p>
+              <p style="font-size:12px;color:var(--muted);margin-top:auto;padding-top:6px">
+                Por {autor.nombre}
+              </p>
+              <a
+                class="btn-outline"
+                href={`/${post.data.categoria}/${post.data.slug}/`}
+                style="margin-top:8px"
+              >
+                Leer guía completa →
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <CtaSimulador />
+</BaseLayout>
