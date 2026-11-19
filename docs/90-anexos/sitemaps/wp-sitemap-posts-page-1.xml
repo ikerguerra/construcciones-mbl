@@ -1,0 +1,137 @@
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mapa del sitio XML</title>
+<style>
+					
+					body {
+						font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+						color: #444;
+					}
+
+					#sitemap {
+						max-width: 980px;
+						margin: 0 auto;
+					}
+
+					#sitemap__table {
+						width: 100%;
+						border: solid 1px #ccc;
+						border-collapse: collapse;
+					}
+
+			 		#sitemap__table tr td.loc {
+						/*
+						 * URLs should always be LTR.
+						 * See https://core.trac.wordpress.org/ticket/16834
+						 * and https://core.trac.wordpress.org/ticket/49949
+						 */
+						direction: ltr;
+					}
+
+					#sitemap__table tr th {
+						text-align: left;
+					}
+
+					#sitemap__table tr td,
+					#sitemap__table tr th {
+						padding: 10px;
+					}
+
+					#sitemap__table tr:nth-child(odd) td {
+						background-color: #eee;
+					}
+
+					a:hover {
+						text-decoration: none;
+					}
+
+				</style>
+</head>
+<body><div id="sitemap">
+<div id="sitemap__header">
+<h1>Mapa del sitio XML</h1>
+<p>Este mapa de sitio XML lo genera WordPress para hacer que tu contenido sea más visible para los motores de búsqueda.</p>
+<p><a href="https://www.sitemaps.org/">Aprende más sobre de los mapas del sitio XML.</a></p>
+</div>
+<div id="sitemap__content">
+<p class="text">Número de URLs en este mapa del sitio XML: 17.</p>
+<table id="sitemap__table">
+<thead><tr>
+<th class="loc">URL</th>
+<th class="lastmod">Última modificación</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/politica-de-privacidad/">https://construccionesmbl.com/politica-de-privacidad/</a></td>
+<td class="lastmod">2025-11-19T11:39:44+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/calcula-el-precio-de-tu-reforma-en-asturias/">https://construccionesmbl.com/calcula-el-precio-de-tu-reforma-en-asturias/</a></td>
+<td class="lastmod">2025-12-30T09:23:43+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/contacto/">https://construccionesmbl.com/contacto/</a></td>
+<td class="lastmod">2025-12-23T11:04:54+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/">https://construccionesmbl.com/</a></td>
+<td class="lastmod">2026-07-01T09:30:10+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/proyectos/">https://construccionesmbl.com/proyectos/</a></td>
+<td class="lastmod">2025-12-01T12:07:08+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/servicios/">https://construccionesmbl.com/servicios/</a></td>
+<td class="lastmod">2025-12-01T10:43:15+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/innovacion-sostenible/">https://construccionesmbl.com/innovacion-sostenible/</a></td>
+<td class="lastmod">2026-02-20T11:30:17+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/politica-de-cookies/">https://construccionesmbl.com/politica-de-cookies/</a></td>
+<td class="lastmod">2025-11-19T11:42:35+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/aviso-legal/">https://construccionesmbl.com/aviso-legal/</a></td>
+<td class="lastmod">2025-11-19T11:49:33+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/reformas-integrales-en-asturias/">https://construccionesmbl.com/reformas-integrales-en-asturias/</a></td>
+<td class="lastmod">2025-12-05T11:25:35+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/reformas-de-cocinas-en-asturias/">https://construccionesmbl.com/reformas-de-cocinas-en-asturias/</a></td>
+<td class="lastmod">2025-12-05T11:28:07+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/reformas-de-banos-en-asturias/">https://construccionesmbl.com/reformas-de-banos-en-asturias/</a></td>
+<td class="lastmod">2025-12-12T11:50:02+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/construccion-de-viviendas-en-asturias/">https://construccionesmbl.com/construccion-de-viviendas-en-asturias/</a></td>
+<td class="lastmod">2025-12-05T11:30:43+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/reformas-parciales-en-asturias/">https://construccionesmbl.com/reformas-parciales-en-asturias/</a></td>
+<td class="lastmod">2025-12-05T12:02:09+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/reforma-de-locales-comerciales-en-asturias/">https://construccionesmbl.com/reforma-de-locales-comerciales-en-asturias/</a></td>
+<td class="lastmod">2025-12-05T11:33:50+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/mensaje-enviado/">https://construccionesmbl.com/mensaje-enviado/</a></td>
+<td class="lastmod">2025-12-23T12:21:09+00:00</td>
+</tr>
+<tr>
+<td class="loc"><a href="https://construccionesmbl.com/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/">https://construccionesmbl.com/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/</a></td>
+<td class="lastmod">2026-07-01T09:47:51+00:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></body>
+</html>
