@@ -1,0 +1,61 @@
+# ============================================================================
+# Mapa de redirecciones 301 de Construcciones MBL (Cloudflare Pages)
+# Nota: Las 340 URLs /tag/* se sirven con HTTP 410 Gone desde functions/tag/[[path]].ts
+# porque Cloudflare Pages _redirects solo admite códigos 200 y 301/302/303/307/308.
+# ============================================================================
+
+# 1. Normalización de autor anónimo heredado y categoría Uncategorized (PA-002, PA-010)
+/author/3fwu9 /innovacion-sostenible/ 301
+/author/3fwu9/ /innovacion-sostenible/ 301
+/author/* /innovacion-sostenible/ 301
+/category/uncategorized /innovacion-sostenible/ 301
+/category/uncategorized/ /innovacion-sostenible/ 301
+
+# 2. Consolidación de subcategorías y categorías redundantes de un solo post (ADR-003, PA-015)
+/category/aislamiento-termico/ventanas /category/aislamiento-termico/ 301
+/category/aislamiento-termico/ventanas/ /category/aislamiento-termico/ 301
+/category/plato-de-ducha /category/reformas-de-banos/ 301
+/category/plato-de-ducha/ /category/reformas-de-banos/ 301
+/category/mantenimiento /category/reformas-de-banos/ 301
+/category/mantenimiento/ /category/reformas-de-banos/ 301
+/category/consejos-practicos /category/reforma-integral/ 301
+/category/consejos-practicos/ /category/reforma-integral/ 301
+
+# 3. Artículo 23º movido de /uncategorized/ a /vivienda-sostenible/
+/uncategorized/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles /vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/ 301
+/uncategorized/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/ /vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/ 301
+
+# 4. Los 10 slugs defectuosos del blog normalizados a ASCII limpio (PA-002, ADR-003)
+/vivienda-sostenible/suelo-vinlico-en-asturias-ventajas-tipos-y-por-qu-debes-confiar-en-un-profesional /vivienda-sostenible/suelo-vinilico-en-asturias-ventajas-tipos-y-por-que-debes-confiar-en-un-profesional/ 301
+/vivienda-sostenible/suelo-vinlico-en-asturias-ventajas-tipos-y-por-qu-debes-confiar-en-un-profesional/ /vivienda-sostenible/suelo-vinilico-en-asturias-ventajas-tipos-y-por-que-debes-confiar-en-un-profesional/ 301
+
+/vivienda-sostenible/tarima-flotante-o-suelo-vinlico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias /vivienda-sostenible/tarima-flotante-o-suelo-vinilico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias/ 301
+/vivienda-sostenible/tarima-flotante-o-suelo-vinlico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias/ /vivienda-sostenible/tarima-flotante-o-suelo-vinilico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias/ 301
+
+/reforma-integral/cmo-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m-gua-2026 /reforma-integral/como-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m2-guia-2026/ 301
+/reforma-integral/cmo-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m-gua-2026/ /reforma-integral/como-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m2-guia-2026/ 301
+
+/construccion-casa/casas-prefabricadas-y-minicasas-en-asturias-es-legal-dnde-se-pueden-instalar-gua-2026 /construccion-casa/casas-prefabricadas-y-minicasas-en-asturias-es-legal-donde-se-pueden-instalar-guia-2026/ 301
+/construccion-casa/casas-prefabricadas-y-minicasas-en-asturias-es-legal-dnde-se-pueden-instalar-gua-2026/ /construccion-casa/casas-prefabricadas-y-minicasas-en-asturias-es-legal-donde-se-pueden-instalar-guia-2026/ 301
+
+/aislamiento-termico/cmo-elegir-ventanas-para-tu-casa-en-asturias-materiales-acristalamiento-e-instalacin-gua-2026 /aislamiento-termico/como-elegir-ventanas-para-tu-casa-en-asturias-materiales-acristalamiento-e-instalacion-guia-2026/ 301
+/aislamiento-termico/cmo-elegir-ventanas-para-tu-casa-en-asturias-materiales-acristalamiento-e-instalacin-gua-2026/ /aislamiento-termico/como-elegir-ventanas-para-tu-casa-en-asturias-materiales-acristalamiento-e-instalacion-guia-2026/ 301
+
+/reformas-de-banos/cambio-de-baera-por-plato-de-ducha-en-asturias-2026-gua-completa /reformas-de-banos/cambio-de-banera-por-plato-de-ducha-en-asturias-2026-guia-completa/ 301
+/reformas-de-banos/cambio-de-baera-por-plato-de-ducha-en-asturias-2026-gua-completa/ /reformas-de-banos/cambio-de-banera-por-plato-de-ducha-en-asturias-2026-guia-completa/ 301
+
+/aislamiento-termico/rehabilitacin-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas /aislamiento-termico/rehabilitacion-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas/ 301
+/aislamiento-termico/rehabilitacin-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas/ /aislamiento-termico/rehabilitacion-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas/ 301
+
+/reforma-integral/reforma-integral-en-asturias-cundo-merece-la-pena-hacerla-gua-2026 /reforma-integral/reforma-integral-en-asturias-cuando-merece-la-pena-hacerla-guia-2026/ 301
+/reforma-integral/reforma-integral-en-asturias-cundo-merece-la-pena-hacerla-gua-2026/ /reforma-integral/reforma-integral-en-asturias-cuando-merece-la-pena-hacerla-guia-2026/ 301
+
+/aislamiento-termico/aislamiento-termico-en-asturias-2026-gua-definitiva-para-ahorrar-energia /aislamiento-termico/aislamiento-termico-en-asturias-2026-guia-definitiva-para-ahorrar-energia/ 301
+/aislamiento-termico/aislamiento-termico-en-asturias-2026-gua-definitiva-para-ahorrar-energia/ /aislamiento-termico/aislamiento-termico-en-asturias-2026-guia-definitiva-para-ahorrar-energia/ 301
+
+/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m%c2%b2 /construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/ 301
+/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m%c2%b2/ /construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/ 301
+/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m%C2%B2 /construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/ 301
+/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m%C2%B2/ /construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/ 301
+/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m² /construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/ 301
+/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m²/ /construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/ 301

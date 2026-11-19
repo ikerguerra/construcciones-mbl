@@ -11,7 +11,7 @@ actualizado: 2026-11-19
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.0.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
+- **Versión del SRS**: `1.1.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
 - **Preguntas abiertas**: 1 abiertas (0 bloqueantes, 1 altas, 0 medias, 0 bajas) · 17 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
@@ -52,8 +52,12 @@ actualizado: 2026-11-19
   - Alcance y garantías (`PA-016`, `PA-017`): sitio exclusivamente en español (`es-ES`, sin reservas multiidioma ni área privada) y garantías/financiación parametrizadas en `src/data/empresa.ts`.
   - Optimización AEO en bloque (`PA-018`, `ADR-006`): caja *En resumen*, tablas HTML limpias, FAQs `FAQPage`, revisión de menciones `2026` y análisis anti-canibalización de guías de suelos al extraer los 22 artículos.
 - Todos los requisitos funcionales y no funcionales quedan trazados desde objetivos de negocio hasta criterios de aceptación en Gherkin y cubiertos al 100 % por la [[Matriz de trazabilidad]].
+- **Implementación Astro v5 completada y verificada (`v1.1.0`)**:
+  - 53 páginas estáticas compiladas en `dist/` (`0` errores en `astro check`, `tsc` de Cloudflare Functions y `astro build`; HTML de portada `60,7 KB < 70 KB`).
+  - Logotipos vectoriales del cliente (`LogoMBL.svg`, `LogoMBL-Light.svg`, `ConstruccionesMBL.svg`), 10 fotografías propias optimizadas a WebP (`<= 1920 px`) y 42 fotografías reales de obras y artículos extraídas de WordPress en `src/assets/`.
+  - 23 artículos migrados y enriquecidos con estructura AEO (*En resumen*, tabla comparativa, 3–5 FAQs sincronizadas con `FAQPage`, autoría `Borja — Dirección` / `Equipo Técnico`, enlazado a servicio y simulador), 6 páginas de servicio, landing permanente de plato de ducha 48 h con interruptor `PUBLIC_SHOW_PROMO_DUCHA`, 3 landings locales (`/reformas-en-gijon/`, `/reformas-en-oviedo/`, `/reformas-en-aviles/`), galería filtrable `/proyectos/`, simulador interactivo (`5,38 KB` JS) y textos legales saneados (sin restos de `CIF: B33` ni plantillas ajenas).
+  - Cobertura 100 % verificada sobre las **395 URLs heredadas** (`38` rutas directas `200`, `17` redirecciones `301` en 1 salto en `public/_redirects` y `340` etiquetas `/tag/*` con `410 Gone` mediante `functions/tag/[[path]].ts`).
 
 ## Siguiente paso
-1. **Especificación Fase 1 cerrada (`v1.0.0`)**: iniciar el desarrollo en **Astro** siguiendo [[Stack web]], [[Guia de estilos]] y las skills de `.agents/skills/`.
-2. Recopilar el logotipo y fotos propias del usuario, extraer los textos completos y mejores imágenes del WordPress actual, implementar componentes/páginas/simulador y verificar `CA-*` + mapa `301`/`410`.
-3. Antes del corte a producción, incorporar CIF completo y Registro Mercantil en `src/data/empresa.ts` ([[PA-001]]) e informar los IDs propios en Cloudflare Pages (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`, `RESEND_API_KEY`).
+1. **Pre-producción (`PA-001` y variables de entorno)**: antes del cambio de DNS hacia Cloudflare Pages, actualizar `cif` y `registroMercantil` definitivos en `src/data/empresa.ts` y configurar en Cloudflare Pages las variables propias (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`, `RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`).
+2. **Despliegue y corte DNS (`ADR-007`)**: conectar el repositorio a Cloudflare Pages, verificar el dominio temporal `.pages.dev` y coordinar el cambio de registros `A`/`CNAME` de `construccionesmbl.com` manteniendo intactos los registros `MX` del correo corporativo.
