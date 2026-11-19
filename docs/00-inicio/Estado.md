@@ -11,8 +11,8 @@ actualizado: 2026-11-19
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `0.5.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
-- **Preguntas abiertas**: 5 abiertas (0 bloqueantes, 1 altas, 4 medias, 0 bajas) · 13 resueltas/cerradas
+- **Versión del SRS**: `1.0.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
+- **Preguntas abiertas**: 1 abiertas (0 bloqueantes, 1 altas, 0 medias, 0 bajas) · 17 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
 |---|---|
@@ -47,8 +47,13 @@ actualizado: 2026-11-19
   - SEO local y ofertas (`PA-008`, `PA-009`): 3 landings locales en **Fase 1** (`/reformas-en-gijon/`, `/reformas-en-oviedo/`, `/reformas-en-aviles/`); landing/reclamo de Oferta Exprés 48h de plato de ducha incluida con interruptor configurable (`PUBLIC_SHOW_PROMO_DUCHA=true|false`).
   - Contenidos, E-E-A-T y reseñas (`PA-010`, `PA-011`, `PA-013`): Content Collections en Git + Zod sin CMS externo (`ADR-004`); autoría E-E-A-T (`Borja — Dirección de Construcciones MBL` y `Equipo Técnico`) + bloque de equipo; carrusel nativo sin Trustindex con cifras unificadas y `hasMap` público.
   - Analítica y cookies (`PA-012`): variables opcionales `PUBLIC_GTM_ID` / `PUBLIC_GA4_ID` listas para rellenar después y banner de consentimiento nativo ultraligero con Consent Mode v2.
-- Todos los requisitos funcionales y no funcionales quedan trazados desde objetivos de negocio hasta criterios de aceptación en Gherkin y cubiertos por la [[Matriz de trazabilidad]].
+- **Bloque 3 resuelto (`PA-015`..`PA-018`) y 7/7 ADRs aceptados (`SRS v1.0.0`)**:
+  - Rutas del blog y Search Console (`PA-015`): nueva propiedad en Google Search Console tras el corte DNS; mantenido `/{categoria}/{slug}/` en artículos y consolidadas subcategorías/categorías de 1 post con `301` ([[ADR-003]]).
+  - Alcance y garantías (`PA-016`, `PA-017`): sitio exclusivamente en español (`es-ES`, sin reservas multiidioma ni área privada) y garantías/financiación parametrizadas en `src/data/empresa.ts`.
+  - Optimización AEO en bloque (`PA-018`, `ADR-006`): caja *En resumen*, tablas HTML limpias, FAQs `FAQPage`, revisión de menciones `2026` y análisis anti-canibalización de guías de suelos al extraer los 22 artículos.
+- Todos los requisitos funcionales y no funcionales quedan trazados desde objetivos de negocio hasta criterios de aceptación en Gherkin y cubiertos al 100 % por la [[Matriz de trazabilidad]].
 
 ## Siguiente paso
-1. Resolver con el usuario el **Bloque 3 final (`PA-015` a `PA-018`)** de [[Indice de preguntas abiertas]] para cerrar el SRS completo (`ADR-003` y `ADR-006`).
-2. Inicializar el proyecto **Astro** en la raíz siguiendo [[Stack web]] y [[Guia de estilos]], extraer/optimizar las imágenes del WordPress actual, migrar contenidos y verificar el mapa `301`/`410` + criterios `CA-*`.
+1. **Especificación Fase 1 cerrada (`v1.0.0`)**: iniciar el desarrollo en **Astro** siguiendo [[Stack web]], [[Guia de estilos]] y las skills de `.agents/skills/`.
+2. Recopilar el logotipo y fotos propias del usuario, extraer los textos completos y mejores imágenes del WordPress actual, implementar componentes/páginas/simulador y verificar `CA-*` + mapa `301`/`410`.
+3. Antes del corte a producción, incorporar CIF completo y Registro Mercantil en `src/data/empresa.ts` ([[PA-001]]) e informar los IDs propios en Cloudflare Pages (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`, `RESEND_API_KEY`).

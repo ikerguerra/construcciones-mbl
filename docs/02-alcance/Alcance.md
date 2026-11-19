@@ -32,8 +32,8 @@ La fase inicial cubre exclusivamente la **web corporativa pública de Construcci
    - Tres landings locales diferenciadas en Fase 1: `/reformas-en-gijon/`, `/reformas-en-oviedo/` y `/reformas-en-aviles/` ([[PA-008]]).
 3. **Portfolio de proyectos (`/proyectos/`)** con filtros por tipología de reforma y fotografía propia optimizada ([[PA-003]]).
 4. **Blog / Revista editorial *Innovación Sostenible*** (`/innovacion-sostenible/`):
-   - Migración y mejora AEO/GEO de los 22 artículos existentes ([[PA-018]]).
-   - Archivo por categorías limpias y perfil de autoría E-E-A-T ([[PA-010]], [[PA-015]]).
+   - Migración y mejora AEO/GEO en bloque de los 22 artículos existentes bajo patrón `/{categoria}/{slug}/`, con control anti-canibalización en suelos ([[PA-015]], [[PA-018]]).
+   - Archivo por categorías limpias consolidadas y perfil de autoría E-E-A-T (`Borja — Dirección de Construcciones MBL` y `Equipo Técnico`, [[PA-010]], [[PA-015]]).
 5. **Conversión y captación de leads**:
    - Página `/calcula-el-precio-de-tu-reforma-en-asturias/` con simulador usable y envío de solicitud ([[PA-004]], [[PA-005]]).
    - Página `/contacto/` con NAP completo, formulario accesible y canales directos (teléfono y WhatsApp).
@@ -47,7 +47,7 @@ La fase inicial cubre exclusivamente la **web corporativa pública de Construcci
 
 ## 2. Fuera del alcance de la Fase 1
 - Desarrollo de aplicación móvil nativa o híbrida.
-- Intranet o panel de gestión interno de obras, presupuestos o clientes ([[PA-016]]).
+- Intranet, área privada o panel de gestión interno de obras, presupuestos o clientes (descartado explícitamente según [[PA-016]]).
 - Pasarela de pagos online o comercio electrónico.
-- Versión multiidioma fuera de español (`es-ES`, [[PA-016]]).
+- Versión multiidioma (web exclusivamente en español `es-ES`, [[PA-016]]).
 - Migración de cuentas de correo corporativo (los registros `MX` se preservan en el corte DNS sin exponer enlace `Webmail` en el pie de página público, según [[PA-006]]).

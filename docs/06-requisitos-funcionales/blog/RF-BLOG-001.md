@@ -17,7 +17,4 @@ casos_uso:
 
 # RF-BLOG-001 — Portada editorial de Innovación Sostenible y archivo por categorías limpias
 
-El sistema debe publicar en `/innovacion-sostenible/` el listado de artículos editoriales filtrable por las categorías temáticas vigentes, excluyendo la categoría vacía `uncategorized` y evitando generar páginas públicas de archivo para etiquetas superfluas (`/tag/`).
-
-> [!warning] Hipótesis
-> Con la retirada de las 340 etiquetas `/tag/` ya confirmada en [[PA-002]], se asume provisionalmente mantener las categorías activas consolidadas hasta definir la estructura de URL de artículos en [[PA-015]].
+El sistema debe publicar en `/innovacion-sostenible/` el listado de artículos editoriales filtrable por las categorías temáticas consolidadas, manteniendo la estructura de ruta `/{categoria}/{slug}/` en artículos, redirigiendo `301` las subcategorías y categorías redundantes de un solo artículo hacia su categoría principal, excluyendo la categoría vacía `uncategorized` y devolviendo `410 Gone` para las 340 páginas de etiquetas (`/tag/*`), resuelto en [[PA-002]] y [[PA-015]].

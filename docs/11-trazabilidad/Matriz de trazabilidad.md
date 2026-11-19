@@ -29,9 +29,9 @@ Cobertura verificable por criterios de aceptación (`CA-*`): **43/43 (100.0%)**.
 
 | Requisito | Título | Prioridad | Necesidades | Criterios de aceptación | ADRs | PAs abiertas |
 |---|---|---|---|---|---|---|
-| [[RF-BLOG-001]] | Portada editorial de Innovación Sostenible y archivo por categorías limpias | alta | [[NEC-001]], [[NEC-006]], [[NEC-009]] | [[CA-BLOG-001]] | [[ADR-003]] | [[PA-015]] |
-| [[RF-BLOG-002]] | Migración de los 22 artículos existentes con enlazado interno a servicios | critica | [[NEC-001]], [[NEC-002]], [[NEC-009]] | [[CA-BLOG-001]] | [[ADR-004]] | [[PA-018]] |
-| [[RF-BLOG-003]] | Estructura AEO de artículo (respuesta directa, tabla de contenidos, tablas y FAQ) | alta | [[NEC-006]] | [[CA-BLOG-002]] | — | [[PA-018]] |
+| [[RF-BLOG-001]] | Portada editorial de Innovación Sostenible y archivo por categorías limpias | alta | [[NEC-001]], [[NEC-006]], [[NEC-009]] | [[CA-BLOG-001]] | [[ADR-003]] | — |
+| [[RF-BLOG-002]] | Migración de los 22 artículos existentes con enlazado interno a servicios | critica | [[NEC-001]], [[NEC-002]], [[NEC-009]] | [[CA-BLOG-001]] | [[ADR-004]] | — |
+| [[RF-BLOG-003]] | Estructura AEO de artículo (respuesta directa, tabla de contenidos, tablas y FAQ) | alta | [[NEC-006]] | [[CA-BLOG-002]] | — | — |
 | [[RF-BLOG-004]] | Autoría real E-E-A-T en reemplazo del identificador técnico 3fwu9 | alta | [[NEC-006]], [[NEC-001]] | [[CA-BLOG-002]] | — | — |
 | [[RF-LEAD-001]] | Simulador interactivo de estimación de reforma en Asturias | critica | [[NEC-004]], [[NEC-002]] | [[CA-LEAD-001]] | [[ADR-005]] | — |
 | [[RF-LEAD-002]] | Formulario de contacto corporativo y consentimiento RGPD en español | critica | [[NEC-004]], [[NEC-008]] | [[CA-LEAD-002]] | [[ADR-005]] | — |
@@ -49,14 +49,14 @@ Cobertura verificable por criterios de aceptación (`CA-*`): **43/43 (100.0%)**.
 | [[RF-PROY-002]] | Sustitución del feed embebido de Instagram por activos locales optimizados | alta | [[NEC-003]], [[NEC-008]] | [[CA-PROY-001]] | — | — |
 | [[RF-PROY-003]] | Sección de testimonios y reseñas de Google Business Profile verificables | alta | [[NEC-003]], [[NEC-006]] | [[CA-PROY-002]] | — | — |
 | [[RF-SERV-001]] | Hub de servicios y 6 páginas principales por especialidad | critica | [[NEC-002]], [[NEC-005]] | [[CA-SERV-001]] | — | — |
-| [[RF-SERV-002]] | Ficha estructurada de servicio con precios orientativos, plazos, proceso y garantías | alta | [[NEC-002]], [[NEC-006]], [[NEC-009]] | [[CA-SERV-001]] | — | [[PA-017]] |
+| [[RF-SERV-002]] | Ficha estructurada de servicio con precios orientativos, plazos, proceso y garantías | alta | [[NEC-002]], [[NEC-006]], [[NEC-009]] | [[CA-SERV-001]] | — | — |
 | [[RF-SERV-003]] | Gestión de vigencia de ofertas y landing exprés de plato de ducha | alta | [[NEC-002]], [[NEC-009]] | [[CA-SERV-002]] | — | — |
 | [[RF-SERV-004]] | Arquitectura preparada para landings locales por municipio en Asturias | media | [[NEC-005]], [[NEC-006]] | [[CA-SERV-002]] | — | — |
 | [[RNF-ACC-001]] | Cumplimiento WCAG 2.1 nivel AA y contraste sobre fotografías | alta | [[NEC-008]], [[NEC-007]] | [[CA-ACC-001]] | [[ADR-002]] | — |
 | [[RNF-ACC-002]] | Navegación por teclado, foco visible y semántica ARIA en controles interactivos | alta | [[NEC-008]] | [[CA-ACC-001]] | — | — |
 | [[RNF-GEO-001]] | Grafo Schema.org JSON-LD granular y válido por plantilla | critica | [[NEC-006]], [[NEC-005]] | [[CA-GEO-001]] | [[ADR-006]] | — |
-| [[RNF-GEO-002]] | Contenido estructurado AEO de respuesta directa y tablas comparativas | alta | [[NEC-006]] | [[CA-GEO-002]] | [[ADR-006]] | [[PA-018]] |
-| [[RNF-GEO-003]] | Señales verificables de autoridad E-E-A-T y frescura editorial | alta | [[NEC-006]], [[NEC-003]] | [[CA-GEO-002]] | — | [[PA-017]] |
+| [[RNF-GEO-002]] | Contenido estructurado AEO de respuesta directa y tablas comparativas | alta | [[NEC-006]] | [[CA-GEO-002]] | [[ADR-006]] | — |
+| [[RNF-GEO-003]] | Señales verificables de autoridad E-E-A-T y frescura editorial | alta | [[NEC-006]], [[NEC-003]] | [[CA-GEO-002]] | — | — |
 | [[RNF-GEO-004]] | Fichero de contexto semántico llms.txt para agentes generativos | media | [[NEC-006]] | [[CA-GEO-001]] | [[ADR-006]] | — |
 | [[RNF-MANT-001]] | Validación tipada de contenidos, precios y enlaces internos en compilación | alta | [[NEC-009]], [[NEC-001]] | [[CA-MANT-001]] | [[ADR-004]] | — |
 | [[RNF-MANT-002]] | Fuente única de datos corporativos (NAP, estadísticas y tarifas) | alta | [[NEC-009]], [[NEC-005]] | [[CA-MANT-001]] | [[ADR-004]] | [[PA-001]] |

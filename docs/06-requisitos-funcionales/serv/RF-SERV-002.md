@@ -20,4 +20,4 @@ casos_uso:
 El sistema debe presentar en cada página de servicio una estructura homogénea y escaneable que incluya resumen ejecutivo inicial, qué incluye la partida, tabla comparativa de precios orientativos y superficies en Asturias, plazos estimados, garantía escrita aplicable, fases del proceso de trabajo y preguntas frecuentes específicas del servicio.
 
 > [!warning] Hipótesis
-> Los importes orientativos iniciales unificados en la fuente única de tarifas ([[PA-005]] y [[PA-009]]) quedan sujetos a validación comercial opcional de MBL y a concretar los plazos exactos de garantía por especialidad en [[PA-017]].
+> Las condiciones verificadas de garantía por escrito (`hasta 3 años` en reformas integrales y `10 años` en obra nueva/estructura) y el estudio de financiación sin compromiso quedan parametrizados ([[PA-017]]); únicamente los importes orientativos unificados en tarifas permanecen pendientes de ajuste comercial opcional por MBL ([[PA-009]]).
