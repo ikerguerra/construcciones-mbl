@@ -15,22 +15,18 @@ actualizado: 2026-11-19
 - **No pérdida orgánica**: la migración no puede dejar URLs válidas existentes en WordPress respondiendo `404` sin redirección `301` o código `410` justificado.
 - **Privacidad y legislación española**: todo formulario de captación y toda carga de analítica/marketing deben cumplir LSSI-CE y RGPD (consentimiento previo al disparo de etiquetas no esenciales).
 - **Independencia de cuentas e integraciones**: dado que el WordPress actual no pertenece al titular del nuevo desarrollo, se descartan explícitamente `GTM-TG8LZ5L8`, CookieYes y los conectores de formularios heredados; toda medición, verificación en Search Console y entrega de leads deberá configurarse con **cuentas e identificadores propios** mediante variables de entorno.
+- **Dominio canónico y plataforma aprobada**: la web se servirá en **Cloudflare Pages** bajo `https://construccionesmbl.com/` (sin `www.` y con barra final `/`), usando **Cloudflare Pages Functions** + **Resend** para leads (`SEND_AUTO_REPLY` configurable) y retirando el enlace público a `Webmail` ([[PA-004]], [[PA-006]], [[ADR-007]]).
+- **Portfolio y activos locales sin embed de Instagram**: las fotografías combinan material propio aportado por el titular y una selección curada de las mejores imágenes del WordPress actual optimizadas localmente (`AVIF`/`WebP`), sin widgets externos de Instagram ([[PA-003]]).
 
 ## 2. Supuestos provisionales (pendientes de confirmar)
 
 > [!warning] Hipótesis
-> Se asume provisionalmente que el dominio canónico seguirá siendo `https://construccionesmbl.com/` (sin `www.`) con barra final en todas las URLs canónicas para igualar el comportamiento actual de WordPress. Confirmar en [[PA-006]].
+> Se asume provisionalmente que el CIF completo y los datos del Registro Mercantil de `MBL CONSTRUCCIONES S.L.` serán entregados por el cliente antes de publicar en producción ([[PA-001]]).
 
 > [!warning] Hipótesis
-> Se asume provisionalmente que el hosting elegido para Astro soportará reglas de redirección `301`/`410` en el borde (CDN/edge) y un endpoint o webhook para procesar formularios sin mantener un servidor WordPress ni PHP vivo. Confirmar en [[PA-004]] y [[PA-006]].
-
-> [!warning] Hipótesis
-> Se asume provisionalmente que Construcciones MBL aportará fotografías reales propias de sus reformas (y logotipo en SVG) para sustituir los marcadores `.ph` de [[mbl-maqueta.html]] y eliminar la dependencia directa del widget de Instagram. Confirmar en [[PA-003]].
-
-> [!warning] Hipótesis
-> Se asume provisionalmente que los rangos de precios orientativos y las condiciones de la oferta de cambio de bañera a plato de ducha serán revisados y unificados por el cliente antes de pasar a producción. Confirmar en [[PA-009]] y [[PA-014]].
+> Se asume provisionalmente que los rangos de precios orientativos coherentes definidos para el simulador y servicios y las condiciones de la oferta de cambio de bañera a plato de ducha serán revisados y validados por el cliente antes de pasar a producción. Confirmar en [[PA-009]] y [[PA-014]].
 
 ## 3. Dependencias externas
-- Acceso al registrador/DNS de `construccionesmbl.com` para el corte de producción y verificación de Search Console ([[IE-006]], [[PA-006]]).
+- Coordinación del cambio de registros DNS de `construccionesmbl.com` con el gestor actual de WordPress para el corte hacia Cloudflare Pages preservando intactos los registros `MX` del correo corporativo ([[IE-006]], [[PA-006]]).
 - Provisión de los nuevos identificadores propios de Google Tag Manager (GTM), GA4 y verificación de propiedad en Google Search Console para configurar el sitio mediante variables de entorno (descartando `GTM-TG8LZ5L8` del WordPress anterior; [[IE-002]], [[PA-012]]).
 - Acceso a la ficha de Google Business Profile `ChIJN_H9_Jyih2MRXyPsrrG4cWg` para mantener consistencia NAP y reseñas ([[IE-004]], [[PA-013]]).

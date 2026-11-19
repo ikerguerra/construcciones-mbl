@@ -18,7 +18,4 @@ casos_uso:
 
 # RF-NAV-004 — Pie de página corporativo con NAP, accesos legales y buscador/acceso rápido
 
-El sistema debe incluir en todas las páginas un pie de página oscuro fiel a [[mbl-maqueta.html]] que muestre la dirección completa (`Av. Argentina 132, Cristasa of. 221, 33213 Gijón, Asturias`), teléfono (`684 675 898`), email (`info@construccionesmbl.com`), horario (`Lunes a Viernes: 10:00–14:00 y 16:00–19:00`), enlaces a servicios, artículos recientes, redes sociales, aviso legal, privacidad, cookies, panel de reconfiguración de consentimiento y la marca de agua tipográfica gigante.
-
-> [!warning] Hipótesis
-> Se asume provisionalmente conservar el enlace a `Webmail` en el footer únicamente si el cliente confirma su continuidad operativa en [[PA-006]].
+El sistema debe incluir en todas las páginas un pie de página oscuro fiel a [[mbl-maqueta.html]] que muestre la dirección completa (`Av. Argentina 132, Cristasa of. 221, 33213 Gijón, Asturias`), teléfono (`684 675 898`), email (`info@construccionesmbl.com`), horario (`Lunes a Viernes: 10:00–14:00 y 16:00–19:00`), enlaces a servicios, artículos recientes, redes sociales, aviso legal, privacidad, cookies, panel de reconfiguración de consentimiento y la marca de agua tipográfica gigante, retirando el enlace público a `Webmail` (resuelto en [[PA-006]]).

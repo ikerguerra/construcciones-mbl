@@ -10,10 +10,13 @@ actualizado: 2026-11-19
 # Web — Formularios e integraciones
 
 - **Simulador interactivo** (`/calcula-el-precio-de-tu-reforma-en-asturias/`):
-  - Componente interactivo ligero (TypeScript vanilla o isla Preact/Svelte mínima `< 15 KB`) que adapta dinámicamente los campos según `tipo_obra`, calcula la horquilla orientativa desde `src/data/tarifas.ts` (sujeto a [[PA-005]]) y envía el resumen junto al lead.
+  - Componente interactivo ligero (TypeScript vanilla o isla Preact/Svelte mínima `< 15 KB`) orientado a SEO y captación de visita técnica/presupuesto cerrado, que adapta dinámicamente los campos según `tipo_obra`, calcula la horquilla orientativa inmediata desde la fuente unificada `src/data/tarifas.ts`, envía el resumen junto al lead y muestra **confirmación inline** ([[PA-005]]).
   - Pre-relleno automático desde query params procedentes del selector rápido del Hero (`?tipo=...&zona=...&m2=...&calidad=...`).
-- **Endpoint de recepción de leads** (`IE-001`, sujeto a [[PA-004]]):
-  - Función serverless (`/api/lead`) con validación Zod en servidor, campo *honeypot* oculto, límite básico de frecuencia / verificación anti-bot no intrusiva, envío por correo transaccional a `info@construccionesmbl.com` y reenvío opcional a Google Sheets webhook.
+- **Endpoint de recepción de leads** (`IE-001`, [[ADR-005]], [[PA-004]]):
+  - Función serverless en **Cloudflare Pages Functions** (`functions/api/lead.ts`, ruta `/api/lead`) con validación Zod en servidor, campo *honeypot* oculto, limitación/anti-bot no intrusiva y confirmación **inline** en página.
+  - Envío mediante **Resend** (API HTTP nativa en capa gratuita, óptima para edge) hacia `LEADS_TO_EMAIL` (`info@construccionesmbl.com`).
+  - **Auto-respuesta al cliente**: envío de correo automático de confirmación al solicitante activable/desactivable mediante la variable de entorno **`SEND_AUTO_REPLY`** (`"true"` / `"false"`).
+  - Reenvío opcional vía webhook a una nueva hoja Google Sheets propia (`SHEETS_WEBHOOK_URL`).
 - **Consentimiento y medición (`IE-002`)**:
   - Gestor nativo ligero (`localStorage` + actualización Google Consent Mode v2 por defecto `denied` para `analytics_storage` y `ad_storage`) con botones equilibrados en primer nivel.
   - Carga diferida de las **cuentas propias** de GTM y/o GA4 mediante variables de entorno (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`, descartando el contenedor `GTM-TG8LZ5L8` del WordPress anterior; sujeto a [[PA-012]]) tras interacción o bajo Consent Mode v2, emitiendo eventos `dataLayer` limpios (`submit_contacto`, `submit_simulador`, `click_telefono`, `click_whatsapp`).

@@ -20,4 +20,4 @@ casos_uso:
 El sistema debe publicar en `/innovacion-sostenible/` el listado de artículos editoriales filtrable por las categorías temáticas vigentes, excluyendo la categoría vacía `uncategorized` y evitando generar páginas públicas de archivo para etiquetas superfluas (`/tag/`).
 
 > [!warning] Hipótesis
-> Se asume provisionalmente mantener las categorías activas actuales consolidadas sin páginas `/tag/`, pendiente de definir la ruta final de artículos en [[PA-015]].
+> Con la retirada de las 340 etiquetas `/tag/` ya confirmada en [[PA-002]], se asume provisionalmente mantener las categorías activas consolidadas hasta definir la estructura de URL de artículos en [[PA-015]].

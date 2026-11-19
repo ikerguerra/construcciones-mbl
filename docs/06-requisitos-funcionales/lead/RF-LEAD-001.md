@@ -16,7 +16,7 @@ casos_uso:
 
 # RF-LEAD-001 — Simulador interactivo de estimación de reforma en Asturias
 
-El sistema debe ofrecer en `/calcula-el-precio-de-tu-reforma-en-asturias/` un simulador guiado que adapte dinámicamente sus campos al tipo de obra seleccionado (eliminando errores heredados como pedir *"metros cuadrados de tu cocina"* para otras reformas), permita indicar superficie, gama de calidades, ubicación en Asturias, trabajos específicos y plazo, y muestre el rango orientativo calculado o recoja la petición para dossier personalizado.
+El sistema debe ofrecer en `/calcula-el-precio-de-tu-reforma-en-asturias/` un simulador interactivo orientado tanto a captación SEO como a conversión hacia visita técnica y presupuesto cerrado, que adapte dinámicamente sus campos al tipo de obra seleccionado (eliminando errores heredados como pedir *"metros cuadrados de tu cocina"* para otras reformas), calcule y muestre una horquilla orientativa inmediata en pantalla a partir de una tabla coherente y unificada de tarifas, y muestre confirmación inline tras el envío de la solicitud (resuelto en [[PA-005]]).
 
 > [!warning] Hipótesis
-> Se asume provisionalmente que el simulador mostrará una horquilla orientativa inmediata en pantalla antes de solicitar los datos de contacto para recibir el desglose completo, pendiente de validar fórmulas y rangos en [[PA-005]].
+> Las cifras base iniciales del simulador y las páginas de servicio emplearán rangos orientativos coherentes definidos técnicamente hasta que el equipo de MBL valide los precios oficiales definitivos en [[PA-009]].

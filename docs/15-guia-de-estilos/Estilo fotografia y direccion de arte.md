@@ -11,8 +11,8 @@ actualizado: 2026-11-19
 
 En este diseño **la fotografía es el único elemento que aporta color a la web** (junto al tono madera `--wood: #b8642a` y luz cálida `--warm: #f0b46c`). Sustituir adecuadamente los marcadores `.ph` de [[mbl-maqueta.html]] es crítico para mantener el aspecto premium de marca.
 
-## Criterios visuales de selección fotográfica ([[PA-003]])
-1. **Arquitectura y reformas reales**: priorizar fotografías reales de reformas ejecutadas por Construcciones MBL en Asturias (salones amplios, cocinas con isla o madera cálida, baños modernos con ducha de obra, fachadas rehabilitadas, locales luminosos).
+## Criterios visuales de selección fotográfica ([[PA-003]] resuelta)
+1. **Banco mixto de arquitectura y reformas reales**: combinar el logotipo oficial y las fotografías propias aportadas por el titular con una selección curada de las mejores imágenes extraídas del WordPress actual (reformas integrales, cocinas, baños, fachadas, locales), descartando cualquier dependencia del feed embebido de Instagram.
 2. **Iluminación y temperatura cromática**:
    - **Hero y bloque oscuro**: tomas arquitectónicas con contraste dramático, luz cálida interior al atardecer o iluminación arquitectónica bien equilibrada que armonice con fondos oscuros y overlays.
    - **Historia, servicios y galería**: tomas diurnas limpias, líneas rectas horizontales/verticales bien encuadradas, maderas naturales, piedra/cerámica mate y griferías contemporáneas.

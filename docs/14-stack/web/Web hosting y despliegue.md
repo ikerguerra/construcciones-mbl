@@ -9,9 +9,10 @@ actualizado: 2026-11-19
 
 # Web — Hosting y despliegue
 
-- **Plataforma objetivo** (sujeto a [[PA-006]] y [[ADR-007]]):
-  - Despliegue en CDN edge (Cloudflare Pages o Vercel/Netlify) con build automatizado desde repositorio Git.
-  - Dominio canónico `https://construccionesmbl.com/` con redirección automática `301` desde `http://` y `www.construccionesmbl.com`.
+- **Plataforma aprobada** ([[PA-006]], [[ADR-007]]):
+  - Despliegue en **Cloudflare Pages** con build automatizado desde la rama `main` de GitHub.
+  - Dominio canónico `https://construccionesmbl.com/` (**sin `www.`** y con **barra final `/`**) y redirección automática `301` desde `http://` y `www.construccionesmbl.com`.
+  - Transición DNS coordinada con el gestor del WordPress previo manteniendo intactos los registros `MX` de correo; retirada del enlace público `Webmail` del footer.
 - **Gestión declarativa de las 393 URLs heredadas (`RF-MIG-001`)**:
   - Fichero de migración en repositorio (`src/data/redirecciones.ts` o `_redirects` generado en build) validado frente a los 4 XML archivados en `docs/90-anexos/sitemaps/` para garantizar cobertura total (`301` en 1 salto para slugs saneados y `410`/`301` para `/tag/*` y `/author/3fwu9/` según [[PA-002]]).
 - **Cabeceras HTTP de seguridad (`_headers`, `RNF-SEG-003`)**:

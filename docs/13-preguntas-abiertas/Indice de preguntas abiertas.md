@@ -14,16 +14,16 @@ Todas las dudas legales, de negocio, contenido, SEO/GEO/AEO y arquitectura detec
 La tabla siguiente se regenera automáticamente mediante `boveda.py indices`.
 
 <!-- AUTO:lista-pa -->
-Total registradas: **18** (18 abiertas: 6 bloqueantes, 8 altas, 4 medias, 0 bajas).
+Total registradas: **18** (13 abiertas: 0 bloqueantes, 9 altas, 4 medias, 0 bajas).
 
 | ID | Prioridad | Categoría | Título | Estado | Artefactos afectados |
 |---|---|---|---|---|---|
-| [[PA-001]] | **bloqueante** | Legal y cumplimiento | CIF completo y datos del Registro Mercantil de MBL CONSTRUCCIONES S.L. | `abierta` | [[OBJ-006]], [[RF-MIG-003]], [[RNF-SEO-005]], [[RNF-MANT-002]] |
-| [[PA-002]] | **bloqueante** | SEO y migración | Política para los 10 slugs defectuosos del blog y las 340 URLs /tag/ | `abierta` | [[OBJ-001]], [[RF-MIG-001]], [[RF-BLOG-001]], [[ADR-003]] |
-| [[PA-003]] | **bloqueante** | Contenido y diseño | Banco fotográfico propio, logotipo SVG y sustitución del embed de Instagram | `abierta` | [[OBJ-004]], [[OBJ-006]], [[RF-NAV-001]], [[RF-PROY-002]], [[RNF-SEO-006]], [[ADR-002]] |
-| [[PA-004]] | **bloqueante** | Arquitectura e integraciones | Backend de formularios y destino operativo de leads | `abierta` | [[OBJ-005]], [[RF-LEAD-002]], [[RF-LEAD-004]], [[IE-001]], [[ADR-005]] |
-| [[PA-005]] | **bloqueante** | Producto y conversión | Comportamiento interactivo y fórmulas del simulador de reforma | `abierta` | [[OBJ-005]], [[RF-LEAD-001]], [[CU-002]], [[ADR-005]] |
-| [[PA-006]] | **bloqueante** | Infraestructura y despliegue | Hosting, acceso DNS, reglas de redirección 301 y continuidad de Webmail | `abierta` | [[OBJ-001]], [[OBJ-006]], [[RF-MIG-002]], [[RF-NAV-004]], [[IE-006]], [[ADR-007]] |
+| [[PA-002]] | **bloqueante** | SEO y migración | Política para los 10 slugs defectuosos del blog y las 340 URLs /tag/ | `resuelta` | [[OBJ-001]], [[RF-MIG-001]], [[RF-BLOG-001]], [[ADR-003]] |
+| [[PA-003]] | **bloqueante** | Contenido y diseño | Banco fotográfico propio, logotipo SVG y sustitución del embed de Instagram | `resuelta` | [[OBJ-004]], [[OBJ-006]], [[RF-NAV-001]], [[RF-PROY-002]], [[RNF-SEO-006]], [[ADR-002]] |
+| [[PA-004]] | **bloqueante** | Arquitectura e integraciones | Backend de formularios y destino operativo de leads | `resuelta` | [[OBJ-005]], [[RF-LEAD-002]], [[RF-LEAD-004]], [[IE-001]], [[ADR-005]] |
+| [[PA-005]] | **bloqueante** | Producto y conversión | Comportamiento interactivo y fórmulas del simulador de reforma | `resuelta` | [[OBJ-005]], [[RF-LEAD-001]], [[CU-002]], [[ADR-005]] |
+| [[PA-006]] | **bloqueante** | Infraestructura y despliegue | Hosting, acceso DNS, reglas de redirección 301 y continuidad de Webmail | `resuelta` | [[OBJ-001]], [[OBJ-006]], [[RF-MIG-002]], [[RF-NAV-004]], [[IE-006]], [[ADR-007]] |
+| [[PA-001]] | **alta** | Legal y cumplimiento | CIF completo y datos del Registro Mercantil de MBL CONSTRUCCIONES S.L. | `abierta` | [[OBJ-006]], [[RF-MIG-003]], [[RNF-SEO-005]], [[RNF-MANT-002]] |
 | [[PA-007]] | **alta** | Diseño y UX | Adaptación del buscador/selector rápido del Hero de mbl-maqueta | `abierta` | [[OBJ-004]], [[OBJ-005]], [[RF-NAV-003]], [[ADR-002]] |
 | [[PA-008]] | **alta** | SEO Local y alcance | Landings locales dedicadas para Gijón, Oviedo y Avilés (Fase 1 vs Fase 2) | `abierta` | [[OBJ-002]], [[RF-SERV-004]], [[ADR-006]] |
 | [[PA-009]] | **alta** | Negocio y contenidos | Vigencia, precio y condiciones de la Oferta Exprés 48h de plato de ducha y tarifas | `abierta` | [[OBJ-005]], [[RF-SERV-002]], [[RF-SERV-003]], [[RNF-MANT-002]] |

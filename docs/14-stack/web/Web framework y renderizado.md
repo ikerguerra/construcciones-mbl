@@ -9,7 +9,7 @@ actualizado: 2026-11-19
 
 # Web — Framework y renderizado
 
-- **Framework**: Astro (última rama estable v5.x sobre Node.js v22 LTS) en modo estático (`output: 'static'`) o híbrido ligero si el endpoint de formularios se despliega con adaptador serverless del proveedor ([[ADR-001]], [[ADR-007]]).
+- **Framework**: Astro (última rama estable v5.x sobre Node.js v22 LTS) en modo estático puro (`output: 'static'`) alojado en **Cloudflare Pages**, acompañado de **Cloudflare Pages Functions** (`functions/api/lead.ts`) para el endpoint serverless de formularios ([[ADR-001]], [[ADR-005]], [[ADR-007]]).
 - **Lenguaje**: TypeScript en modo estricto (`tsconfig.json` `strict`) para layouts, esquemas de datos, helpers SEO y lógica del simulador.
 - **Arquitectura de renderizado**:
   - **Cero JS por defecto**: portada estática, páginas de servicios, artículos del blog, portfolio base y legales entregan HTML/CSS puro sin hidratación.

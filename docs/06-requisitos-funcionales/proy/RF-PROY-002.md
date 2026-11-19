@@ -16,7 +16,4 @@ casos_uso:
 
 # RF-PROY-002 — Sustitución del feed embebido de Instagram por activos locales optimizados
 
-El sistema debe eliminar la carga de scripts e imágenes externas desde el feed embebido de Instagram en portada y `/proyectos/`, sustituyéndolo por un portfolio propio servido localmente con texto alternativo descriptivo y un enlace externo seguro hacia `@construccionesmbl`.
-
-> [!warning] Hipótesis
-> Se asume provisionalmente que el cliente suministrará fotografías propias de obras reales para poblar el portfolio local sin depender de la API de Instagram, sujeto a [[PA-003]].
+El sistema debe eliminar por completo el feed embebido de Instagram en portada y `/proyectos/`, sustituyéndolo por un portfolio propio servido localmente con fotografías reales aportadas por el usuario complementadas con las mejores imágenes extraídas y optimizadas del sitio WordPress actual, texto alternativo descriptivo y un enlace externo seguro hacia `@construccionesmbl` (resuelto en [[PA-003]]).
