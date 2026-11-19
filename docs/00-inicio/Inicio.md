@@ -25,4 +25,4 @@ Bienvenido a la documentación de requisitos (según **ISO/IEC/IEEE 29148**) y a
 - **Verificación y trazabilidad**: `10-criterios-de-aceptacion/` (`CA-*`), [[Matriz de trazabilidad]]
 - **Decisiones y dudas**: [[Decisiones pendientes]], [[Indice de preguntas abiertas]]
 - **Arquitectura y diseño**: [[Stack]], [[Stack web]], [[Guia de estilos]]
-- **Anexos originales**: [[mbl-maqueta.html]] y los 4 archivos `wp-sitemap-*.xml` en `90-anexos/sitemaps/`
+- **Guías operativas y anexos**: [[Flujo editorial SEO GEO AEO]], [[Guia de autoridad off-page local]], [[mbl-maqueta.html]] y los 4 archivos `wp-sitemap-*.xml` en `90-anexos/sitemaps/`

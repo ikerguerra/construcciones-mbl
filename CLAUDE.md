@@ -34,7 +34,7 @@ Este archivo no almacena cifras ni estado operativo del SRS para no quedar desfa
 | `docs/13-preguntas-abiertas/` | Dudas de negocio, legales, de contenido y técnicas (`PA-NNN`) e `Indice de preguntas abiertas.md` |
 | `docs/14-stack/` | `Stack.md` y carpeta `web/` (`Stack web.md` + una nota por área técnica de la web en Astro) |
 | `docs/15-guia-de-estilos/` | `Guia de estilos.md` y notas `Estilo <tema>.md` adaptadas desde `mbl-maqueta.html` |
-| `docs/90-anexos/` | `auditoria/` (auditoría del WordPress actual), `maquetas/` (`mbl-maqueta.html`), `sitemaps/` (`wp-sitemap-*.xml`), `scripts/` (`boveda.py`) y `generados/` (`Listado de requisitos.md`) |
+| `docs/90-anexos/` | `auditoria/` (auditoría del WordPress actual), `guias/` (flujo editorial SEO/GEO/AEO y autoridad off-page local), `maquetas/` (`mbl-maqueta.html`), `sitemaps/` (`wp-sitemap-*.xml`), `scripts/` (`boveda.py`) y `generados/` (`Listado de requisitos.md`, ignorada por Git) |
 | `docs/99-plantillas/` | Plantillas Markdown por tipo de artefacto |
 
 ---
@@ -57,12 +57,14 @@ Consulta la referencia completa en `docs/00-inicio/Convenciones.md`. Reglas esen
 7. **Wikilinks únicos**: todo `.md` en `docs/` (fuera de `99-plantillas/` y `90-anexos/generados/`) debe tener un nombre de archivo único en toda la bóveda para enlazar con `[[Nombre]]`. En el frontmatter YAML van siempre entre comillas: `"[[NEC-001]]"`.
 8. **Archivos de referencia en raíz**: `mbl-maqueta.html` y los `wp-sitemap-*.xml` adjuntos en la raíz se conservan intactos como referencia original del usuario (con copia de trabajo en `docs/90-anexos/`).
 9. **Orden antes de programar en Astro**: no inicializar ni generar páginas definitivas de Astro mientras existan preguntas abiertas con `prioridad: bloqueante` sin resolver con el usuario, salvo que el usuario autorice explícitamente trabajar sobre hipótesis marcadas.
-10. **Control de versiones (Git)**: en cuanto se inicialice el repositorio Git y se configure un remoto, trabaja en la rama acordada (`dev` o `main` según flujo del proyecto), comprueba `git fetch` y `git status -sb` antes de editar si existe remoto, no hagas `pull` ni `commit` sin confirmación del usuario y verifica el último número de versión en `Historial de cambios.md` antes de publicar una nueva versión.
+10. **Control de versiones (Git)**: la rama de trabajo actual es `main` (con remoto `origin`). Comprueba `git fetch` y `git status -sb` antes de editar; si la rama local está por detrás del remoto (`behind`) o ha divergido, detente y avisa al usuario sin hacer `pull` automático. Se realizan **commits locales** por cada hito relevante del proyecto (especialmente cuando implique una nueva versión en `docs/00-inicio/Historial de cambios.md`), verificando antes `boveda.py` y el último número de versión. **Nunca ejecutes `git push`** sin confirmación explícita del usuario.
 
 ---
 
 ## Búsquedas útiles
 - **Auditoría completa de la web actual**: `docs/90-anexos/auditoria/Auditoria web actual WordPress.md`
+- **Flujo editorial SEO/GEO/AEO**: `docs/90-anexos/guias/Flujo editorial SEO GEO AEO.md`
+- **Guía de autoridad off-page local**: `docs/90-anexos/guias/Guia de autoridad off-page local.md`
 - **Preguntas abiertas por resolver**: `docs/13-preguntas-abiertas/Indice de preguntas abiertas.md`
 - **Estado y siguiente paso**: `docs/00-inicio/Estado.md`
 - **Trazabilidad completa**: `docs/11-trazabilidad/Matriz de trazabilidad.md`

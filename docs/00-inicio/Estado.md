@@ -11,7 +11,7 @@ actualizado: 2026-11-19
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `0.1.1` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
+- **Versión del SRS**: `0.2.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
 - **Preguntas abiertas**: 18 abiertas (6 bloqueantes, 8 altas, 4 medias, 0 bajas) · 0 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
@@ -34,6 +34,7 @@ actualizado: 2026-11-19
 - El sistema visual adopta la estética editorial de [[mbl-maqueta.html]]: marco redondeado, alto contraste monocromo blanco/negro, tipografía display condensada en mayúsculas (`Bebas Neue`) combinada con cuerpo legible (`Inter`) y color aportado exclusivamente por la fotografía arquitectónica ([[ADR-002]], [[Guia de estilos]]).
 - Generación estática (`SSG`) orientada a Core Web Vitals máximos y JavaScript mínimo solo en islas interactivas ([[ADR-001]]).
 - **Independencia total de cuentas respecto al WordPress anterior**: descartados `GTM-TG8LZ5L8`, CookieYes y el destino de formularios heredado; GTM, GA4, Search Console y envío de leads se configurarán con **identificadores y cuentas propios del titular** mediante variables de entorno ([[IE-002]], [[PA-012]]).
+- **Estrategia editorial y off-page propia sin SaaS de intercambio**: adoptado el flujo editorial asistido AEO/GEO ([[Flujo editorial SEO GEO AEO]], [[Plantilla articulo MDX]]) y la guía de autoridad local segura centrada en Google Business Profile y citaciones en Asturias ([[Guia de autoridad off-page local]]), descartando redes automáticas de backlinks.
 - Todos los requisitos funcionales y no funcionales quedan trazados desde objetivos de negocio hasta criterios de aceptación en Gherkin y cubiertos por la [[Matriz de trazabilidad]].
 
 ## Siguiente paso

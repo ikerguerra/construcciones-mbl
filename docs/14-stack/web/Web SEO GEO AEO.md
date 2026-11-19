@@ -27,3 +27,6 @@ actualizado: 2026-11-19
   - `<ResumenDirecto />` (*En resumen* de 40–60 palabras al inicio de servicios y artículos).
   - `<TablaComparativa />` (tablas HTML semánticas con `<thead>` y `<caption>`).
   - `<BloqueFaq />` (acordeón accesible sincronizado con `FAQPage`).
+- **Operativa editorial y seguimiento GEO/Off-page**:
+  - Creación y refresco trimestral de artículos siguiendo [[Flujo editorial SEO GEO AEO]] y [[Plantilla articulo MDX]].
+  - Autoridad local y control mensual en Search Console / GA4 / prompts IA siguiendo [[Guia de autoridad off-page local]] (sin redes automáticas de intercambio de backlinks).
