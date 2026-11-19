@@ -11,8 +11,8 @@ actualizado: 2026-11-19
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `0.4.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
-- **Preguntas abiertas**: 13 abiertas (0 bloqueantes, 9 altas, 4 medias, 0 bajas) · 5 resueltas/cerradas
+- **Versión del SRS**: `0.5.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
+- **Preguntas abiertas**: 5 abiertas (0 bloqueantes, 1 altas, 4 medias, 0 bajas) · 13 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
 |---|---|
@@ -42,9 +42,13 @@ actualizado: 2026-11-19
   - Activos visuales: logotipo y fotos propias del usuario + extracción/optimización local de las mejores imágenes del WordPress actual; eliminado el feed embebido de Instagram ([[PA-003]]).
   - Simulador y leads (`ADR-005`): simulador interactivo real en pantalla con tarifas orientativas coherentes unificadas y confirmación inline; endpoint en Cloudflare Pages Functions + **Resend** con auto-respuesta gobernable mediante `SEND_AUTO_REPLY` y webhook opcional a Google Sheets ([[PA-004]], [[PA-005]]).
   - Datos legales (`PA-001`): domicilio y correo confirmados; CIF completo y Registro Mercantil quedan pendientes únicamente para antes de publicar en producción (prioridad `alta`).
+- **Bloque 2 resuelto (`PA-007`..`PA-014`) y `ADR-004` aceptado**:
+  - UX/Marca (`PA-007`, `PA-014`): selector rápido del Hero (4 parámetros) hacia simulador preseleccionado; marca principal `Construcciones MBL`, marcas de agua `ASTURIAS` y `CONSTRUCCIONES MBL`, y 4 métricas oficiales (`+20 años`, `+260 proyectos`, `48 h` ducha exprés, `Hasta 10 años` garantía).
+  - SEO local y ofertas (`PA-008`, `PA-009`): 3 landings locales en **Fase 1** (`/reformas-en-gijon/`, `/reformas-en-oviedo/`, `/reformas-en-aviles/`); landing/reclamo de Oferta Exprés 48h de plato de ducha incluida con interruptor configurable (`PUBLIC_SHOW_PROMO_DUCHA=true|false`).
+  - Contenidos, E-E-A-T y reseñas (`PA-010`, `PA-011`, `PA-013`): Content Collections en Git + Zod sin CMS externo (`ADR-004`); autoría E-E-A-T (`Borja — Dirección de Construcciones MBL` y `Equipo Técnico`) + bloque de equipo; carrusel nativo sin Trustindex con cifras unificadas y `hasMap` público.
+  - Analítica y cookies (`PA-012`): variables opcionales `PUBLIC_GTM_ID` / `PUBLIC_GA4_ID` listas para rellenar después y banner de consentimiento nativo ultraligero con Consent Mode v2.
 - Todos los requisitos funcionales y no funcionales quedan trazados desde objetivos de negocio hasta criterios de aceptación en Gherkin y cubiertos por la [[Matriz de trazabilidad]].
 
 ## Siguiente paso
-1. Resolver con el usuario el **Bloque 2 (`PA-007` a `PA-014`)** y el **Bloque 3 (`PA-015` a `PA-018`)** de [[Indice de preguntas abiertas]].
-2. Aprobar o ajustar las decisiones pendientes (`ADR-003`, `ADR-004`, `ADR-006`).
-3. Inicializar el proyecto **Astro** en la raíz siguiendo [[Stack web]] y [[Guia de estilos]], extraer/optimizar las imágenes del WordPress actual, migrar contenidos y verificar el mapa `301`/`410` + criterios `CA-*`.
+1. Resolver con el usuario el **Bloque 3 final (`PA-015` a `PA-018`)** de [[Indice de preguntas abiertas]] para cerrar el SRS completo (`ADR-003` y `ADR-006`).
+2. Inicializar el proyecto **Astro** en la raíz siguiendo [[Stack web]] y [[Guia de estilos]], extraer/optimizar las imágenes del WordPress actual, migrar contenidos y verificar el mapa `301`/`410` + criterios `CA-*`.

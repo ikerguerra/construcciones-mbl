@@ -24,7 +24,7 @@ actualizado: 2026-11-19
 > Se asume provisionalmente que el CIF completo y los datos del Registro Mercantil de `MBL CONSTRUCCIONES S.L.` serán entregados por el cliente antes de publicar en producción ([[PA-001]]).
 
 > [!warning] Hipótesis
-> Se asume provisionalmente que los rangos de precios orientativos coherentes definidos para el simulador y servicios y las condiciones de la oferta de cambio de bañera a plato de ducha serán revisados y validados por el cliente antes de pasar a producción. Confirmar en [[PA-009]] y [[PA-014]].
+> Se asume provisionalmente que los rangos de precios orientativos coherentes unificados en `src/data/tarifas.ts` (y el importe promocional configurable de cambio de bañera a plato de ducha) podrán ajustarse cuando MBL confirme sus tarifas comerciales definitivas ([[PA-009]], [[PA-017]]).
 
 ## 3. Dependencias externas
 - Coordinación del cambio de registros DNS de `construccionesmbl.com` con el gestor actual de WordPress para el corte hacia Cloudflare Pages preservando intactos los registros `MX` del correo corporativo ([[IE-006]], [[PA-006]]).

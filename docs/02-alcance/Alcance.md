@@ -28,8 +28,8 @@ La fase inicial cubre exclusivamente la **web corporativa pública de Construcci
    - `/construccion-de-viviendas-en-asturias/`
    - `/reformas-parciales-en-asturias/` (corrigiendo errata de copy detectada).
    - `/reforma-de-locales-comerciales-en-asturias/`
-   - Landing comercial de cambio exprés de bañera por plato de ducha (sujeta a actualización en [[PA-009]]).
-   - Landings locales para Gijón, Oviedo y Avilés sujetas a confirmación en [[PA-008]].
+   - Landing comercial de cambio exprés de bañera por plato de ducha en 48h con interruptor configurable de promoción temporal ([[PA-009]]).
+   - Tres landings locales diferenciadas en Fase 1: `/reformas-en-gijon/`, `/reformas-en-oviedo/` y `/reformas-en-aviles/` ([[PA-008]]).
 3. **Portfolio de proyectos (`/proyectos/`)** con filtros por tipología de reforma y fotografía propia optimizada ([[PA-003]]).
 4. **Blog / Revista editorial *Innovación Sostenible*** (`/innovacion-sostenible/`):
    - Migración y mejora AEO/GEO de los 22 artículos existentes ([[PA-018]]).
@@ -50,4 +50,4 @@ La fase inicial cubre exclusivamente la **web corporativa pública de Construcci
 - Intranet o panel de gestión interno de obras, presupuestos o clientes ([[PA-016]]).
 - Pasarela de pagos online o comercio electrónico.
 - Versión multiidioma fuera de español (`es-ES`, [[PA-016]]).
-- Migración de cuentas de correo corporativo (aunque debe preservarse la accesibilidad del servicio Webmail según [[PA-006]]).
+- Migración de cuentas de correo corporativo (los registros `MX` se preservan en el corte DNS sin exponer enlace `Webmail` en el pie de página público, según [[PA-006]]).

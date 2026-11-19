@@ -17,7 +17,4 @@ casos_uso:
 
 # RF-NAV-003 — Selector rápido interactivo en el Hero
 
-El sistema debe reemplazar el buscador inmobiliario genérico del Hero de [[mbl-maqueta.html]] por un selector rápido de hasta 4 parámetros adaptado al negocio de Construcciones MBL que conduzca directamente a la página de servicio correspondiente o al simulador preconfigurado con la selección del usuario.
-
-> [!warning] Hipótesis
-> Se asume provisionalmente la combinación de campos `Tipo de obra`, `Zona en Asturias`, `Superficie aproximada` y `Plazo / Nivel de calidad`, pendiente de validación en [[PA-007]].
+El sistema debe reemplazar el buscador inmobiliario genérico del Hero de [[mbl-maqueta.html]] por un selector rápido de 4 parámetros (`Tipo de obra`, `Zona en Asturias`, `Superficie aproximada` y `Calidad`) que conduzca directamente al simulador `/calcula-el-precio-de-tu-reforma-en-asturias/` con dichos valores preseleccionados (resuelto en [[PA-007]]).

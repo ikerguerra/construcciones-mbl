@@ -16,7 +16,4 @@ casos_uso:
 
 # RF-PROY-003 — Sección de testimonios y reseñas de Google Business Profile verificables
 
-El sistema debe mostrar testimonios de clientes reales con nombre, localidad o servicio contratado, puntuación media y conteo total de reseñas coherentes con Google Business Profile (`Place ID: ChIJN_H9_Jyih2MRXyPsrrG4cWg`), además de controles de navegación accesibles y enlace directo a la ficha oficial de reseñas.
-
-> [!warning] Hipótesis
-> Se asume provisionalmente que la web mostrará una selección curada de reseñas reales con conteo único consistente (resolviendo la discrepancia actual `27` vs `29` / `5.0` vs `4.9`), según se defina en [[PA-013]].
+El sistema debe eliminar widgets externos pesados y mostrar un carrusel nativo fiel a [[mbl-maqueta.html]] con testimonios reales verificados, puntuación media y conteo total de reseñas coherentes con Google Business Profile (`Place ID: ChIJN_H9_Jyih2MRXyPsrrG4cWg`, unificados entre vista y datos estructurados), controles accesibles y enlace directo a la ficha pública oficial de Google Maps (resuelto en [[PA-013]]).

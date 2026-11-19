@@ -15,9 +15,6 @@ casos_uso:
   - "[[CU-006]]"
 ---
 
-# RF-SERV-004 — Arquitectura preparada para landings locales por municipio en Asturias
+# RF-SERV-004 — Landings locales diferenciadas por municipio en Asturias
 
-El sistema debe soportar la publicación de páginas de aterrizaje geolocalizadas para los núcleos principales de actuación (`Gijón`, `Oviedo`, `Avilés`) con contenido local único (normativa municipal, licencias, barrios, proyectos cercanos y Schema local) sin duplicar contenido genérico.
-
-> [!warning] Hipótesis
-> Se asume provisionalmente la inclusión en Fase 1 o Fase 2 de landings dedicadas para Gijón, Oviedo y Avilés a la espera de confirmación del alcance en [[PA-008]].
+El sistema debe publicar desde la Fase 1 tres páginas de aterrizaje geolocalizadas (`/reformas-en-gijon/`, `/reformas-en-oviedo/` y `/reformas-en-aviles/`) con contenido local único (barrios, casuística edificatoria, licencias municipales, proyectos cercanos y marcado geográfico local) sin duplicar texto genérico (resuelto en [[PA-008]]).

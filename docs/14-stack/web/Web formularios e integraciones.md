@@ -17,8 +17,8 @@ actualizado: 2026-11-19
   - Envío mediante **Resend** (API HTTP nativa en capa gratuita, óptima para edge) hacia `LEADS_TO_EMAIL` (`info@construccionesmbl.com`).
   - **Auto-respuesta al cliente**: envío de correo automático de confirmación al solicitante activable/desactivable mediante la variable de entorno **`SEND_AUTO_REPLY`** (`"true"` / `"false"`).
   - Reenvío opcional vía webhook a una nueva hoja Google Sheets propia (`SHEETS_WEBHOOK_URL`).
-- **Consentimiento y medición (`IE-002`)**:
-  - Gestor nativo ligero (`localStorage` + actualización Google Consent Mode v2 por defecto `denied` para `analytics_storage` y `ad_storage`) con botones equilibrados en primer nivel.
-  - Carga diferida de las **cuentas propias** de GTM y/o GA4 mediante variables de entorno (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`, descartando el contenedor `GTM-TG8LZ5L8` del WordPress anterior; sujeto a [[PA-012]]) tras interacción o bajo Consent Mode v2, emitiendo eventos `dataLayer` limpios (`submit_contacto`, `submit_simulador`, `click_telefono`, `click_whatsapp`).
+- **Consentimiento y medición (`IE-002`, [[PA-012]])**:
+  - Banner de consentimiento nativo ultraligero en español (`localStorage` + Google Consent Mode v2 por defecto `denied` para `analytics_storage` y `ad_storage`) con botones equilibrados en primer nivel y Política de Cookies actualizada (sustituyendo definitivamente a CookieYes).
+  - Carga diferida de las **cuentas propias** de GTM y/o GA4 mediante variables de entorno opcionales (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`, inocuas mientras permanezcan vacías para configurarlas tras la puesta a punto; descartado `GTM-TG8LZ5L8`) tras aceptación o bajo Consent Mode v2, emitiendo eventos `dataLayer` limpios (`submit_contacto`, `submit_simulador`, `click_telefono`, `click_whatsapp`).
 - **WhatsApp y teléfono**:
   - Enlaces semánticos `tel:+34684675898` y `https://wa.me/34684675898`, con botón flotante SVG ligero CSS puro (sin librerías externas).

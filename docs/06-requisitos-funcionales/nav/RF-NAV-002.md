@@ -18,7 +18,4 @@ casos_uso:
 
 # RF-NAV-002 — Portada editorial adaptada a Construcciones MBL
 
-El sistema debe renderizar la página de inicio (`/`) siguiendo la secuencia editorial de [[mbl-maqueta.html]]: Hero a sangre con buscador/selector rápido, bloque *Nuestra historia* con 4 indicadores numéricos verificados y galería de 3 imágenes, escaparate de servicios con pestañas por categoría, bloque oscuro diferencial con marca de agua corporativa, sección dual de destacados y galería, bloque de testimonios y preguntas frecuentes (FAQs).
-
-> [!warning] Hipótesis
-> Se asume provisionalmente que las 4 estadísticas corporativas mantendrán `+20 años de experiencia` y `+260 proyectos finalizados` más dos métricas por confirmar con el cliente, así como el texto de la marca de agua del footer. Ver [[PA-014]].
+El sistema debe renderizar la página de inicio (`/`) siguiendo la secuencia editorial de [[mbl-maqueta.html]]: Hero a sangre con selector rápido, bloque *Nuestra historia* con las 4 métricas oficiales (`+20 años de experiencia`, `+260 proyectos finalizados`, `48 h cambio exprés de ducha` y `Hasta 10 años de garantía por escrito`) y galería de 3 imágenes, escaparate de servicios con pestañas por categoría, bloque oscuro diferencial con marca de agua `ASTURIAS`, sección dual de destacados y galería, bloque de testimonios, bloque visible de equipo/dirección técnica y preguntas frecuentes (FAQs), rematado con pie de página y marca de agua `CONSTRUCCIONES MBL` (resuelto en [[PA-010]] y [[PA-014]]).

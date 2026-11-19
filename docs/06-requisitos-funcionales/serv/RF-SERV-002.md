@@ -20,4 +20,4 @@ casos_uso:
 El sistema debe presentar en cada página de servicio una estructura homogénea y escaneable que incluya resumen ejecutivo inicial, qué incluye la partida, tabla comparativa de precios orientativos y superficies en Asturias, plazos estimados, garantía escrita aplicable, fases del proceso de trabajo y preguntas frecuentes específicas del servicio.
 
 > [!warning] Hipótesis
-> Se asume provisionalmente que las discrepancias de rangos de precio entre páginas de servicio y calculadora serán unificadas desde una fuente única de datos tras confirmar [[PA-009]] y [[PA-017]].
+> Los importes orientativos iniciales unificados en la fuente única de tarifas ([[PA-005]] y [[PA-009]]) quedan sujetos a validación comercial opcional de MBL y a concretar los plazos exactos de garantía por especialidad en [[PA-017]].

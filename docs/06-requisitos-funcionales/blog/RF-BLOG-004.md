@@ -17,7 +17,4 @@ casos_uso:
 
 # RF-BLOG-004 — Autoría real E-E-A-T en reemplazo del identificador técnico 3fwu9
 
-El sistema debe mostrar en cada artículo el nombre real, cargo técnico o editorial, breve biografía y fecha de última revisión del autor o equipo redactor, eliminando por completo la firma técnica `"3fwu9"` y la ruta `/author/3fwu9/`.
-
-> [!warning] Hipótesis
-> Se asume provisionalmente la atribución a un perfil técnico real de Construcciones MBL (p. ej. dirección técnica / Borja o equipo editorial verificado) sujeto a confirmación en [[PA-010]].
+El sistema debe atribuir los artículos del blog al perfil de dirección real **`Borja — Dirección de Construcciones MBL`** y al **`Equipo Técnico de Construcciones MBL`** con cargo, breve biografía y fecha de última revisión, mostrar un bloque visible de dirección/equipo técnico en la web, eliminar por completo la firma `"3fwu9"` y redirigir `301` `/author/3fwu9/` hacia `/innovacion-sostenible/` (resuelto en [[PA-010]]).
