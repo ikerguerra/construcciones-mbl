@@ -1,0 +1,480 @@
+---
+import {
+  CALIDADES,
+  TARIFAS,
+  ZONAS_ASTURIAS,
+  calcularPresupuesto,
+  formatearEuros,
+} from '../data/tarifas';
+
+const inicial = calcularPresupuesto({
+  tipo: 'reforma-integral',
+  m2: 85,
+  calidad: 'estandar',
+  extrasIds: [],
+});
+
+const tarifasJson = JSON.stringify(TARIFAS);
+const calidadesJson = JSON.stringify(CALIDADES);
+---
+
+<div class="article-layout" id="simulador-app" data-tarifas={tarifasJson} data-calidades={calidadesJson}>
+  <!-- PANEL IZQUIERDO: PARÁMETROS Y FORMULARIO -->
+  <div style="display:grid;gap:28px">
+    <div class="eeat-card" style="background:var(--white)">
+      <span class="sec-kicker">Paso 1 · Configura tu proyecto en Asturias</span>
+      <h2 class="sec-title" style="font-size:32px;margin-bottom:18px">
+        Parámetros de Tu Reforma o Construcción
+      </h2>
+
+      <div class="form-grid">
+        <div class="input-group full">
+          <label for="sim-tipo">Tipo de actuación *</label>
+          <select id="sim-tipo" class="input-ctrl">
+            {Object.values(TARIFAS).map((t) => (
+              <option value={t.key}>{t.nombre} ({t.rangoVisible})</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="sim-zona">Concejo / Zona en Asturias *</label>
+          <select id="sim-zona" class="input-ctrl">
+            {ZONAS_ASTURIAS.map((z) => (
+              <option value={z}>{z}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="sim-calidad">Nivel de calidades *</label>
+          <select id="sim-calidad" class="input-ctrl">
+            {Object.values(CALIDADES).map((c) => (
+              <option value={c.key} selected={c.key === 'estandar'}>
+                {c.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div class="input-group full">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <label for="sim-m2" id="sim-m2-label">
+              {TARIFAS['reforma-integral'].etiquetaSuperficie}
+            </label>
+            <strong id="sim-m2-badge" style="font-size:15px">85 m²</strong>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center">
+            <input
+              id="sim-m2-range"
+              type="range"
+              min="35"
+              max="260"
+              value="85"
+              style="flex:1;accent-color:var(--black)"
+              aria-label="Selector deslizante de superficie"
+            />
+            <input
+              id="sim-m2"
+              type="number"
+              class="input-ctrl"
+              min="35"
+              max="260"
+              value="85"
+              style="width:100px"
+            />
+          </div>
+          <small id="sim-calidad-desc" style="font-size:12.5px;color:var(--muted)">
+            {CALIDADES.estandar.descripcion}
+          </small>
+        </div>
+
+        <div class="input-group full">
+          <span style="font-size:13.5px;font-weight:500">Partidas opcionales frecuentes</span>
+          <div id="sim-extras-container" style="display:grid;gap:8px;margin-top:4px">
+            {TARIFAS['reforma-integral'].extras.map((ex) => (
+              <label class="check-row" style="padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer">
+                <input type="checkbox" value={ex.id} data-extra-check />
+                <span>
+                  <strong>{ex.label}</strong>{' '}
+                  <small style="color:var(--muted)">
+                    (+{formatearEuros(ex.min)} – {formatearEuros(ex.max)})
+                  </small>
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 2: SOLICITAR VISITA TÉCNICA / PRESUPUESTO CERRADO -->
+    <form id="sim-lead-form" class="eeat-card" style="background:var(--white)" novalidate>
+      <span class="sec-kicker">Paso 2 · Recibe copia detallada o pide visita gratuita</span>
+      <h2 class="sec-title" style="font-size:32px;margin-bottom:10px">
+        Solicita Presupuesto Cerrado sin Compromiso
+      </h2>
+      <p style="font-size:14px;color:#333;margin-bottom:18px">
+        Te enviamos el desglose orientativo y, si lo deseas, concertamos una visita técnica gratuita en tu vivienda o local en Asturias para darte un precio cerrado en 48 h.
+      </p>
+
+      <div class="hp-field" aria-hidden="true">
+        <label for="sim-hp">No rellenar este campo</label>
+        <input id="sim-hp" name="empresa_web" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="sim-nombre">Nombre y apellidos *</label>
+          <input id="sim-nombre" name="nombre" type="text" class="input-ctrl" required minlength="2" placeholder="Ej. Laura García" />
+        </div>
+
+        <div class="input-group">
+          <label for="sim-telefono">Teléfono de contacto *</label>
+          <input id="sim-telefono" name="telefono" type="tel" class="input-ctrl" required minlength="9" placeholder="Ej. 684 675 898" />
+        </div>
+
+        <div class="input-group full">
+          <label for="sim-email">Correo electrónico *</label>
+          <input id="sim-email" name="email" type="email" class="input-ctrl" required placeholder="tu@correo.es" />
+        </div>
+
+        <div class="input-group full">
+          <label for="sim-mensaje">Detalles adicionales de tu proyecto (opcional)</label>
+          <textarea
+            id="sim-mensaje"
+            name="mensaje"
+            rows="3"
+            class="input-ctrl"
+            placeholder="Cuéntanos barrio o concejo, estado actual del inmueble o fecha en la que te gustaría empezar..."
+          ></textarea>
+        </div>
+
+        <div class="input-group full">
+          <label class="check-row">
+            <input id="sim-privacidad" name="privacidad" type="checkbox" required />
+            <span>
+              He leído y acepto la{' '}
+              <a href="/politica-de-privacidad/" style="text-decoration:underline;font-weight:500">
+                Política de Privacidad
+              </a>{' '}
+              para que Construcciones MBL gestione mi solicitud de presupuesto. *
+            </span>
+          </label>
+        </div>
+
+        <div class="input-group full">
+          <button type="submit" class="btn-dark" id="sim-submit-btn" style="width:100%;padding:14px 24px;font-size:15px">
+            Solicitar presupuesto y visita gratuita →
+          </button>
+        </div>
+      </div>
+
+      <div id="sim-form-status" class="form-status" hidden role="status" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <!-- PANEL DERECHO: RESUMEN EN TIEMPO REAL -->
+  <aside class="toc-box" style="background:var(--black);color:var(--white);border-color:#222">
+    <span class="sec-kicker" style="color:var(--warm)">Estimación orientativa en pantalla</span>
+    <h2 style="font-family:var(--f-display);font-size:28px;text-transform:uppercase;color:var(--white);margin-bottom:8px" id="res-titulo">
+      {TARIFAS['reforma-integral'].nombreCorto}
+    </h2>
+
+    <div style="padding:16px 0;border-top:1px solid #333;border-bottom:1px solid #333;margin:12px 0">
+      <span style="font-size:12px;color:#cccccc;display:block">Horquilla orientativa (IVA no incl.)</span>
+      <strong
+        id="res-rango"
+        style="font-family:var(--f-display);font-size:40px;line-height:1.05;color:var(--white);display:block;margin-top:4px"
+      >
+        {formatearEuros(inicial.min)} – {formatearEuros(inicial.max)}
+      </strong>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;margin-bottom:16px">
+      <div>
+        <span style="color:#aaa;display:block">Plazo estimado</span>
+        <strong id="res-plazo">{inicial.plazo}</strong>
+      </div>
+      <div>
+        <span style="color:#aaa;display:block">Garantía escrita</span>
+        <strong id="res-garantia">{inicial.garantia}</strong>
+      </div>
+    </div>
+
+    <div style="font-size:13px;border-top:1px solid #333;padding-top:14px">
+      <strong style="display:block;margin-bottom:8px;color:#eee">Desglose por partidas:</strong>
+      <ul id="res-desglose" style="list-style:none;display:grid;gap:8px;color:#d0d0d0">
+        {inicial.desglose.map((d) => (
+          <li style="display:flex;justify-content:space-between;gap:10px">
+            <span>{d.concepto}</span>
+            <strong style="white-space:nowrap">
+              {formatearEuros(d.min)} – {formatearEuros(d.max)}
+            </strong>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <p style="font-size:12px;color:#aaa;margin-top:18px;line-height:1.45">
+      * Cálculo orientativo basado en tarifas de referencia en Asturias (2026). El presupuesto definitivo cerrado se entrega tras medición técnica gratuita en el inmueble.
+    </p>
+  </aside>
+</div>
+
+<script>
+  const app = document.getElementById('simulador-app');
+  if (app) {
+    const TARIFAS = JSON.parse(app.getAttribute('data-tarifas') || '{}');
+    const CALIDADES = JSON.parse(app.getAttribute('data-calidades') || '{}');
+
+    const tipoEl = document.getElementById('sim-tipo') as HTMLSelectElement;
+    const zonaEl = document.getElementById('sim-zona') as HTMLSelectElement;
+    const calidadEl = document.getElementById('sim-calidad') as HTMLSelectElement;
+    const m2El = document.getElementById('sim-m2') as HTMLInputElement;
+    const m2RangeEl = document.getElementById('sim-m2-range') as HTMLInputElement;
+    const m2LabelEl = document.getElementById('sim-m2-label') as HTMLElement;
+    const m2BadgeEl = document.getElementById('sim-m2-badge') as HTMLElement;
+    const calDescEl = document.getElementById('sim-calidad-desc') as HTMLElement;
+    const extrasContainer = document.getElementById('sim-extras-container') as HTMLElement;
+
+    const resTitulo = document.getElementById('res-titulo') as HTMLElement;
+    const resRango = document.getElementById('res-rango') as HTMLElement;
+    const resPlazo = document.getElementById('res-plazo') as HTMLElement;
+    const resGarantia = document.getElementById('res-garantia') as HTMLElement;
+    const resDesglose = document.getElementById('res-desglose') as HTMLElement;
+
+    const fmt = (val: number) =>
+      new Intl.NumberFormat('es-ES', {
+        style: 'currency',
+        currency: 'EUR',
+        maximumFractionDigits: 0,
+      }).format(Math.round(val / 10) * 10);
+
+    let currentSummary = { min: 0, max: 0, plazo: '', desglose: [] as Array<{ concepto: string; min: number; max: number }> };
+
+    function renderExtrasForType(tipoKey: string) {
+      const cfg = TARIFAS[tipoKey] || TARIFAS['reforma-integral'];
+      extrasContainer.innerHTML = cfg.extras
+        .map(
+          (ex: { id: string; label: string; min: number; max: number }) => `
+        <label class="check-row" style="padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer">
+          <input type="checkbox" value="${ex.id}" data-extra-check />
+          <span>
+            <strong>${ex.label}</strong>
+            <small style="color:var(--muted)"> (+${fmt(ex.min)} – ${fmt(ex.max)})</small>
+          </span>
+        </label>
+      `
+        )
+        .join('');
+
+      extrasContainer.querySelectorAll('input[data-extra-check]').forEach((chk) => {
+        chk.addEventListener('change', recalc);
+      });
+    }
+
+    function syncBoundsForType(tipoKey: string, customM2?: number) {
+      const cfg = TARIFAS[tipoKey] || TARIFAS['reforma-integral'];
+      m2LabelEl.textContent = cfg.etiquetaSuperficie;
+      m2El.min = String(cfg.minM2);
+      m2El.max = String(cfg.maxM2);
+      m2RangeEl.min = String(cfg.minM2);
+      m2RangeEl.max = String(cfg.maxM2);
+      const targetVal = customM2
+        ? Math.max(cfg.minM2, Math.min(cfg.maxM2, customM2))
+        : cfg.defaultM2;
+      m2El.value = String(targetVal);
+      m2RangeEl.value = String(targetVal);
+    }
+
+    function recalc() {
+      const cfg = TARIFAS[tipoEl.value] || TARIFAS['reforma-integral'];
+      const cal = CALIDADES[calidadEl.value] || CALIDADES.estandar;
+      const medida = Math.max(
+        cfg.minM2,
+        Math.min(cfg.maxM2, Number(m2El.value) || cfg.defaultM2)
+      );
+
+      const unit = cfg.usaSuperficie ? 'm²' : medida === 1 ? 'baño' : 'baños';
+      m2BadgeEl.textContent = `${medida} ${unit}`;
+      calDescEl.textContent = cal.descripcion;
+
+      let baseMin = 0;
+      let baseMax = 0;
+      if (cfg.key === 'plato-ducha') {
+        baseMin = cfg.baseFijaMin * medida * cal.factor;
+        baseMax = cfg.baseFijaMax * medida * cal.factor;
+      } else {
+        baseMin = (cfg.baseFijaMin + cfg.precioM2Min * medida) * cal.factor;
+        baseMax = (cfg.baseFijaMax + cfg.precioM2Max * medida) * cal.factor;
+      }
+
+      const desglose = [
+        {
+          concepto: `Ejecución base (${cfg.nombreCorto} · ${cal.label})`,
+          min: Math.round(baseMin / 10) * 10,
+          max: Math.round(baseMax / 10) * 10,
+        },
+      ];
+
+      let extrasMin = 0;
+      let extrasMax = 0;
+      extrasContainer
+        .querySelectorAll<HTMLInputElement>('input[data-extra-check]:checked')
+        .forEach((chk) => {
+          const ex = cfg.extras.find((e: { id: string }) => e.id === chk.value);
+          if (ex) {
+            extrasMin += ex.min;
+            extrasMax += ex.max;
+            desglose.push({ concepto: ex.label, min: ex.min, max: ex.max });
+          }
+        });
+
+      const totalMin = Math.round((baseMin + extrasMin) / 10) * 10;
+      const totalMax = Math.round((baseMax + extrasMax) / 10) * 10;
+
+      resTitulo.textContent = `${cfg.nombreCorto} en ${zonaEl.value}`;
+      resRango.textContent = `${fmt(totalMin)} – ${fmt(totalMax)}`;
+      resPlazo.textContent = cfg.plazoEstimado;
+      resGarantia.textContent = cfg.garantia;
+      resDesglose.innerHTML = desglose
+        .map(
+          (d) => `
+        <li style="display:flex;justify-content:space-between;gap:10px">
+          <span>${d.concepto}</span>
+          <strong style="white-space:nowrap">${fmt(d.min)} – ${fmt(d.max)}</strong>
+        </li>
+      `
+        )
+        .join('');
+
+      currentSummary = { min: totalMin, max: totalMax, plazo: cfg.plazoEstimado, desglose };
+    }
+
+    // Pre-relleno desde query params (?tipo=&zona=&m2=&calidad=)
+    const params = new URLSearchParams(window.location.search);
+    const qTipo = params.get('tipo');
+    const qZona = params.get('zona');
+    const qM2 = params.get('m2');
+    const qCal = params.get('calidad');
+
+    if (qTipo && TARIFAS[qTipo]) {
+      tipoEl.value = qTipo;
+    }
+    if (qZona) {
+      const matchZona = Array.from(zonaEl.options).find((o) =>
+        o.value.toLowerCase().includes(qZona.toLowerCase())
+      );
+      if (matchZona) zonaEl.value = matchZona.value;
+    }
+    if (qCal && CALIDADES[qCal]) {
+      calidadEl.value = qCal;
+    }
+
+    syncBoundsForType(tipoEl.value, qM2 ? Number(qM2) : undefined);
+    renderExtrasForType(tipoEl.value);
+    recalc();
+
+    tipoEl.addEventListener('change', () => {
+      syncBoundsForType(tipoEl.value);
+      renderExtrasForType(tipoEl.value);
+      recalc();
+    });
+
+    zonaEl.addEventListener('change', recalc);
+    calidadEl.addEventListener('change', recalc);
+
+    m2RangeEl.addEventListener('input', () => {
+      m2El.value = m2RangeEl.value;
+      recalc();
+    });
+
+    m2El.addEventListener('input', () => {
+      m2RangeEl.value = m2El.value;
+      recalc();
+    });
+
+    // Envío con confirmación inline a /api/lead
+    const form = document.getElementById('sim-lead-form') as HTMLFormElement | null;
+    const statusBox = document.getElementById('sim-form-status') as HTMLElement | null;
+    const submitBtn = document.getElementById('sim-submit-btn') as HTMLButtonElement | null;
+
+    form?.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (!statusBox || !submitBtn) return;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const fd = new FormData(form);
+      const checkedExtras = Array.from(
+        extrasContainer.querySelectorAll<HTMLInputElement>('input[data-extra-check]:checked')
+      ).map((c) => c.value);
+
+      const payload = {
+        origen: 'simulador',
+        nombre: String(fd.get('nombre') || '').trim(),
+        telefono: String(fd.get('telefono') || '').trim(),
+        email: String(fd.get('email') || '').trim(),
+        zona: zonaEl.value,
+        mensaje: String(fd.get('mensaje') || '').trim(),
+        privacidad: (document.getElementById('sim-privacidad') as HTMLInputElement).checked,
+        empresa_web: String(fd.get('empresa_web') || ''),
+        simulacion: {
+          tipoObra: tipoEl.value,
+          nombreObra: (TARIFAS[tipoEl.value] || TARIFAS['reforma-integral']).nombre,
+          m2: Number(m2El.value),
+          calidad: calidadEl.value,
+          extras: checkedExtras,
+          estimacionMin: currentSummary.min,
+          estimacionMax: currentSummary.max,
+          plazoEstimado: currentSummary.plazo,
+        },
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando solicitud...';
+      statusBox.hidden = true;
+
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.ok) {
+          statusBox.className = 'form-status ok';
+          statusBox.textContent =
+            data.message ||
+            '¡Solicitud recibida! Hemos registrado tu simulación y nuestro equipo técnico en Asturias contactará contigo en menos de 24-48 h laborables.';
+          statusBox.hidden = false;
+          form.reset();
+          (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({
+            event: 'submit_simulador',
+            tipo_obra: payload.simulacion.tipoObra,
+            zona: payload.zona,
+          });
+        } else {
+          statusBox.className = 'form-status err';
+          statusBox.textContent =
+            data.error ||
+            'No hemos podido procesar el envío en este momento. Por favor, llámanos o escríbenos por WhatsApp al 684 675 898.';
+          statusBox.hidden = false;
+        }
+      } catch (_err) {
+        statusBox.className = 'form-status err';
+        statusBox.textContent =
+          'Error de conexión al enviar el formulario. Puedes llamarnos directamente al 684 675 898 o contactarnos por WhatsApp.';
+        statusBox.hidden = false;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Solicitar presupuesto y visita gratuita →';
+      }
+    });
+  }
+</script>

@@ -1,0 +1,36 @@
+---
+import { EMPRESA } from '../data/empresa';
+import type { TipoObraKey } from '../data/tarifas';
+
+export interface Props {
+  titulo?: string;
+  descripcion?: string;
+  tipoPorDefecto?: TipoObraKey;
+}
+
+const {
+  titulo = 'Calcula tu presupuesto orientativo o solicita visita técnica gratuita',
+  descripcion = 'Estima en 2 minutos la horquilla real para tu obra en Asturias y pide una valoración cerrada por partidas sin compromiso.',
+  tipoPorDefecto = 'reforma-integral',
+} = Astro.props;
+---
+
+<section class="sec-compact" aria-label="Llamada a la acción">
+  <div class="promo-strip" style="margin-top:0">
+    <div>
+      <h3>{titulo}</h3>
+      <p>{descripcion}</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <a
+        class="pill pill-white"
+        href={`/calcula-el-precio-de-tu-reforma-en-asturias/?tipo=${tipoPorDefecto}`}
+      >
+        Ir al simulador →
+      </a>
+      <a class="pill" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+        Llamar {EMPRESA.telefonoVisible}
+      </a>
+    </div>
+  </div>
+</section>

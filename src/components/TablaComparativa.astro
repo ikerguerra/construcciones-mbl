@@ -1,0 +1,29 @@
+---
+export interface Props {
+  caption: string;
+  columnas: string[];
+  filas: string[][];
+}
+
+const { caption, columnas, filas } = Astro.props;
+---
+
+<div class="tabla-wrap">
+  <table>
+    <caption>{caption}</caption>
+    <thead>
+      <tr>
+        {columnas.map((col) => <th scope="col">{col}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {filas.map((fila) => (
+        <tr>
+          {fila.map((celda, idx) =>
+            idx === 0 ? <th scope="row" style="font-weight:600">{celda}</th> : <td>{celda}</td>
+          )}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

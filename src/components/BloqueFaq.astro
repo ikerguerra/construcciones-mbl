@@ -1,0 +1,35 @@
+---
+export interface FaqItem {
+  pregunta: string;
+  respuesta: string;
+}
+
+export interface Props {
+  titulo?: string;
+  subtitulo?: string;
+  faqs: ReadonlyArray<FaqItem>;
+}
+
+const {
+  titulo = 'Preguntas frecuentes',
+  subtitulo,
+  faqs,
+} = Astro.props;
+---
+
+<section class="sec" aria-labelledby="faq-heading">
+  <span class="sec-kicker">Resolvemos tus dudas</span>
+  <h2 class="sec-title" id="faq-heading">{titulo}</h2>
+  {subtitulo && <p class="story-copy" style="margin-bottom:8px">{subtitulo}</p>}
+
+  <div class="faq-list">
+    {faqs.map((faq, idx) => (
+      <details class="faq-item" open={idx === 0}>
+        <summary>{faq.pregunta}</summary>
+        <div class="faq-body">
+          <p>{faq.respuesta}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

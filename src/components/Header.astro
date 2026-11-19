@@ -1,0 +1,97 @@
+---
+import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg?raw';
+import { EMPRESA } from '../data/empresa';
+
+export interface Props {
+  mode?: 'overlay' | 'solid';
+  currentPath?: string;
+}
+
+const { mode = 'solid', currentPath = Astro.url.pathname } = Astro.props;
+
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+
+const menuId = 'mobile-nav-drawer';
+---
+
+<div class={mode === 'solid' ? 'nav-solid-wrap' : ''}>
+  <nav class={`nav ${mode === 'solid' ? 'nav-solid' : ''}`} aria-label="Navegación principal">
+    <div class="pills">
+      <a class={`pill ${isActive('/') ? 'active' : ''}`} href="/">Inicio</a>
+      <a class={`pill ${isActive('/servicios/') ? 'active' : ''}`} href="/servicios/">Servicios</a>
+      <a class={`pill ${isActive('/proyectos/') ? 'active' : ''}`} href="/proyectos/">Proyectos</a>
+    </div>
+
+    <a class="logo-link" href="/" aria-label={`${EMPRESA.marca} — Ir a inicio`}>
+      <span class="logo-svg" aria-hidden="true" set:html={logoMarkLight} />
+      <span class="logo-text">CONSTRUCCIONES MBL</span>
+    </a>
+
+    <div class="pills end">
+      <a
+        class={`pill ${isActive('/innovacion-sostenible/') ? 'active' : ''}`}
+        href="/innovacion-sostenible/"
+      >
+        Guías
+      </a>
+      <a class={`pill ${isActive('/contacto/') ? 'active' : ''}`} href="/contacto/">Contacto</a>
+      <a
+        class="pill pill-white"
+        href="/calcula-el-precio-de-tu-reforma-en-asturias/"
+      >
+        Calcula tu reforma
+      </a>
+    </div>
+
+    <button
+      type="button"
+      class="nav-toggle"
+      aria-expanded="false"
+      aria-controls={menuId}
+      data-nav-toggle
+    >
+      Menú ☰
+    </button>
+  </nav>
+
+  <div class="mobile-drawer" id={menuId} data-open="false" hidden>
+    <a href="/">Inicio</a>
+    <a href="/servicios/">Servicios</a>
+    <a href="/proyectos/">Proyectos</a>
+    <a href="/reformas-en-gijon/">Reformas en Gijón</a>
+    <a href="/reformas-en-oviedo/">Reformas en Oviedo</a>
+    <a href="/reformas-en-aviles/">Reformas en Avilés</a>
+    <a href="/innovacion-sostenible/">Innovación Sostenible (Guías)</a>
+    <a href="/contacto/">Contacto</a>
+    <a href="/calcula-el-precio-de-tu-reforma-en-asturias/">Calcula el precio de tu reforma</a>
+    <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">Llamar: {EMPRESA.telefonoVisible}</a>
+  </div>
+</div>
+
+<script>
+  const toggleBtn = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const drawer = document.getElementById('mobile-nav-drawer');
+
+  if (toggleBtn && drawer) {
+    const closeDrawer = () => {
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('data-open', 'false');
+      drawer.hidden = true;
+    };
+
+    toggleBtn.addEventListener('click', () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      drawer.setAttribute('data-open', String(!expanded));
+      drawer.hidden = expanded;
+    });
+
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape' && !drawer.hidden) {
+        closeDrawer();
+        toggleBtn.focus();
+      }
+    });
+  }
+</script>

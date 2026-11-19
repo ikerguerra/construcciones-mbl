@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets';
+import { EMPRESA } from '../data/empresa';
+import footerImg from '../assets/images/proyectos/obra-reforma-integral-1.webp';
+---
+
+<footer class="foot" id="footer">
+  <div class="fgrid">
+    <div>
+      <h4>Contacto directo</h4>
+      <address>
+        <strong>{EMPRESA.marca}</strong><br />
+        {EMPRESA.direccion.calle}<br />
+        {EMPRESA.direccion.codigoPostal} {EMPRESA.direccion.localidad}, {EMPRESA.direccion.provincia}
+      </address>
+      <p style="font-size:13.5px;color:#d0d0d0;margin-top:12px;">
+        Tel: <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel" style="text-decoration:underline">{EMPRESA.telefonoVisible}</a><br />
+        Email: <a href={`mailto:${EMPRESA.email}`} style="text-decoration:underline">{EMPRESA.email}</a><br />
+        <span>{EMPRESA.horario.resumen}</span>
+      </p>
+      <div class="soc" aria-label="Perfiles oficiales de Construcciones MBL">
+        <a
+          href={EMPRESA.redes.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram de Construcciones MBL"
+          title="Instagram"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a
+          href={EMPRESA.redes.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook de Construcciones MBL"
+          title="Facebook"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5Z" />
+          </svg>
+        </a>
+        <a
+          href={EMPRESA.googleBusiness.hasMap}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Ficha de Google Maps de Construcciones MBL en Gijón"
+          title="Google Maps"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10Z" />
+            <circle cx="12" cy="11" r="2.2" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h4>Servicios en Asturias</h4>
+      <ul>
+        <li><a href="/reformas-integrales-en-asturias/">Reformas integrales</a></li>
+        <li><a href="/reformas-de-cocinas-en-asturias/">Reformas de cocinas</a></li>
+        <li><a href="/reformas-de-banos-en-asturias/">Reformas de baños</a></li>
+        <li><a href="/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/">Cambio de bañera por ducha (48 h)</a></li>
+        <li><a href="/construccion-de-viviendas-en-asturias/">Construcción de viviendas</a></li>
+        <li><a href="/reformas-parciales-en-asturias/">Reformas parciales</a></li>
+        <li><a href="/reforma-de-locales-comerciales-en-asturias/">Locales comerciales</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Zonas y recursos</h4>
+      <ul>
+        <li><a href="/reformas-en-gijon/">Reformas en Gijón</a></li>
+        <li><a href="/reformas-en-oviedo/">Reformas en Oviedo</a></li>
+        <li><a href="/reformas-en-aviles/">Reformas en Avilés</a></li>
+        <li><a href="/proyectos/">Proyectos realizados</a></li>
+        <li><a href="/innovacion-sostenible/">Blog Innovación Sostenible</a></li>
+        <li><a href="/calcula-el-precio-de-tu-reforma-en-asturias/">Simulador de presupuesto</a></li>
+        <li><a href="/contacto/">Solicitar visita técnica</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="foot-photo">
+        <Image
+          src={footerImg}
+          alt="Reforma interior acabada en Asturias por Construcciones MBL"
+          widths={[420, 760]}
+          sizes="(max-width: 900px) 100vw, 340px"
+          loading="lazy"
+        />
+      </div>
+      <a class="pill pill-white" href="/calcula-el-precio-de-tu-reforma-en-asturias/" style="width:100%">
+        Calcula tu reforma en 2 min →
+      </a>
+    </div>
+  </div>
+
+  <div class="big" aria-hidden="true">{EMPRESA.marcasAgua.footer}</div>
+
+  <div class="legal">
+    <span>© {new Date().getFullYear()} {EMPRESA.razonSocial} · {EMPRESA.marca} (Asturias)</span>
+    <div class="legal-links">
+      <a href="/aviso-legal/">Aviso Legal</a>
+      <a href="/politica-de-privacidad/">Política de Privacidad</a>
+      <a href="/politica-de-cookies/">Política de Cookies</a>
+      <button type="button" data-open-cookies style="color:#cccccc">Configurar cookies</button>
+    </div>
+  </div>
+</footer>

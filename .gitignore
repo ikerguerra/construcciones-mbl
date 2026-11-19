@@ -5,10 +5,14 @@ docs/90-anexos/generados/
 __pycache__/
 *.py[cod]
 
-# Node / Astro
+# Node / Astro / Cloudflare
 node_modules/
 dist/
 .astro/
+.wrangler/
+
+# Activos brutos del cliente (7-24 MB por foto; versiones optimizadas en src/assets/images/)
+assets-cliente/
 
 # Variables de entorno
 .env

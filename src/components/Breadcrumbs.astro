@@ -1,0 +1,25 @@
+---
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Migas de pan">
+  {items.map((item, idx) => (
+    <>
+      {idx > 0 && <span aria-hidden="true">/</span>}
+      {idx === items.length - 1 ? (
+        <span aria-current="page" style="color:var(--ink);font-weight:500">{item.name}</span>
+      ) : (
+        <a href={item.url}>{item.name}</a>
+      )}
+    </>
+  ))}
+</nav>

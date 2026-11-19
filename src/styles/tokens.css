@@ -1,0 +1,32 @@
+:root {
+  /* Paleta estrictamente monocroma UI + acentos de foco y fotografía */
+  --black: #000000;
+  --ink: #0a0a0a;
+  --white: #ffffff;
+  --bg: #f2f2f2;
+  --muted: #595959;
+  --line: #e4e4e4;
+  --glass: rgba(255, 255, 255, 0.12);
+  --glass-b: rgba(255, 255, 255, 0.35);
+  --glass-dark: rgba(0, 0, 0, 0.28);
+  --wood: #b8642a;
+  --warm: #f0b46c;
+
+  /* Tipografía local (@fontsource) */
+  --f-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', Impact, sans-serif;
+  --f-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Radios y layout fieles a mbl-maqueta.html */
+  --r-xl: 36px;
+  --r-lg: 24px;
+  --r-md: 18px;
+  --r-pill: 999px;
+  --gap: 24px;
+  --pad: 40px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --pad: 20px;
+  }
+}

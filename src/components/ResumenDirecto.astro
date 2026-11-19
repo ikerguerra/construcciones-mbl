@@ -1,0 +1,13 @@
+---
+export interface Props {
+  texto: string;
+  etiqueta?: string;
+}
+
+const { texto, etiqueta = 'En resumen' } = Astro.props;
+---
+
+<aside class="resumen-aeo" aria-label={etiqueta}>
+  <div class="resumen-aeo-titulo">{etiqueta}</div>
+  <p>{texto}</p>
+</aside>
