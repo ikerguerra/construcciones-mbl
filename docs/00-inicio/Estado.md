@@ -11,7 +11,7 @@ actualizado: 2026-11-19
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `0.2.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
+- **Versión del SRS**: `0.3.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
 - **Preguntas abiertas**: 18 abiertas (6 bloqueantes, 8 altas, 4 medias, 0 bajas) · 0 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
@@ -35,6 +35,7 @@ actualizado: 2026-11-19
 - Generación estática (`SSG`) orientada a Core Web Vitals máximos y JavaScript mínimo solo en islas interactivas ([[ADR-001]]).
 - **Independencia total de cuentas respecto al WordPress anterior**: descartados `GTM-TG8LZ5L8`, CookieYes y el destino de formularios heredado; GTM, GA4, Search Console y envío de leads se configurarán con **identificadores y cuentas propios del titular** mediante variables de entorno ([[IE-002]], [[PA-012]]).
 - **Estrategia editorial y off-page propia sin SaaS de intercambio**: adoptado el flujo editorial asistido AEO/GEO ([[Flujo editorial SEO GEO AEO]], [[Plantilla articulo MDX]]) y la guía de autoridad local segura centrada en Google Business Profile y citaciones en Asturias ([[Guia de autoridad off-page local]]), descartando redes automáticas de backlinks.
+- **Skills y reglas del workspace**: incorporadas 8 skills especializadas en `.agents/skills/` y las reglas de entrada en `AGENTS.md` para gobernar la bóveda SRS, la migración `301`/`410`, el diseño de [[mbl-maqueta.html]], SEO/GEO/AEO, la producción editorial y la arquitectura Astro.
 - Todos los requisitos funcionales y no funcionales quedan trazados desde objetivos de negocio hasta criterios de aceptación en Gherkin y cubiertos por la [[Matriz de trazabilidad]].
 
 ## Siguiente paso

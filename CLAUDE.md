@@ -9,7 +9,7 @@ Todo el contenido de la documentación y del sitio web está en **español** y l
 ---
 
 ## Estado y punto de entrada
-Este archivo no almacena cifras ni estado operativo del SRS para no quedar desfasado. Consulta siempre:
+Este archivo se complementa con [AGENTS.md](AGENTS.md) (regla compacta automática del workspace) y no almacena cifras ni estado operativo del SRS para no quedar desfasado. Consulta siempre:
 - **`docs/00-inicio/Inicio.md`**: punto de entrada a la bóveda.
 - **`docs/00-inicio/Estado.md`**: cifras generadas automáticamente, lo ya decidido, el siguiente paso y las preguntas abiertas bloqueantes. Léelo antes de trabajar en el contenido del SRS o de iniciar el código en Astro.
 
@@ -58,6 +58,20 @@ Consulta la referencia completa en `docs/00-inicio/Convenciones.md`. Reglas esen
 8. **Archivos de referencia en raíz**: `mbl-maqueta.html` y los `wp-sitemap-*.xml` adjuntos en la raíz se conservan intactos como referencia original del usuario (con copia de trabajo en `docs/90-anexos/`).
 9. **Orden antes de programar en Astro**: no inicializar ni generar páginas definitivas de Astro mientras existan preguntas abiertas con `prioridad: bloqueante` sin resolver con el usuario, salvo que el usuario autorice explícitamente trabajar sobre hipótesis marcadas.
 10. **Control de versiones (Git)**: la rama de trabajo actual es `main` (con remoto `origin`). Comprueba `git fetch` y `git status -sb` antes de editar; si la rama local está por detrás del remoto (`behind`) o ha divergido, detente y avisa al usuario sin hacer `pull` automático. Se realizan **commits locales** por cada hito relevante del proyecto (especialmente cuando implique una nueva versión en `docs/00-inicio/Historial de cambios.md`), verificando antes `boveda.py` y el último número de versión. **Nunca ejecutes `git push`** sin confirmación explícita del usuario.
+
+---
+
+## Skills del proyecto (`.agents/skills/`)
+| Skill | Ruta | Cuándo usarla |
+|---|---|---|
+| `validar-boveda` | `.agents/skills/validar-boveda/SKILL.md` | Tras editar `docs/` para regenerar índices, validar (`Errores: 0`) y cerrar commit de versión |
+| `gestionar-pa` | `.agents/skills/gestionar-pa/SKILL.md` | Al abrir nuevas dudas o resolver `PA-NNN` propagando la decisión por el SRS |
+| `gestionar-srs` | `.agents/skills/gestionar-srs/SKILL.md` | Al crear, editar o retirar requisitos (`RF`/`RNF`), `CA`, entidades o `ADR` |
+| `astro-arquitectura-y-rendimiento` | `.agents/skills/astro-arquitectura-y-rendimiento/SKILL.md` | Al desarrollar en Astro: SSG, islas, Zod, activos locales, env vars y CWV |
+| `sistema-visual-mbl` | `.agents/skills/sistema-visual-mbl/SKILL.md` | Al maquetar estilos, componentes de `mbl-maqueta.html` y verificar WCAG 2.1 AA |
+| `seo-geo-aeo-mbl` | `.agents/skills/seo-geo-aeo-mbl/SKILL.md` | Al configurar `<SeoHead>`, grafo JSON-LD, `/llms.txt`, sitemaps y bloques AEO |
+| `migracion-wordpress-301` | `.agents/skills/migracion-wordpress-301/SKILL.md` | Al trasladar contenido de WordPress, limpiar erratas y generar reglas `301`/`410` |
+| `articulo-editorial-aeo` | `.agents/skills/articulo-editorial-aeo/SKILL.md` | Al crear, migrar o actualizar artículos en *Innovación Sostenible* |
 
 ---
 
