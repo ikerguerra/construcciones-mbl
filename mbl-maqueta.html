@@ -35,7 +35,7 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
 .ph.pool{background:linear-gradient(180deg,#4aa4c8,#c9dde5 40%,#38505c)}
 
 /* Hero */
-.hero{position:relative;min-height:640px;border-radius:var(--r-xl);color:#fff;padding:28px 36px;display:flex;flex-direction:column;overflow:hidden;
+.hero{position:relative;min-height:clamp(640px,84vh,840px);border-radius:var(--r-xl);color:#fff;padding:28px 44px 36px;display:flex;flex-direction:column;overflow:hidden;
   background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.75)),linear-gradient(120deg,#69727d,#3a2f26 45%,#0e0d0c)}
 .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
 .nav .logo{font-family:var(--f-display);font-size:26px;letter-spacing:.04em;text-align:center}
@@ -47,18 +47,18 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
 .hero .lead{font-style:italic;font-size:15px;max-width:340px;opacity:.9;margin-bottom:12px}
 .hero .tag{font-family:var(--f-display);font-size:20px;margin-top:24px;text-transform:uppercase}
 .hero small{font-style:italic;display:block;margin-bottom:14px;opacity:.85}
-.search{margin-top:36px;display:flex;gap:12px;align-items:stretch;padding:14px;border:1px solid var(--glass-b);border-radius:var(--r-lg);background:rgba(0,0,0,.25);backdrop-filter:blur(14px)}
+.search{margin-top:36px;display:flex;gap:12px;align-items:stretch;padding:12px;border:1px solid var(--glass-b);border-radius:var(--r-lg);background:rgba(0,0,0,.25);backdrop-filter:blur(14px)}
 .field{flex:1;padding:12px 16px;border-radius:var(--r-md);background:var(--glass);display:flex;justify-content:space-between;align-items:center;gap:8px}
 .field span{display:block;font-size:11px;opacity:.7}.field b{font-weight:500;font-size:14px}
-.search .go{width:64px;border-radius:var(--r-md);background:#fff;color:#000;font-size:20px}
+.search .go{width:60px;min-width:60px;height:58px;border-radius:var(--r-md);background:#fff;color:#000;font-size:20px}
 
 /* Our story */
-.story{display:grid;grid-template-columns:1fr 1.1fr;gap:var(--gap);align-items:start}
+.story{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(32px,4vw,64px);align-items:start}
 .story p{font-style:italic;color:#444;font-size:14px;max-width:520px;margin:20px 0 28px}
 .story .imgs{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
-.story .imgs .ph{height:240px}.story .imgs .ph:last-child{grid-column:span 2;height:260px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:24px 32px}
-.stat b{display:block;font-family:var(--f-display);font-weight:400;font-size:44px;line-height:1}
+.story .imgs .ph{height:260px}.story .imgs .ph:last-child{grid-column:span 2;height:310px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
+.stat b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(44px,4.2vw,56px);line-height:1}
 .stat span{font-size:13px;color:var(--muted)}
 
 /* Top picks */
@@ -66,9 +66,9 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
 .tab{padding:10px 22px;border-radius:var(--r-pill);border:1px solid var(--line);font-size:14px}
 .tab.on{background:#000;color:#fff;border-color:#000}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
-.card{position:relative;height:360px;border-radius:var(--r-lg);overflow:hidden;color:#fff;display:flex;align-items:flex-end;padding:18px}
+.card{position:relative;height:380px;border-radius:var(--r-lg);overflow:hidden;color:#fff;display:flex;align-items:flex-end;padding:22px}
 .card .ph{position:absolute;inset:0;border-radius:0}
-.card::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(0,0,0,.85));z-index:1}
+.card::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 42%,rgba(0,0,0,.85));z-index:1}
 .card>*:not(.ph){position:relative;z-index:2}
 .rate{position:absolute!important;top:16px;left:16px;padding:4px 10px;border-radius:var(--r-pill);background:rgba(0,0,0,.45);font-size:12px;backdrop-filter:blur(6px)}
 .heart{position:absolute!important;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.3);display:grid;place-items:center}
@@ -78,23 +78,23 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
 .card .txt{flex:1}
 
 /* Dark services */
-.dark{background:#000;color:#fff;border-radius:var(--r-xl);padding:56px var(--pad);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
-.dark h2{font-size:clamp(34px,4.4vw,60px)}
-.dark .ghost{position:absolute;right:-10px;bottom:-30px;font-family:var(--f-display);font-size:220px;color:rgba(255,255,255,.06);line-height:1;pointer-events:none;white-space:nowrap}
-.dark h3{font-family:var(--f-body);text-transform:none;font-size:24px;font-weight:400;margin-bottom:12px}
-.dark p{font-style:italic;font-size:13px;color:#bbb;max-width:380px;margin-bottom:20px}
-.dark .ph{height:240px;margin-top:20px}
-.arrows{display:flex;flex-direction:column;gap:8px;position:absolute;top:36px;right:36px}
-.arr{width:34px;height:34px;border-radius:50%;border:1px solid #fff;display:grid;place-items:center;font-size:14px}.arr.on{background:#fff;color:#000}
+.dark{background:#000;color:#fff;border-radius:var(--r-xl);padding:64px var(--pad);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(32px,4vw,64px);align-items:start}
+.dark h2{font-size:clamp(38px,4.6vw,66px)}
+.dark .ghost{position:absolute;left:0;right:0;bottom:-34px;text-align:center;font-family:var(--f-display);font-size:clamp(120px,21vw,310px);color:rgba(255,255,255,.06);line-height:.85;pointer-events:none;white-space:nowrap}
+.dark h3{font-family:var(--f-body);text-transform:none;font-size:26px;font-weight:400;margin-bottom:12px}
+.dark p{font-style:italic;font-size:13.5px;color:#bbb;max-width:44ch;margin-bottom:20px}
+.dark .ph{height:290px;margin-top:24px;position:relative;z-index:2}
+.arrows{display:flex;flex-direction:row;gap:8px;position:absolute;top:40px;right:var(--pad);z-index:3}
+.arr{width:38px;height:38px;border-radius:50%;border:1px solid #fff;display:grid;place-items:center;font-size:14px}.arr.on{background:#fff;color:#000}
 .arr.light{border-color:#999;color:#000}.arr.light.on{background:#000;color:#fff;border-color:#000}
 
-/* Editor's choice + gallery */
-.two{display:grid;grid-template-columns:1fr 1.5fr;gap:48px}
-.choice{display:grid;gap:var(--gap);margin-top:24px;position:relative}
-.choice .card{height:230px}
-.choice .card h3{font-size:22px}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:24px}
-.gallery .ph{height:200px}.gallery .ph:first-child{grid-column:span 3;height:300px}
+/* Editor's choice + gallery (full-width apilados como capturas 5/8 y 6/8) */
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);margin-top:24px}
+.choice-grid .card{height:320px}.choice-grid .card h3{font-size:22px}
+.gallery-wrap{position:relative;overflow:hidden;padding-bottom:76px}
+.gallery-ghost{position:absolute;left:0;right:0;bottom:-14px;text-align:center;font-family:var(--f-display);font-size:clamp(80px,14vw,210px);line-height:.85;color:rgba(0,0,0,.045);pointer-events:none;white-space:nowrap}
+.gallery{position:relative;z-index:2;display:grid;grid-template-columns:1.45fr 1fr 1fr;grid-template-rows:220px 220px;gap:var(--gap);margin-top:24px}
+.gallery .ph{height:100%}.gallery .ph:first-child{grid-row:span 2}
 
 /* Testimonial */
 .testi{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative}
@@ -118,11 +118,11 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
 
 @media(max-width:900px){
   :root{--pad:20px}
-  .hero-body,.story,.two,.testi,.dark,.fgrid{grid-template-columns:1fr}
+  .hero-body,.story,.choice-grid,.testi,.dark,.fgrid{grid-template-columns:1fr}
   .cards{grid-template-columns:1fr}.card{height:300px}
   .search{flex-wrap:wrap}.field{flex:1 1 45%}.search .go{height:52px;flex:1 1 100%}
   .nav{grid-template-columns:1fr}.nav .logo{order:-1;margin-bottom:12px}
-  .gallery{grid-template-columns:1fr 1fr}.gallery .ph:first-child{grid-column:span 2}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:auto}.gallery .ph{height:180px}.gallery .ph:first-child{grid-column:span 2;grid-row:span 1;height:220px}
 }
 
 /* ---------- Documentación ---------- */
@@ -211,17 +211,21 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
     </div>
   </section>
 
-  <section class="sec two">
-    <div><h2 class="sec-title">Editor's Choice</h2>
-      <div class="choice">
-        <article class="card"><div class="ph rock"></div><div class="txt"><h3>Property Presentation</h3><p>Let us handle the daily operations of your property. We guarantee efficient maintenance and increased profitability.</p></div></article>
-        <article class="card"><div class="ph pool"></div><div class="txt"><h3>Leasing Solutions</h3><p>Explore our personalized rental services to find the perfect property match. We offer access to high-quality homes in desirable areas.</p></div></article>
-        <div class="ctrl"><button class="arr light" aria-label="Anterior">↑</button><button class="arr light on" aria-label="Siguiente">↓</button></div>
-      </div>
+  <section class="sec">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2 class="sec-title">Editor's Choice</h2>
+      <div class="ctrl" style="margin-top:0"><button class="arr light" aria-label="Anterior">↑</button><button class="arr light on" aria-label="Siguiente">↓</button></div>
     </div>
-    <div><h2 class="sec-title">Explore our portfolio gallery</h2>
-      <div class="gallery"><div class="ph night"></div><div class="ph day"></div><div class="ph pool"></div></div>
+    <div class="choice-grid">
+      <article class="card"><div class="ph rock"></div><div class="txt"><h3>Property Presentation</h3><p>Let us handle the daily operations of your property. We guarantee efficient maintenance and increased profitability.</p></div></article>
+      <article class="card"><div class="ph pool"></div><div class="txt"><h3>Leasing Solutions</h3><p>Explore our personalized rental services to find the perfect property match. We offer access to high-quality homes in desirable areas.</p></div></article>
     </div>
+  </section>
+
+  <section class="sec gallery-wrap" style="padding-top:8px">
+    <h2 class="sec-title">Explore our portfolio gallery</h2>
+    <div class="gallery"><div class="ph night"></div><div class="ph day"></div><div class="ph pool"></div><div class="ph rock"></div><div class="ph day"></div></div>
+    <div class="gallery-ghost" aria-hidden="true">DREAMHOME</div>
   </section>
 
   <section class="sec testi" style="position:relative">

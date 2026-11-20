@@ -27,12 +27,13 @@ import galImg1 from '../assets/images/proyectos/obra-bano-mbl-14.webp';
 import galImg2 from '../assets/images/proyectos/obra-cocina-mbl-2.webp';
 import galImg3 from '../assets/images/proyectos/proyecto-alicatado-bano-1.webp';
 import galImg4 from '../assets/images/proyectos/obra-ducha-mampara.webp';
+import galImg5 from '../assets/images/proyectos/obra-bano-mbl-16.webp';
 
 const servicios = (await getCollection('servicios')).sort((a, b) => a.data.orden - b.data.orden);
 const localidades = await getCollection('localidades');
 const proyectosDestacados = (await getCollection('proyectos'))
   .sort((a, b) => a.data.orden - b.data.orden)
-  .slice(0, 2);
+  .slice(0, 4);
 const ultimosArticulos = (await getCollection('blog'))
   .sort((a, b) => b.data.datePublished.localeCompare(a.data.datePublished))
   .slice(0, 3);
@@ -282,76 +283,99 @@ const schemaGraph = [
     </div>
   </section>
 
-  <!-- ================= PROYECTOS DESTACADOS + GALERÍA ================= -->
-  <section class="sec two" aria-labelledby="proyectos-home-title">
-    <div>
-      <span class="sec-kicker">Obras reales ejecutadas</span>
-      <h2 class="sec-title" id="proyectos-home-title">Proyectos Destacados</h2>
-      <div class="choice">
-        {proyectosDestacados.map((proy) => (
-          <article class="card">
-            <Image
-              src={proy.data.imagen}
-              alt={proy.data.imagenAlt}
-              class="card-img"
-              widths={[460, 780]}
-              sizes="(max-width: 900px) 100vw, 440px"
-            />
-            <span class="card-badge">{proy.data.municipio} · {proy.data.superficieM2}</span>
-            <div class="txt">
-              <h3><a href="/proyectos/">{proy.data.titulo}</a></h3>
-              <p>{proy.data.resumen}</p>
-            </div>
-          </article>
-        ))}
-        <div class="ctrl">
-          <a class="btn-dark" href="/proyectos/">Ver todos los proyectos →</a>
-        </div>
+  <!-- ================= PROYECTOS DESTACADOS (2 COLUMNAS ANCHAS, CAPTURA 5/8) ================= -->
+  <section class="sec" aria-labelledby="proyectos-home-title">
+    <div class="sec-header-row">
+      <div>
+        <span class="sec-kicker">Obras reales ejecutadas</span>
+        <h2 class="sec-title" id="proyectos-home-title">Proyectos Destacados</h2>
+      </div>
+      <div class="ctrl" style="margin-top:0">
+        <button type="button" class="arr light" aria-label="Proyectos anteriores" data-proj-prev>↑</button>
+        <button type="button" class="arr light on" aria-label="Siguientes proyectos" data-proj-next>↓</button>
+        <a class="btn-outline" href="/proyectos/" style="margin-left:8px">Ver todos →</a>
       </div>
     </div>
 
-    <div>
-      <span class="sec-kicker">Acabados e interiores</span>
-      <h2 class="sec-title">Galería de Obras en Asturias</h2>
-      <div class="gallery">
-        <div class="photo-tile">
+    <div class="choice-grid" id="choice-projects-grid">
+      {proyectosDestacados.map((proy, idx) => (
+        <article class="card" data-choice-idx={idx} hidden={idx >= 2}>
           <Image
-            src={galImg1}
-            alt="Reforma completa de baño moderno con ducha y mueble suspendido en Asturias"
-            widths={[640, 1024]}
-            sizes="(max-width: 900px) 100vw, 720px"
+            src={proy.data.imagen}
+            alt={proy.data.imagenAlt}
+            class="card-img"
+            widths={[540, 860]}
+            sizes="(max-width: 900px) 100vw, 48vw"
           />
-        </div>
-        <div class="photo-tile">
-          <Image
-            src={galImg2}
-            alt="Cocina reformada con armarios a medida y acabado cálido en Asturias"
-            widths={[360, 560]}
-            sizes="(max-width: 900px) 50vw, 240px"
-          />
-        </div>
-        <div class="photo-tile">
-          <Image
-            src={galImg3}
-            alt="Alicatado porcelánico rectificado ejecutado por Construcciones MBL"
-            widths={[360, 560]}
-            sizes="(max-width: 900px) 50vw, 240px"
-          />
-        </div>
-        <div class="photo-tile">
-          <Image
-            src={galImg4}
-            alt="Cambio de bañera por plato de ducha antideslizante con mampara en Asturias"
-            widths={[360, 560]}
-            sizes="(max-width: 900px) 100vw, 240px"
-          />
-        </div>
-      </div>
+          <span class="card-badge">{proy.data.municipio} · {proy.data.superficieM2}</span>
+          <div class="txt">
+            <h3><a href="/proyectos/">{proy.data.titulo}</a></h3>
+            <p>{proy.data.resumen}</p>
+          </div>
+          <a class="price" href="/proyectos/">{proy.data.plazo}</a>
+        </article>
+      ))}
     </div>
   </section>
 
-  <!-- ================= ZONAS DE ACTUACIÓN EN ASTURIAS ================= -->
-  <section class="sec" style="padding-top:8px" aria-labelledby="zonas-title">
+  <!-- ================= GALERÍA DE OBRAS A ANCHO COMPLETO (CAPTURAS 5/8 Y 6/8) ================= -->
+  <section class="sec gallery-section" style="padding-top:8px" aria-labelledby="galeria-home-title">
+    <div class="sec-header-row">
+      <div>
+        <span class="sec-kicker">Acabados e interiores en Asturias</span>
+        <h2 class="sec-title" id="galeria-home-title">Explora Nuestra Galería de Obras</h2>
+      </div>
+      <a class="btn-dark" href="/proyectos/">Explorar galería completa →</a>
+    </div>
+
+    <div class="gallery">
+      <div class="photo-tile">
+        <Image
+          src={galImg1}
+          alt="Reforma completa de baño moderno con ducha y mueble suspendido en Asturias"
+          widths={[640, 1024]}
+          sizes="(max-width: 900px) 100vw, 45vw"
+        />
+      </div>
+      <div class="photo-tile">
+        <Image
+          src={galImg2}
+          alt="Cocina reformada con armarios a medida y acabado cálido en Asturias"
+          widths={[400, 680]}
+          sizes="(max-width: 900px) 50vw, 25vw"
+        />
+      </div>
+      <div class="photo-tile">
+        <Image
+          src={galImg3}
+          alt="Alicatado porcelánico rectificado ejecutado por Construcciones MBL"
+          widths={[400, 680]}
+          sizes="(max-width: 900px) 50vw, 25vw"
+        />
+      </div>
+      <div class="photo-tile">
+        <Image
+          src={galImg4}
+          alt="Cambio de bañera por plato de ducha antideslizante con mampara en Asturias"
+          widths={[400, 680]}
+          sizes="(max-width: 900px) 50vw, 25vw"
+        />
+      </div>
+      <div class="photo-tile">
+        <Image
+          src={galImg5}
+          alt="Baño contemporáneo reformado con sanitarios modernos en Asturias"
+          widths={[400, 680]}
+          sizes="(max-width: 900px) 50vw, 25vw"
+        />
+      </div>
+    </div>
+
+    <div class="gallery-ghost" aria-hidden="true">{EMPRESA.marcasAgua.footer}</div>
+  </section>
+
+  <!-- ================= ZONAS DE ACTUACIÓN EN ASTURIAS (ESTILO TARJETAS 7/8) ================= -->
+  <section class="sec" style="padding-top:24px" aria-labelledby="zonas-title">
     <span class="sec-kicker">Cobertura local sin sobrecoste de desplazamiento</span>
     <h2 class="sec-title" id="zonas-title">Reformas en Gijón, Oviedo y Avilés</h2>
     <div class="zonas-grid">
@@ -362,17 +386,20 @@ const schemaGraph = [
               src={loc.data.imagen}
               alt={loc.data.imagenAlt}
               widths={[420, 720]}
-              sizes="(max-width: 900px) 100vw, 380px"
+              sizes="(max-width: 900px) 100vw, 31vw"
             />
           </div>
           <div class="zona-card-body">
-            <h3><a href={`/${loc.data.slug}/`}>Reformas en {loc.data.municipio}</a></h3>
+            <div class="zona-card-head">
+              <h3><a href={`/${loc.data.slug}/`}>Reformas en {loc.data.municipio}</a></h3>
+              <span class="zona-card-price">Desde 650 €/m²</span>
+            </div>
             <p>{loc.data.subtituloHero}</p>
-            <p style="font-size:12.5px;color:var(--muted);margin-top:auto">
+            <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px">
               Trámites en {loc.data.ayuntamiento} · Visita técnica 48 h
             </p>
-            <a class="btn-outline" href={`/${loc.data.slug}/`} style="margin-top:8px">
-              Ver servicios en {loc.data.municipio} →
+            <a class="btn-card" href={`/${loc.data.slug}/`}>
+              Explorar servicios en {loc.data.municipio}
             </a>
           </div>
         </article>
@@ -515,7 +542,21 @@ const schemaGraph = [
   document.querySelector('[data-method-prev]')?.addEventListener('click', () => showMethod(methodIdx - 1));
   document.querySelector('[data-method-next]')?.addEventListener('click', () => showMethod(methodIdx + 1));
 
-  // 3. Carrusel testimonios reales
+  // 3. Carrusel pares de proyectos destacados
+  const choiceCards = document.querySelectorAll<HTMLElement>('#choice-projects-grid [data-choice-idx]');
+  let projPage = 0;
+  function showProjPair(nextPage: number) {
+    const totalPages = Math.ceil(choiceCards.length / 2);
+    if (totalPages <= 1) return;
+    projPage = (nextPage + totalPages) % totalPages;
+    choiceCards.forEach((el, idx) => {
+      el.hidden = Math.floor(idx / 2) !== projPage;
+    });
+  }
+  document.querySelector('[data-proj-prev]')?.addEventListener('click', () => showProjPair(projPage - 1));
+  document.querySelector('[data-proj-next]')?.addEventListener('click', () => showProjPair(projPage + 1));
+
+  // 4. Carrusel testimonios reales
   const testiSlides = document.querySelectorAll<HTMLElement>('.testi-slide');
   let testiIdx = 0;
   function showTesti(nextIdx: number) {
