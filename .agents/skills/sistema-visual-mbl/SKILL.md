@@ -15,7 +15,7 @@ Traduce la estética aprobada en `docs/90-anexos/maquetas/mbl-maqueta.html` y `d
 ## Reglas visuales y de accesibilidad
 
 1. **Interfaz monocroma y color en fotografía**: usar estrictamente `--black` (`#000`), `--ink` (`#0a0a0a`), `--white` (`#fff`), `--bg` (`#f2f2f2`), `--line` (`#e4e4e4`) y glassmorphism (`--glass` / `--glass-b`). El color cálido (`--wood`, `--warm`) aporta coherencia fotográfica y foco accesible.
-2. **Proporciones y radios**: marco `.frame` `max-width: 1280px` (`--r-xl: 36px`), tarjetas/imágenes `--r-lg: 24px`, campos `--r-md: 18px`, píldoras `--r-pill: 999px`, gutter `--gap: 24px`, padding de sección `64px 40px` (`40px 20px` en `<= 900px`).
+2. **Proporciones y radios**: diseño a **pantalla completa** (`.frame` al `100 %` de ancho sobre `--white` con `padding: 16px`, `12px` en móvil), bloques Hero/oscuros/footer con `--r-xl: 36px` (`24px` en móvil), tarjetas/imágenes `--r-lg: 24px`, campos `--r-md: 18px`, píldoras `--r-pill: 999px`, gutter `--gap: 24px`, padding de sección `64px 40px` (`40px 20px` en `<= 900px`).
 3. **Tipografía correcta y semántica**: `Bebas Neue` para display/títulos en mayúsculas e `Inter` para cuerpo y UI. Marcar cifras estadísticas (`.stat b`) con `<strong>`/`<span>`, **nunca como `<h2>`**. Evitar cursiva pequeña prolongada en textos largos para mantener lectura confortable.
 4. **Contraste WCAG 2.1 AA**:
    - Ratio `>= 4.5:1` en texto normal (`>= 3:1` en grande). Sobre negro usar `#fff`, `#ccc` o `#bbb` (nunca `--muted`).

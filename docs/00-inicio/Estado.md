@@ -11,7 +11,7 @@ actualizado: 2026-11-19
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.1.0` (último hito: `2026-11-19` · generación de índices: `2026-11-19`)
+- **Versión del SRS**: `1.1.1` (último hito: `2026-11-20` · generación de índices: `2026-11-20`)
 - **Preguntas abiertas**: 1 abiertas (0 bloqueantes, 1 altas, 0 medias, 0 bajas) · 17 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |

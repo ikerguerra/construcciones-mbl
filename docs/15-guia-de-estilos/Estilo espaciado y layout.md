@@ -20,11 +20,11 @@ actualizado: 2026-11-19
 ```
 
 ## Contenedor principal y ritmo vertical
-- **Marco exterior (`.frame`)**: `max-width: 1280px`, centrado (`margin: 24px auto`), fondo `--white`, `border-radius: 36px`, `padding: 16px`, única sombra estructural del sistema: `box-shadow: 0 20px 60px rgba(0, 0, 0, .08)`. En móviles estrechos (`<= 640px`), los márgenes laterales exteriores y radios se ajustan (`border-radius: 24px`, `margin: 8px`) para maximizar el ancho útil de lectura.
+- **Contenedor de página completa (`.frame`)**: ocupa el **100 % del ancho de la ventana** (`width: 100%; margin: 0;`) sobre fondo `--white`, sin caja flotante ni sombra exterior, manteniendo un `padding: 16px` (`12px` en `<= 900px`) que conserva el margen lateral uniforme alrededor de los bloques destacados (`.hero`, `.dark`, `.foot`).
 - **Secciones (`.sec`)**: `padding: 64px var(--pad)` (`40px 20px` en móvil).
 - **Gutter de rejillas**: `24px` constante en tarjetas, galería, historia y footer.
 - **Radios por elemento**:
-  - Hero, `.frame`, `.dark`, `.foot`: `36px` (`--r-xl`).
+  - Hero, `.nav-solid`, `.dark`, `.foot`: `36px` (`--r-xl`; `24px` en `<= 900px`).
   - Tarjetas (`.card`), imágenes (`.ph` / `<img>`), contenedor buscador Hero: `24px` (`--r-lg`).
   - Campos internos del selector Hero y botón enviar: `18px` (`--r-md`).
   - Píldoras de navegación, tabs, badges de precio/rating, botones CTA: `999px` (`--r-pill`).

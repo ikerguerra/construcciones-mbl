@@ -9,7 +9,7 @@ actualizado: 2026-11-19
 
 # Guía de estilos — Construcciones MBL
 
-Sistema visual oficial derivado de [[mbl-maqueta.html]] y aprobado en [[ADR-002]]. Mantiene una **estética editorial arquitectónica de alto contraste**: interfaz estrictamente monocroma (negro, blanco, grises) dentro de un marco redondeado sobre fondo neutro, donde toda la calidez cromática procede de la fotografía real de reformas e interiores en Asturias.
+Sistema visual oficial derivado de [[mbl-maqueta.html]] y aprobado en [[ADR-002]]. Mantiene una **estética editorial arquitectónica de alto contraste**: interfaz estrictamente monocroma (negro, blanco, grises) a **pantalla completa sobre fondo blanco** con bloques destacados redondeados (`36px`) y margen lateral uniforme de `16px`, donde toda la calidez cromática procede de la fotografía real de reformas e interiores en Asturias.
 
 ## Equivalencia de la maqueta *RealWorld* → *Construcciones MBL*
 

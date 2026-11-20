@@ -17,8 +17,8 @@ La interfaz de usuario es **monocroma (blanco, negro y escala de grises)** para 
 |---|---|---|
 | `--black` | `#000000` | Fondo de bloques oscuros (`.dark`, `.foot`), pestaña activa (`.tab.on`), botones primarios |
 | `--ink` | `#0a0a0a` | Color de texto principal sobre fondos claros |
-| `--white` | `#ffffff` | Fondo del marco principal (`.frame`), secciones claras, texto principal sobre fondo negro |
-| `--bg` | `#f2f2f2` | Lienzo exterior detrás de `.frame` y fondo base en móvil |
+| `--white` | `#ffffff` | Lienzo base a pantalla completa, secciones claras, texto principal sobre fondo negro |
+| `--bg` | `#f2f2f2` | Superficies neutras suaves de apoyo y páginas de error/estado |
 | `--muted` | `#6b6b6b` | Etiquetas secundarias y subtítulos sobre blanco (`contraste ~5.3:1`) |
 | `--line` | `#e4e4e4` | Bordes suaves de pestañas inactivas, divisores y tablas |
 | `--glass` | `rgba(255, 255, 255, .12)` | Fondo translúcido de píldoras y campos del buscador en Hero |

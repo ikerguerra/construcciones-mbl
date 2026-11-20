@@ -12,7 +12,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--bg);
+  background: var(--white);
   color: var(--ink);
   font-family: var(--f-body);
   -webkit-font-smoothing: antialiased;
@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  background: var(--bg);
+  background: var(--white);
   color: var(--ink);
   font-family: var(--f-body);
   line-height: 1.6;
@@ -99,14 +99,12 @@ h3 {
   left: 16px;
 }
 
-/* Marco editorial blanco exterior */
+/* Contenedor principal a pantalla completa con margen lateral uniforme de 16px */
 .frame {
-  max-width: 1280px;
-  margin: 24px auto;
+  width: 100%;
+  margin: 0;
   background: var(--white);
-  border-radius: var(--r-xl);
   padding: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
 }
 
 .sec {
@@ -1455,15 +1453,20 @@ h3 {
 
 @media (max-width: 900px) {
   .frame {
-    margin: 12px;
+    margin: 0;
     padding: 12px;
+  }
+
+  .hero,
+  .nav-solid,
+  .dark,
+  .foot {
     border-radius: 24px;
   }
 
   .hero {
     min-height: auto;
     padding: 18px 20px 24px;
-    border-radius: 24px;
   }
 
   .nav {
