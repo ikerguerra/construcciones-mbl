@@ -9,6 +9,7 @@ import TablaComparativa from '../components/TablaComparativa.astro';
 import BloqueFaq from '../components/BloqueFaq.astro';
 import EquipoEEAT from '../components/EquipoEEAT.astro';
 import CtaSimulador from '../components/CtaSimulador.astro';
+import Icon from '../components/Icon.astro';
 import { EMPRESA, FAQS_GENERALES } from '../data/empresa';
 import { TARIFAS } from '../data/tarifas';
 import {
@@ -47,16 +48,17 @@ const schemaGraph = [
 ---
 
 <BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
-  <header class="hero hero-sub">
+  <Header currentPath="/servicios/" />
+
+  <section class="hero-sub" aria-label="Servicios de Construcciones MBL">
     <Image
       src={heroServiciosImg}
       alt="Servicios profesionales de reformas y construcción en Asturias por Construcciones MBL"
       class="hero-bg"
       widths={[640, 1024, 1440]}
-      sizes="(max-width: 1280px) 100vw, 1248px"
+      sizes="100vw"
       loading="eager"
     />
-    <Header mode="overlay" currentPath="/servicios/" />
 
     <div class="hero-body">
       <div>
@@ -69,7 +71,7 @@ const schemaGraph = [
         </p>
       </div>
     </div>
-  </header>
+  </section>
 
   <section class="sec">
     <Breadcrumbs items={breadcrumbs} />
@@ -83,22 +85,29 @@ const schemaGraph = [
     <div class="cards">
       {servicios.map((srv) => (
         <article class="card">
-          <Image
-            src={srv.data.imagen}
-            alt={srv.data.imagenAlt}
-            class="card-img"
-            widths={[440, 760]}
-            sizes="(max-width: 900px) 100vw, 380px"
-          />
-          <span class="card-badge">⏱ {srv.data.plazoVisible}</span>
-          <a class="card-icon" href={`/${srv.data.slug}/`} aria-label={`Ver ${srv.data.tituloCorto}`}>
-            ↗
-          </a>
-          <div class="txt">
+          <div class="card-media">
+            <Image
+              src={srv.data.imagen}
+              alt={srv.data.imagenAlt}
+              widths={[440, 760]}
+              sizes="(max-width: 900px) 100vw, 31vw"
+            />
+          </div>
+          <div class="card-body">
+            <div class="card-meta-row">
+              <span class="card-badge">
+                <Icon name="clock" size={14} />
+                <span>{srv.data.plazoVisible}</span>
+              </span>
+              <span class="card-price">{srv.data.precioDesde}</span>
+            </div>
             <h3><a href={`/${srv.data.slug}/`}>{srv.data.titulo}</a></h3>
             <p>{srv.data.metaDescription}</p>
+            <a class="card-link" href={`/${srv.data.slug}/`}>
+              <span>Ver alcance y tarifas</span>
+              <Icon name="arrow-right" size={16} />
+            </a>
           </div>
-          <a class="price" href={`/${srv.data.slug}/`}>{srv.data.precioDesde}</a>
         </article>
       ))}
     </div>
@@ -115,7 +124,8 @@ const schemaGraph = [
         class="pill pill-white"
         href="/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/"
       >
-        Ver servicio plato de ducha 48 h →
+        <span>Ver servicio plato de ducha 48 h</span>
+        <Icon name="arrow-right" size={16} />
       </a>
     </div>
   </section>

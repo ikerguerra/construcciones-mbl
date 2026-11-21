@@ -4,107 +4,99 @@ import {
   TARIFAS,
   ZONAS_ASTURIAS,
   type TipoObraKey,
-} from "../data/tarifas";
+} from '../data/tarifas';
+import Icon from './Icon.astro';
 
 const tipos: TipoObraKey[] = [
-  "reforma-integral",
-  "reforma-cocina",
-  "reforma-bano",
-  "plato-ducha",
-  "construccion-vivienda",
-  "local-comercial",
-  "reforma-parcial",
+  'reforma-integral',
+  'reforma-cocina',
+  'reforma-bano',
+  'plato-ducha',
+  'construccion-vivienda',
+  'local-comercial',
+  'reforma-parcial',
 ];
 ---
 
 <form
-  class="search"
+  class="estimator-card"
   action="/calcula-el-precio-de-tu-reforma-en-asturias/"
   method="get"
   aria-label="Selector rápido para calcular tu reforma en Asturias"
 >
-  <div class="field">
-    <label for="hero-tipo">Tipo de obra</label>
-    <select id="hero-tipo" name="tipo">
-      {tipos.map((k) => (
-        <option value={k}>{TARIFAS[k].nombreCorto}</option>
-      ))}
-    </select>
+  <div class="estimator-head">
+    <div>
+      <span class="estimator-kicker">Estimación orientativa inmediata</span>
+      <h2>Calcula tu presupuesto en 1 minuto</h2>
+    </div>
+    <span class="estimator-badge">Sin compromiso</span>
   </div>
 
-  <div class="field">
-    <label for="hero-zona">Zona en Asturias</label>
-    <select id="hero-zona" name="zona">
-      {ZONAS_ASTURIAS.map((zona) => (
-        <option value={zona}>{zona}</option>
-      ))}
-    </select>
+  <div class="estimator-fields">
+    <div class="est-field">
+      <label for="hero-tipo">Tipo de obra</label>
+      <select id="hero-tipo" name="tipo">
+        {tipos.map((k) => (
+          <option value={k}>{TARIFAS[k].nombreCorto}</option>
+        ))}
+      </select>
+    </div>
+
+    <div class="est-field">
+      <label for="hero-zona">Zona en Asturias</label>
+      <select id="hero-zona" name="zona">
+        {ZONAS_ASTURIAS.map((zona) => (
+          <option value={zona}>{zona}</option>
+        ))}
+      </select>
+    </div>
+
+    <div class="est-field">
+      <label for="hero-m2">Superficie aprox. (m²)</label>
+      <input
+        id="hero-m2"
+        name="m2"
+        type="number"
+        min="1"
+        max="450"
+        value="85"
+        inputmode="numeric"
+      />
+    </div>
+
+    <div class="est-field">
+      <label for="hero-calidad">Nivel de calidades</label>
+      <select id="hero-calidad" name="calidad">
+        {Object.values(CALIDADES).map((cal) => (
+          <option value={cal.key} selected={cal.key === 'estandar'}>
+            {cal.label}
+          </option>
+        ))}
+      </select>
+    </div>
   </div>
 
-  <div class="field">
-    <label for="hero-m2">Superficie aprox. (m²)</label>
-    <input
-      id="hero-m2"
-      name="m2"
-      type="number"
-      min="1"
-      max="450"
-      value="85"
-      inputmode="numeric"
-    />
-  </div>
-
-  <div class="field">
-    <label for="hero-calidad">Nivel de calidades</label>
-    <select id="hero-calidad" name="calidad">
-      {Object.values(CALIDADES).map((cal) => (
-        <option value={cal.key} selected={cal.key === "estandar"}>
-          {cal.label}
-        </option>
-      ))}
-    </select>
-  </div>
-
-  <button
-    type="submit"
-    class="go"
-    aria-label="Calcular presupuesto en el simulador"
-  >
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      aria-hidden="true"
-    >
-      <circle cx="11" cy="11" r="7" />
-      <path d="m20 20-3.5-3.5" />
-    </svg>
-    <span class="go-mobile-label">Calcular presupuesto</span>
+  <button type="submit" class="btn-primary estimator-submit">
+    <Icon name="calculator" size={18} />
+    <span>Calcular presupuesto orientativo</span>
   </button>
 </form>
 
 <script>
-  const tipoSelect = document.getElementById(
-    "hero-tipo",
-  ) as HTMLSelectElement | null;
-  const m2Input = document.getElementById("hero-m2") as HTMLInputElement | null;
+  const tipoSelect = document.getElementById('hero-tipo') as HTMLSelectElement | null;
+  const m2Input = document.getElementById('hero-m2') as HTMLInputElement | null;
   const defaults: Record<string, { val: string; label: string }> = {
-    "reforma-integral": { val: "85", label: "Superficie aprox. (m²)" },
-    "reforma-cocina": { val: "10", label: "Superficie cocina (m²)" },
-    "reforma-bano": { val: "5", label: "Superficie baño (m²)" },
-    "plato-ducha": { val: "1", label: "N.º de baños (ud.)" },
-    "construccion-vivienda": { val: "140", label: "Superficie vivienda (m²)" },
-    "local-comercial": { val: "80", label: "Superficie local (m²)" },
-    "reforma-parcial": { val: "40", label: "Superficie actuación (m²)" },
+    'reforma-integral': { val: '85', label: 'Superficie aprox. (m²)' },
+    'reforma-cocina': { val: '10', label: 'Superficie cocina (m²)' },
+    'reforma-bano': { val: '5', label: 'Superficie baño (m²)' },
+    'plato-ducha': { val: '1', label: 'N.º de baños (ud.)' },
+    'construccion-vivienda': { val: '140', label: 'Superficie vivienda (m²)' },
+    'local-comercial': { val: '80', label: 'Superficie local (m²)' },
+    'reforma-parcial': { val: '40', label: 'Superficie actuación (m²)' },
   };
-  const m2Label = document.querySelector<HTMLLabelElement>(
-    'label[for="hero-m2"]',
-  );
+  const m2Label = document.querySelector<HTMLLabelElement>('label[for="hero-m2"]');
 
-  tipoSelect?.addEventListener("change", () => {
+  tipoSelect?.addEventListener('change', () => {
     const cfg = defaults[tipoSelect.value];
     if (cfg && m2Input && m2Label) {
       m2Input.value = cfg.val;

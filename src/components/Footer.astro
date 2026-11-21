@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { EMPRESA } from '../data/empresa';
 import footerImg from '../assets/images/proyectos/obra-reforma-integral-1.webp';
 import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
+import Icon from './Icon.astro';
 ---
 
 <footer class="foot" id="footer">
@@ -17,46 +18,50 @@ import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
           loading="lazy"
           aria-hidden="true"
         />
-        <span class="logo-text">CONSTRUCCIONES MBL</span>
+        <span class="logo-text">Construcciones MBL</span>
       </a>
       <p class="foot-tagline">
-        Reformas integrales, cocinas, baños y construcción en Asturias con presupuesto cerrado en 48 h.
+        Reformas integrales, cocinas, baños y construcción en Asturias con presupuesto cerrado en 48 h y garantía por escrito.
       </p>
     </div>
 
     <div class="foot-cta-row">
       <a class="pill" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
-        Llamar: {EMPRESA.telefonoVisible}
+        <Icon name="phone" size={16} />
+        <span>Llamar: {EMPRESA.telefonoVisible}</span>
       </a>
       <a class="pill pill-white" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
-        Calcula tu reforma →
+        <span>Calcula tu reforma</span>
+        <Icon name="arrow-right" size={16} />
       </a>
     </div>
   </div>
 
   <div class="fgrid">
     <div>
-      <h4>Oficina técnica</h4>
-      <address>
-        <strong>{EMPRESA.marca}</strong><br />
-        {EMPRESA.direccion.calle}<br />
-        {EMPRESA.direccion.codigoPostal} {EMPRESA.direccion.localidad}, {EMPRESA.direccion.provincia}
+      <h4>Oficina técnica en Gijón</h4>
+      <address class="foot-address-row">
+        <Icon name="map-pin" size={16} />
+        <span>
+          <strong>{EMPRESA.marca}</strong><br />
+          {EMPRESA.direccion.calle}<br />
+          {EMPRESA.direccion.codigoPostal} {EMPRESA.direccion.localidad}, {EMPRESA.direccion.provincia}
+        </span>
       </address>
 
       <ul class="foot-contact-list">
         <li>
-          Tel:{' '}
-          <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel" style="text-decoration:underline">
-            {EMPRESA.telefonoVisible}
-          </a>
+          <Icon name="phone" size={15} />
+          <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">{EMPRESA.telefonoVisible}</a>
         </li>
         <li>
-          Email:{' '}
-          <a href={`mailto:${EMPRESA.email}`} style="text-decoration:underline">
-            {EMPRESA.email}
-          </a>
+          <Icon name="mail" size={15} />
+          <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a>
         </li>
-        <li>{EMPRESA.horario.resumen}</li>
+        <li>
+          <Icon name="clock" size={15} />
+          <span>{EMPRESA.horario.resumen}</span>
+        </li>
       </ul>
 
       <div class="soc" aria-label="Perfiles oficiales de Construcciones MBL">
@@ -67,11 +72,7 @@ import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
           aria-label="Instagram de Construcciones MBL"
           title="Instagram"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <rect x="2" y="2" width="20" height="20" rx="5" />
-            <circle cx="12" cy="12" r="4" />
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-          </svg>
+          <Icon name="globe" size={16} />
         </a>
         <a
           href={EMPRESA.redes.facebook}
@@ -80,9 +81,7 @@ import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
           aria-label="Facebook de Construcciones MBL"
           title="Facebook"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5Z" />
-          </svg>
+          <Icon name="share-2" size={16} />
         </a>
         <a
           href={EMPRESA.googleBusiness.hasMap}
@@ -91,10 +90,7 @@ import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
           aria-label="Ficha de Google Maps de Construcciones MBL en Gijón"
           title="Google Maps"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10Z" />
-            <circle cx="12" cy="11" r="2.2" />
-          </svg>
+          <Icon name="map-pin" size={16} />
         </a>
       </div>
     </div>
@@ -132,30 +128,25 @@ import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
           src={footerImg}
           alt="Reforma interior acabada en Asturias por Construcciones MBL"
           widths={[420, 760]}
-          sizes="(max-width: 640px) 100vw, (max-width: 1080px) 48vw, 380px"
+          sizes="(max-width: 640px) 100vw, (max-width: 1080px) 48vw, 320px"
           loading="lazy"
         />
       </div>
       <a class="fsearch" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="7" />
-          <path d="m20 20-3.5-3.5" />
-        </svg>
-        <span>Simula el precio de tu reforma...</span>
+        <Icon name="calculator" size={16} />
+        <span>Simula el precio de tu reforma</span>
+        <Icon name="arrow-right" size={15} />
       </a>
     </div>
   </div>
 
-  <div class="foot-bottom">
-    <div class="big" aria-hidden="true">{EMPRESA.marcasAgua.footer}</div>
-    <div class="legal">
-      <span>© {new Date().getFullYear()} {EMPRESA.razonSocial} · {EMPRESA.marca} (Asturias)</span>
-      <div class="legal-links">
-        <a href="/aviso-legal/">Aviso Legal</a>
-        <a href="/politica-de-privacidad/">Política de Privacidad</a>
-        <a href="/politica-de-cookies/">Política de Cookies</a>
-        <button type="button" data-open-cookies style="color:#cccccc">Configurar cookies</button>
-      </div>
+  <div class="legal">
+    <span>© {new Date().getFullYear()} {EMPRESA.razonSocial} · {EMPRESA.marca} (Asturias)</span>
+    <div class="legal-links">
+      <a href="/aviso-legal/">Aviso Legal</a>
+      <a href="/politica-de-privacidad/">Política de Privacidad</a>
+      <a href="/politica-de-cookies/">Política de Cookies</a>
+      <button type="button" data-open-cookies>Configurar cookies</button>
     </div>
   </div>
 </footer>

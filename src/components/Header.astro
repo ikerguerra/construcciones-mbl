@@ -1,46 +1,58 @@
 ---
-import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg?raw';
+import logoMark from '../assets/brand/logo-mbl-mark.svg';
 import { EMPRESA } from '../data/empresa';
+import Icon from './Icon.astro';
 
 export interface Props {
   mode?: 'overlay' | 'solid';
   currentPath?: string;
 }
 
-const { mode = 'solid', currentPath = Astro.url.pathname } = Astro.props;
+const { currentPath = Astro.url.pathname } = Astro.props;
 
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 
 const menuId = 'mobile-nav-drawer';
+
+const navLinks = [
+  { href: '/', label: 'Inicio' },
+  { href: '/servicios/', label: 'Servicios' },
+  { href: '/proyectos/', label: 'Proyectos' },
+  { href: '/innovacion-sostenible/', label: 'Guías' },
+  { href: '/contacto/', label: 'Contacto' },
+];
 ---
 
-<div class={mode === 'solid' ? 'nav-solid-wrap' : ''}>
-  <nav class={`nav ${mode === 'solid' ? 'nav-solid' : ''}`} aria-label="Navegación principal">
-    <div class="pills">
-      <a class={`pill ${isActive('/') ? 'active' : ''}`} href="/">Inicio</a>
-      <a class={`pill ${isActive('/servicios/') ? 'active' : ''}`} href="/servicios/">Servicios</a>
-      <a class={`pill ${isActive('/proyectos/') ? 'active' : ''}`} href="/proyectos/">Proyectos</a>
-    </div>
-
+<header class="site-header">
+  <nav class="nav" aria-label="Navegación principal">
     <a class="logo-link" href="/" aria-label={`${EMPRESA.marca} — Ir a inicio`}>
-      <span class="logo-svg" aria-hidden="true" set:html={logoMarkLight} />
-      <span class="logo-text">CONSTRUCCIONES MBL</span>
+      <img src={logoMark.src} alt="" width="34" height="24" aria-hidden="true" />
+      <span class="logo-text">Construcciones MBL</span>
     </a>
 
-    <div class="pills end">
-      <a
-        class={`pill ${isActive('/innovacion-sostenible/') ? 'active' : ''}`}
-        href="/innovacion-sostenible/"
-      >
-        Guías
+    <ul class="nav-links">
+      {navLinks.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class={isActive(item.href) ? 'is-active' : undefined}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="nav-actions">
+      <a class="nav-tel" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+        <Icon name="phone" size={16} />
+        <span>{EMPRESA.telefonoVisible}</span>
       </a>
-      <a class={`pill ${isActive('/contacto/') ? 'active' : ''}`} href="/contacto/">Contacto</a>
-      <a
-        class="pill pill-white"
-        href="/calcula-el-precio-de-tu-reforma-en-asturias/"
-      >
-        Calcula tu reforma
+      <a class="btn-primary btn-sm" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
+        <Icon name="calculator" size={16} />
+        <span>Calcula tu reforma</span>
       </a>
     </div>
 
@@ -51,7 +63,8 @@ const menuId = 'mobile-nav-drawer';
       aria-controls={menuId}
       data-nav-toggle
     >
-      Menú ☰
+      <Icon name="menu" size={20} />
+      <span>Menú</span>
     </button>
   </nav>
 
@@ -64,10 +77,16 @@ const menuId = 'mobile-nav-drawer';
     <a href="/reformas-en-aviles/">Reformas en Avilés</a>
     <a href="/innovacion-sostenible/">Innovación Sostenible (Guías)</a>
     <a href="/contacto/">Contacto</a>
-    <a href="/calcula-el-precio-de-tu-reforma-en-asturias/">Calcula el precio de tu reforma</a>
-    <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">Llamar: {EMPRESA.telefonoVisible}</a>
+    <a class="mobile-drawer-cta" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
+      <Icon name="calculator" size={16} />
+      <span>Calcula el precio de tu reforma</span>
+    </a>
+    <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+      <Icon name="phone" size={16} />
+      <span>Llamar: {EMPRESA.telefonoVisible}</span>
+    </a>
   </div>
-</div>
+</header>
 
 <script>
   const toggleBtn = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');

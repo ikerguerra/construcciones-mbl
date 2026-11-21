@@ -1,6 +1,7 @@
 ---
 import { EMPRESA } from '../data/empresa';
 import type { TipoObraKey } from '../data/tarifas';
+import Icon from './Icon.astro';
 
 export interface Props {
   titulo?: string;
@@ -26,10 +27,12 @@ const {
         class="pill pill-white"
         href={`/calcula-el-precio-de-tu-reforma-en-asturias/?tipo=${tipoPorDefecto}`}
       >
-        Ir al simulador →
+        <span>Ir al simulador</span>
+        <Icon name="arrow-right" size={16} />
       </a>
       <a class="pill" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
-        Llamar {EMPRESA.telefonoVisible}
+        <Icon name="phone" size={16} />
+        <span>Llamar {EMPRESA.telefonoVisible}</span>
       </a>
     </div>
   </div>
