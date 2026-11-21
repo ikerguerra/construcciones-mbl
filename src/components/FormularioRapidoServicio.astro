@@ -29,51 +29,55 @@ const formId = `srv-lead-${Math.random().toString(36).slice(2, 8)}`;
     </div>
 
     <div class="service-form-fields">
-      <div class="input-group">
-        <label for={`${formId}-nombre`}>Nombre y apellidos *</label>
-        <input
-          id={`${formId}-nombre`}
-          name="nombre"
-          type="text"
-          class="input-ctrl"
-          required
-          minlength="2"
-          placeholder="Tu nombre"
-        />
+      <div class="service-form-row">
+        <div class="input-group">
+          <label for={`${formId}-nombre`}>Nombre y apellidos *</label>
+          <input
+            id={`${formId}-nombre`}
+            name="nombre"
+            type="text"
+            class="input-ctrl"
+            required
+            minlength="2"
+            placeholder="Tu nombre"
+          />
+        </div>
+
+        <div class="input-group">
+          <label for={`${formId}-telefono`}>Teléfono *</label>
+          <input
+            id={`${formId}-telefono`}
+            name="telefono"
+            type="tel"
+            class="input-ctrl"
+            required
+            minlength="9"
+            placeholder="Ej. 684 675 898"
+          />
+        </div>
       </div>
 
-      <div class="input-group">
-        <label for={`${formId}-telefono`}>Teléfono *</label>
-        <input
-          id={`${formId}-telefono`}
-          name="telefono"
-          type="tel"
-          class="input-ctrl"
-          required
-          minlength="9"
-          placeholder="Ej. 684 675 898"
-        />
-      </div>
+      <div class="service-form-row">
+        <div class="input-group">
+          <label for={`${formId}-email`}>Correo electrónico *</label>
+          <input
+            id={`${formId}-email`}
+            name="email"
+            type="email"
+            class="input-ctrl"
+            required
+            placeholder="tu@correo.es"
+          />
+        </div>
 
-      <div class="input-group">
-        <label for={`${formId}-email`}>Correo electrónico *</label>
-        <input
-          id={`${formId}-email`}
-          name="email"
-          type="email"
-          class="input-ctrl"
-          required
-          placeholder="tu@correo.es"
-        />
-      </div>
-
-      <div class="input-group">
-        <label for={`${formId}-zona`}>Concejo en Asturias *</label>
-        <select id={`${formId}-zona`} name="zona" class="input-ctrl">
-          {ZONAS_ASTURIAS.map((z) => (
-            <option value={z}>{z}</option>
-          ))}
-        </select>
+        <div class="input-group">
+          <label for={`${formId}-zona`}>Concejo en Asturias *</label>
+          <select id={`${formId}-zona`} name="zona" class="input-ctrl">
+            {ZONAS_ASTURIAS.map((z) => (
+              <option value={z}>{z}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div class="input-group">
@@ -81,7 +85,7 @@ const formId = `srv-lead-${Math.random().toString(36).slice(2, 8)}`;
         <textarea
           id={`${formId}-mensaje`}
           name="mensaje"
-          rows="3"
+          rows="2"
           class="input-ctrl"
           placeholder={placeholder}
         ></textarea>

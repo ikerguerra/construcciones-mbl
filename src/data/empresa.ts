@@ -129,6 +129,8 @@ export interface TestimonioItem {
   titulo: string;
   cita: string;
   imagenKey: 'integral' | 'local' | 'bano' | 'cocina';
+  rating?: number;
+  avatarUrl?: string;
 }
 
 export const TESTIMONIOS_REALES: TestimonioItem[] = [

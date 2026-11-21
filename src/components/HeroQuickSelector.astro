@@ -15,6 +15,8 @@ const tipos: TipoObraKey[] = [
   "local-comercial",
   "reforma-parcial",
 ];
+
+const calidadesList = Object.values(CALIDADES);
 ---
 
 <form
@@ -23,25 +25,51 @@ const tipos: TipoObraKey[] = [
   method="get"
   aria-label="Selector rápido para calcular tu reforma en Asturias"
 >
-  <div class="field">
-    <label for="hero-tipo">Tipo de obra</label>
-    <select id="hero-tipo" name="tipo">
+  <div class="field field-select" data-hero-dd>
+    <input type="hidden" id="hero-tipo" name="tipo" value="reforma-integral" />
+    <span class="field-label" id="hero-tipo-l">Tipo de obra</span>
+    <button
+      type="button"
+      class="hero-select-trigger"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-labelledby="hero-tipo-l hero-tipo-v"
+    >
+      <span id="hero-tipo-v" data-hd>{TARIFAS["reforma-integral"].nombreCorto}</span>
+      <span class="hero-select-chev" aria-hidden="true"></span>
+    </button>
+    <ul class="hero-select-menu" role="listbox" aria-labelledby="hero-tipo-l" hidden>
       {tipos.map((k) => (
-        <option value={k}>{TARIFAS[k].nombreCorto}</option>
+        <li role="option" data-v={k} aria-selected={k === "reforma-integral" ? "true" : undefined}>
+          {TARIFAS[k].nombreCorto}
+        </li>
       ))}
-    </select>
+    </ul>
   </div>
 
-  <div class="field">
-    <label for="hero-zona">Zona en Asturias</label>
-    <select id="hero-zona" name="zona">
-      {ZONAS_ASTURIAS.map((zona) => (
-        <option value={zona}>{zona}</option>
+  <div class="field field-select" data-hero-dd>
+    <input type="hidden" id="hero-zona" name="zona" value={ZONAS_ASTURIAS[0]} />
+    <span class="field-label" id="hero-zona-l">Zona en Asturias</span>
+    <button
+      type="button"
+      class="hero-select-trigger"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-labelledby="hero-zona-l hero-zona-v"
+    >
+      <span id="hero-zona-v" data-hd>{ZONAS_ASTURIAS[0]}</span>
+      <span class="hero-select-chev" aria-hidden="true"></span>
+    </button>
+    <ul class="hero-select-menu" role="listbox" aria-labelledby="hero-zona-l" hidden>
+      {ZONAS_ASTURIAS.map((zona, idx) => (
+        <li role="option" data-v={zona} aria-selected={idx === 0 ? "true" : undefined}>
+          {zona}
+        </li>
       ))}
-    </select>
+    </ul>
   </div>
 
-  <div class="field">
+  <div class="field field-number" data-hero-num>
     <label for="hero-m2">Superficie aprox. (m²)</label>
     <input
       id="hero-m2"
@@ -54,15 +82,26 @@ const tipos: TipoObraKey[] = [
     />
   </div>
 
-  <div class="field">
-    <label for="hero-calidad">Nivel de calidades</label>
-    <select id="hero-calidad" name="calidad">
-      {Object.values(CALIDADES).map((cal) => (
-        <option value={cal.key} selected={cal.key === "estandar"}>
+  <div class="field field-select" data-hero-dd>
+    <input type="hidden" id="hero-calidad" name="calidad" value="estandar" />
+    <span class="field-label" id="hero-calidad-l">Nivel de calidades</span>
+    <button
+      type="button"
+      class="hero-select-trigger"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-labelledby="hero-calidad-l hero-calidad-v"
+    >
+      <span id="hero-calidad-v" data-hd>{CALIDADES.estandar.label}</span>
+      <span class="hero-select-chev" aria-hidden="true"></span>
+    </button>
+    <ul class="hero-select-menu" role="listbox" aria-labelledby="hero-calidad-l" hidden>
+      {calidadesList.map((cal) => (
+        <li role="option" data-v={cal.key} aria-selected={cal.key === "estandar" ? "true" : undefined}>
           {cal.label}
-        </option>
+        </li>
       ))}
-    </select>
+    </ul>
   </div>
 
   <button
@@ -86,29 +125,4 @@ const tipos: TipoObraKey[] = [
   </button>
 </form>
 
-<script>
-  const tipoSelect = document.getElementById(
-    "hero-tipo",
-  ) as HTMLSelectElement | null;
-  const m2Input = document.getElementById("hero-m2") as HTMLInputElement | null;
-  const defaults: Record<string, { val: string; label: string }> = {
-    "reforma-integral": { val: "85", label: "Superficie aprox. (m²)" },
-    "reforma-cocina": { val: "10", label: "Superficie cocina (m²)" },
-    "reforma-bano": { val: "5", label: "Superficie baño (m²)" },
-    "plato-ducha": { val: "1", label: "N.º de baños (ud.)" },
-    "construccion-vivienda": { val: "140", label: "Superficie vivienda (m²)" },
-    "local-comercial": { val: "80", label: "Superficie local (m²)" },
-    "reforma-parcial": { val: "40", label: "Superficie actuación (m²)" },
-  };
-  const m2Label = document.querySelector<HTMLLabelElement>(
-    'label[for="hero-m2"]',
-  );
-
-  tipoSelect?.addEventListener("change", () => {
-    const cfg = defaults[tipoSelect.value];
-    if (cfg && m2Input && m2Label) {
-      m2Input.value = cfg.val;
-      m2Label.textContent = cfg.label;
-    }
-  });
-</script>
+<script is:inline defer src="/js/hero-selector.js"></script>

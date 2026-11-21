@@ -1,92 +1,95 @@
 ---
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import HeroQuickSelector from '../components/HeroQuickSelector.astro';
-import BloqueFaq from '../components/BloqueFaq.astro';
-import EquipoEEAT from '../components/EquipoEEAT.astro';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import HeroQuickSelector from "../components/HeroQuickSelector.astro";
+import BloqueFaq from "../components/BloqueFaq.astro";
+import EquipoEEAT from "../components/EquipoEEAT.astro";
 import {
   EMPRESA,
   FAQS_GENERALES,
-  TESTIMONIOS_REALES,
   isPromoDuchaActive,
   isDetalleProyectosActive,
-} from '../data/empresa';
+} from "../data/empresa";
+import { getResenasHome } from "../data/google-reviews";
 import {
   buildOrganizationNode,
   buildWebSiteNode,
   buildFaqNode,
-} from '../lib/schema';
+} from "../lib/schema";
 
-import heroHomeImg from '../assets/images/servicios/hero-home-construcciones-mbl.webp';
-import storyImg1 from '../assets/images/proyectos/obra-reforma-integral-1.webp';
-import storyImg2 from '../assets/images/proyectos/obra-bano-mbl-wide.webp';
-import darkImg from '../assets/images/proyectos/proyecto-local-comercial-gijon-1.webp';
-import galImgMain from '../assets/images/proyectos/obra-bano-mbl-14.webp';
-import galImgSide1 from '../assets/images/proyectos/obra-cocina-mbl-1.webp';
-import galImgSide2 from '../assets/images/proyectos/proyecto-alicatado-bano-1.webp';
-import galImgAlt1 from '../assets/images/proyectos/obra-cocina-mbl-2.webp';
-import galImgAlt2 from '../assets/images/proyectos/obra-ducha-mampara.webp';
-import testiImg from '../assets/images/proyectos/proyecto-bano-moderno-asturias.webp';
+import heroHomeImg from "../assets/images/servicios/hero-home-construcciones-mbl.webp";
+import storyImg1 from "../assets/images/proyectos/obra-reforma-integral-1.webp";
+import storyImg2 from "../assets/images/proyectos/obra-bano-mbl-wide.webp";
+import darkImg from "../assets/images/proyectos/proyecto-local-comercial-gijon-1.webp";
+import galImgMain from "../assets/images/proyectos/obra-bano-mbl-14.webp";
+import galImgSide1 from "../assets/images/proyectos/obra-cocina-mbl-1.webp";
+import galImgSide2 from "../assets/images/proyectos/proyecto-alicatado-bano-1.webp";
+import galImgAlt1 from "../assets/images/proyectos/obra-cocina-mbl-2.webp";
+import galImgAlt2 from "../assets/images/proyectos/obra-ducha-mampara.webp";
+import testiImg from "../assets/images/proyectos/proyecto-bano-moderno-asturias.webp";
 
-const servicios = (await getCollection('servicios')).sort((a, b) => a.data.orden - b.data.orden);
-const localidades = await getCollection('localidades');
-const proyectosDestacados = (await getCollection('proyectos'))
+const servicios = (await getCollection("servicios")).sort(
+  (a, b) => a.data.orden - b.data.orden,
+);
+const localidades = await getCollection("localidades");
+const proyectosDestacados = (await getCollection("proyectos"))
   .sort((a, b) => a.data.orden - b.data.orden)
   .slice(0, 4);
-const ultimosArticulos = (await getCollection('blog'))
+const ultimosArticulos = (await getCollection("blog"))
   .sort((a, b) => b.data.datePublished.localeCompare(a.data.datePublished))
   .slice(0, 3);
-const promos = await getCollection('promociones');
-const promoDucha = promos.find((p) => p.data.id === 'plato-ducha-48h');
+const promos = await getCollection("promociones");
+const promoDucha = promos.find((p) => p.data.id === "plato-ducha-48h");
 const showPromoDucha = isPromoDuchaActive(promoDucha?.data.activa ?? true);
+const testimonios = await getResenasHome();
 
 const fasesMetodo = [
   {
-    paso: 'Fase 01 · Diagnóstico en obra',
-    titulo: 'Visita técnica gratuita en cualquier punto de Asturias',
+    paso: "Fase 01 · Diagnóstico en obra",
+    titulo: "Visita técnica gratuita en cualquier punto de Asturias",
     texto:
-      'Nos desplazamos a tu vivienda o local en Gijón, Oviedo, Avilés o concejos cercanos para tomar medidas reales, revisar instalaciones y escuchar tus prioridades.',
+      "Nos desplazamos a tu vivienda o local en Gijón, Oviedo, Avilés o concejos cercanos para tomar medidas reales, revisar instalaciones y escuchar tus prioridades.",
   },
   {
-    paso: 'Fase 02 · Transparencia total',
-    titulo: 'Presupuesto cerrado y desglosado en 48 horas',
+    paso: "Fase 02 · Transparencia total",
+    titulo: "Presupuesto cerrado y desglosado en 48 horas",
     texto:
-      'Recibes cada capítulo detallado por partidas y materiales acordados. Sin conceptos genéricos ni desviaciones imprevistas durante la ejecución.',
+      "Recibes cada capítulo detallado por partidas y materiales acordados. Sin conceptos genéricos ni desviaciones imprevistas durante la ejecución.",
   },
   {
-    paso: 'Fase 03 · Ejecución coordinada',
-    titulo: 'Dirección técnica propia y cumplimiento de plazos',
+    paso: "Fase 03 · Ejecución coordinada",
+    titulo: "Dirección técnica propia y cumplimiento de plazos",
     texto:
-      'Coordinamos todos los gremios (albañilería, fontanería, electricidad, carpintería y clima) con un único responsable asignado y seguimiento continuo.',
+      "Coordinamos todos los gremios (albañilería, fontanería, electricidad, carpintería y clima) con un único responsable asignado y seguimiento continuo.",
   },
   {
-    paso: 'Fase 04 · Respaldo real',
-    titulo: 'Entrega llave en mano con garantía por escrito',
+    paso: "Fase 04 · Respaldo real",
+    titulo: "Entrega llave en mano con garantía por escrito",
     texto:
-      'Revisamos contigo cada acabado antes de la entrega final y emitimos tu garantía por escrito: hasta 3 años en reformas y 10 años en construcción estructural.',
+      "Revisamos contigo cada acabado antes de la entrega final y emitimos tu garantía por escrito: hasta 3 años en reformas y 10 años en construcción estructural.",
   },
 ];
 
 const galeriaSlides = [
   {
     src: galImgMain,
-    alt: 'Reforma completa de baño moderno con ducha y mueble suspendido en Asturias',
+    alt: "Reforma completa de baño moderno con ducha y mueble suspendido en Asturias",
   },
   {
     src: galImgAlt1,
-    alt: 'Cocina reformada a medida con mobiliario luminoso en Asturias',
+    alt: "Cocina reformada a medida con mobiliario luminoso en Asturias",
   },
   {
     src: galImgAlt2,
-    alt: 'Cambio de bañera por plato de ducha antideslizante con mampara en Asturias',
+    alt: "Cambio de bañera por plato de ducha antideslizante con mampara en Asturias",
   },
 ];
 
-const title = 'Reformas Integrales y Construcción en Asturias | MBL';
+const title = "Reformas Integrales y Construcción en Asturias | MBL";
 const description =
-  'Empresa de reformas integrales, cocinas, baños y construcción en Asturias (Gijón, Oviedo y Avilés). Presupuesto cerrado en 48 h y garantía por escrito.';
+  "Empresa de reformas integrales, cocinas, baños y construcción en Asturias (Gijón, Oviedo y Avilés). Presupuesto cerrado en 48 h y garantía por escrito.";
 const pageUrl = `${EMPRESA.dominio}/`;
 
 const faqNode = buildFaqNode(FAQS_GENERALES, pageUrl);
@@ -97,13 +100,32 @@ const schemaGraph = [
 ];
 ---
 
-<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
-  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none">
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={pageUrl}
+  schemaGraph={schemaGraph}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none"
+  >
     <defs>
-      <symbol id="i-clk" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
-      <symbol id="i-ur" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></symbol>
-      <symbol id="i-lt" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
-      <symbol id="i-rt" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-clk" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </symbol>
+      <symbol id="i-ur" viewBox="0 0 24 24">
+        <path d="M7 17 17 7" />
+        <path d="M7 7h10v10" />
+      </symbol>
+      <symbol id="i-lt" viewBox="0 0 24 24">
+        <path d="m15 18-6-6 6-6" />
+      </symbol>
+      <symbol id="i-rt" viewBox="0 0 24 24">
+        <path d="m9 18 6-6-6-6" />
+      </symbol>
     </defs>
   </svg>
 
@@ -124,16 +146,22 @@ const schemaGraph = [
     <div class="hero-stack">
       <div class="hero-main">
         <small>Gijón · Oviedo · Avilés · Todo el Principado de Asturias</small>
-        <h1>Reformas Integrales y Construcción en Asturias con Presupuesto Cerrado</h1>
+        <h1>
+          Reformas Integrales y Construcción en Asturias con Presupuesto Cerrado
+        </h1>
 
         <p class="hero-lead-right">
-          Transformamos viviendas, cocinas, baños y locales comerciales en todo el Principado de Asturias con presupuesto cerrado por partidas, dirección técnica diaria y garantía por escrito.
+          Transformamos viviendas, cocinas, baños y locales comerciales en todo
+          el Principado de Asturias con presupuesto cerrado por partidas,
+          dirección técnica diaria y garantía por escrito.
         </p>
       </div>
 
       <div class="hero-bottom">
         <div class="hero-tag-row">
-          <p class="tag">+20 años de oficio · Dirección técnica propia · Garantía por escrito</p>
+          <p class="tag">
+            +20 años de oficio · Dirección técnica propia · Garantía por escrito
+          </p>
         </div>
 
         <HeroQuickSelector />
@@ -142,7 +170,12 @@ const schemaGraph = [
   </header>
 
   <!-- ================= 2. NUESTRA HISTORIA — ZIG-ZAG 2 FILAS ================= -->
-  <section class="sec story-zigzag" id="historia" aria-labelledby="historia-title" data-reveal>
+  <section
+    class="sec story-zigzag"
+    id="historia"
+    aria-labelledby="historia-title"
+    data-reveal
+  >
     <div class="story-row">
       <div class="story-photo">
         <Image
@@ -155,12 +188,20 @@ const schemaGraph = [
 
       <div>
         <span class="sec-kicker">Desde 2005 en Asturias</span>
-        <h2 class="sec-title" id="historia-title">Nuestra Historia</h2>
+        <h2 class="sec-title" id="historia-title">
+          Nuestra Historia
+        </h2>
         <p class="story-copy">
-          En Construcciones MBL nacimos con un objetivo claro: eliminar la incertidumbre que suele acompañar a una obra. Combinamos más de dos décadas de oficio en Asturias con una planificación técnica rigurosa para que reformar tu piso o construir tu casa sea un proceso predecible y limpio.
+          En Construcciones MBL nacimos con un objetivo claro: eliminar la
+          incertidumbre que suele acompañar a una obra. Combinamos más de dos
+          décadas de oficio en Asturias con una planificación técnica rigurosa
+          para que reformar tu piso o construir tu casa sea un proceso
+          predecible y limpio.
         </p>
         <p class="story-copy">
-          Desde nuestra oficina técnica en Cristasa (Gijón), gestionamos licencias municipales, aislamiento frente a la humedad atlántica y acabados duraderos con garantía por escrito.
+          Desde nuestra oficina técnica en Cristasa (Gijón), gestionamos
+          licencias municipales, aislamiento frente a la humedad atlántica y
+          acabados duraderos con garantía por escrito.
         </p>
       </div>
     </div>
@@ -187,21 +228,57 @@ const schemaGraph = [
   </section>
 
   <!-- ================= 3. NUESTROS SERVICIOS — TOP PICKS ================= -->
-  <section class="sec" id="servicios" style="padding-top:16px" aria-labelledby="servicios-title" data-reveal>
+  <section
+    class="sec"
+    id="servicios"
+    style="padding-top:16px"
+    aria-labelledby="servicios-title"
+    data-reveal
+  >
     <span class="sec-kicker">Especialidades llave en mano</span>
-    <h2 class="sec-title" id="servicios-title">Nuestros Servicios</h2>
+    <h2 class="sec-title" id="servicios-title">
+      Nuestros Servicios
+    </h2>
 
-    <div class="tabs" role="tablist" aria-label="Filtrar servicios por especialidad">
-      <button type="button" class="tab on" role="tab" aria-selected="true" data-service-tab="todos">
+    <div
+      class="tabs"
+      role="tablist"
+      aria-label="Filtrar servicios por especialidad"
+    >
+      <button
+        type="button"
+        class="tab on"
+        role="tab"
+        aria-selected="true"
+        data-service-tab="todos"
+      >
         Todos los servicios
       </button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-service-tab="reformas">
+      <button
+        type="button"
+        class="tab"
+        role="tab"
+        aria-selected="false"
+        data-service-tab="reformas"
+      >
         Reformas de vivienda
       </button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-service-tab="banos-cocinas">
+      <button
+        type="button"
+        class="tab"
+        role="tab"
+        aria-selected="false"
+        data-service-tab="banos-cocinas"
+      >
         Baños y cocinas
       </button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-service-tab="obra-locales">
+      <button
+        type="button"
+        class="tab"
+        role="tab"
+        aria-selected="false"
+        data-service-tab="obra-locales"
+      >
         Vivienda nueva y locales
       </button>
     </div>
@@ -217,11 +294,19 @@ const schemaGraph = [
             sizes="(max-width: 900px) 100vw, 31vw"
           />
           <span class="card-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clk" /></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+              <use href="#i-clk" />
+            </svg>
             <span>{srv.data.plazoVisible}</span>
           </span>
-          <a class="card-icon" href={`/${srv.data.slug}/`} aria-label={`Ver ${srv.data.tituloCorto}`}>
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur" /></svg>
+          <a
+            class="card-icon"
+            href={`/${srv.data.slug}/`}
+            aria-label={`Ver ${srv.data.tituloCorto}`}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+              <use href="#i-ur" />
+            </svg>
           </a>
           <div class="txt">
             <h3>
@@ -262,10 +347,10 @@ const schemaGraph = [
 
   <!-- ================= 4. BLOQUE OSCURO MÉTODO MBL ================= -->
   <section class="dark" aria-labelledby="metodo-title" data-reveal>
-    <div class="ghost" aria-hidden="true">{EMPRESA.marcasAgua.bloqueOscuro}</div>
-
     <div class="dark-head">
-      <h2 id="metodo-title">Construimos con presupuesto cerrado y garantía escrita</h2>
+      <h2 id="metodo-title">
+        Construimos con presupuesto cerrado y garantía escrita
+      </h2>
     </div>
 
     <div class="dark-grid">
@@ -293,17 +378,33 @@ const schemaGraph = [
           <a class="pill" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
             Solicitar presupuesto cerrado
           </a>
-          <a class="pill pill-white" href="/servicios/">Ver servicios</a>
+          <a class="pill pill-white" href="/servicios/">
+            Ver servicios
+          </a>
         </div>
       </div>
     </div>
 
     <div class="dark-bottom-nav">
-      <button type="button" class="arr" aria-label="Fase anterior" data-method-prev>
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lt" /></svg>
+      <button
+        type="button"
+        class="arr"
+        aria-label="Fase anterior"
+        data-method-prev
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <use href="#i-lt" />
+        </svg>
       </button>
-      <button type="button" class="arr on" aria-label="Fase siguiente" data-method-next>
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rt" /></svg>
+      <button
+        type="button"
+        class="arr on"
+        aria-label="Fase siguiente"
+        data-method-next
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <use href="#i-rt" />
+        </svg>
       </button>
     </div>
   </section>
@@ -311,12 +412,16 @@ const schemaGraph = [
   <!-- ================= 5. PROYECTOS DESTACADOS ================= -->
   <section class="sec" aria-labelledby="proyectos-home-title" data-reveal>
     <span class="sec-kicker">Obras reales ejecutadas en Asturias</span>
-    <h2 class="sec-title" id="proyectos-home-title">Proyectos Destacados</h2>
+    <h2 class="sec-title" id="proyectos-home-title">
+      Proyectos Destacados
+    </h2>
 
     <div class="choice-grid" id="choice-projects-grid">
       {proyectosDestacados.map((proy, idx) => {
         const hasDetail = isDetalleProyectosActive(proy.data.detalleActivo);
-        const proyHref = hasDetail ? `/proyectos/${proy.data.slug}/` : '/proyectos/';
+        const proyHref = hasDetail
+          ? `/proyectos/${proy.data.slug}/`
+          : "/proyectos/";
         return (
           <article class="card" data-choice-idx={idx} hidden={idx >= 2}>
             <Image
@@ -326,12 +431,27 @@ const schemaGraph = [
               widths={[540, 860]}
               sizes="(max-width: 900px) 100vw, 46vw"
             />
-            <span class="card-badge">{proy.data.municipio} · {proy.data.superficieM2}</span>
-            <a class="card-icon" href={proyHref} aria-label={`Ver ${proy.data.titulo}`}>
-              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur" /></svg>
+            <span class="card-badge">
+              {proy.data.municipio} · {proy.data.superficieM2}
+            </span>
+            <a
+              class="card-icon"
+              href={proyHref}
+              aria-label={`Ver ${proy.data.titulo}`}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <use href="#i-ur" />
+              </svg>
             </a>
             <div class="txt">
-              <h3><a href={proyHref}>{proy.data.titulo}</a></h3>
+              <h3>
+                <a href={proyHref}>{proy.data.titulo}</a>
+              </h3>
               <p>{proy.data.resumen}</p>
             </div>
           </article>
@@ -341,20 +461,43 @@ const schemaGraph = [
 
     <div class="choice-nav-row">
       <div class="ctrl" style="margin-top:0">
-        <button type="button" class="arr light on" aria-label="Proyectos anteriores" data-proj-prev>
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lt" /></svg>
+        <button
+          type="button"
+          class="arr light on"
+          aria-label="Proyectos anteriores"
+          data-proj-prev
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <use href="#i-lt" />
+          </svg>
         </button>
-        <button type="button" class="arr light" aria-label="Siguientes proyectos" data-proj-next>
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rt" /></svg>
+        <button
+          type="button"
+          class="arr light"
+          aria-label="Siguientes proyectos"
+          data-proj-next
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <use href="#i-rt" />
+          </svg>
         </button>
       </div>
-      <a class="btn-outline" href="/proyectos/">Ver todos los proyectos →</a>
+      <a class="btn-outline" href="/proyectos/">
+        Ver todos los proyectos →
+      </a>
     </div>
   </section>
 
   <!-- ================= 6. GALERÍA DE OBRAS ================= -->
-  <section class="sec gallery-section" style="padding-top:8px" aria-labelledby="galeria-home-title" data-reveal>
-    <h2 class="sec-title" id="galeria-home-title">Explora Nuestra Galería de Obras</h2>
+  <section
+    class="sec gallery-section"
+    style="padding-top:8px"
+    aria-labelledby="galeria-home-title"
+    data-reveal
+  >
+    <h2 class="sec-title" id="galeria-home-title">
+      Explora Nuestra Galería de Obras
+    </h2>
 
     <div class="gallery">
       <div class="gallery-side">
@@ -391,52 +534,108 @@ const schemaGraph = [
     </div>
 
     <div class="gallery-nav-row">
-      <button type="button" class="arr light" aria-label="Foto anterior" data-gal-prev>
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lt" /></svg>
+      <button
+        type="button"
+        class="arr light"
+        aria-label="Foto anterior"
+        data-gal-prev
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <use href="#i-lt" />
+        </svg>
       </button>
-      <button type="button" class="arr light on" aria-label="Foto siguiente" data-gal-next>
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rt" /></svg>
+      <button
+        type="button"
+        class="arr light on"
+        aria-label="Foto siguiente"
+        data-gal-next
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <use href="#i-rt" />
+        </svg>
       </button>
     </div>
 
-    <div class="gallery-ghost" aria-hidden="true">{EMPRESA.marcasAgua.footer}</div>
+    <div class="gallery-ghost" aria-hidden="true">
+      {EMPRESA.marcasAgua.footer}
+    </div>
   </section>
 
   <!-- ================= 7. TESTIMONIOS REALES VERIFICADOS ================= -->
   <section class="sec testi" aria-labelledby="testi-title" data-reveal>
     <div>
       <span class="sec-kicker">
-        {EMPRESA.googleBusiness.ratingValor} / 5 en Google · {EMPRESA.googleBusiness.totalResenas} reseñas verificadas
+        {EMPRESA.googleBusiness.ratingValor} / 5 en Google ·{" "}
+        {EMPRESA.googleBusiness.totalResenas} reseñas verificadas
       </span>
-      <h2 class="sec-title" id="testi-title" style="margin-bottom:20px">Opiniones reales de clientes en Asturias</h2>
+      <h2 class="sec-title" id="testi-title" style="margin-bottom:20px">
+        Opiniones reales de clientes en Asturias
+      </h2>
 
       <div class="testi-card">
         <div class="testi-card-top">
           <div class="testi-stars" aria-label="Valoración 5 de 5 estrellas">
-            <svg width="88" height="16" viewBox="0 0 110 20" fill="currentColor" aria-hidden="true">
-              <path d="M10 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L1.2 7.4l6.1-.9zM32 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L23.2 7.4l6.1-.9zM54 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L45.2 7.4l6.1-.9zM76 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L67.2 7.4l6.1-.9zM98 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L89.2 7.4l6.1-.9z"/>
+            <svg
+              width="88"
+              height="16"
+              viewBox="0 0 110 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M10 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L1.2 7.4l6.1-.9zM32 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L23.2 7.4l6.1-.9zM54 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L45.2 7.4l6.1-.9zM76 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L67.2 7.4l6.1-.9zM98 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L89.2 7.4l6.1-.9z" />
             </svg>
           </div>
           <span class="testi-verified">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /><path d="m9 12 2 2 4-4" />
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+              <path d="m9 12 2 2 4-4" />
             </svg>
             <span>Cliente verificado en Google</span>
           </span>
         </div>
 
         <div id="testi-slides" aria-live="polite">
-          {TESTIMONIOS_REALES.map((t, idx) => (
-            <blockquote class="testi-slide" data-testi-idx={idx} hidden={idx !== 0}>
+          {testimonios.map((t, idx) => (
+            <blockquote
+              class="testi-slide"
+              data-testi-idx={idx}
+              hidden={idx !== 0}
+            >
               <h3>“{t.titulo}”</h3>
               <p class="testi-quote">{t.cita}</p>
 
               <footer class="who">
                 <div class="who-id">
-                  <span class="who-avatar" aria-hidden="true">{t.autor.slice(0, 1)}</span>
+                  {t.avatarUrl ? (
+                    <img
+                      class="who-avatar-img"
+                      src={t.avatarUrl}
+                      alt={`Foto de perfil de ${t.autor} en Google`}
+                      width="44"
+                      height="44"
+                      loading="lazy"
+                      referrerpolicy="no-referrer"
+                    />
+                  ) : (
+                    <span class="who-avatar" aria-hidden="true">
+                      {t.autor.slice(0, 1)}
+                    </span>
+                  )}
                   <div>
                     <strong>{t.autor}</strong>
-                    <small>{t.tipoObra} · {t.municipio}</small>
+                    <small>
+                      {t.tipoObra} · {t.municipio}
+                    </small>
                   </div>
                 </div>
                 {idx === 0 && (
@@ -455,25 +654,26 @@ const schemaGraph = [
         </div>
       </div>
 
-      <div class="testi-dots" role="tablist" aria-label="Seleccionar reseña de cliente">
-        {TESTIMONIOS_REALES.map((t, idx) => (
-          <button
-            type="button"
-            class={`testi-dot ${idx === 0 ? 'on' : ''}`}
-            data-testi-dot={idx}
-            aria-label={`Leer opinión de ${t.autor}`}
-          >
-            {t.autor.split(' ')[0]}
-          </button>
-        ))}
-      </div>
-
       <div class="ctrl">
-        <button type="button" class="arr light on" aria-label="Opinión anterior" data-testi-prev>
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lt" /></svg>
+        <button
+          type="button"
+          class="arr light on"
+          aria-label="Opinión anterior"
+          data-testi-prev
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <use href="#i-lt" />
+          </svg>
         </button>
-        <button type="button" class="arr light" aria-label="Opinión siguiente" data-testi-next>
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rt" /></svg>
+        <button
+          type="button"
+          class="arr light"
+          aria-label="Opinión siguiente"
+          data-testi-next
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <use href="#i-rt" />
+          </svg>
         </button>
         <a
           class="btn-outline"
@@ -498,8 +698,13 @@ const schemaGraph = [
         <div class="gbp-score">
           <strong>{EMPRESA.googleBusiness.ratingValor}</strong>
           <div>
-            <span style="font-weight:600;font-size:14px">Valoración en Google Maps</span>
-            <small>{EMPRESA.googleBusiness.totalResenas} opiniones reales · Gijón, Asturias</small>
+            <span style="font-weight:600;font-size:14px">
+              Valoración en Google Maps
+            </span>
+            <small>
+              {EMPRESA.googleBusiness.totalResenas} opiniones reales · Gijón,
+              Asturias
+            </small>
           </div>
         </div>
         <a
@@ -516,8 +721,12 @@ const schemaGraph = [
 
   <!-- ================= 8. ZONAS DE ACTUACIÓN ================= -->
   <section class="sec sec-tint" aria-labelledby="zonas-title" data-reveal>
-    <span class="sec-kicker">Cobertura local sin sobrecoste de desplazamiento</span>
-    <h2 class="sec-title" id="zonas-title">Reformas en Gijón, Oviedo y Avilés</h2>
+    <span class="sec-kicker">
+      Cobertura local sin sobrecoste de desplazamiento
+    </span>
+    <h2 class="sec-title" id="zonas-title">
+      Reformas en Gijón, Oviedo y Avilés
+    </h2>
     <div class="zonas-grid">
       {localidades.map((loc) => (
         <article class="zona-card">
@@ -531,7 +740,11 @@ const schemaGraph = [
           </div>
           <div class="zona-card-body">
             <div class="zona-card-head">
-              <h3><a href={`/${loc.data.slug}/`}>Reformas en {loc.data.municipio}</a></h3>
+              <h3>
+                <a href={`/${loc.data.slug}/`}>
+                  Reformas en {loc.data.municipio}
+                </a>
+              </h3>
               <span class="zona-card-price">Desde 650 €/m²</span>
             </div>
             <p>{loc.data.subtituloHero}</p>
@@ -550,13 +763,24 @@ const schemaGraph = [
   <!-- ================= 9. EQUIPO E-E-A-T + GUÍAS + FAQS ================= -->
   <EquipoEEAT compact />
 
-  <section class="sec" style="padding-top:16px" aria-labelledby="blog-home-title" data-reveal>
+  <section
+    class="sec"
+    style="padding-top:16px"
+    aria-labelledby="blog-home-title"
+    data-reveal
+  >
     <div class="sec-header-row">
       <div>
-        <span class="sec-kicker">Innovación Sostenible · Guías técnicas 2026</span>
-        <h2 class="sec-title" id="blog-home-title">Consejos, Precios y Normativa en Asturias</h2>
+        <span class="sec-kicker">
+          Innovación Sostenible · Guías técnicas 2026
+        </span>
+        <h2 class="sec-title" id="blog-home-title">
+          Consejos, Precios y Normativa en Asturias
+        </h2>
       </div>
-      <a class="btn-outline" href="/innovacion-sostenible/">Ver las 23 guías técnicas →</a>
+      <a class="btn-outline" href="/innovacion-sostenible/">
+        Ver las 23 guías técnicas →
+      </a>
     </div>
 
     <div class="zonas-grid">
@@ -571,12 +795,19 @@ const schemaGraph = [
             />
           </div>
           <div class="zona-card-body">
-            <span class="sec-kicker" style="margin-bottom:0">{post.data.categoriaNombre}</span>
+            <span class="sec-kicker" style="margin-bottom:0">
+              {post.data.categoriaNombre}
+            </span>
             <h3>
-              <a href={`/${post.data.categoria}/${post.data.slug}/`}>{post.data.titulo}</a>
+              <a href={`/${post.data.categoria}/${post.data.slug}/`}>
+                {post.data.titulo}
+              </a>
             </h3>
             <p>{post.data.metaDescription}</p>
-            <a class="btn-card" href={`/${post.data.categoria}/${post.data.slug}/`}>
+            <a
+              class="btn-card"
+              href={`/${post.data.categoria}/${post.data.slug}/`}
+            >
               Leer guía completa
             </a>
           </div>
@@ -592,99 +823,4 @@ const schemaGraph = [
   />
 </BaseLayout>
 
-<script>
-  const animateEl = (el: HTMLElement) => {
-    el.classList.remove('is-animating');
-    void el.offsetWidth;
-    el.classList.add('is-animating');
-  };
-
-  // 1. Filtrado accesible de tabs de servicios
-  const tabBtns = document.querySelectorAll<HTMLButtonElement>('[data-service-tab]');
-  const serviceCards = document.querySelectorAll<HTMLElement>('#services-cards-grid [data-service-cat]');
-
-  tabBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const targetCat = btn.getAttribute('data-service-tab') ?? 'todos';
-      tabBtns.forEach((b) => {
-        const active = b === btn;
-        b.classList.toggle('on', active);
-        b.setAttribute('aria-selected', String(active));
-      });
-      serviceCards.forEach((card) => {
-        const cat = card.getAttribute('data-service-cat');
-        const show = targetCat === 'todos' || cat === targetCat;
-        card.hidden = !show;
-        if (show) animateEl(card);
-      });
-    });
-  });
-
-  // 2. Carrusel método MBL (.dark)
-  const methodSteps = document.querySelectorAll<HTMLElement>('.method-step');
-  let methodIdx = 0;
-  function showMethod(nextIdx: number) {
-    if (methodSteps.length === 0) return;
-    methodIdx = (nextIdx + methodSteps.length) % methodSteps.length;
-    methodSteps.forEach((el, i) => {
-      const active = i === methodIdx;
-      el.hidden = !active;
-      if (active) animateEl(el);
-    });
-  }
-  document.querySelector('[data-method-prev]')?.addEventListener('click', () => showMethod(methodIdx - 1));
-  document.querySelector('[data-method-next]')?.addEventListener('click', () => showMethod(methodIdx + 1));
-
-  // 3. Carrusel pares de proyectos destacados
-  const choiceCards = document.querySelectorAll<HTMLElement>('#choice-projects-grid [data-choice-idx]');
-  let projPage = 0;
-  function showProjPair(nextPage: number) {
-    const totalPages = Math.ceil(choiceCards.length / 2);
-    if (totalPages <= 1) return;
-    projPage = (nextPage + totalPages) % totalPages;
-    choiceCards.forEach((el, idx) => {
-      const active = Math.floor(idx / 2) === projPage;
-      el.hidden = !active;
-      if (active) animateEl(el);
-    });
-  }
-  document.querySelector('[data-proj-prev]')?.addEventListener('click', () => showProjPair(projPage - 1));
-  document.querySelector('[data-proj-next]')?.addEventListener('click', () => showProjPair(projPage + 1));
-
-  // 4. Carrusel de foto principal en Galería de Obras
-  const galSlides = document.querySelectorAll<HTMLElement>('#gallery-main-slides [data-gal-idx]');
-  let galIdx = 0;
-  function showGal(nextIdx: number) {
-    if (galSlides.length === 0) return;
-    galIdx = (nextIdx + galSlides.length) % galSlides.length;
-    galSlides.forEach((el, i) => {
-      const active = i === galIdx;
-      el.hidden = !active;
-      if (active) animateEl(el);
-    });
-  }
-  document.querySelector('[data-gal-prev]')?.addEventListener('click', () => showGal(galIdx - 1));
-  document.querySelector('[data-gal-next]')?.addEventListener('click', () => showGal(galIdx + 1));
-
-  // 5. Carrusel testimonios reales + selector directo por cliente
-  const testiSlides = document.querySelectorAll<HTMLElement>('.testi-slide');
-  const testiDots = document.querySelectorAll<HTMLButtonElement>('[data-testi-dot]');
-  let testiIdx = 0;
-  function showTesti(nextIdx: number) {
-    if (testiSlides.length === 0) return;
-    testiIdx = (nextIdx + testiSlides.length) % testiSlides.length;
-    testiSlides.forEach((el, i) => {
-      const active = i === testiIdx;
-      el.hidden = !active;
-      if (active) animateEl(el);
-    });
-    testiDots.forEach((dot, i) => {
-      dot.classList.toggle('on', i === testiIdx);
-    });
-  }
-  document.querySelector('[data-testi-prev]')?.addEventListener('click', () => showTesti(testiIdx - 1));
-  document.querySelector('[data-testi-next]')?.addEventListener('click', () => showTesti(testiIdx + 1));
-  testiDots.forEach((dot, i) => {
-    dot.addEventListener('click', () => showTesti(i));
-  });
-</script>
+<script is:inline defer src="/js/home-carousels.js"></script>
