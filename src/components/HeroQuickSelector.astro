@@ -1,14 +1,19 @@
 ---
-import { CALIDADES, TARIFAS, ZONAS_ASTURIAS, type TipoObraKey } from '../data/tarifas';
+import {
+  CALIDADES,
+  TARIFAS,
+  ZONAS_ASTURIAS,
+  type TipoObraKey,
+} from "../data/tarifas";
 
 const tipos: TipoObraKey[] = [
-  'reforma-integral',
-  'reforma-cocina',
-  'reforma-bano',
-  'plato-ducha',
-  'construccion-vivienda',
-  'local-comercial',
-  'reforma-parcial',
+  "reforma-integral",
+  "reforma-cocina",
+  "reforma-bano",
+  "plato-ducha",
+  "construccion-vivienda",
+  "local-comercial",
+  "reforma-parcial",
 ];
 ---
 
@@ -53,15 +58,27 @@ const tipos: TipoObraKey[] = [
     <label for="hero-calidad">Nivel de calidades</label>
     <select id="hero-calidad" name="calidad">
       {Object.values(CALIDADES).map((cal) => (
-        <option value={cal.key} selected={cal.key === 'estandar'}>
+        <option value={cal.key} selected={cal.key === "estandar"}>
           {cal.label}
         </option>
       ))}
     </select>
   </div>
 
-  <button type="submit" class="go" aria-label="Calcular presupuesto en el simulador">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+  <button
+    type="submit"
+    class="go"
+    aria-label="Calcular presupuesto en el simulador"
+  >
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
       <circle cx="11" cy="11" r="7" />
       <path d="m20 20-3.5-3.5" />
     </svg>
@@ -70,20 +87,24 @@ const tipos: TipoObraKey[] = [
 </form>
 
 <script>
-  const tipoSelect = document.getElementById('hero-tipo') as HTMLSelectElement | null;
-  const m2Input = document.getElementById('hero-m2') as HTMLInputElement | null;
+  const tipoSelect = document.getElementById(
+    "hero-tipo",
+  ) as HTMLSelectElement | null;
+  const m2Input = document.getElementById("hero-m2") as HTMLInputElement | null;
   const defaults: Record<string, { val: string; label: string }> = {
-    'reforma-integral': { val: '85', label: 'Superficie aprox. (m²)' },
-    'reforma-cocina': { val: '10', label: 'Superficie cocina (m²)' },
-    'reforma-bano': { val: '5', label: 'Superficie baño (m²)' },
-    'plato-ducha': { val: '1', label: 'N.º de baños (ud.)' },
-    'construccion-vivienda': { val: '140', label: 'Superficie vivienda (m²)' },
-    'local-comercial': { val: '80', label: 'Superficie local (m²)' },
-    'reforma-parcial': { val: '40', label: 'Superficie actuación (m²)' },
+    "reforma-integral": { val: "85", label: "Superficie aprox. (m²)" },
+    "reforma-cocina": { val: "10", label: "Superficie cocina (m²)" },
+    "reforma-bano": { val: "5", label: "Superficie baño (m²)" },
+    "plato-ducha": { val: "1", label: "N.º de baños (ud.)" },
+    "construccion-vivienda": { val: "140", label: "Superficie vivienda (m²)" },
+    "local-comercial": { val: "80", label: "Superficie local (m²)" },
+    "reforma-parcial": { val: "40", label: "Superficie actuación (m²)" },
   };
-  const m2Label = document.querySelector<HTMLLabelElement>('label[for="hero-m2"]');
+  const m2Label = document.querySelector<HTMLLabelElement>(
+    'label[for="hero-m2"]',
+  );
 
-  tipoSelect?.addEventListener('change', () => {
+  tipoSelect?.addEventListener("change", () => {
     const cfg = defaults[tipoSelect.value];
     if (cfg && m2Input && m2Label) {
       m2Input.value = cfg.val;

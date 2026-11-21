@@ -13,6 +13,7 @@ dist/
 
 # Activos brutos del cliente (7-24 MB por foto; versiones optimizadas en src/assets/images/)
 assets-cliente/
+assets-maqueta/
 
 # Variables de entorno
 .env

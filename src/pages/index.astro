@@ -20,14 +20,14 @@ import {
 
 import heroHomeImg from '../assets/images/servicios/hero-home-construcciones-mbl.webp';
 import storyImg1 from '../assets/images/proyectos/obra-reforma-integral-1.webp';
-import storyImg2 from '../assets/images/proyectos/obra-cocina-mbl-1.webp';
-import storyImg3 from '../assets/images/proyectos/obra-bano-mbl-wide.webp';
+import storyImg2 from '../assets/images/proyectos/obra-bano-mbl-wide.webp';
 import darkImg from '../assets/images/proyectos/proyecto-local-comercial-gijon-1.webp';
-import galImg1 from '../assets/images/proyectos/obra-bano-mbl-14.webp';
-import galImg2 from '../assets/images/proyectos/obra-cocina-mbl-2.webp';
-import galImg3 from '../assets/images/proyectos/proyecto-alicatado-bano-1.webp';
-import galImg4 from '../assets/images/proyectos/obra-ducha-mampara.webp';
-import galImg5 from '../assets/images/proyectos/obra-bano-mbl-16.webp';
+import galImgMain from '../assets/images/proyectos/obra-bano-mbl-14.webp';
+import galImgSide1 from '../assets/images/proyectos/obra-cocina-mbl-1.webp';
+import galImgSide2 from '../assets/images/proyectos/proyecto-alicatado-bano-1.webp';
+import galImgAlt1 from '../assets/images/proyectos/obra-cocina-mbl-2.webp';
+import galImgAlt2 from '../assets/images/proyectos/obra-ducha-mampara.webp';
+import testiImg from '../assets/images/proyectos/proyecto-bano-moderno-asturias.webp';
 
 const servicios = (await getCollection('servicios')).sort((a, b) => a.data.orden - b.data.orden);
 const localidades = await getCollection('localidades');
@@ -68,6 +68,21 @@ const fasesMetodo = [
   },
 ];
 
+const galeriaSlides = [
+  {
+    src: galImgMain,
+    alt: 'Reforma completa de baño moderno con ducha y mueble suspendido en Asturias',
+  },
+  {
+    src: galImgAlt1,
+    alt: 'Cocina reformada a medida con mobiliario luminoso en Asturias',
+  },
+  {
+    src: galImgAlt2,
+    alt: 'Cambio de bañera por plato de ducha antideslizante con mampara en Asturias',
+  },
+];
+
 const title = 'Reformas Integrales y Construcción en Asturias | MBL';
 const description =
   'Empresa de reformas integrales, cocinas, baños y construcción en Asturias (Gijón, Oviedo y Avilés). Presupuesto cerrado en 48 h y garantía por escrito.';
@@ -82,56 +97,60 @@ const schemaGraph = [
 ---
 
 <BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
-  <!-- ================= HERO ================= -->
+  <!-- ================= 1. HERO (Fiel a original-43422703) ================= -->
   <header class="hero" id="inicio">
     <Image
       src={heroHomeImg}
       alt="Reforma integral de vivienda luminosa en Asturias ejecutada por Construcciones MBL"
       class="hero-bg"
       widths={[640, 1024, 1440]}
-      sizes="(max-width: 1280px) 100vw, 1248px"
+      sizes="100vw"
       loading="eager"
       fetchpriority="high"
     />
 
     <Header mode="overlay" currentPath="/" />
 
-    <div class="hero-body">
-      <div>
-        <small>Gijón · Oviedo · Avilés · Todo el Principado de Asturias</small>
-        <h1>Reformas Integrales y Construcción en Asturias</h1>
-      </div>
-      <div>
-        <p class="lead">
-          Transformamos viviendas, cocinas, baños y locales comerciales con presupuesto cerrado por partidas, dirección técnica diaria y cumplimiento estricto de plazos.
-        </p>
+    <div class="hero-stack">
+      <small>Gijón · Oviedo · Avilés · Todo el Principado de Asturias</small>
+      <h1>Reformas Integrales y Construcción en Asturias</h1>
+
+      <p class="hero-lead-right">
+        Transformamos viviendas, cocinas, baños y locales comerciales con presupuesto cerrado por partidas, dirección técnica diaria y garantía por escrito.
+      </p>
+
+      <div class="hero-tag-row">
         <p class="tag">+20 años · Presupuesto cerrado · Garantía escrita</p>
-        <div class="hero-actions">
-          <a class="pill pill-white" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
-            Calcula tu presupuesto
-          </a>
-          <a class="pill" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
-            Llamar {EMPRESA.telefonoVisible}
-          </a>
-        </div>
+      </div>
+
+      <HeroQuickSelector />
+    </div>
+  </header>
+
+  <!-- ================= 2. NUESTRA HISTORIA — ZIG-ZAG 2 FILAS (Fiel a original-77c1b0fb) ================= -->
+  <section class="sec story-zigzag" id="historia" aria-labelledby="historia-title">
+    <div class="story-row">
+      <div class="story-photo">
+        <Image
+          src={storyImg1}
+          alt="Salón reformado integralmente en Asturias con carpintería blanca"
+          widths={[520, 860]}
+          sizes="(max-width: 900px) 100vw, 46vw"
+        />
+      </div>
+
+      <div>
+        <h2 class="sec-title" id="historia-title">Nuestra Historia</h2>
+        <p class="story-copy">
+          En Construcciones MBL nacimos con un objetivo claro: eliminar la incertidumbre que suele acompañar a una obra. Combinamos más de dos décadas de oficio en Asturias con una planificación técnica rigurosa para que reformar tu piso o construir tu casa sea un proceso predecible y limpio.
+        </p>
+        <p class="story-copy">
+          Desde nuestra oficina técnica en Cristasa (Gijón), gestionamos licencias municipales, aislamiento frente a la humedad atlántica y acabados duraderos con garantía por escrito.
+        </p>
       </div>
     </div>
 
-    <HeroQuickSelector />
-  </header>
-
-  <!-- ================= NUESTRA HISTORIA + 4 MÉTRICAS ================= -->
-  <section class="sec story" id="historia" aria-labelledby="historia-title">
-    <div>
-      <span class="sec-kicker">Construcciones MBL · Asturias</span>
-      <h2 class="sec-title" id="historia-title">Nuestra Historia</h2>
-      <p class="story-copy">
-        En Construcciones MBL nacimos con un objetivo claro: eliminar la incertidumbre que suele acompañar a una obra. Combinamos más de dos décadas de oficio en Asturias con una planificación técnica rigurosa para que reformar tu piso o construir tu casa sea un proceso predecible, limpio y bien ejecutado.
-      </p>
-      <p class="story-copy">
-        Desde nuestra oficina técnica en Cristasa (Gijón), gestionamos licencias municipales, aislamiento frente a la humedad atlántica y acabados duraderos con garantía escrita.
-      </p>
-
+    <div class="story-row">
       <div class="stats" aria-label="Cifras clave de Construcciones MBL">
         {EMPRESA.metricas.map((m) => (
           <div class="stat">
@@ -140,40 +159,21 @@ const schemaGraph = [
           </div>
         ))}
       </div>
-    </div>
 
-    <div class="imgs">
-      <div class="photo-tile">
-        <Image
-          src={storyImg1}
-          alt="Salón reformado integralmente en Asturias con carpintería blanca"
-          widths={[400, 720]}
-          sizes="(max-width: 900px) 50vw, 320px"
-        />
-      </div>
-      <div class="photo-tile">
+      <div class="story-photo">
         <Image
           src={storyImg2}
-          alt="Cocina moderna reformada a medida en Asturias"
-          widths={[400, 720]}
-          sizes="(max-width: 900px) 50vw, 320px"
-        />
-      </div>
-      <div class="photo-tile">
-        <Image
-          src={storyImg3}
           alt="Baño contemporáneo reformado con plato de ducha en Asturias"
-          widths={[600, 960]}
-          sizes="(max-width: 900px) 100vw, 660px"
+          widths={[520, 860]}
+          sizes="(max-width: 900px) 100vw, 46vw"
         />
       </div>
     </div>
   </section>
 
-  <!-- ================= SERVICIOS EN ASTURIAS (TABS) ================= -->
-  <section class="sec" id="servicios" style="padding-top:8px" aria-labelledby="servicios-title">
-    <span class="sec-kicker">Especialidades llave en mano</span>
-    <h2 class="sec-title" id="servicios-title">Nuestros Servicios en Asturias</h2>
+  <!-- ================= 3. NUESTROS SERVICIOS — TOP PICKS (Fiel a original-fe9427c6) ================= -->
+  <section class="sec" id="servicios" style="padding-top:16px" aria-labelledby="servicios-title">
+    <h2 class="sec-title" id="servicios-title">Nuestros Servicios</h2>
 
     <div class="tabs" role="tablist" aria-label="Filtrar servicios por especialidad">
       <button type="button" class="tab on" role="tab" aria-selected="true" data-service-tab="todos">
@@ -198,9 +198,12 @@ const schemaGraph = [
             alt={srv.data.imagenAlt}
             class="card-img"
             widths={[440, 760]}
-            sizes="(max-width: 900px) 100vw, 380px"
+            sizes="(max-width: 900px) 100vw, 31vw"
           />
           <span class="card-badge">⏱ {srv.data.plazoVisible}</span>
+          <a class="card-icon" href={`/${srv.data.slug}/`} aria-label={`Ver ${srv.data.tituloCorto}`}>
+            ↗
+          </a>
           <div class="txt">
             <h3>
               <a href={`/${srv.data.slug}/`}>{srv.data.tituloCorto}</a>
@@ -238,64 +241,53 @@ const schemaGraph = [
     )}
   </section>
 
-  <!-- ================= BLOQUE OSCURO MÉTODO MBL (ASTURIAS) ================= -->
+  <!-- ================= 4. BLOQUE OSCURO MÉTODO MBL (Fiel a original-15643f93) ================= -->
   <section class="dark" aria-labelledby="metodo-title">
     <div class="ghost" aria-hidden="true">{EMPRESA.marcasAgua.bloqueOscuro}</div>
-    <div class="arrows">
-      <button type="button" class="arr on" aria-label="Fase anterior" data-method-prev>↑</button>
-      <button type="button" class="arr" aria-label="Fase siguiente" data-method-next>↓</button>
-    </div>
 
-    <div>
-      <span class="sec-kicker" style="color:#cccccc">Método Construcciones MBL</span>
+    <div class="dark-head">
       <h2 id="metodo-title">Construimos con presupuesto cerrado y garantía escrita</h2>
-      <p style="margin-top:16px">
-        {EMPRESA.garantias.reformaIntegral} {EMPRESA.garantias.financiacion}
-      </p>
     </div>
 
-    <div>
-      <div id="method-steps-container" aria-live="polite">
-        {fasesMetodo.map((f, idx) => (
-          <div class="method-step" data-method-idx={idx} hidden={idx !== 0}>
-            <span class="sec-kicker" style="color:var(--warm)">{f.paso}</span>
-            <h3>{f.titulo}</h3>
-            <p>{f.texto}</p>
-          </div>
-        ))}
-      </div>
-
-      <div style="display:flex;flex-wrap:wrap;gap:10px">
-        <a class="pill pill-white" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
-          Solicitar presupuesto cerrado
-        </a>
-        <a class="pill" href="/servicios/">Ver catálogo de servicios</a>
-      </div>
-
+    <div class="dark-grid">
       <div class="dark-img-wrap">
         <Image
           src={darkImg}
           alt="Equipo técnico de Construcciones MBL ejecutando obra con nivelación láser en Asturias"
-          widths={[520, 900]}
-          sizes="(max-width: 900px) 100vw, 560px"
+          widths={[560, 920]}
+          sizes="(max-width: 900px) 100vw, 48vw"
         />
       </div>
+
+      <div>
+        <div id="method-steps-container" aria-live="polite">
+          {fasesMetodo.map((f, idx) => (
+            <div class="method-step" data-method-idx={idx} hidden={idx !== 0}>
+              <span class="sec-kicker" style="color:var(--warm)">{f.paso}</span>
+              <h3>{f.titulo}</h3>
+              <p>{f.texto}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="pill" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
+            Solicitar presupuesto cerrado
+          </a>
+          <a class="pill pill-white" href="/servicios/">Ver servicios</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dark-bottom-nav">
+      <button type="button" class="arr" aria-label="Fase anterior" data-method-prev>←</button>
+      <button type="button" class="arr on" aria-label="Fase siguiente" data-method-next>→</button>
     </div>
   </section>
 
-  <!-- ================= PROYECTOS DESTACADOS (2 COLUMNAS ANCHAS, CAPTURA 5/8) ================= -->
+  <!-- ================= 5. PROYECTOS DESTACADOS — EDITOR'S CHOICE (Fiel a original-e9e02008) ================= -->
   <section class="sec" aria-labelledby="proyectos-home-title">
-    <div class="sec-header-row">
-      <div>
-        <span class="sec-kicker">Obras reales ejecutadas</span>
-        <h2 class="sec-title" id="proyectos-home-title">Proyectos Destacados</h2>
-      </div>
-      <div class="ctrl" style="margin-top:0">
-        <button type="button" class="arr light" aria-label="Proyectos anteriores" data-proj-prev>↑</button>
-        <button type="button" class="arr light on" aria-label="Siguientes proyectos" data-proj-next>↓</button>
-        <a class="btn-outline" href="/proyectos/" style="margin-left:8px">Ver todos →</a>
-      </div>
-    </div>
+    <h2 class="sec-title" id="proyectos-home-title">Proyectos Destacados</h2>
 
     <div class="choice-grid" id="choice-projects-grid">
       {proyectosDestacados.map((proy, idx) => (
@@ -305,77 +297,122 @@ const schemaGraph = [
             alt={proy.data.imagenAlt}
             class="card-img"
             widths={[540, 860]}
-            sizes="(max-width: 900px) 100vw, 48vw"
+            sizes="(max-width: 900px) 100vw, 46vw"
           />
-          <span class="card-badge">{proy.data.municipio} · {proy.data.superficieM2}</span>
           <div class="txt">
             <h3><a href="/proyectos/">{proy.data.titulo}</a></h3>
             <p>{proy.data.resumen}</p>
           </div>
-          <a class="price" href="/proyectos/">{proy.data.plazo}</a>
         </article>
       ))}
     </div>
+
+    <div class="choice-nav-row">
+      <div class="ctrl" style="margin-top:0">
+        <button type="button" class="arr light on" aria-label="Proyectos anteriores" data-proj-prev>←</button>
+        <button type="button" class="arr light" aria-label="Siguientes proyectos" data-proj-next>→</button>
+      </div>
+      <a class="btn-outline" href="/proyectos/">Ver todos los proyectos →</a>
+    </div>
   </section>
 
-  <!-- ================= GALERÍA DE OBRAS A ANCHO COMPLETO (CAPTURAS 5/8 Y 6/8) ================= -->
+  <!-- ================= 6. GALERÍA DE OBRAS (Fiel a original-e006c0b5: 2 izq + 1 grande der) ================= -->
   <section class="sec gallery-section" style="padding-top:8px" aria-labelledby="galeria-home-title">
-    <div class="sec-header-row">
-      <div>
-        <span class="sec-kicker">Acabados e interiores en Asturias</span>
-        <h2 class="sec-title" id="galeria-home-title">Explora Nuestra Galería de Obras</h2>
-      </div>
-      <a class="btn-dark" href="/proyectos/">Explorar galería completa →</a>
-    </div>
+    <h2 class="sec-title" id="galeria-home-title">Explora Nuestra Galería de Obras</h2>
 
     <div class="gallery">
-      <div class="photo-tile">
-        <Image
-          src={galImg1}
-          alt="Reforma completa de baño moderno con ducha y mueble suspendido en Asturias"
-          widths={[640, 1024]}
-          sizes="(max-width: 900px) 100vw, 45vw"
-        />
+      <div class="gallery-side">
+        <div class="photo-tile">
+          <Image
+            src={galImgSide1}
+            alt="Cocina moderna reformada a medida en Asturias"
+            widths={[400, 680]}
+            sizes="(max-width: 900px) 50vw, 30vw"
+          />
+        </div>
+        <div class="photo-tile">
+          <Image
+            src={galImgSide2}
+            alt="Alicatado porcelánico rectificado ejecutado por Construcciones MBL"
+            widths={[400, 680]}
+            sizes="(max-width: 900px) 50vw, 30vw"
+          />
+        </div>
       </div>
-      <div class="photo-tile">
-        <Image
-          src={galImg2}
-          alt="Cocina reformada con armarios a medida y acabado cálido en Asturias"
-          widths={[400, 680]}
-          sizes="(max-width: 900px) 50vw, 25vw"
-        />
+
+      <div class="gallery-main" id="gallery-main-slides" aria-live="polite">
+        {galeriaSlides.map((img, idx) => (
+          <Image
+            src={img.src}
+            alt={img.alt}
+            widths={[640, 1080]}
+            sizes="(max-width: 900px) 100vw, 60vw"
+            data-gal-idx={idx}
+            hidden={idx !== 0}
+          />
+        ))}
       </div>
-      <div class="photo-tile">
-        <Image
-          src={galImg3}
-          alt="Alicatado porcelánico rectificado ejecutado por Construcciones MBL"
-          widths={[400, 680]}
-          sizes="(max-width: 900px) 50vw, 25vw"
-        />
-      </div>
-      <div class="photo-tile">
-        <Image
-          src={galImg4}
-          alt="Cambio de bañera por plato de ducha antideslizante con mampara en Asturias"
-          widths={[400, 680]}
-          sizes="(max-width: 900px) 50vw, 25vw"
-        />
-      </div>
-      <div class="photo-tile">
-        <Image
-          src={galImg5}
-          alt="Baño contemporáneo reformado con sanitarios modernos en Asturias"
-          widths={[400, 680]}
-          sizes="(max-width: 900px) 50vw, 25vw"
-        />
-      </div>
+    </div>
+
+    <div class="gallery-nav-row">
+      <button type="button" class="arr light" aria-label="Foto anterior" data-gal-prev>←</button>
+      <button type="button" class="arr light on" aria-label="Foto siguiente" data-gal-next>→</button>
     </div>
 
     <div class="gallery-ghost" aria-hidden="true">{EMPRESA.marcasAgua.footer}</div>
   </section>
 
-  <!-- ================= ZONAS DE ACTUACIÓN EN ASTURIAS (ESTILO TARJETAS 7/8) ================= -->
-  <section class="sec" style="padding-top:24px" aria-labelledby="zonas-title">
+  <!-- ================= 7. TESTIMONIOS REALES (Fiel a original-e9e02008: texto izq + foto der) ================= -->
+  <section class="sec testi" aria-labelledby="testi-title">
+    <div>
+      <span class="sec-kicker">
+        ★ {EMPRESA.googleBusiness.ratingValor} / 5 · Basado en {EMPRESA.googleBusiness.totalResenas} reseñas verificadas en Google
+      </span>
+      <h2 class="sr-only" id="testi-title">Opiniones reales de clientes en Asturias</h2>
+
+      <div id="testi-slides" aria-live="polite">
+        {TESTIMONIOS_REALES.map((t, idx) => (
+          <blockquote class="testi-slide" data-testi-idx={idx} hidden={idx !== 0}>
+            <h3>{t.titulo}</h3>
+            <p class="testi-quote">{t.cita}</p>
+            <footer class="who">
+              <span class="who-avatar" aria-hidden="true">{t.autor.slice(0, 1)}</span>
+              <div>
+                <strong>{t.autor}</strong>
+                <small>{t.tipoObra} · {t.municipio}</small>
+              </div>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+
+      <div class="ctrl">
+        <button type="button" class="arr light on" aria-label="Opinión anterior" data-testi-prev>←</button>
+        <button type="button" class="arr light" aria-label="Opinión siguiente" data-testi-next>→</button>
+        <a
+          class="btn-outline"
+          href={EMPRESA.googleBusiness.hasMap}
+          target="_blank"
+          rel="noopener noreferrer"
+          style="margin-left:8px"
+        >
+          Ver ficha en Google Maps →
+        </a>
+      </div>
+    </div>
+
+    <div class="testi-img">
+      <Image
+        src={testiImg}
+        alt="Resultado de reforma ejecutada con opiniones verificadas de clientes en Asturias"
+        widths={[540, 880]}
+        sizes="(max-width: 900px) 100vw, 48vw"
+      />
+    </div>
+  </section>
+
+  <!-- ================= 8. ZONAS DE ACTUACIÓN (Tarjetas limpias estilo 7/8) ================= -->
+  <section class="sec" style="padding-top:16px" aria-labelledby="zonas-title">
     <span class="sec-kicker">Cobertura local sin sobrecoste de desplazamiento</span>
     <h2 class="sec-title" id="zonas-title">Reformas en Gijón, Oviedo y Avilés</h2>
     <div class="zonas-grid">
@@ -407,63 +444,11 @@ const schemaGraph = [
     </div>
   </section>
 
-  <!-- ================= TESTIMONIOS REALES ================= -->
-  <section class="sec testi" aria-labelledby="testi-title">
-    <div class="testi-img">
-      <Image
-        src={storyImg1}
-        alt="Resultado de vivienda reformada con opiniones verificadas de clientes en Asturias"
-        widths={[540, 880]}
-        sizes="(max-width: 900px) 100vw, 560px"
-      />
-    </div>
-
-    <div>
-      <span class="sec-kicker">
-        ★ {EMPRESA.googleBusiness.ratingValor} / 5 · Basado en {EMPRESA.googleBusiness.totalResenas} reseñas verificadas en Google
-      </span>
-      <h2 class="sec-title" id="testi-title" style="margin-bottom:18px">
-        Opiniones Reales en Asturias
-      </h2>
-
-      <div id="testi-slides" aria-live="polite">
-        {TESTIMONIOS_REALES.map((t, idx) => (
-          <blockquote class="testi-slide" data-testi-idx={idx} hidden={idx !== 0}>
-            <h3>“{t.titulo}”</h3>
-            <p class="testi-quote">{t.cita}</p>
-            <footer class="who">
-              <span class="who-avatar" aria-hidden="true">{t.autor.slice(0, 1)}</span>
-              <div>
-                <strong>{t.autor}</strong>
-                <small>{t.tipoObra} · {t.municipio}</small>
-              </div>
-            </footer>
-          </blockquote>
-        ))}
-      </div>
-
-      <div class="ctrl">
-        <button type="button" class="arr light" aria-label="Opinión anterior" data-testi-prev>↑</button>
-        <button type="button" class="arr light on" aria-label="Opinión siguiente" data-testi-next>↓</button>
-        <a
-          class="btn-outline"
-          href={EMPRESA.googleBusiness.hasMap}
-          target="_blank"
-          rel="noopener noreferrer"
-          style="margin-left:8px"
-        >
-          Ver ficha en Google Maps →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= EQUIPO E-E-A-T ================= -->
+  <!-- ================= 9. EQUIPO E-E-A-T + GUÍAS + FAQS ================= -->
   <EquipoEEAT compact />
 
-  <!-- ================= ÚLTIMAS GUÍAS DEL BLOG ================= -->
   <section class="sec" style="padding-top:16px" aria-labelledby="blog-home-title">
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:24px">
+    <div class="sec-header-row">
       <div>
         <span class="sec-kicker">Innovación Sostenible · Guías técnicas 2026</span>
         <h2 class="sec-title" id="blog-home-title">Consejos, Precios y Normativa en Asturias</h2>
@@ -479,21 +464,17 @@ const schemaGraph = [
               src={post.data.imagen}
               alt={post.data.imagenAlt}
               widths={[420, 720]}
-              sizes="(max-width: 900px) 100vw, 380px"
+              sizes="(max-width: 900px) 100vw, 31vw"
             />
           </div>
           <div class="zona-card-body">
             <span class="sec-kicker" style="margin-bottom:0">{post.data.categoriaNombre}</span>
-            <h3 style="font-family:var(--f-body);text-transform:none;font-size:18px;font-weight:600;line-height:1.35">
+            <h3>
               <a href={`/${post.data.categoria}/${post.data.slug}/`}>{post.data.titulo}</a>
             </h3>
             <p>{post.data.metaDescription}</p>
-            <a
-              class="btn-outline"
-              href={`/${post.data.categoria}/${post.data.slug}/`}
-              style="margin-top:auto"
-            >
-              Leer guía completa →
+            <a class="btn-card" href={`/${post.data.categoria}/${post.data.slug}/`}>
+              Leer guía completa
             </a>
           </div>
         </article>
@@ -501,7 +482,6 @@ const schemaGraph = [
     </div>
   </section>
 
-  <!-- ================= FAQS PORTADA ================= -->
   <BloqueFaq
     titulo="Preguntas Frecuentes sobre Reformas en Asturias"
     subtitulo="Resolvemos las dudas habituales antes de iniciar una reforma integral, baño, cocina o vivienda unifamiliar."
@@ -556,7 +536,20 @@ const schemaGraph = [
   document.querySelector('[data-proj-prev]')?.addEventListener('click', () => showProjPair(projPage - 1));
   document.querySelector('[data-proj-next]')?.addEventListener('click', () => showProjPair(projPage + 1));
 
-  // 4. Carrusel testimonios reales
+  // 4. Carrusel de foto principal en Galería de Obras
+  const galSlides = document.querySelectorAll<HTMLElement>('#gallery-main-slides [data-gal-idx]');
+  let galIdx = 0;
+  function showGal(nextIdx: number) {
+    if (galSlides.length === 0) return;
+    galIdx = (nextIdx + galSlides.length) % galSlides.length;
+    galSlides.forEach((el, i) => {
+      el.hidden = i !== galIdx;
+    });
+  }
+  document.querySelector('[data-gal-prev]')?.addEventListener('click', () => showGal(galIdx - 1));
+  document.querySelector('[data-gal-next]')?.addEventListener('click', () => showGal(galIdx + 1));
+
+  // 5. Carrusel testimonios reales
   const testiSlides = document.querySelectorAll<HTMLElement>('.testi-slide');
   let testiIdx = 0;
   function showTesti(nextIdx: number) {

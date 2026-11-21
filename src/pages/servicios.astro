@@ -91,6 +91,9 @@ const schemaGraph = [
             sizes="(max-width: 900px) 100vw, 380px"
           />
           <span class="card-badge">⏱ {srv.data.plazoVisible}</span>
+          <a class="card-icon" href={`/${srv.data.slug}/`} aria-label={`Ver ${srv.data.tituloCorto}`}>
+            ↗
+          </a>
           <div class="txt">
             <h3><a href={`/${srv.data.slug}/`}>{srv.data.titulo}</a></h3>
             <p>{srv.data.metaDescription}</p>
