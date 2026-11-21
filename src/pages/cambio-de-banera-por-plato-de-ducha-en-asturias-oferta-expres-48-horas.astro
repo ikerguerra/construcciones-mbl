@@ -72,17 +72,16 @@ const schemaGraph = [
 ---
 
 <BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
-  <Header currentPath={`/${slug}/`} />
-
-  <section class="hero-sub" aria-label="Cambio de bañera por plato de ducha en 48 horas">
+  <header class="hero hero-sub">
     <Image
       src={duchaHeroImg}
       alt="Cambio de bañera por plato de ducha extraplano antideslizante en Asturias en 48 horas"
       class="hero-bg"
       widths={[640, 1024, 1440]}
-      sizes="100vw"
+      sizes="(max-width: 1280px) 100vw, 1248px"
       loading="eager"
     />
+    <Header mode="overlay" currentPath={`/${slug}/`} />
 
     <div class="hero-body">
       <div>
@@ -106,7 +105,7 @@ const schemaGraph = [
         </div>
       </div>
     </div>
-  </section>
+  </header>
 
   <section class="sec">
     <Breadcrumbs items={breadcrumbs} />

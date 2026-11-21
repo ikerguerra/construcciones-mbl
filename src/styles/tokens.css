@@ -1,72 +1,40 @@
 :root {
   /* Paleta corporativa Construcciones MBL (WCAG 2.1 AA/AAA) */
+  --black: #0f1d14;
+  --ink: #111a14;
   --color-primary: #164624;
   --color-primary-hover: #0f331a;
   --color-secondary: #3e6b47;
-  --color-accent: #a85a24;
-  --color-accent-light: #e5a96d;
-
-  /* Fondos y superficies */
-  --bg-canvas: #f7f6f3;
-  --bg-surface: #ffffff;
-  --bg-surface-alt: #eef2ee;
-  --bg-dark: #0f1d14;
-  --bg-dark-elevated: #16291d;
-
-  /* Tintas y contraste */
-  --ink-primary: #111a14;
-  --ink-secondary: #3b4a41;
-  --ink-muted: #516158;
-  --ink-on-dark: #f4f6f4;
-  --ink-on-dark-muted: #bcc8c0;
-
-  /* Bordes */
-  --border-subtle: #d6ddd8;
-  --border-input: #718077;
+  --white: #ffffff;
+  --bg: #eef3ee;
+  --muted: #516158;
+  --line: #d6ddd8;
   --border-dark: #243a2c;
-
-  /* Estados semánticos */
-  --status-ok: #166534;
-  --status-ok-bg: #ecfdf3;
-  --status-warn: #92400e;
-  --status-warn-bg: #fef3c7;
-  --status-err: #b42318;
-  --status-err-bg: #fef3f2;
-
-  /* Alias de compatibilidad para estilos en línea existentes */
-  --black: var(--bg-dark);
-  --ink: var(--ink-primary);
-  --white: var(--bg-surface);
-  --bg: var(--bg-canvas);
-  --muted: var(--ink-muted);
-  --line: var(--border-subtle);
-  --wood: var(--color-accent);
-  --warm: var(--color-accent-light);
+  --ink-on-dark-muted: #c2cec6;
+  --glass: rgba(15, 29, 20, 0.3);
+  --glass-b: rgba(213, 234, 216, 0.38);
+  --glass-dark: rgba(10, 22, 14, 0.42);
+  --wood: #a85a24;
+  --warm: #e5a96d;
 
   /* Tipografía local (@fontsource) */
-  --f-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  --f-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --f-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', Impact, sans-serif;
+  --f-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 
-  /* Geometría arquitectónica corporativa */
-  --r-xl: 16px;
-  --r-lg: 14px;
-  --r-md: 10px;
-  --r-sm: 6px;
-  --r-btn: 8px;
+  /* Radios y layout fieles a mbl-maqueta.html */
+  --r-xl: 36px;
+  --r-lg: 24px;
+  --r-md: 18px;
   --r-pill: 999px;
-
-  /* Espaciado y rejilla */
   --gap: 24px;
-  --content-max: 1320px;
-  --pad-x: max(clamp(20px, 4vw, 48px), calc((100% - var(--content-max)) / 2));
-
-  /* Elevación sutil */
-  --shadow-sm: 0 1px 2px rgba(15, 29, 20, 0.06);
-  --shadow-md: 0 8px 24px rgba(15, 29, 20, 0.08);
+  --pad: 40px;
+  --content-max: 1640px;
+  --pad-x: max(clamp(28px, 4vw, 64px), calc((100% - var(--content-max)) / 2));
 }
 
 @media (max-width: 900px) {
   :root {
+    --pad: 20px;
     --pad-x: 20px;
   }
 }

@@ -64,17 +64,16 @@ const schemaGraph = [
   canonical={pageUrl}
   schemaGraph={schemaGraph}
 >
-  <Header currentPath={`/${servicio.data.slug}/`} />
-
-  <section class="hero-sub" aria-label={servicio.data.titulo}>
+  <header class="hero hero-sub">
     <Image
       src={servicio.data.imagen}
       alt={servicio.data.imagenAlt}
       class="hero-bg"
       widths={[640, 1024, 1440]}
-      sizes="100vw"
+      sizes="(max-width: 1280px) 100vw, 1248px"
       loading="eager"
     />
+    <Header mode="overlay" currentPath={`/${servicio.data.slug}/`} />
 
     <div class="hero-body">
       <div>
@@ -96,7 +95,7 @@ const schemaGraph = [
         </div>
       </div>
     </div>
-  </section>
+  </header>
 
   <section class="sec">
     <Breadcrumbs items={breadcrumbs} />
