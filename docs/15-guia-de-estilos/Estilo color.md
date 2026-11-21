@@ -21,7 +21,7 @@ Sobre la arquitectura editorial de [[mbl-maqueta.html]] se aplica la **paleta co
 | `--color-primary-hover` | `#0f331a` | Estado hover de botones primarios (`13.8:1` **AAA**) |
 | `--color-secondary` | `#3e6b47` | Verde hoja MBL para kickers, bordes hover en tarjetas y detalles verificados (`6.18:1` **AA**) |
 | `--white` | `#ffffff` | Lienzo base, secciones claras y texto principal sobre `--black` (`16.7:1` **AAA**) |
-| `--bg` | `#eef3ee` | Superficie salvia suave en `.stat`, `.sec-kicker`, `.resumen-aeo`, `.eeat-card`, `.toc-box` y cabeceras de tabla |
+| `--bg` | `#eef3ee` | Superficie salvia suave en `.stat`, `.resumen-aeo`, `.eeat-card`, `.toc-box` y cabeceras de tabla |
 | `--bg-tint` | `#f3f7f4` | Banda salvia muy suave para alternar secciones claras (Zonas, FAQs, formulario lateral en servicios, proyectos relacionados) |
 | `--muted` | `#516158` | Etiquetas secundarias y subtítulos sobre blanco (`6.56:1` **AA**) y sobre `--bg` (`5.80:1` **AA**) |
 | `--line` / `--border-sage` | `#d6ddd8` / `#c6d9cb` | Divisores, bordes de tarjetas limpias, FAQs y pestañas |
