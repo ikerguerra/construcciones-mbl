@@ -23,10 +23,13 @@
   --r-pill: 999px;
   --gap: 24px;
   --pad: 40px;
+  --content-max: 1640px;
+  --pad-x: max(clamp(28px, 4vw, 64px), calc((100% - var(--content-max)) / 2));
 }
 
 @media (max-width: 900px) {
   :root {
     --pad: 20px;
+    --pad-x: 20px;
   }
 }

@@ -2,40 +2,62 @@
 import { Image } from 'astro:assets';
 import { EMPRESA } from '../data/empresa';
 import footerImg from '../assets/images/proyectos/obra-reforma-integral-1.webp';
+import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
 ---
 
 <footer class="foot" id="footer">
-  <div class="foot-top-nav">
-    <ul class="foot-nav-group">
-      <li><a href="/contacto/">Contacto</a></li>
-      <li><a href="/proyectos/">Proyectos</a></li>
-      <li><a href="/innovacion-sostenible/">Guías</a></li>
-      <li><a href="/reformas-en-gijon/">Gijón</a></li>
-      <li><a href="/reformas-en-oviedo/">Oviedo</a></li>
-      <li><a href="/reformas-en-aviles/">Avilés</a></li>
-    </ul>
+  <div class="foot-head">
+    <div class="foot-brand">
+      <a class="foot-logo" href="/" aria-label={`${EMPRESA.marca} — Ir a inicio`}>
+        <img
+          src={logoMarkLight.src}
+          alt=""
+          width="34"
+          height="24"
+          loading="lazy"
+          aria-hidden="true"
+        />
+        <span class="logo-text">CONSTRUCCIONES MBL</span>
+      </a>
+      <p class="foot-tagline">
+        Reformas integrales, cocinas, baños y construcción en Asturias con presupuesto cerrado en 48 h.
+      </p>
+    </div>
 
-    <ul class="foot-nav-group">
-      <li><a href="/servicios/">Nuestros Servicios</a></li>
-      <li><a href="/reformas-integrales-en-asturias/">Reformas Integrales</a></li>
-      <li><a href="/reformas-de-cocinas-en-asturias/">Cocinas</a></li>
-      <li><a href="/reformas-de-banos-en-asturias/">Baños</a></li>
-      <li><a href="/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/">Ducha 48 h</a></li>
-      <li><a href="/construccion-de-viviendas-en-asturias/">Viviendas</a></li>
-      <li><a href="/reforma-de-locales-comerciales-en-asturias/">Locales</a></li>
-    </ul>
+    <div class="foot-cta-row">
+      <a class="pill" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+        Llamar: {EMPRESA.telefonoVisible}
+      </a>
+      <a class="pill pill-white" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
+        Calcula tu reforma →
+      </a>
+    </div>
   </div>
 
-  <div class="foot-main">
+  <div class="fgrid">
     <div>
-      <h4>Ubicación y contacto</h4>
+      <h4>Oficina técnica</h4>
       <address>
-        <strong>{EMPRESA.marca}</strong> · {EMPRESA.direccion.calle}<br />
-        {EMPRESA.direccion.codigoPostal} {EMPRESA.direccion.localidad}, {EMPRESA.direccion.provincia}<br />
-        Tel: <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel" style="text-decoration:underline">{EMPRESA.telefonoVisible}</a> ·{' '}
-        <a href={`mailto:${EMPRESA.email}`} style="text-decoration:underline">{EMPRESA.email}</a><br />
-        <span>{EMPRESA.horario.resumen}</span>
+        <strong>{EMPRESA.marca}</strong><br />
+        {EMPRESA.direccion.calle}<br />
+        {EMPRESA.direccion.codigoPostal} {EMPRESA.direccion.localidad}, {EMPRESA.direccion.provincia}
       </address>
+
+      <ul class="foot-contact-list">
+        <li>
+          Tel:{' '}
+          <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel" style="text-decoration:underline">
+            {EMPRESA.telefonoVisible}
+          </a>
+        </li>
+        <li>
+          Email:{' '}
+          <a href={`mailto:${EMPRESA.email}`} style="text-decoration:underline">
+            {EMPRESA.email}
+          </a>
+        </li>
+        <li>{EMPRESA.horario.resumen}</li>
+      </ul>
 
       <div class="soc" aria-label="Perfiles oficiales de Construcciones MBL">
         <a
@@ -75,24 +97,52 @@ import footerImg from '../assets/images/proyectos/obra-reforma-integral-1.webp';
           </svg>
         </a>
       </div>
+    </div>
 
+    <div>
+      <h4>Servicios en Asturias</h4>
+      <ul>
+        <li><a href="/servicios/">Nuestros servicios</a></li>
+        <li><a href="/reformas-integrales-en-asturias/">Reformas integrales</a></li>
+        <li><a href="/reformas-de-cocinas-en-asturias/">Reformas de cocinas</a></li>
+        <li><a href="/reformas-de-banos-en-asturias/">Reformas de baños</a></li>
+        <li><a href="/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/">Cambio de bañera por ducha (48 h)</a></li>
+        <li><a href="/construccion-de-viviendas-en-asturias/">Construcción de viviendas</a></li>
+        <li><a href="/reformas-parciales-en-asturias/">Reformas parciales</a></li>
+        <li><a href="/reforma-de-locales-comerciales-en-asturias/">Locales comerciales</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Zonas y recursos</h4>
+      <ul>
+        <li><a href="/reformas-en-gijon/">Reformas en Gijón</a></li>
+        <li><a href="/reformas-en-oviedo/">Reformas en Oviedo</a></li>
+        <li><a href="/reformas-en-aviles/">Reformas en Avilés</a></li>
+        <li><a href="/proyectos/">Proyectos realizados</a></li>
+        <li><a href="/innovacion-sostenible/">Blog Innovación Sostenible</a></li>
+        <li><a href="/calcula-el-precio-de-tu-reforma-en-asturias/">Simulador de presupuesto</a></li>
+        <li><a href="/contacto/">Solicitar visita técnica</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="foot-photo">
+        <Image
+          src={footerImg}
+          alt="Reforma interior acabada en Asturias por Construcciones MBL"
+          widths={[420, 760]}
+          sizes="(max-width: 640px) 100vw, (max-width: 1080px) 48vw, 380px"
+          loading="lazy"
+        />
+      </div>
       <a class="fsearch" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="11" cy="11" r="7" />
           <path d="m20 20-3.5-3.5" />
         </svg>
-        <span>Calcula el precio de tu reforma en Asturias...</span>
+        <span>Simula el precio de tu reforma...</span>
       </a>
-    </div>
-
-    <div class="foot-photo">
-      <Image
-        src={footerImg}
-        alt="Reforma interior acabada en Asturias por Construcciones MBL"
-        widths={[520, 880]}
-        sizes="(max-width: 900px) 100vw, 560px"
-        loading="lazy"
-      />
     </div>
   </div>
 

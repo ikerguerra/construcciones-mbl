@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RealWorld – Maqueta fiel a capturas completas</title>
+<title>Construcciones MBL – Maqueta HTML de referencia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
@@ -14,6 +14,8 @@
   --f-body:'Inter','Helvetica Neue',Arial,sans-serif;
   --r-xl:36px;--r-lg:24px;--r-md:18px;--r-pill:999px;
   --gap:24px;--pad:40px;
+  --content-max:1640px;
+  --pad-x:max(clamp(28px,4vw,64px),calc((100% - var(--content-max)) / 2));
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--f-body);background:var(--white);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -22,7 +24,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 :focus-visible{outline:2px solid var(--wood);outline-offset:3px}
 h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:1}
 .frame{width:100%;margin:0;background:var(--white);padding:16px}
-.sec{padding:72px max(var(--pad),calc((100% - 1220px)/2))}
+.sec{padding:72px var(--pad-x)}
 .sec-title{font-size:clamp(34px,3.8vw,52px);letter-spacing:.01em}
 
 .ph{background:linear-gradient(160deg,#9fb3c8,#3d4a58 60%,#1c232b);border-radius:var(--r-lg);position:relative;overflow:hidden}
@@ -32,34 +34,36 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
 .ph.rock{background:linear-gradient(160deg,#6f7a80,#2b3236 70%,#161a1c)}
 .ph.pool{background:linear-gradient(180deg,#4aa4c8,#c9dde5 40%,#38505c)}
 
-/* Hero escalonado (original-43422703) */
-.hero{position:relative;min-height:clamp(640px,88vh,840px);border-radius:var(--r-xl);color:#fff;padding:28px max(var(--pad),calc((100% - 1220px)/2)) 40px;display:flex;flex-direction:column;overflow:hidden;
+/* Hero a pantalla completa (ancho y alto) */
+.hero{position:relative;min-height:calc(100vh - 32px);min-height:max(640px,calc(100svh - 32px));border-radius:var(--r-xl);color:#fff;padding:clamp(24px,3vh,36px) var(--pad-x) clamp(26px,3.6vh,42px);display:flex;flex-direction:column;overflow:hidden;
   background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.78)),linear-gradient(120deg,#69727d,#3a2f26 45%,#0e0d0c)}
 .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
 .nav .logo{font-family:var(--f-display);font-size:26px;letter-spacing:.04em;text-align:center}
 .pills{display:flex;gap:8px}.pills.end{justify-content:flex-end}
 .pill{padding:9px 20px;border-radius:var(--r-pill);font-size:14px;background:var(--glass);border:1px solid var(--glass-b);backdrop-filter:blur(10px);color:#fff}
 .pill.active{background:#fff;color:#000;border-color:#fff}
-.hero-stack{margin-top:auto;padding-top:56px;display:flex;flex-direction:column}
-.hero-stack small{font-style:italic;font-size:15px;opacity:.9;margin-bottom:14px}
-.hero-stack h1{font-size:clamp(46px,6.2vw,94px);letter-spacing:.008em;line-height:.98;max-width:18ch}
-.hero-lead-right{margin-left:auto;margin-top:20px;max-width:440px;font-style:italic;font-size:15px;opacity:.92}
-.hero .tag{font-family:var(--f-display);font-size:22px;margin-top:28px;text-transform:uppercase}
-.search{margin-top:20px;display:flex;gap:14px;align-items:stretch;padding:18px 20px;border:1px solid rgba(255,255,255,.42);border-radius:26px;background:rgba(0,0,0,.34);backdrop-filter:blur(14px)}
-.field{flex:1;padding:12px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hero-stack{flex:1;display:flex;flex-direction:column;padding-top:clamp(28px,4.5vh,64px)}
+.hero-main{margin-block:auto;display:flex;flex-direction:column;width:100%}
+.hero-bottom{margin-top:clamp(24px,3.5vh,44px);width:100%}
+.hero-stack small{font-style:italic;font-size:clamp(14px,1.15vw,18px);opacity:.9;margin-bottom:clamp(10px,1.6vh,18px)}
+.hero-stack h1{font-size:clamp(42px,5.4vw,102px);letter-spacing:.008em;line-height:.96;max-width:100%;text-wrap:balance}
+.hero-lead-right{margin-left:auto;margin-top:clamp(18px,2.6vh,30px);width:min(100%,620px);max-width:620px;font-style:italic;font-size:clamp(15px,1.12vw,18px);opacity:.92}
+.hero .tag{font-family:var(--f-display);font-size:clamp(20px,1.7vw,27px);text-transform:uppercase}
+.search{width:100%;margin-top:clamp(14px,2vh,22px);display:flex;gap:14px;align-items:stretch;padding:clamp(16px,2vh,24px) clamp(18px,2vw,26px);border:1px solid rgba(255,255,255,.42);border-radius:26px;background:rgba(0,0,0,.34);backdrop-filter:blur(14px)}
+.field{flex:1;padding:13px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;gap:8px}
 .field span{display:block;font-size:11px;opacity:.7}.field b{font-weight:500;font-size:14px}
 .search .go{width:64px;min-width:64px;min-height:58px;border-radius:16px;background:#fff;color:#000;font-size:20px}
 
-/* Our story zig-zag 2 filas (original-77c1b0fb) */
+/* Our story zig-zag 2 filas */
 .story-zigzag{display:flex;flex-direction:column;gap:56px}
 .story-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center}
-.story-row .ph{height:330px}
-.story-row p{font-style:italic;color:#444;font-size:15px;max-width:54ch;margin-top:16px}
+.story-row .ph{height:clamp(320px,24vw,400px)}
+.story-row p{font-style:italic;color:#444;font-size:clamp(15px,1.04vw,16.5px);max-width:66ch;margin-top:16px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:36px 48px}
 .stat b{display:block;font-family:var(--f-display);font-weight:400;font-size:56px;line-height:1}
 .stat span{font-size:14px;color:var(--muted)}
 
-/* Top picks verticales con precio abajo (original-fe9427c6) */
+/* Top picks verticales con precio abajo */
 .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 32px}
 .tab{padding:10px 24px;border-radius:var(--r-pill);border:1px solid var(--line);font-size:14px}
 .tab.on{background:#000;color:#fff;border-color:#000}
@@ -71,60 +75,75 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
 .rate{position:absolute!important;top:18px;left:18px;padding:5px 12px;border-radius:var(--r-pill);background:rgba(0,0,0,.48);font-size:12px;backdrop-filter:blur(6px)}
 .heart{position:absolute!important;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);display:grid;place-items:center}
 .card h3{font-family:var(--f-body);text-transform:none;font-size:20px;font-weight:500;margin-bottom:6px}
-.card p{font-size:13px;opacity:.85;max-width:34ch}
+.card p{font-size:13px;opacity:.85;max-width:48ch}
 .card .price{margin-top:16px;padding:9px 22px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.1);font-size:13.5px;font-weight:500}
 
-/* Dark services (original-15643f93: titular arriba · foto izq + texto der · ← → abajo der) */
-.dark{background:#000;color:#fff;border-radius:var(--r-xl);padding:64px max(var(--pad),calc((100% - 1220px)/2)) 76px;position:relative;overflow:hidden}
+/* Dark services */
+.dark{background:#000;color:#fff;border-radius:var(--r-xl);padding:64px var(--pad-x) 76px;position:relative;overflow:hidden}
 .dark h2{font-size:clamp(36px,4.4vw,60px);position:relative;z-index:2;margin-bottom:36px}
 .dark-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr 1fr;gap:clamp(32px,5vw,64px);align-items:center}
-.dark .ph{height:320px}
+.dark .ph{height:clamp(320px,24vw,390px)}
 .dark h3{font-family:var(--f-body);text-transform:none;font-size:28px;font-weight:400;margin-bottom:14px}
-.dark p{font-style:italic;font-size:14px;color:#c6c6c6;max-width:46ch;margin-bottom:24px}
+.dark p{font-style:italic;font-size:clamp(15px,1.04vw,16.5px);color:#c6c6c6;max-width:62ch;margin-bottom:24px}
 .dark-nav{position:relative;z-index:3;display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
 .dark .ghost{position:absolute;left:0;right:0;bottom:-24px;text-align:center;font-family:var(--f-display);font-size:clamp(120px,20vw,290px);color:rgba(255,255,255,.055);line-height:.85;pointer-events:none;white-space:nowrap}
 .arr{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.45);display:grid;place-items:center;font-size:15px}.arr.on{background:#fff;color:#000;border-color:#fff}
 .arr.light{border-color:#ccc;color:#000;background:#fff}.arr.light.on{background:#000;color:#fff;border-color:#000}
 
-/* Editor's choice (original-e9e02008) */
+/* Editor's choice */
 .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);margin-top:24px}
-.choice-grid .card{height:310px}.choice-grid .card h3{font-size:24px}
+.choice-grid .card{height:clamp(300px,23vw,370px)}.choice-grid .card h3{font-size:24px}
 .ctrl{display:flex;gap:10px;margin-top:20px}
 
-/* Portfolio gallery (original-e006c0b5: 2 izq + 1 grande der) */
-.gallery-wrap{position:relative;overflow:hidden;padding-bottom:72px}
-.gallery-ghost{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-family:var(--f-display);font-size:clamp(80px,14vw,215px);line-height:.85;color:rgba(0,0,0,.045);pointer-events:none;white-space:nowrap}
+/* Portfolio gallery */
+.gallery-wrap{position:relative;overflow:hidden;padding-bottom:72px;container-type:inline-size}
+.gallery-ghost{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-family:var(--f-display);font-size:clamp(32px,9.8vw,190px);font-size:clamp(32px,10.8cqi,190px);line-height:.85;color:rgba(0,0,0,.045);pointer-events:none;white-space:nowrap;overflow:hidden}
 .gallery{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.85fr;gap:var(--gap);margin-top:24px}
-.gallery-side{display:grid;grid-template-rows:240px 240px;gap:var(--gap)}
-.gallery-main{height:504px}
+.gallery-side{display:grid;grid-template-rows:260px 260px;gap:var(--gap)}
+.gallery-main{height:544px}
 
-/* Testimonio (original-e9e02008: texto izq + foto der) */
+/* Testimonio */
 .testi{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(32px,5vw,72px);align-items:center}
-.testi .ph{height:360px}
+.testi .ph{height:clamp(340px,25vw,420px)}
 .testi h3{font-family:var(--f-body);text-transform:none;font-weight:500;font-size:30px;line-height:1.2;margin-bottom:16px}
-.testi p{font-style:italic;font-size:14.5px;color:#444;margin-bottom:22px}
+.testi p{font-style:italic;font-size:clamp(15px,1.05vw,16.5px);color:#444;max-width:64ch;margin-bottom:22px}
 .who{display:flex;gap:12px;align-items:center;font-size:14px}.who i{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#556,#222)}.who small{display:block;font-size:12px;color:var(--muted)}
 
-/* Footer (original-152e782f) */
-.foot{background:#000;color:#fff;border-radius:var(--r-xl);padding:52px max(var(--pad),calc((100% - 1220px)/2)) 0;position:relative;overflow:hidden}
-.foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:36px;font-size:15px}
-.foot-top div{display:flex;gap:28px;flex-wrap:wrap}
-.foot-main{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(32px,5vw,64px);align-items:end}
-.foot address{font-style:normal;font-size:13.5px;color:#bbb;max-width:260px;margin-top:10px}
-.soc{display:flex;gap:10px;margin-top:22px}.soc i{width:36px;height:36px;border-radius:50%;background:#fff;display:block}
-.fsearch{display:flex;align-items:center;gap:10px;max-width:340px;padding:13px 20px;border-radius:var(--r-pill);background:rgba(255,255,255,.05);border:1px solid #444;font-size:13.5px;color:#bbb;margin-top:22px}
-.foot-main .ph{height:240px}
-.big{font-family:var(--f-display);font-size:clamp(80px,18vw,250px);line-height:.82;color:#161616;text-align:center;margin-top:32px}
-.legal{position:relative;z-index:2;display:flex;justify-content:space-between;font-size:12.5px;color:#ccc;border-top:1px solid #333;padding:18px 0 22px;margin-top:-40px}
+/* Footer remaquetado (cabecera + rejilla 4 cols + marca de agua en 1 línea + legal) */
+.foot{background:#000;color:#fff;border-radius:var(--r-xl);padding:52px var(--pad-x) 0;position:relative;overflow:hidden}
+.foot-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px 32px;padding-bottom:32px;margin-bottom:40px;border-bottom:1px solid #222}
+.foot-brand{display:flex;flex-direction:column;gap:8px;max-width:540px}
+.foot-logo{font-family:var(--f-display);font-size:26px;letter-spacing:.04em;line-height:1;color:#fff}
+.foot-tagline{font-size:14px;color:#b8b8b8;line-height:1.5}
+.foot-cta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.fgrid{display:grid;grid-template-columns:1.25fr 1fr 1fr 1.15fr;gap:clamp(28px,3.5vw,52px);align-items:start}
+.foot h4{font-family:var(--f-body);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:16px;color:#fff}
+.foot ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot li{font-size:14px;color:#ccc;line-height:1.45}
+.foot address{font-style:normal;font-size:14px;color:#ccc;max-width:300px;line-height:1.55;margin-bottom:14px}
+.soc{display:flex;gap:10px;margin-top:18px}.soc i{width:36px;height:36px;border-radius:50%;background:#fff;display:block}
+.foot-photo{height:205px;margin-bottom:14px}
+.fsearch{display:flex;align-items:center;gap:10px;width:100%;padding:13px 18px;border-radius:var(--r-pill);background:rgba(255,255,255,.06);border:1px solid #3c3c3c;font-size:13.5px;color:#d4d4d4}
+.foot-bottom{position:relative;margin-top:40px;padding-top:8px;container-type:inline-size}
+.foot .big{font-family:var(--f-display);font-size:clamp(24px,9.6vw,190px);font-size:clamp(24px,11.4cqi,198px);line-height:.85;color:#191919;text-align:center;letter-spacing:.015em;white-space:nowrap;overflow:hidden;user-select:none}
+.legal{position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;font-size:12.5px;color:#ccc;border-top:1px solid #2e2e2e;padding:18px 0 24px;margin-top:-36px}
 
+@media(max-width:1080px){
+  .fgrid{grid-template-columns:1fr 1fr}
+}
 @media(max-width:900px){
-  :root{--pad:20px}
-  .story-row,.dark-grid,.choice-grid,.gallery,.testi,.foot-main{grid-template-columns:1fr}
+  :root{--pad:20px;--pad-x:20px}
+  .hero{min-height:calc(100svh - 24px);padding:18px 20px 24px}
+  .hero-stack{padding-top:28px}.hero-bottom{margin-top:24px}.hero-lead-right{margin-left:0;max-width:100%}
+  .story-row,.dark-grid,.choice-grid,.gallery,.testi{grid-template-columns:1fr}
   .cards{grid-template-columns:1fr}.card{height:360px}
   .search{flex-wrap:wrap}.field{flex:1 1 45%}.search .go{height:50px;flex:1 1 100%}
   .nav{grid-template-columns:1fr}.nav .logo{order:-1;margin-bottom:12px}
   .gallery-side{grid-template-columns:1fr 1fr;grid-template-rows:170px}.gallery-main{height:260px}
   .legal{margin-top:8px}
+}
+@media(max-width:640px){
+  .fgrid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -132,22 +151,26 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
 <div class="frame">
   <header class="hero" id="home">
     <nav class="nav" aria-label="Principal">
-      <div class="pills"><a class="pill active" href="#home">Home</a><a class="pill" href="#story">About Us</a></div>
-      <a class="logo" href="#home">REALWORLD</a>
-      <div class="pills end"><a class="pill" href="#picks">Collection</a><a class="pill" href="#footer">Let's Talk</a></div>
+      <div class="pills"><a class="pill active" href="#home">Inicio</a><a class="pill" href="#story">Servicios</a></div>
+      <a class="logo" href="#home">CONSTRUCCIONES MBL</a>
+      <div class="pills end"><a class="pill" href="#picks">Proyectos</a><a class="pill" href="#footer">Contacto</a></div>
     </nav>
     <div class="hero-stack">
-      <small>Explore a diverse selection of premium listings</small>
-      <h1>Discover the top real estate options and turn your vision into reality</h1>
-      <p class="hero-lead-right">Elevate your lifestyle with our luxury residences. Experience unmatched comfort and sophistication in each home.</p>
-      <p class="tag">Collaborate with the top agent</p>
-      <form class="search" onsubmit="return false" aria-label="Buscar propiedades">
-        <div class="field"><div><span>Category</span><b>Rent or Purchase</b></div>⌄</div>
-        <div class="field"><div><span>Location</span><b>New York City</b></div>⌄</div>
-        <div class="field"><div><span>Type</span><b>Property</b></div>⌄</div>
-        <div class="field"><div><span>Price</span><b>USD per Month</b></div>⌄</div>
-        <button class="go" aria-label="Buscar">⌕</button>
-      </form>
+      <div class="hero-main">
+        <small>Gijón · Oviedo · Avilés · Todo el Principado de Asturias</small>
+        <h1>Reformas Integrales y Construcción en Asturias con Presupuesto Cerrado</h1>
+        <p class="hero-lead-right">Transformamos viviendas, cocinas, baños y locales comerciales en todo el Principado de Asturias con presupuesto cerrado por partidas, dirección técnica diaria y garantía por escrito.</p>
+      </div>
+      <div class="hero-bottom">
+        <p class="tag">+20 años de oficio · Dirección técnica propia · Garantía por escrito</p>
+        <form class="search" onsubmit="return false" aria-label="Simulador rápido">
+          <div class="field"><div><span>Tipo de obra</span><b>Reforma integral</b></div>⌄</div>
+          <div class="field"><div><span>Zona en Asturias</span><b>Gijón</b></div>⌄</div>
+          <div class="field"><div><span>Superficie aprox.</span><b>85 m²</b></div>⌄</div>
+          <div class="field"><div><span>Calidades</span><b>Estándar</b></div>⌄</div>
+          <button class="go" aria-label="Calcular">⌕</button>
+        </form>
+      </div>
     </div>
   </header>
 
@@ -155,91 +178,110 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;l
     <div class="story-row">
       <div class="ph night"></div>
       <div>
-        <h2 class="sec-title">Our Story</h2>
-        <p>At Real World, our goal is to transform the real estate experience. Our team of experts merges industry expertise with tailored service to meet your requirements accurately.</p>
-        <p>Whether you are purchasing, selling, or renting, our team is devoted to fulfilling your needs across top-notch areas.</p>
+        <h2 class="sec-title">Nuestra Historia</h2>
+        <p>En Construcciones MBL combinamos más de dos décadas de oficio en Asturias con una planificación técnica rigurosa para eliminar la incertidumbre en cada reforma o construcción.</p>
+        <p>Desde nuestra oficina técnica en Cristasa (Gijón), gestionamos licencias municipales, control térmico frente al clima atlántico y acabados duraderos con garantía por escrito.</p>
       </div>
     </div>
     <div class="story-row">
       <div class="stats">
-        <div class="stat"><b>1500+</b><span>Project Finished</span></div>
-        <div class="stat"><b>950+</b><span>Global Customer</span></div>
-        <div class="stat"><b>235+</b><span>Ready Units</span></div>
-        <div class="stat"><b>$50M+</b><span>Generating Income</span></div>
+        <div class="stat"><b>+20</b><span>Años de experiencia</span></div>
+        <div class="stat"><b>+260</b><span>Proyectos finalizados</span></div>
+        <div class="stat"><b>48 h</b><span>Cambio de ducha exprés</span></div>
+        <div class="stat"><b>10 años</b><span>Garantía estructural</span></div>
       </div>
       <div class="ph day"></div>
     </div>
   </section>
 
   <section class="sec" id="picks" style="padding-top:16px">
-    <h2 class="sec-title">Top Picks</h2>
-    <div class="tabs"><button class="tab on">Top Sellers</button><button class="tab">Condo</button><button class="tab">Villa</button><button class="tab">Business</button><button class="tab">Warehouse</button><button class="tab">Lease</button></div>
+    <h2 class="sec-title">Nuestros Servicios</h2>
+    <div class="tabs"><button class="tab on">Todos los servicios</button><button class="tab">Reformas de vivienda</button><button class="tab">Baños y cocinas</button><button class="tab">Vivienda nueva y locales</button></div>
     <div class="cards">
-      <article class="card"><div class="ph night"></div><span class="rate">4.4 ★</span><span class="heart">♡</span><h3>San Francisco, CA</h3><p>3 beds, 2 baths, 1,800 sq ft. Modern design with rooftop terrace</p><span class="price">$1,450,000</span></article>
-      <article class="card"><div class="ph day"></div><span class="rate">4.1 ★</span><span class="heart">♡</span><h3>Austin, TX</h3><p>4 beds, 3 baths, 2,400 sq ft. Contemporary style with spacious backyard</p><span class="price">$725,000</span></article>
-      <article class="card"><div class="ph pool"></div><span class="rate">4.0 ★</span><span class="heart">♡</span><h3>Miami, FL</h3><p>2 beds, 2 baths, 1,200 sq ft. Oceanfront condo with panoramic views</p><span class="price">$895,000</span></article>
+      <article class="card"><div class="ph night"></div><span class="rate">⏱ 8 - 14 sem.</span><span class="heart">↗</span><h3>Reformas Integrales</h3><p>Llave en mano con coordinación de gremios, licencias municipales y presupuesto cerrado.</p><span class="price">Desde 650 €/m²</span></article>
+      <article class="card"><div class="ph day"></div><span class="rate">⏱ 2 - 4 sem.</span><span class="heart">↗</span><h3>Reformas de Cocinas</h3><p>Distribución a medida, fontanería, iluminación y encimeras resistentes para tu vivienda.</p><span class="price">Desde 6.800 €</span></article>
+      <article class="card"><div class="ph pool"></div><span class="rate">⏱ 1 - 2 sem.</span><span class="heart">↗</span><h3>Reformas de Baños</h3><p>Revestimientos porcelánicos, platos antideslizantes y renovación completa de instalaciones.</p><span class="price">Desde 3.400 €</span></article>
     </div>
   </section>
 
   <section class="dark" aria-labelledby="serv">
-    <div class="ghost" aria-hidden="true">DREAM HOME</div>
-    <h2 id="serv">Refined real estate strategies and expert advice</h2>
+    <div class="ghost" aria-hidden="true">ASTURIAS</div>
+    <h2 id="serv">Construimos con presupuesto cerrado y garantía escrita</h2>
     <div class="dark-grid">
       <div class="ph rock"></div>
       <div>
-        <h3>Outstanding Home Renovation Services</h3>
-        <p>Discover why our clients rave about the outstanding service and unwavering commitment we provide throughout every real estate experience.</p>
-        <a class="pill" href="#">Explore Further</a>
+        <h3>Visita técnica gratuita y presupuesto desglosado en 48 horas</h3>
+        <p>Nos desplazamos a tu vivienda o local en Gijón, Oviedo, Avilés o concejos cercanos para medir in situ y entregarte cada partida cerrada por escrito.</p>
+        <a class="pill" href="#footer">Solicitar presupuesto cerrado</a>
       </div>
     </div>
     <div class="dark-nav"><button class="arr" aria-label="Anterior">←</button><button class="arr on" aria-label="Siguiente">→</button></div>
   </section>
 
   <section class="sec">
-    <h2 class="sec-title">Editor's Choice</h2>
+    <h2 class="sec-title">Proyectos Destacados</h2>
     <div class="choice-grid">
-      <article class="card"><div class="ph rock"></div><h3>Property Presentation</h3><p>Let us handle the daily operations of your property. We guarantee efficient maintenance and increased profitability.</p></article>
-      <article class="card"><div class="ph pool"></div><h3>Leasing Solutions</h3><p>Explore our personalized rental services to find the perfect property match.</p></article>
+      <article class="card"><div class="ph rock"></div><h3>Reforma integral en Gijón</h3><p>Redistribución de salón y cocina luminosa con eficiencia térmica y carpintería lacada.</p></article>
+      <article class="card"><div class="ph pool"></div><h3>Local comercial llave en mano</h3><p>Adecuación acústica, eléctrica y de escaparate cumpliendo normativa municipal.</p></article>
     </div>
     <div class="ctrl"><button class="arr light on" aria-label="Anterior">←</button><button class="arr light" aria-label="Siguiente">→</button></div>
   </section>
 
   <section class="sec gallery-wrap" style="padding-top:8px">
-    <h2 class="sec-title">Explore our portfolio gallery</h2>
+    <h2 class="sec-title">Explora Nuestra Galería de Obras</h2>
     <div class="gallery">
       <div class="gallery-side"><div class="ph day"></div><div class="ph pool"></div></div>
       <div class="ph night gallery-main"></div>
     </div>
     <div class="ctrl" style="justify-content:flex-end;position:relative;z-index:2"><button class="arr light" aria-label="Anterior">←</button><button class="arr light on" aria-label="Siguiente">→</button></div>
-    <div class="gallery-ghost" aria-hidden="true">DREAM HOME</div>
+    <div class="gallery-ghost" aria-hidden="true">CONSTRUCCIONES MBL</div>
   </section>
 
   <section class="sec testi">
     <div>
-      <h3>Valuable Feedback That Speaks Volumes</h3>
-      <p>At our company, client satisfaction is our top priority, and their feedback truly speaks volumes.</p>
-      <div class="who"><i></i><div>John Smith<small>25 Mar, 2025</small></div></div>
+      <h3>Cumplimiento estricto de plazos y presupuesto acordado</h3>
+      <p>Nos realizaron la reforma integral de nuestra vivienda y no podemos estar más satisfechos con el resultado y la atención diaria en obra.</p>
+      <div class="who"><i></i><div>Ana<small>Reforma integral · Pola de Siero</small></div></div>
       <div class="ctrl"><button class="arr light on" aria-label="Anterior">←</button><button class="arr light" aria-label="Siguiente">→</button></div>
     </div>
     <div class="ph day"></div>
   </section>
 
   <footer class="foot" id="footer">
-    <div class="foot-top">
-      <div><a href="#">Get in Touch</a><a href="#">About Us</a></div>
-      <div><a href="#">Our Services</a><a href="#">Join Our Team</a></div>
-    </div>
-    <div class="foot-main">
-      <div>
-        <h4>Location</h4>
-        <address>1234 Maple Avenue, Suite 600, Rivertown, AZ 12345</address>
-        <div class="soc"><i></i><i></i><i></i><i></i></div>
-        <div class="fsearch">⌕ Search...</div>
+    <div class="foot-head">
+      <div class="foot-brand">
+        <a class="foot-logo" href="#home">CONSTRUCCIONES MBL</a>
+        <p class="foot-tagline">Reformas integrales, cocinas, baños y construcción en Asturias con presupuesto cerrado en 48 h.</p>
       </div>
-      <div class="ph night"></div>
+      <div class="foot-cta-row">
+        <a class="pill" href="tel:+34684675898">Llamar: 684 675 898</a>
+        <a class="pill active" href="#home">Calcula tu reforma →</a>
+      </div>
     </div>
-    <div class="big" aria-hidden="true">REALWORLD</div>
-    <div class="legal"><span>© 2024 RealWORLD</span><span>Designed by: SahilDesign.com</span></div>
+    <div class="fgrid">
+      <div>
+        <h4>Oficina técnica</h4>
+        <address>Av. Argentina 132 (Cristasa of. 221), 33213 Gijón, Asturias</address>
+        <ul><li>684 675 898</li><li>info@construccionesmbl.com</li></ul>
+        <div class="soc"><i></i><i></i><i></i></div>
+      </div>
+      <div>
+        <h4>Servicios en Asturias</h4>
+        <ul><li>Reformas integrales</li><li>Cocinas y baños</li><li>Ducha 48 h</li><li>Vivienda nueva</li></ul>
+      </div>
+      <div>
+        <h4>Zonas y recursos</h4>
+        <ul><li>Gijón, Oviedo y Avilés</li><li>Proyectos realizados</li><li>Guías Innovación Sostenible</li><li>Contacto</li></ul>
+      </div>
+      <div>
+        <div class="ph night foot-photo"></div>
+        <div class="fsearch">⌕ Simula el precio de tu reforma...</div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="big" aria-hidden="true">CONSTRUCCIONES MBL</div>
+      <div class="legal"><span>© 2026 MBL CONSTRUCCIONES S.L. · Construcciones MBL (Asturias)</span><span>Aviso Legal · Privacidad · Cookies</span></div>
+    </div>
   </footer>
 </div>
 </body>
