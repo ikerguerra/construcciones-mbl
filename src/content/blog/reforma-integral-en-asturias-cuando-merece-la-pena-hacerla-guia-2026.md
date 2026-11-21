@@ -29,8 +29,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 ¿Vives en **Asturias con una casa que no termina de funcionar**? ¿Te preguntas si es mejor **ir parcheando o hacer una reforma total de una vez**? Como **expertos en reformas integrales en Asturias**, en MBL Construcciones te ayudamos a decidir qué es mejor para TU caso.
 
 ## ¿Reforma Integral o Parches? La Gran Decisión en Asturias

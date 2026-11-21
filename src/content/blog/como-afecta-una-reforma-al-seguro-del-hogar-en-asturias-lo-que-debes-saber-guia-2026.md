@@ -28,8 +28,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 Has contratado la reforma de tus sueños. Cocina nueva, baño moderno, distribución abierta… Pero, ¿has pensado en qué pasa con el **seguro del hogar mientras duren las obras** ?
 
 Una reforma es un período de mayor riesgo: herramientas, materiales, ruido, polvo, acceso de operarios… Y si ocurre un accidente (una tubería rota, un incendio, un robo), la última cosa que quieres es enterarte de que **tu seguro no lo cubre** .

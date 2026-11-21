@@ -130,7 +130,7 @@ const schemaGraph = [
   </svg>
 
   <!-- ================= 1. HERO ================= -->
-  <header class="hero" id="inicio">
+  <header class="hero" id="inicio" slot="header">
     <Image
       src={heroHomeImg}
       alt="Reforma integral de vivienda luminosa en Asturias ejecutada por Construcciones MBL"
@@ -574,7 +574,7 @@ const schemaGraph = [
 
       <div class="testi-card">
         <div class="testi-card-top">
-          <div class="testi-stars" aria-label="Valoración 5 de 5 estrellas">
+          <div class="testi-stars" role="img" aria-label="Valoración 5 de 5 estrellas">
             <svg
               width="88"
               height="16"

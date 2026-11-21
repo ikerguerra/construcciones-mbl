@@ -31,8 +31,6 @@ faqs:
     respuesta: "Para solicitar un presupuesto, puedes contactarnos a través de nuestro formulario en la página de contacto o llamarnos directamente. Estaremos encantados de ayudarte."
 ---
 
-#### Tabla de contenido
-
 ¿Estás **harto de escalar cada día para meterte en la bañera**? ¿Cansado de limpiar esa superficie que atrae el moho como un imán? En Asturias, **cambiar la bañera por un plato de ducha moderno** se ha convertido en la reforma más inteligente que puedes hacer. Y en MBL Construcciones, **expertos en baños asturianos**, te contamos todo para que tu cambio sea perfecto.
 
 ## ¿Por Qué 2026 es el Año Ideal para el Cambio en Asturias?

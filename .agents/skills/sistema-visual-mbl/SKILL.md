@@ -25,5 +25,5 @@ Traduce la estética estructural de `mbl-maqueta.html` y `docs/12-decisiones/ADR
 
 ## Verificación
 
-- Revisar en escritorio (`>= 1280px`) y móvil (`<= 900px` / `375px`) ausencia de desbordamiento horizontal, transiciones fluidas y `dist/index.html < 70 KB`.
-- Confirmar contraste AA/AAA, foco visible por teclado y `0` errores en `npm run verify` y `npm run check`.
+- Revisar en escritorio (`>= 1280px`) y móvil (`<= 900px` / `375px`) ausencia de desbordamiento horizontal, transiciones fluidas, no solapamiento de `.cookie-banner` sobre el selector rápido del Hero ni `.wa-float`, y `dist/index.html < 70 KB`.
+- Confirmar contraste AA/AAA (incluyendo enlaces/botones dentro de `.prose`), áreas táctiles `>= 44x44 px`, jerarquía de encabezados sin saltos, landmark `banner` fuera de `<main>`, foco visible por teclado y `0` errores en `npm run verify`, `npm run check` y la auditoría en vivo con `auditoria-chrome-devtools` (`a11y-debugging` + `lighthouse_audit` `100` en Accesibilidad).

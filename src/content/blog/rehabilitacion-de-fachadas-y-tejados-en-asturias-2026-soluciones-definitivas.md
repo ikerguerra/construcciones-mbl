@@ -29,8 +29,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 ¿Vives en **Asturias y ves cómo tu fachada se cae a pedazos** o tu tejado tiene goteras cada invierno? No es normal, aunque sea común. La **lluvia, humedad y viento asturiano** castigan nuestros edificios, pero hay soluciones definitivas. En MBL Construcciones te explicamos **cómo rehabilitar para 20 años de tranquilidad**.
 
 ## ¿Por Qué en Asturias se Estropean Tanto Fachadas y Tejados?

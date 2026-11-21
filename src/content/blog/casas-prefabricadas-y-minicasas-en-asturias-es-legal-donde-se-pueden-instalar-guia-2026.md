@@ -27,8 +27,6 @@ faqs:
     respuesta: "Debes buscar una parcela calificada como Suelo Urbano o Suelo de Núcleo Rural con edificabilidad residencial permitida en la cédula urbanística del Ayuntamiento correspondiente."
 ---
 
-#### Tabla de contenido
-
 ¿Has visto esas **casas prefabricadas modernas o minicasas** que parecen sacadas de un cuento? ¿Te imaginas tener una en un terreno rural de Asturias, rodeado de naturaleza, sin los costes de una construcción tradicional?
 
 Pues para que ese sueño no se convierta en una pesadilla burocrática, tienes que saber **qué es legal, qué no, y dónde puedes ponerla**. En MBL Construcciones te lo contamos todo claro, sin tecnicismos innecesarios.

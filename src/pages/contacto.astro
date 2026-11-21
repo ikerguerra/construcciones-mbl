@@ -27,7 +27,7 @@ const schemaGraph = [
 ---
 
 <BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
-  <Header mode="solid" currentPath="/contacto/" />
+  <Header slot="header" mode="solid" currentPath="/contacto/" />
 
   <section class="sec">
     <Breadcrumbs items={breadcrumbs} />
@@ -55,17 +55,17 @@ const schemaGraph = [
         <div class="form-grid">
           <div class="input-group">
             <label for="cnt-nombre">Nombre y apellidos *</label>
-            <input id="cnt-nombre" name="nombre" type="text" class="input-ctrl" required minlength="2" placeholder="Tu nombre" />
+            <input id="cnt-nombre" name="nombre" type="text" class="input-ctrl" autocomplete="name" required minlength="2" placeholder="Tu nombre" />
           </div>
 
           <div class="input-group">
             <label for="cnt-telefono">Teléfono *</label>
-            <input id="cnt-telefono" name="telefono" type="tel" class="input-ctrl" required minlength="9" placeholder="Ej. 684 675 898" />
+            <input id="cnt-telefono" name="telefono" type="tel" class="input-ctrl" autocomplete="tel" required minlength="9" placeholder="Ej. 684 675 898" />
           </div>
 
           <div class="input-group">
             <label for="cnt-email">Correo electrónico *</label>
-            <input id="cnt-email" name="email" type="email" class="input-ctrl" required placeholder="tu@correo.es" />
+            <input id="cnt-email" name="email" type="email" class="input-ctrl" autocomplete="email" required placeholder="tu@correo.es" />
           </div>
 
           <div class="input-group">

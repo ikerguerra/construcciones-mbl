@@ -31,8 +31,6 @@ faqs:
     respuesta: "¡Por supuesto! De hecho, es altamente recomendable por nuestro clima. Te asesoramos en: – Diseño bioclimático (aprovechando sol y protegiendo del frío) – Materiales naturales como madera, corcho, piedra local – Sistemas de alta eficiencia (aerotermia, suelo radiante, placas solares) – Recuperación de aguas pluviales (¡en Asturias tenemos abundancia!)"
 ---
 
-#### Tabla de contenido
-
 ¿Sueñas con **construir tu casa desde cero en Asturias** pero te asustan los números? Como **constructora especializada en Asturias**, en MBL Construcciones te damos cifras reales, sin secretos. Porque construir tu hogar debe ser emocionante, no una pesadilla de presupuestos.
 
 ## Precio Real por Metro Cuadrado en Asturias (2026)

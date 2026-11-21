@@ -28,8 +28,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 ¿Tienes una **casa asturiana de piedra, de los años 50, 60 o incluso anterior** y quieres reformarla sin perder su esencia? Como **especialistas en reformas de casas antiguas en Asturias**, en MBL Construcciones te guiamos en un proceso que puede parecer abrumador, pero que con planificación, es totalmente viable y gratificante.
 
 ## Paso 1: El Diagnóstico (Lo Más Importante)

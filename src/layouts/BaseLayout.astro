@@ -20,11 +20,19 @@ const seoProps = Astro.props;
 <html lang="es">
   <head>
     <SeoHead {...seoProps} />
+    <script is:inline>
+      try {
+        if (!localStorage.getItem('mbl_consent_v1')) {
+          document.documentElement.classList.add('has-cookie-banner');
+        }
+      } catch (_e) {}
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
 
     <div class="frame">
+      <slot name="header" />
       <main id="contenido-principal">
         <slot />
       </main>

@@ -30,8 +30,6 @@ faqs:
     respuesta: "Para solicitar un presupuesto, puedes contactarnos a través de nuestro formulario en la página de contacto o llamarnos directamente. Estaremos encantados de ayudarte."
 ---
 
-#### Tabla de contenido
-
 ¿Tienes **esa idea de negocio en la cabeza** y por fin has encontrado el local perfecto en Asturias? ¿O ya tienes local pero necesita una transformación total? Abrir un negocio no es solo poner unas mesas o estanterías. Hay **un mundo de trámites, normativas y decisiones técnicas** que pueden alargarse meses si no sabes por dónde tirar.
 
 En MBL Construcciones, **especialistas en reformas de locales comerciales en Asturias**, te contamos **todo el proceso real, paso a paso**, para que pases de la idea a la apertura sin perder la cabeza (ni el dinero).

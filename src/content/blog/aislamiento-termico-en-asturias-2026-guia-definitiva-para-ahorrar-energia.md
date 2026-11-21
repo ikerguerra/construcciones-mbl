@@ -27,8 +27,6 @@ faqs:
     respuesta: "El resultado queda incompleto: el calor se escapará por el vidrio y el marco metálico, donde además se concentrará toda la condensación. Conviene combinar trasdosado en muros fríos con ventanas RPT."
 ---
 
-#### Tabla de contenido
-
 ¿Vives en **Asturias y tu casa está siempre fría**, con humedades y facturas de calefacción que duelen? El problema no es la calefacción, es que **el calor se escapa como agua por un colador**. En MBL Construcciones te explicamos **cómo aislar tu casa de verdad**, no con parches, para vivir cómodo y ahorrar de una vez.
 
 ## ¿Por Qué en Asturias el Aislamiento es una Urgencia (No un Lujo)?

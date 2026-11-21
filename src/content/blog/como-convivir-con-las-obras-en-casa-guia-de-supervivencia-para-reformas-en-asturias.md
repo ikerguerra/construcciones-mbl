@@ -26,8 +26,6 @@ faqs:
     respuesta: "Respetamos estrictamente las ordenanzas municipales de Gijón, Oviedo y Avilés, concentrando trabajos de percusión en días laborables entre las 9:00 y las 18:00 horas."
 ---
 
-#### Tabla de contenido
-
 Has tomado la decisión. Por fin vas a reformar esa casa que tanto lo necesita. Cocina nueva, baño moderno, distribución que tiene sentido… Pero de repente te asalta una pregunta: **¿y cómo vamos a vivir durante todo este tiempo?**
 
 Tranquilo. En MBL Construcciones hemos acompañado a cientos de familias asturianas en este proceso. Y sí, una reforma en casa **es un pequeño caos temporal**, pero con organización y los consejos adecuados, se supera sin traumas. Te contamos todo lo que hemos aprendido de nuestros clientes.

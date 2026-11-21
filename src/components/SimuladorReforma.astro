@@ -126,17 +126,17 @@ const calidadesJson = JSON.stringify(CALIDADES);
       <div class="form-grid">
         <div class="input-group">
           <label for="sim-nombre">Nombre y apellidos *</label>
-          <input id="sim-nombre" name="nombre" type="text" class="input-ctrl" required minlength="2" placeholder="Ej. Laura García" />
+          <input id="sim-nombre" name="nombre" type="text" class="input-ctrl" autocomplete="name" required minlength="2" placeholder="Ej. Laura García" />
         </div>
 
         <div class="input-group">
           <label for="sim-telefono">Teléfono de contacto *</label>
-          <input id="sim-telefono" name="telefono" type="tel" class="input-ctrl" required minlength="9" placeholder="Ej. 684 675 898" />
+          <input id="sim-telefono" name="telefono" type="tel" class="input-ctrl" autocomplete="tel" required minlength="9" placeholder="Ej. 684 675 898" />
         </div>
 
         <div class="input-group full">
           <label for="sim-email">Correo electrónico *</label>
-          <input id="sim-email" name="email" type="email" class="input-ctrl" required placeholder="tu@correo.es" />
+          <input id="sim-email" name="email" type="email" class="input-ctrl" autocomplete="email" required placeholder="tu@correo.es" />
         </div>
 
         <div class="input-group full">

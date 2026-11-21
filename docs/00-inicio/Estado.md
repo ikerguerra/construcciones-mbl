@@ -4,14 +4,14 @@ tipo: inicio
 titulo: Estado del SRS — Construcciones MBL
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-21
+actualizado: 2026-11-22
 ---
 
 # Estado del proyecto
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.2.0` (último hito: `2026-11-21` · generación de índices: `2026-11-21`)
+- **Versión del SRS**: `1.2.1` (último hito: `2026-11-22` · generación de índices: `2026-11-22`)
 - **Preguntas abiertas**: 1 abiertas (0 bloqueantes, 1 altas, 0 medias, 0 bajas) · 17 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
@@ -57,6 +57,9 @@ actualizado: 2026-11-21
   - Logotipos vectoriales del cliente (`LogoMBL.svg`, `LogoMBL-Light.svg`, `ConstruccionesMBL.svg`), 10 fotografías propias optimizadas a WebP (`<= 1920 px`) y 42 fotografías reales de obras y artículos extraídas de WordPress en `src/assets/`.
   - 23 artículos migrados con título y contenido centrados, imágenes en guías relacionadas y estructura AEO/GEO completa; 6 páginas de servicio + landing permanente de ducha 48 h con formulario rápido de presupuesto lateral; 3 landings locales con imágenes en servicios; botón flotante de WhatsApp animado y reseñas Google verificadas enriquecidas.
   - Cobertura 100 % verificada sobre las **395 URLs heredadas** (`38` rutas directas `200`, `17` redirecciones `301` en 1 salto en `public/_redirects` y `340` etiquetas `/tag/*` con `410 Gone` mediante `functions/tag/[[path]].ts`).
+- **Integración y auditoría en vivo con Chrome DevTools MCP (`v1.2.1`)**:
+  - Incorporada la skill operativa `auditoria-chrome-devtools` en `.agents/skills/` (combinando `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp` y `cookie-debugging`) y documentados sus resultados reales en [[Auditoria Chrome DevTools Astro]].
+  - Corregidos todos los hallazgos detectados en vivo: contraste `10.85:1` en botones `.btn-dark` dentro de `.prose`, barra horizontal de cookies sin solapamiento sobre el selector Hero ni `.wa-float`, precarga `.woff2` + fallbacks métricos en `tokens.css` (reduciendo el CLS móvil en `Fast 3G` de `0,25` a `0,01`), landmark `banner` de nivel superior, jerarquía de encabezados sin saltos (`heading-order`), `role="img"` en reseñas, `autocomplete` estándar, áreas táctiles `>= 44 px` y eliminación de `ForcedReflow` (`0 ms`), logrando **`100` en Accessibility, SEO y Agentic Browsing** en Lighthouse.
 
 ## Siguiente paso
 1. **Pre-producción (`PA-001` y variables de entorno)**: antes del cambio de DNS hacia Cloudflare Pages, actualizar `cif` y `registroMercantil` definitivos en `src/data/empresa.ts` y configurar en Cloudflare Pages las variables propias (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`, `RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`).

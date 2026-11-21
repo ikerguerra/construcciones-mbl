@@ -28,8 +28,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 ¿Vas a reformar tu casa en Gijón? Te explicamos todo: precios por m², licencias municipales, errores a evitar y cómo transformar tu vivienda paso a paso. ¡Guía completa!
 
 ## Reformas Integrales en Gijón: Guía Definitiva Antes de Empezar

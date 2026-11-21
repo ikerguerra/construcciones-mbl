@@ -26,8 +26,6 @@ faqs:
     respuesta: "Sí. Emitimos presupuesto y facturación desglosada especificando materiales, transmitancias térmicas o partidas subvencionables conforme exigen las bases técnicas."
 ---
 
-#### Tabla de contenido
-
 ¿Sabías que en **Asturias puedes conseguir ayudas de hasta el 80%** para reformar tu casa y hacerla más eficiente? Sí, has leído bien. Pero hay un problema: **9 de cada 10 solicitudes se rechazan** por errores evitables. En MBL Construcciones te explicamos **cómo conseguir tu ayuda paso a paso**, sin tecnicismos.
 
 ## ¿Qué Ayudas Hay Realmente en Asturias en 2026?

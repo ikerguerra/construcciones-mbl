@@ -28,8 +28,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 ¿Estás planeando una **reforma integral de tu vivienda en Asturias** y quieres evitar sorpresas desagradables? Después de más de 15 años gestionando reformas en Gijón, Oviedo y toda Asturias, en MBL Construcciones hemos visto los mismos errores repetirse una y otra vez. Te los contamos para que tú no los cometas.
 
 ## 1. No Tener un Presupuesto Detallado

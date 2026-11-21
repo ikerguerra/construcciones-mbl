@@ -27,8 +27,6 @@ faqs:
     respuesta: "Con suelo vinílico SPC de gama alta es posible cubrir paños continuos amplios incluyendo cocina y baño; en tarima flotante es obligatorio respetar juntas de dilatación perimetrales y en pasos de puerta según fabricante."
 ---
 
-#### Tabla de contenido
-
 Llega el momento de reformar tu casa en Asturias y te enfrentas a una de las decisiones más importantes: **¿qué suelo pongo?** La tarima flotante y el suelo vinílico son las opciones más demandadas, pero cada una tiene sus ventajas y sus inconvenientes, sobre todo en un clima como el nuestro, con humedad alta y cambios de temperatura.
 
 En MBL Construcciones, **expertos en reformas en Asturias** , te contamos todo lo que necesitas saber para elegir el pavimento perfecto para cada estancia de tu casa. Sin tecnicismos, con información práctica y precios reales.

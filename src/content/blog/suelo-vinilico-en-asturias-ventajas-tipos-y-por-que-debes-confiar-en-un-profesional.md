@@ -27,8 +27,6 @@ faqs:
     respuesta: "Sí. Por su alta densidad mineral tiene una resistencia térmica muy baja, transmitiendo el calor mejor que una tarima laminada gruesa."
 ---
 
-#### Tabla de contenido
-
 ¿Estás reformando tu casa en Asturias y buscas un suelo que aguante la humedad, sea cálido al tacto y no te dé problemas de mantenimiento? El **suelo vinílico** se ha convertido en la opción favorita de muchos asturianos, y no es para menos.
 
 En MBL Construcciones, **expertos en reformas en Asturias** , te contamos todo lo que necesitas saber sobre este pavimento: sus ventajas, los tipos que existen y por qué **dejar la instalación en manos de un profesional** es la mejor decisión que puedes tomar.

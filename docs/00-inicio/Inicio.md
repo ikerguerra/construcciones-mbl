@@ -4,7 +4,7 @@ tipo: inicio
 titulo: Inicio de la bóveda SRS — Construcciones MBL
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-19
+actualizado: 2026-11-22
 ---
 
 # Bóveda SRS — Migración web de Construcciones MBL a Astro
@@ -25,4 +25,4 @@ Bienvenido a la documentación de requisitos (según **ISO/IEC/IEEE 29148**) y a
 - **Verificación y trazabilidad**: `10-criterios-de-aceptacion/` (`CA-*`), [[Matriz de trazabilidad]]
 - **Decisiones y dudas**: [[Decisiones pendientes]], [[Indice de preguntas abiertas]]
 - **Arquitectura y diseño**: [[Stack]], [[Stack web]], [[Guia de estilos]]
-- **Guías operativas y anexos**: [[Flujo editorial SEO GEO AEO]], [[Guia de autoridad off-page local]], [[mbl-maqueta.html]] y los 4 archivos `wp-sitemap-*.xml` en `90-anexos/sitemaps/`
+- **Guías operativas y anexos**: [[Flujo editorial SEO GEO AEO]], [[Guia de autoridad off-page local]], [[Auditoria Chrome DevTools Astro]], [[mbl-maqueta.html]] y los 4 archivos `wp-sitemap-*.xml` en `90-anexos/sitemaps/`

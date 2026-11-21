@@ -26,8 +26,6 @@ faqs:
     respuesta: "Entre un 8 % y un 14 % en la inversión inicial, que se recupera mediante facturas energéticas mínimas, subvenciones disponibles y mayor valor de tasación."
 ---
 
-#### Tabla de contenido
-
 ¿Te imaginas una **casa en Asturias que apenas gaste en calefacción**, que esté siempre a temperatura perfecta y que además sea más saludable para tu familia? No es ciencia ficción. En MBL Construcciones creamos **viviendas sostenibles reales para el clima asturiano**, y te contamos cómo puedes tener la tuya.
 
 ## ¿Qué es Realmente una Casa Sostenible en Asturias? (Más Allá de la Moda)

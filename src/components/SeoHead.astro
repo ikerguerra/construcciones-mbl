@@ -1,5 +1,8 @@
 ---
 import { EMPRESA } from '../data/empresa';
+import bebasWoff2Url from '@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2?url';
+import inter400Woff2Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import inter500Woff2Url from '@fontsource/inter/files/inter-latin-500-normal.woff2?url';
 
 export interface Props {
   title: string;
@@ -45,6 +48,9 @@ const jsonLd =
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="preload" as="font" type="font/woff2" href={bebasWoff2Url} crossorigin />
+<link rel="preload" as="font" type="font/woff2" href={inter400Woff2Url} crossorigin />
+<link rel="preload" as="font" type="font/woff2" href={inter500Woff2Url} crossorigin />
 
 <meta property="og:locale" content="es_ES" />
 <meta property="og:type" content={ogType} />

@@ -30,8 +30,6 @@ faqs:
     respuesta: "Utiliza soluciones de almacenamiento inteligente, como cajones extraíbles, estantes deslizantes y organizadores."
 ---
 
-#### Tabla de contenido
-
 ¿Estás pensando en **reformar tu cocina en Asturias** y no sabes por dónde empezar con el presupuesto? Como **especialistas en reformas de cocinas en Asturias**, en MBL Construcciones te contamos todo lo que necesitas saber para planificar tu inversión sin sorpresas.
 
 ## ¿De Qué Depende el Precio de tu Reforma de Cocina?

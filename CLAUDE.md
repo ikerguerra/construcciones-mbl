@@ -72,6 +72,7 @@ Consulta la referencia completa en `docs/00-inicio/Convenciones.md`. Reglas esen
 | `seo-geo-aeo-mbl` | `.agents/skills/seo-geo-aeo-mbl/SKILL.md` | Al configurar `<SeoHead>`, grafo JSON-LD, `/llms.txt`, sitemaps y bloques AEO |
 | `migracion-wordpress-301` | `.agents/skills/migracion-wordpress-301/SKILL.md` | Al trasladar contenido de WordPress, limpiar erratas y generar reglas `301`/`410` |
 | `articulo-editorial-aeo` | `.agents/skills/articulo-editorial-aeo/SKILL.md` | Al crear, migrar o actualizar artículos en *Innovación Sostenible* |
+| `auditoria-chrome-devtools` | `.agents/skills/auditoria-chrome-devtools/SKILL.md` | Al auditar en vivo rendimiento LCP/CLS, accesibilidad WCAG 2.1 AA, Consent Mode v2 y formularios con Chrome DevTools MCP |
 
 ---
 

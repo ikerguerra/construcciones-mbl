@@ -8,6 +8,7 @@ export interface Props {
 }
 
 const { mode = 'solid', currentPath = Astro.url.pathname } = Astro.props;
+const Wrapper = mode === 'solid' ? 'header' : Fragment;
 
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
@@ -36,6 +37,7 @@ const serviciosSubmenu = [
 ];
 ---
 
+<Wrapper>
 <div class="nav-anchor" data-nav-anchor>
   <div class={`nav-wrap ${mode === 'solid' ? 'nav-solid-wrap' : 'nav-overlay-wrap'}`}>
     <nav class={`nav ${mode === 'solid' ? 'nav-solid' : ''}`} aria-label="Navegación principal">
@@ -153,6 +155,7 @@ const serviciosSubmenu = [
     </div>
   </div>
 </div>
+</Wrapper>
 
 <script>
   const toggleBtn = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
@@ -190,17 +193,21 @@ const serviciosSubmenu = [
   const heroEl = document.querySelector<HTMLElement>('.hero');
 
   if (navAnchor && navWrap) {
-    let cachedHeight = navWrap.offsetHeight;
+    let cachedHeight = 0;
+    let cachedThreshold = 200;
 
-    const updateStickyNav = () => {
+    const measureStickyBounds = () => {
       if (!navWrap.classList.contains('is-sticky')) {
         cachedHeight = navWrap.offsetHeight;
       }
-      const threshold = heroEl ? heroEl.offsetTop + heroEl.offsetHeight - 60 : 200;
-      const shouldStick = window.scrollY > threshold;
+      cachedThreshold = heroEl ? heroEl.offsetTop + heroEl.offsetHeight - 60 : 200;
+    };
+
+    const applyStickyState = () => {
+      const shouldStick = window.scrollY > cachedThreshold;
       if (shouldStick) {
         if (!navWrap.classList.contains('is-sticky')) {
-          navAnchor.style.minHeight = `${cachedHeight}px`;
+          if (cachedHeight > 0) navAnchor.style.minHeight = `${cachedHeight}px`;
           navWrap.classList.add('is-sticky');
         }
       } else if (navWrap.classList.contains('is-sticky')) {
@@ -209,8 +216,18 @@ const serviciosSubmenu = [
       }
     };
 
-    window.addEventListener('scroll', updateStickyNav, { passive: true });
-    window.addEventListener('resize', updateStickyNav, { passive: true });
-    updateStickyNav();
+    let rafId = 0;
+    const scheduleStickyCheck = (remeasure = false) => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        if (remeasure || cachedHeight === 0) measureStickyBounds();
+        applyStickyState();
+      });
+    };
+
+    window.addEventListener('scroll', () => scheduleStickyCheck(false), { passive: true });
+    window.addEventListener('resize', () => scheduleStickyCheck(true), { passive: true });
+    scheduleStickyCheck(true);
   }
 </script>

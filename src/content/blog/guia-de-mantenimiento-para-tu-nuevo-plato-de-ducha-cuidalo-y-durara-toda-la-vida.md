@@ -26,8 +26,6 @@ faqs:
     respuesta: "En cuanto observes que algún tramo pierde adherencia o presenta puntos oscuros permanentes (normalmente cada 3 a 5 años), aplicando siempre silicona neutra sanitaria antifúngica."
 ---
 
-#### Tabla de contenido
-
 **¡Enhorabuena!** Ya has dado el paso. Has cambiado esa bañera incómoda por un **plato de ducha moderno, seguro y fácil de limpiar**. Ahora toca disfrutarlo. Pero como todo en esta vida, si le das un mínimo de cariño, tu ducha te lo devolverá con años de buen funcionamiento y aspecto impecable.
 
 En **MBL Construcciones** no solo te hacemos la reforma y nos vamos. Queremos que tu **inversión dure** y que cada día te alegres de haber dado el paso. Por eso hemos preparado esta **guía práctica de mantenimiento**, pensada especialmente para el clima de Asturias (sí, la humedad, esa compañera inseparable).

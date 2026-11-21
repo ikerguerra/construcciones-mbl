@@ -60,7 +60,7 @@ const schemaGraph = [
   canonical={pageUrl}
   schemaGraph={schemaGraph}
 >
-  <header class="hero hero-sub">
+  <header class="hero hero-sub" slot="header">
     <Image
       src={loc.data.imagen}
       alt={loc.data.imagenAlt}
@@ -103,7 +103,7 @@ const schemaGraph = [
 
     <div class="eeat-grid" style="margin-top:36px">
       <article class="eeat-card">
-        <h3>Barrios y zonas que atendemos en {loc.data.municipio}</h3>
+        <h2>Barrios y zonas que atendemos en {loc.data.municipio}</h2>
         <ul style="margin-top:12px;padding-left:18px;display:grid;gap:6px;font-size:14.5px;color:#222">
           {loc.data.barrios.map((b) => (
             <li>{b}</li>
@@ -112,7 +112,7 @@ const schemaGraph = [
       </article>
 
       <article class="eeat-card">
-        <h3>Licencias y trámites ante el {loc.data.ayuntamiento}</h3>
+        <h2>Licencias y trámites ante el {loc.data.ayuntamiento}</h2>
         <p style="margin-top:10px;font-size:14.5px;color:#333;line-height:1.6">
           {loc.data.licenciasInfo}
         </p>

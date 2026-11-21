@@ -3,23 +3,31 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID ?? '';
 const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
 ---
 
-<aside
+<div
   id="mbl-cookie-banner"
   class="cookie-banner"
-  role="dialog"
+  role="region"
   aria-labelledby="cookie-title"
-  aria-modal="false"
   hidden
 >
-  <h2 id="cookie-title" style="font-family:var(--f-body);text-transform:none;font-size:17px;font-weight:600;margin-bottom:6px">
-    Tu privacidad en Construcciones MBL
-  </h2>
-  <p style="font-size:13.5px;color:#d4d4d4;line-height:1.5">
-    Utilizamos cookies técnicas necesarias para el funcionamiento de la web y, solo si las aceptas, medición estadística anónima para mejorar nuestros contenidos y simulador en Asturias. Puedes aceptar todas, rechazar las opcionales o revisar la{' '}
-    <a href="/politica-de-cookies/" style="color:#fff;text-decoration:underline">Política de Cookies</a>.
-  </p>
+  <div class="cookie-banner-copy">
+    <h2 id="cookie-title" style="font-family:var(--f-body);text-transform:none;font-size:16px;font-weight:600;margin-bottom:4px">
+      Tu privacidad en Construcciones MBL
+    </h2>
+    <p style="font-size:13px;color:#d4d4d4;line-height:1.45">
+      Usamos cookies técnicas necesarias y, solo si aceptas, medición anónima para mejorar nuestros contenidos y simulador en Asturias. Puedes aceptar, rechazar o revisar la{' '}
+      <a href="/politica-de-cookies/" style="color:#fff;text-decoration:underline">Política de Cookies</a>.
+    </p>
+  </div>
 
-  <div id="cookie-prefs-panel" hidden style="margin-top:12px;padding-top:12px;border-top:1px solid #333;display:grid;gap:8px;font-size:13px">
+  <div class="cookie-actions">
+    <button type="button" class="pill pill-white" id="cookie-accept-all">Aceptar todas</button>
+    <button type="button" class="pill" id="cookie-reject-all">Rechazar opcionales</button>
+    <button type="button" class="pill" id="cookie-toggle-prefs" aria-expanded="false" aria-controls="cookie-prefs-panel">Configurar</button>
+    <button type="button" class="pill pill-white" id="cookie-save-prefs" hidden>Guardar selección</button>
+  </div>
+
+  <div id="cookie-prefs-panel" hidden class="cookie-prefs-panel">
     <label style="display:flex;gap:8px;align-items:center">
       <input type="checkbox" checked disabled />
       <span>Cookies técnicas necesarias (siempre activas)</span>
@@ -29,14 +37,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
       <span>Medición y analítica web propia (Google Analytics / Consent Mode v2)</span>
     </label>
   </div>
-
-  <div class="cookie-actions">
-    <button type="button" class="pill pill-white" id="cookie-accept-all">Aceptar todas</button>
-    <button type="button" class="pill" id="cookie-reject-all">Rechazar opcionales</button>
-    <button type="button" class="pill" id="cookie-toggle-prefs">Configurar</button>
-    <button type="button" class="pill pill-white" id="cookie-save-prefs" hidden>Guardar selección</button>
-  </div>
-</aside>
+</div>
 
 <script is:inline define:vars={{ gtmId, ga4Id }}>
   (function () {
@@ -111,11 +112,13 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
     function showBanner() {
       if (!banner) return;
       banner.hidden = false;
+      document.documentElement.classList.add('has-cookie-banner');
     }
 
     function hideBanner() {
       if (!banner) return;
       banner.hidden = true;
+      document.documentElement.classList.remove('has-cookie-banner');
     }
 
     try {
@@ -146,6 +149,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
         var willShow = prefsPanel.hidden;
         prefsPanel.hidden = !willShow;
         saveBtn.hidden = !willShow;
+        configBtn.setAttribute('aria-expanded', String(willShow));
       }
     });
 

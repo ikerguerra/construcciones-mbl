@@ -28,8 +28,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 ¿Te has preguntado cuánto podrías ahorrar realmente haciendo tu hogar más sostenible? En MBL Construcciones te mostramos **casos reales de clientes en Asturias** que ya están disfrutando de facturas más bajas y hogares más confortables. ¡Esto es lo que han conseguido!
 
 ## Caso 1: Reforma Integral en Gijón – Ahorro del 40% en Calefacción

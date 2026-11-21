@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'BebasFallback';
+  src: local('Arial'), local('Liberation Sans'), local('Roboto');
+  size-adjust: 57.5%;
+  ascent-override: 156.5%;
+  descent-override: 52.2%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'InterFallback';
+  src: local('Arial'), local('Liberation Sans'), local('Roboto');
+  size-adjust: 104.7%;
+  ascent-override: 92.5%;
+  descent-override: 23%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* Paleta corporativa Construcciones MBL (WCAG 2.1 AA/AAA) */
   --black: #0f1d14;
@@ -19,9 +37,9 @@
   --wood: #2d6a3e;
   --warm: #86d195;
 
-  /* Tipografía local (@fontsource) */
-  --f-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', Impact, sans-serif;
-  --f-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  /* Fallbacks ajustados por métricas (FontTools sobre WOFF locales) para CLS ~ 0 */
+  --f-display: 'Bebas Neue', 'BebasFallback', 'Oswald', 'Arial Narrow', Impact, sans-serif;
+  --f-body: 'Inter', 'InterFallback', 'Helvetica Neue', Arial, sans-serif;
 
   /* Radios y layout fieles a mbl-maqueta.html */
   --r-xl: 36px;

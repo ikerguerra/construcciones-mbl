@@ -29,8 +29,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 ¿Tus ventanas **silban cuando hace viento**? ¿Tocas el cristal en invierno y está **helado**? ¿Tienes **agua corriendo por los marcos** cada mañana? Si vives en Asturias y reconoces estas señales, necesitas leer esto.
 
 Cambiar las ventanas es **una de las reformas más rentables** que puedes hacer en nuestra comunidad. Pero ojo: **elegir mal puede ser tirar el dinero**. En MBL Construcciones, **expertos en eficiencia energética en Asturias**, te explicamos todo lo que necesitas saber para acertar.

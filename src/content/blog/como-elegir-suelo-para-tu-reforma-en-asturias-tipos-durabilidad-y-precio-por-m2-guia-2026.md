@@ -29,8 +29,6 @@ faqs:
     respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
 ---
 
-#### Tabla de contenido
-
 Llega el momento de elegir el suelo de tu casa reformada y te asaltan las dudas. ¿Tarima flotante o cerámico? ¿Vinílico o microcemento? ¿Y la piedra natural? Y encima, **vivimos en Asturias**, con su humedad, sus lluvias y sus cambios de temperatura.
 
 No te preocupes. En MBL Construcciones, **expertos en reformas en Asturias**, te ayudamos a elegir el pavimento perfecto para cada estancia. Porque el suelo no es solo estética: es confort, durabilidad y facilidad de limpieza.

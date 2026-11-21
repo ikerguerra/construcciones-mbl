@@ -30,8 +30,6 @@ faqs:
     respuesta: "Para solicitar un presupuesto, puedes contactarnos a través de nuestro formulario en la página de contacto o llamarnos directamente. Estaremos encantados de ayudarte."
 ---
 
-#### Tabla de contenido
-
 ¿Estás pensando en **reformar tu baño** y te gustaría hacerlo de forma más ecológica? En MBL Construcciones sabemos que combinar diseño, ahorro y sostenibilidad es posible. Te presentamos los materiales que están cambiando la forma de reformar baños:
 
 ## 1. Azulejos de Vidrio Reciclado

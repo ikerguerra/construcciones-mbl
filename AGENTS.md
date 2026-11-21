@@ -20,3 +20,4 @@ Al comenzar cualquier tarea, lee [CLAUDE.md](CLAUDE.md) y [docs/00-inicio/Estado
 - `seo-geo-aeo-mbl`: metadatos únicos, grafo JSON-LD, `/llms.txt`, sitemaps y estructura AEO.
 - `migracion-wordpress-301`: mapa `301`/`410` de las 393 URLs y saneamiento del contenido heredado.
 - `articulo-editorial-aeo`: flujo editorial de 6 fases y plantilla MDX para *Innovación Sostenible*.
+- `auditoria-chrome-devtools`: auditoría en vivo con Chrome DevTools MCP (LCP/CLS, WCAG 2.1 AA, Consent Mode v2 y payloads `/api/lead`).

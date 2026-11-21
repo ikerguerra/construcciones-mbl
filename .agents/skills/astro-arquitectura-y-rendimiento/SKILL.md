@@ -30,4 +30,4 @@ Define los estándares técnicos obligatorios para construir la web de Construcc
 ## Verificación
 
 - Ejecutar `npx astro check` y `npm run build` sin errores de tipos ni validación Zod.
-- Auditar en compilación/preview: `LCP <= 2,5 s` (objetivo `< 1,5 s`), `INP <= 200 ms`, `CLS <= 0,1`, HTML de portada `< 70 KB` y ausencia de peticiones de analítica antes del consentimiento.
+- Auditar en compilación/preview con la skill `auditoria-chrome-devtools` (`debug-optimize-lcp`, `cookie-debugging` y `a11y-debugging`): `LCP <= 2,5 s` (objetivo `< 1,5 s`), `INP <= 200 ms`, `CLS <= 0,1` (incluyendo móvil `Fast 3G` con precarga `.woff2` y fallbacks métricos), `0` `ForcedReflow`, HTML de portada `< 70 KB` y ausencia de cookies o peticiones de analítica antes del consentimiento.
