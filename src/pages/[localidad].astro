@@ -155,6 +155,14 @@ const schemaGraph = [
       <div class="zonas-grid">
         {servicios.map((s) => (
           <article class="zona-card">
+            <div class="zona-card-img">
+              <Image
+                src={s.data.imagen}
+                alt={s.data.imagenAlt}
+                widths={[400, 700]}
+                sizes="(max-width: 900px) 100vw, 31vw"
+              />
+            </div>
             <div class="zona-card-body">
               <h3><a href={`/${s.data.slug}/`}>{s.data.tituloCorto}</a></h3>
               <p>{s.data.metaDescription}</p>

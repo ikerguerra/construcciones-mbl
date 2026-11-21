@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { EMPRESA } from '../data/empresa';
 import footerImg from '../assets/images/proyectos/obra-reforma-integral-1.webp';
-import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
+import logoFullLight from '../assets/brand/logo-mbl-full-light.svg';
 ---
 
 <footer class="foot" id="footer">
@@ -10,17 +10,15 @@ import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
     <div class="foot-brand">
       <a class="foot-logo" href="/" aria-label={`${EMPRESA.marca} — Ir a inicio`}>
         <img
-          src={logoMarkLight.src}
-          alt=""
-          width="34"
-          height="24"
+          src={logoFullLight.src}
+          alt={EMPRESA.marca}
+          width="76"
+          height="48"
           loading="lazy"
-          aria-hidden="true"
         />
-        <span class="logo-text">CONSTRUCCIONES MBL</span>
       </a>
       <p class="foot-tagline">
-        Reformas integrales, cocinas, baños y construcción en Asturias con presupuesto cerrado en 48 h.
+        Reformas integrales, cocinas, baños y construcción en Asturias con presupuesto cerrado en 48 h y garantía por escrito.
       </p>
     </div>
 
@@ -29,7 +27,10 @@ import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
         Llamar: {EMPRESA.telefonoVisible}
       </a>
       <a class="pill pill-white" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
-        Calcula tu reforma →
+        Calcula tu reforma
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+        </svg>
       </a>
     </div>
   </div>
@@ -146,16 +147,13 @@ import logoMarkLight from '../assets/brand/logo-mbl-mark-light.svg';
     </div>
   </div>
 
-  <div class="foot-bottom">
-    <div class="big" aria-hidden="true">{EMPRESA.marcasAgua.footer}</div>
-    <div class="legal">
-      <span>© {new Date().getFullYear()} {EMPRESA.razonSocial} · {EMPRESA.marca} (Asturias)</span>
-      <div class="legal-links">
-        <a href="/aviso-legal/">Aviso Legal</a>
-        <a href="/politica-de-privacidad/">Política de Privacidad</a>
-        <a href="/politica-de-cookies/">Política de Cookies</a>
-        <button type="button" data-open-cookies style="color:#cccccc">Configurar cookies</button>
-      </div>
+  <div class="legal">
+    <span>© {new Date().getFullYear()} {EMPRESA.razonSocial} · {EMPRESA.marca} (Asturias)</span>
+    <div class="legal-links">
+      <a href="/aviso-legal/">Aviso Legal</a>
+      <a href="/politica-de-privacidad/">Política de Privacidad</a>
+      <a href="/politica-de-cookies/">Política de Cookies</a>
+      <button type="button" data-open-cookies>Configurar cookies</button>
     </div>
   </div>
 </footer>

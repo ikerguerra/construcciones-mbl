@@ -4,7 +4,7 @@ tipo: inicio
 titulo: Historial de cambios del SRS
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-19
+actualizado: 2026-11-21
 ---
 
 # Historial de cambios
@@ -20,3 +20,4 @@ actualizado: 2026-11-19
 | 1.0.0 | 2026-11-19 | Cierre oficial del SRS Fase 1: resolución del Bloque 3 (`PA-015`..`PA-018`), aceptación de `ADR-003` y `ADR-006` (7/7 ADRs aceptados; 17/18 PA resueltas quedando únicamente `PA-001` pre-producción para CIF/Registro). Especificación lista para iniciar la implementación en Astro. |
 | 1.1.0 | 2026-11-19 | Implementación completa del proyecto Astro v5 (SSG): sistema visual `mbl-maqueta.html`, fuente única `src/data/empresa.ts` y `tarifas.ts`, Content Collections con validación Zod (`servicios`, `localidades`, `proyectos`, `blog` con 23 guías AEO/GEO migradas, `promociones`), 53 páginas estáticas (`dist/index.html` `60,7 KB < 70 KB`), simulador interactivo (`5,38 KB`), `/llms.txt`, Cloudflare Pages Functions (`functions/api/lead.ts` con Resend + `SEND_AUTO_REPLY` y `functions/tag/[[path]].ts` con `410 Gone` para 340 `/tag/*`), `public/_redirects` (`301` en 1 salto) y suite `scripts/verify-build.py` superada con `0` errores sobre las 395 URLs heredadas. |
 | 1.1.1 | 2026-11-20 | Corrección del layout a **pantalla completa** (`100 %` de ancho sobre `--white`, eliminando la caja flotante `.frame` de `1280 px` y su sombra exterior) en `mbl-maqueta.html`, `src/styles/global.css`, guía de estilos SRS y skill `sistema-visual-mbl`, manteniendo el margen lateral de `16 px` (`12 px` en móvil) y esquinas de `36 px` (`24 px` en móvil) en Hero, bloques oscuros y Footer. |
+| 1.2.0 | 2026-11-21 | Evolución visual y UX corporativa sobre el layout original: integración completa de la paleta verde bosque/salvia WCAG 2.1 AA/AAA (`#0F1D14`, `#164624`, `#3E6B47`, `#86D195` sin tonos naranjas), Hero a alto completo y ancho fluido (`--content-max: 1640px`), logotipo centrado sin texto en cabecera, submenú desplegable de Servicios, barra sticky animada al superar el Hero, iconos SVG en carruseles y tarjetas, animaciones ligeras por intersección y cambio de diapositiva, reseñas verificadas enriquecidas con tarjeta Google Maps, FAQs acotadas y centradas (`860px`), entradas de blog centradas con imágenes en guías relacionadas, formulario rápido lateral en páginas de servicios y proyectos, botón WhatsApp animado con despliegue periódico del teléfono, Footer remaquetado sin marca de agua inferior y creación de fichas de detalle individuales de proyectos (`/proyectos/[slug]/`) activables mediante `PUBLIC_SHOW_PROJECT_DETAILS` y `detalleActivo`. |

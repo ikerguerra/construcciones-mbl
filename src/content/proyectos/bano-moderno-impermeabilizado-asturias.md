@@ -11,4 +11,24 @@ imagen: ../../assets/images/proyectos/proyecto-bano-moderno-asturias.webp
 imagenAlt: Baño contemporáneo reformado con cerámica rectificada y ducha amplia en Asturias
 destacadoHome: true
 orden: 3
+detalleActivo: true
+servicioSlug: reformas-de-banos-en-asturias
+tarifaKey: reforma-bano
+desafio: Baño interior con problemas de condensación, tuberías antiguas con pérdida de presión y bañera elevada de difícil acceso.
+solucion: Sustitución integral de red de fontanería y desagües, impermeabilización completa de paramentos en zona húmeda, instalación de plato de ducha extraplano antideslizante Clase 3 y alicatado porcelánico rectificado de gran formato.
+trabajos:
+  - Desmontaje de sanitarios, picado completo y retirada de escombros a gestor autorizado
+  - Nueva fontanería en multicapa con llaves de corte independientes por aparato
+  - Impermeabilización con lámina geotextil sellada bajo el plato de ducha y paredes
+  - Alicatado y solado en gres porcelánico rectificado con junta mínima epoxi antihumedad
+  - Montaje de mueble suspendido, mampara con tratamiento antical y ventilación forzada
+galeria:
+  - imagen: ../../assets/images/proyectos/proyecto-bano-moderno-asturias.webp
+    alt: Baño moderno terminado con mueble suspendido y cerámica rectificada en Asturias
+  - imagen: ../../assets/images/proyectos/obra-bano-mbl-14.webp
+    alt: Zona de ducha con plato extraplano, mampara de cristal y grifería termostática
+  - imagen: ../../assets/images/proyectos/obra-bano-mbl-wide.webp
+    alt: Vista general del baño reformado con iluminación LED y acabados porcelánicos
 ---
+
+Reforma completa de cuarto de baño ejecutada en 2 semanas en Asturias. Se priorizó la estanqueidad frente a la humedad ambiental, la facilidad de limpieza diaria y el aprovechamiento del espacio mediante mobiliario suspendido.

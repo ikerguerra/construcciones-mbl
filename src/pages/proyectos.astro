@@ -6,7 +6,7 @@ import Header from '../components/Header.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ResumenDirecto from '../components/ResumenDirecto.astro';
 import CtaSimulador from '../components/CtaSimulador.astro';
-import { EMPRESA } from '../data/empresa';
+import { EMPRESA, isDetalleProyectosActive } from '../data/empresa';
 import {
   buildOrganizationNode,
   buildBreadcrumbNode,
@@ -63,34 +63,42 @@ const schemaGraph = [
     </div>
 
     <div class="zonas-grid" id="proyectos-grid">
-      {proyectos.map((proy) => (
-        <article class="zona-card" data-proj-cat={proy.data.categoria}>
-          <div class="zona-card-img" style="height:240px">
-            <Image
-              src={proy.data.imagen}
-              alt={proy.data.imagenAlt}
-              widths={[460, 780]}
-              sizes="(max-width: 900px) 100vw, 390px"
-            />
-          </div>
-          <div class="zona-card-body">
-            <span class="sec-kicker" style="margin-bottom:0">
-              {proy.data.categoriaEtiqueta} · {proy.data.municipio}
-            </span>
-            <div class="zona-card-head">
-              <h2>{proy.data.titulo}</h2>
-              <span class="zona-card-price">{proy.data.superficieM2}</span>
+      {proyectos.map((proy) => {
+        const hasDetail = isDetalleProyectosActive(proy.data.detalleActivo);
+        const detailHref = hasDetail
+          ? `/proyectos/${proy.data.slug}/`
+          : `/calcula-el-precio-de-tu-reforma-en-asturias/?tipo=${proy.data.tarifaKey}`;
+        return (
+          <article class="zona-card" data-proj-cat={proy.data.categoria}>
+            <div class="zona-card-img" style="height:240px">
+              <Image
+                src={proy.data.imagen}
+                alt={proy.data.imagenAlt}
+                widths={[460, 780]}
+                sizes="(max-width: 900px) 100vw, 390px"
+              />
             </div>
-            <p>{proy.data.resumen}</p>
-            <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px">
-              Plazo de ejecución: <strong>{proy.data.plazo}</strong>
-            </p>
-            <a class="btn-card" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
-              Calcular proyecto similar
-            </a>
-          </div>
-        </article>
-      ))}
+            <div class="zona-card-body">
+              <span class="sec-kicker" style="margin-bottom:0">
+                {proy.data.categoriaEtiqueta} · {proy.data.municipio}
+              </span>
+              <div class="zona-card-head">
+                <h2>
+                  {hasDetail ? <a href={detailHref}>{proy.data.titulo}</a> : proy.data.titulo}
+                </h2>
+                <span class="zona-card-price">{proy.data.superficieM2}</span>
+              </div>
+              <p>{proy.data.resumen}</p>
+              <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px">
+                Plazo de ejecución: <strong>{proy.data.plazo}</strong>
+              </p>
+              <a class="btn-card" href={detailHref}>
+                {hasDetail ? 'Ver ficha y galería de obra →' : 'Calcular proyecto similar'}
+              </a>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </section>
 

@@ -17,19 +17,23 @@ const {
 } = Astro.props;
 ---
 
-<section class="sec" aria-labelledby="faq-heading">
-  <span class="sec-kicker">Resolvemos tus dudas</span>
-  <h2 class="sec-title" id="faq-heading">{titulo}</h2>
-  {subtitulo && <p class="story-copy" style="margin-bottom:8px">{subtitulo}</p>}
+<section class="sec sec-tint" aria-labelledby="faq-heading" data-reveal>
+  <div class="faq-narrow">
+    <div class="faq-head">
+      <span class="sec-kicker">Resolvemos tus dudas</span>
+      <h2 class="sec-title" id="faq-heading">{titulo}</h2>
+      {subtitulo && <p class="story-copy">{subtitulo}</p>}
+    </div>
 
-  <div class="faq-list">
-    {faqs.map((faq, idx) => (
-      <details class="faq-item" open={idx === 0}>
-        <summary>{faq.pregunta}</summary>
-        <div class="faq-body">
-          <p>{faq.respuesta}</p>
-        </div>
-      </details>
-    ))}
+    <div class="faq-list">
+      {faqs.map((faq, idx) => (
+        <details class="faq-item" open={idx === 0}>
+          <summary>{faq.pregunta}</summary>
+          <div class="faq-body">
+            <p>{faq.respuesta}</p>
+          </div>
+        </details>
+      ))}
+    </div>
   </div>
 </section>

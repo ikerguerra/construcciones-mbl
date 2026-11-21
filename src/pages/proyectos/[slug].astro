@@ -1,0 +1,229 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ResumenDirecto from '../../components/ResumenDirecto.astro';
+import FormularioRapidoServicio from '../../components/FormularioRapidoServicio.astro';
+import CtaSimulador from '../../components/CtaSimulador.astro';
+import { EMPRESA, isDetalleProyectosActive } from '../../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+} from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const proyectos = await getCollection('proyectos');
+  return proyectos
+    .filter((proy) => isDetalleProyectosActive(proy.data.detalleActivo))
+    .map((proy) => ({
+      params: { slug: proy.data.slug },
+      props: { proy },
+    }));
+}
+
+const { proy } = Astro.props;
+const { Content } = await render(proy);
+
+const otrosProyectos = (await getCollection('proyectos'))
+  .filter((p) => p.data.slug !== proy.data.slug && isDetalleProyectosActive(p.data.detalleActivo))
+  .sort((a, b) => a.data.orden - b.data.orden)
+  .slice(0, 3);
+
+function formatTitle(base: string): string {
+  const full = `${base} | MBL`;
+  if (full.length <= 65 && full.length >= 35) return full;
+  if (full.length > 65) {
+    const trimmed = base.slice(0, 56).replace(/\s+\S*$/, '');
+    return `${trimmed} | Obra MBL`;
+  }
+  return `${base} en Asturias | Obras MBL`;
+}
+
+function formatDescription(text: string): string {
+  if (text.length >= 120 && text.length <= 165) return text;
+  if (text.length > 165) return `${text.slice(0, 161).replace(/\s+\S*$/, '')}...`;
+  return `${text} Ejecución con presupuesto cerrado y garantía por escrito de Construcciones MBL.`.slice(0, 165);
+}
+
+const title = formatTitle(proy.data.titulo);
+const description = formatDescription(proy.data.resumen);
+const pageUrl = `${EMPRESA.dominio}/proyectos/${proy.data.slug}/`;
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Proyectos realizados', url: '/proyectos/' },
+  { name: proy.data.titulo, url: `/proyectos/${proy.data.slug}/` },
+];
+
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={pageUrl}
+  ogImage={proy.data.imagen.src}
+  schemaGraph={schemaGraph}
+>
+  <header class="hero hero-sub">
+    <Image
+      src={proy.data.imagen}
+      alt={proy.data.imagenAlt}
+      class="hero-bg"
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      loading="eager"
+    />
+    <Header mode="overlay" currentPath="/proyectos/" />
+
+    <div class="hero-body">
+      <div>
+        <small>{proy.data.categoriaEtiqueta} · {proy.data.municipio} · {proy.data.superficieM2}</small>
+        <h1>{proy.data.titulo}</h1>
+      </div>
+      <div>
+        <p class="lead">{proy.data.resumen}</p>
+        <div class="hero-actions">
+          <a
+            class="pill pill-white"
+            href={`/calcula-el-precio-de-tu-reforma-en-asturias/?tipo=${proy.data.tarifaKey}`}
+          >
+            Calcular obra similar →
+          </a>
+          <a class="pill" href={`/${proy.data.servicioSlug}/`}>
+            Ver servicio relacionado
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="project-meta-strip">
+      <div class="project-meta-box">
+        <small>Especialidad</small>
+        <strong>{proy.data.categoriaEtiqueta}</strong>
+      </div>
+      <div class="project-meta-box">
+        <small>Ubicación</small>
+        <strong>{proy.data.municipio}</strong>
+      </div>
+      <div class="project-meta-box">
+        <small>Superficie</small>
+        <strong>{proy.data.superficieM2}</strong>
+      </div>
+      <div class="project-meta-box">
+        <small>Plazo de entrega</small>
+        <strong>{proy.data.plazo}</strong>
+      </div>
+    </div>
+
+    <ResumenDirecto
+      etiqueta="Resumen técnico de la actuación"
+      texto={proy.data.solucion || proy.data.resumen}
+    />
+
+    <div class="service-split-layout">
+      <div>
+        <div class="prose">
+          <Content />
+        </div>
+
+        {(proy.data.desafio || proy.data.solucion) && (
+          <div class="eeat-grid" style="margin-top:28px">
+            {proy.data.desafio && (
+              <article class="eeat-card">
+                <span class="sec-kicker" style="margin-bottom:8px">Estado inicial</span>
+                <h3>El reto técnico</h3>
+                <p style="font-size:14.5px;color:#2f3e34;margin-top:6px">{proy.data.desafio}</p>
+              </article>
+            )}
+            {proy.data.solucion && (
+              <article class="eeat-card">
+                <span class="sec-kicker" style="margin-bottom:8px">Actuación MBL</span>
+                <h3>La solución ejecutada</h3>
+                <p style="font-size:14.5px;color:#2f3e34;margin-top:6px">{proy.data.solucion}</p>
+              </article>
+            )}
+          </div>
+        )}
+
+        {proy.data.trabajos.length > 0 && (
+          <div style="margin-top:36px">
+            <span class="sec-kicker">Partidas ejecutadas</span>
+            <h2 class="sec-title">Trabajos Realizados en Esta Obra</h2>
+            <ul style="margin-top:18px;display:grid;gap:10px;padding-left:20px;font-size:15px;color:#222">
+              {proy.data.trabajos.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <FormularioRapidoServicio
+        tituloServicio={proy.data.categoriaEtiqueta}
+        placeholder={`Cuéntanos si buscas una reforma similar a "${proy.data.titulo}" en Asturias...`}
+      />
+    </div>
+
+    {proy.data.galeria.length > 0 && (
+      <div style="margin-top:52px">
+        <span class="sec-kicker">Documentación visual de obra</span>
+        <h2 class="sec-title">Galería Fotográfica del Proyecto</h2>
+        <div class="project-gallery-grid">
+          {proy.data.galeria.map((foto) => (
+            <div class="project-gallery-item">
+              <Image
+                src={foto.imagen}
+                alt={foto.alt}
+                widths={[440, 760]}
+                sizes="(max-width: 900px) 100vw, 31vw"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+
+  {otrosProyectos.length > 0 && (
+    <section class="sec sec-tint" aria-labelledby="otros-proyectos-title">
+      <span class="sec-kicker">Más trabajos en Asturias</span>
+      <h2 class="sec-title" id="otros-proyectos-title">Otros Proyectos Realizados</h2>
+      <div class="zonas-grid">
+        {otrosProyectos.map((op) => (
+          <article class="zona-card">
+            <div class="zona-card-img">
+              <Image
+                src={op.data.imagen}
+                alt={op.data.imagenAlt}
+                widths={[420, 720]}
+                sizes="(max-width: 900px) 100vw, 31vw"
+              />
+            </div>
+            <div class="zona-card-body">
+              <span class="sec-kicker" style="margin-bottom:0">
+                {op.data.categoriaEtiqueta} · {op.data.municipio}
+              </span>
+              <h3><a href={`/proyectos/${op.data.slug}/`}>{op.data.titulo}</a></h3>
+              <p>{op.data.resumen}</p>
+              <a class="btn-outline" href={`/proyectos/${op.data.slug}/`} style="margin-top:auto">
+                Ver proyecto →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <CtaSimulador tipoPorDefecto={proy.data.tarifaKey} />
+</BaseLayout>

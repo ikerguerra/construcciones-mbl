@@ -4,12 +4,12 @@ tipo: guia
 titulo: Estilo fotografía y dirección de arte — Coherencia visual de obras
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-19
+actualizado: 2026-11-21
 ---
 
 # Estilo fotografía y dirección de arte
 
-En este diseño **la fotografía es el único elemento que aporta color a la web** (junto al tono madera `--wood: #b8642a` y luz cálida `--warm: #f0b46c`). Sustituir adecuadamente los marcadores `.ph` de [[mbl-maqueta.html]] es crítico para mantener el aspecto premium de marca.
+Sobre la paleta corporativa verde bosque/salvia (`#0F1D14`, `#164624`, `#3E6B47`, `#86D195`, `#EEF3EE`), **la fotografía arquitectónica aporta calidez y realismo de obra** (sustituyendo por completo los antiguos tonos naranjas de acento en UI). Sustituir adecuadamente los marcadores `.ph` de [[mbl-maqueta.html]] es crítico para mantener el aspecto profesional de marca.
 
 ## Criterios visuales de selección fotográfica ([[PA-003]] resuelta)
 1. **Banco mixto de arquitectura y reformas reales**: combinar el logotipo oficial y las fotografías propias aportadas por el titular con una selección curada de las mejores imágenes extraídas del WordPress actual (reformas integrales, cocinas, baños, fachadas, locales), descartando cualquier dependencia del feed embebido de Instagram.

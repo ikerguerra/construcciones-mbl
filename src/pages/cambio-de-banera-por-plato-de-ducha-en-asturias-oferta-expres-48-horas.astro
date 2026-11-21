@@ -9,6 +9,7 @@ import TablaComparativa from '../components/TablaComparativa.astro';
 import BloqueFaq from '../components/BloqueFaq.astro';
 import EquipoEEAT from '../components/EquipoEEAT.astro';
 import CtaSimulador from '../components/CtaSimulador.astro';
+import FormularioRapidoServicio from '../components/FormularioRapidoServicio.astro';
 import { EMPRESA, isPromoDuchaActive } from '../data/empresa';
 import {
   buildOrganizationNode,
@@ -113,7 +114,7 @@ const schemaGraph = [
     {showPromoBanner && (
       <div class="promo-strip" style="margin-top:0;margin-bottom:24px">
         <div>
-          <span class="sec-kicker" style="color:var(--warm);margin-bottom:4px">
+          <span class="sec-kicker" style="margin-bottom:8px">
             Campaña activa en Asturias
           </span>
           <h3>Pack Cambio Exprés 48 Horas · {promo.data.precioDesde}</h3>
@@ -127,14 +128,18 @@ const schemaGraph = [
       texto="El servicio de cambio de bañera por plato de ducha en Asturias de Construcciones MBL se completa en 48 horas desde 1.190 € (sustitución base) hasta 2.300 € en paquete completo todo incluido con plato de carga mineral antideslizante Grado 3, mampara de vidrio templado antical, revestimiento cerámico de la zona descubierta y 3 años de garantía escrita."
     />
 
-    <div style="margin-top:32px">
-      <span class="sec-kicker">Qué incluye la actuación en 48 horas</span>
-      <h2 class="sec-title">Seguridad, Accesibilidad y Limpieza</h2>
-      <ul style="margin-top:18px;display:grid;gap:10px;padding-left:20px;font-size:15px;color:#222">
-        {promo.data.incluye.map((item) => (
-          <li>{item}</li>
-        ))}
-      </ul>
+    <div class="service-split-layout">
+      <div>
+        <span class="sec-kicker">Qué incluye la actuación en 48 horas</span>
+        <h2 class="sec-title">Seguridad, Accesibilidad y Limpieza</h2>
+        <ul style="margin-top:18px;display:grid;gap:12px;padding-left:20px;font-size:15px;color:#222">
+          {promo.data.incluye.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+
+      <FormularioRapidoServicio tituloServicio="Cambio de bañera por plato de ducha 48 h" />
     </div>
 
     <div style="margin-top:44px">

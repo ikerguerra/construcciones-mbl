@@ -7,15 +7,17 @@
   --color-secondary: #3e6b47;
   --white: #ffffff;
   --bg: #eef3ee;
+  --bg-tint: #f3f7f4;
   --muted: #516158;
   --line: #d6ddd8;
+  --border-sage: #c6d9cb;
   --border-dark: #243a2c;
   --ink-on-dark-muted: #c2cec6;
-  --glass: rgba(15, 29, 20, 0.3);
-  --glass-b: rgba(213, 234, 216, 0.38);
-  --glass-dark: rgba(10, 22, 14, 0.42);
-  --wood: #a85a24;
-  --warm: #e5a96d;
+  --glass: rgba(15, 29, 20, 0.34);
+  --glass-b: rgba(196, 228, 203, 0.4);
+  --glass-dark: rgba(10, 22, 14, 0.45);
+  --wood: #2d6a3e;
+  --warm: #86d195;
 
   /* Tipografía local (@fontsource) */
   --f-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', Impact, sans-serif;

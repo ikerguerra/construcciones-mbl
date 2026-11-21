@@ -232,3 +232,13 @@ export function isPromoDuchaActive(collectionFlag = true): boolean {
   if (envVal === 'false' || envVal === '0') return false;
   return collectionFlag;
 }
+
+/**
+ * Interruptor configurable para activar o desactivar las páginas individuales de detalle
+ * de proyecto (/proyectos/[slug]/) globalmente (PUBLIC_SHOW_PROJECT_DETAILS=false) o por ficha.
+ */
+export function isDetalleProyectosActive(projectFlag = true): boolean {
+  const envVal = import.meta.env.PUBLIC_SHOW_PROJECT_DETAILS;
+  if (envVal === 'false' || envVal === '0') return false;
+  return projectFlag;
+}

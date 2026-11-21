@@ -11,6 +11,7 @@ import {
   FAQS_GENERALES,
   TESTIMONIOS_REALES,
   isPromoDuchaActive,
+  isDetalleProyectosActive,
 } from '../data/empresa';
 import {
   buildOrganizationNode,
@@ -97,7 +98,16 @@ const schemaGraph = [
 ---
 
 <BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
-  <!-- ================= 1. HERO (Fiel a original-43422703) ================= -->
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none">
+    <defs>
+      <symbol id="i-clk" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+      <symbol id="i-ur" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></symbol>
+      <symbol id="i-lt" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-rt" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= 1. HERO ================= -->
   <header class="hero" id="inicio">
     <Image
       src={heroHomeImg}
@@ -131,8 +141,8 @@ const schemaGraph = [
     </div>
   </header>
 
-  <!-- ================= 2. NUESTRA HISTORIA — ZIG-ZAG 2 FILAS (Fiel a original-77c1b0fb) ================= -->
-  <section class="sec story-zigzag" id="historia" aria-labelledby="historia-title">
+  <!-- ================= 2. NUESTRA HISTORIA — ZIG-ZAG 2 FILAS ================= -->
+  <section class="sec story-zigzag" id="historia" aria-labelledby="historia-title" data-reveal>
     <div class="story-row">
       <div class="story-photo">
         <Image
@@ -144,6 +154,7 @@ const schemaGraph = [
       </div>
 
       <div>
+        <span class="sec-kicker">Desde 2005 en Asturias</span>
         <h2 class="sec-title" id="historia-title">Nuestra Historia</h2>
         <p class="story-copy">
           En Construcciones MBL nacimos con un objetivo claro: eliminar la incertidumbre que suele acompañar a una obra. Combinamos más de dos décadas de oficio en Asturias con una planificación técnica rigurosa para que reformar tu piso o construir tu casa sea un proceso predecible y limpio.
@@ -175,8 +186,9 @@ const schemaGraph = [
     </div>
   </section>
 
-  <!-- ================= 3. NUESTROS SERVICIOS — TOP PICKS (Fiel a original-fe9427c6) ================= -->
-  <section class="sec" id="servicios" style="padding-top:16px" aria-labelledby="servicios-title">
+  <!-- ================= 3. NUESTROS SERVICIOS — TOP PICKS ================= -->
+  <section class="sec" id="servicios" style="padding-top:16px" aria-labelledby="servicios-title" data-reveal>
+    <span class="sec-kicker">Especialidades llave en mano</span>
     <h2 class="sec-title" id="servicios-title">Nuestros Servicios</h2>
 
     <div class="tabs" role="tablist" aria-label="Filtrar servicios por especialidad">
@@ -204,9 +216,12 @@ const schemaGraph = [
             widths={[440, 760]}
             sizes="(max-width: 900px) 100vw, 31vw"
           />
-          <span class="card-badge">⏱ {srv.data.plazoVisible}</span>
+          <span class="card-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clk" /></svg>
+            <span>{srv.data.plazoVisible}</span>
+          </span>
           <a class="card-icon" href={`/${srv.data.slug}/`} aria-label={`Ver ${srv.data.tituloCorto}`}>
-            ↗
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur" /></svg>
           </a>
           <div class="txt">
             <h3>
@@ -224,7 +239,7 @@ const schemaGraph = [
     {showPromoDucha && promoDucha && (
       <div class="promo-strip">
         <div>
-          <span class="sec-kicker" style="color:var(--warm);margin-bottom:4px">
+          <span class="sec-kicker" style="margin-bottom:8px">
             Servicio Exprés 48 Horas · Disponible en toda Asturias
           </span>
           <h3>{promoDucha.data.titulo}</h3>
@@ -245,8 +260,8 @@ const schemaGraph = [
     )}
   </section>
 
-  <!-- ================= 4. BLOQUE OSCURO MÉTODO MBL (Fiel a original-15643f93) ================= -->
-  <section class="dark" aria-labelledby="metodo-title">
+  <!-- ================= 4. BLOQUE OSCURO MÉTODO MBL ================= -->
+  <section class="dark" aria-labelledby="metodo-title" data-reveal>
     <div class="ghost" aria-hidden="true">{EMPRESA.marcasAgua.bloqueOscuro}</div>
 
     <div class="dark-head">
@@ -267,7 +282,7 @@ const schemaGraph = [
         <div id="method-steps-container" aria-live="polite">
           {fasesMetodo.map((f, idx) => (
             <div class="method-step" data-method-idx={idx} hidden={idx !== 0}>
-              <span class="sec-kicker" style="color:var(--warm)">{f.paso}</span>
+              <span class="sec-kicker">{f.paso}</span>
               <h3>{f.titulo}</h3>
               <p>{f.texto}</p>
             </div>
@@ -284,44 +299,61 @@ const schemaGraph = [
     </div>
 
     <div class="dark-bottom-nav">
-      <button type="button" class="arr" aria-label="Fase anterior" data-method-prev>←</button>
-      <button type="button" class="arr on" aria-label="Fase siguiente" data-method-next>→</button>
+      <button type="button" class="arr" aria-label="Fase anterior" data-method-prev>
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lt" /></svg>
+      </button>
+      <button type="button" class="arr on" aria-label="Fase siguiente" data-method-next>
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rt" /></svg>
+      </button>
     </div>
   </section>
 
-  <!-- ================= 5. PROYECTOS DESTACADOS — EDITOR'S CHOICE (Fiel a original-e9e02008) ================= -->
-  <section class="sec" aria-labelledby="proyectos-home-title">
+  <!-- ================= 5. PROYECTOS DESTACADOS ================= -->
+  <section class="sec" aria-labelledby="proyectos-home-title" data-reveal>
+    <span class="sec-kicker">Obras reales ejecutadas en Asturias</span>
     <h2 class="sec-title" id="proyectos-home-title">Proyectos Destacados</h2>
 
     <div class="choice-grid" id="choice-projects-grid">
-      {proyectosDestacados.map((proy, idx) => (
-        <article class="card" data-choice-idx={idx} hidden={idx >= 2}>
-          <Image
-            src={proy.data.imagen}
-            alt={proy.data.imagenAlt}
-            class="card-img"
-            widths={[540, 860]}
-            sizes="(max-width: 900px) 100vw, 46vw"
-          />
-          <div class="txt">
-            <h3><a href="/proyectos/">{proy.data.titulo}</a></h3>
-            <p>{proy.data.resumen}</p>
-          </div>
-        </article>
-      ))}
+      {proyectosDestacados.map((proy, idx) => {
+        const hasDetail = isDetalleProyectosActive(proy.data.detalleActivo);
+        const proyHref = hasDetail ? `/proyectos/${proy.data.slug}/` : '/proyectos/';
+        return (
+          <article class="card" data-choice-idx={idx} hidden={idx >= 2}>
+            <Image
+              src={proy.data.imagen}
+              alt={proy.data.imagenAlt}
+              class="card-img"
+              widths={[540, 860]}
+              sizes="(max-width: 900px) 100vw, 46vw"
+            />
+            <span class="card-badge">{proy.data.municipio} · {proy.data.superficieM2}</span>
+            <a class="card-icon" href={proyHref} aria-label={`Ver ${proy.data.titulo}`}>
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur" /></svg>
+            </a>
+            <div class="txt">
+              <h3><a href={proyHref}>{proy.data.titulo}</a></h3>
+              <p>{proy.data.resumen}</p>
+            </div>
+          </article>
+        );
+      })}
     </div>
 
     <div class="choice-nav-row">
       <div class="ctrl" style="margin-top:0">
-        <button type="button" class="arr light on" aria-label="Proyectos anteriores" data-proj-prev>←</button>
-        <button type="button" class="arr light" aria-label="Siguientes proyectos" data-proj-next>→</button>
+        <button type="button" class="arr light on" aria-label="Proyectos anteriores" data-proj-prev>
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lt" /></svg>
+        </button>
+        <button type="button" class="arr light" aria-label="Siguientes proyectos" data-proj-next>
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rt" /></svg>
+        </button>
       </div>
       <a class="btn-outline" href="/proyectos/">Ver todos los proyectos →</a>
     </div>
   </section>
 
-  <!-- ================= 6. GALERÍA DE OBRAS (Fiel a original-e006c0b5: 2 izq + 1 grande der) ================= -->
-  <section class="sec gallery-section" style="padding-top:8px" aria-labelledby="galeria-home-title">
+  <!-- ================= 6. GALERÍA DE OBRAS ================= -->
+  <section class="sec gallery-section" style="padding-top:8px" aria-labelledby="galeria-home-title" data-reveal>
     <h2 class="sec-title" id="galeria-home-title">Explora Nuestra Galería de Obras</h2>
 
     <div class="gallery">
@@ -359,40 +391,90 @@ const schemaGraph = [
     </div>
 
     <div class="gallery-nav-row">
-      <button type="button" class="arr light" aria-label="Foto anterior" data-gal-prev>←</button>
-      <button type="button" class="arr light on" aria-label="Foto siguiente" data-gal-next>→</button>
+      <button type="button" class="arr light" aria-label="Foto anterior" data-gal-prev>
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lt" /></svg>
+      </button>
+      <button type="button" class="arr light on" aria-label="Foto siguiente" data-gal-next>
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rt" /></svg>
+      </button>
     </div>
 
     <div class="gallery-ghost" aria-hidden="true">{EMPRESA.marcasAgua.footer}</div>
   </section>
 
-  <!-- ================= 7. TESTIMONIOS REALES (Fiel a original-e9e02008: texto izq + foto der) ================= -->
-  <section class="sec testi" aria-labelledby="testi-title">
+  <!-- ================= 7. TESTIMONIOS REALES VERIFICADOS ================= -->
+  <section class="sec testi" aria-labelledby="testi-title" data-reveal>
     <div>
       <span class="sec-kicker">
-        ★ {EMPRESA.googleBusiness.ratingValor} / 5 · Basado en {EMPRESA.googleBusiness.totalResenas} reseñas verificadas en Google
+        {EMPRESA.googleBusiness.ratingValor} / 5 en Google · {EMPRESA.googleBusiness.totalResenas} reseñas verificadas
       </span>
-      <h2 class="sr-only" id="testi-title">Opiniones reales de clientes en Asturias</h2>
+      <h2 class="sec-title" id="testi-title" style="margin-bottom:20px">Opiniones reales de clientes en Asturias</h2>
 
-      <div id="testi-slides" aria-live="polite">
+      <div class="testi-card">
+        <div class="testi-card-top">
+          <div class="testi-stars" aria-label="Valoración 5 de 5 estrellas">
+            <svg width="88" height="16" viewBox="0 0 110 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L1.2 7.4l6.1-.9zM32 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L23.2 7.4l6.1-.9zM54 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L45.2 7.4l6.1-.9zM76 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L67.2 7.4l6.1-.9zM98 1l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6L89.2 7.4l6.1-.9z"/>
+            </svg>
+          </div>
+          <span class="testi-verified">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /><path d="m9 12 2 2 4-4" />
+            </svg>
+            <span>Cliente verificado en Google</span>
+          </span>
+        </div>
+
+        <div id="testi-slides" aria-live="polite">
+          {TESTIMONIOS_REALES.map((t, idx) => (
+            <blockquote class="testi-slide" data-testi-idx={idx} hidden={idx !== 0}>
+              <h3>“{t.titulo}”</h3>
+              <p class="testi-quote">{t.cita}</p>
+
+              <footer class="who">
+                <div class="who-id">
+                  <span class="who-avatar" aria-hidden="true">{t.autor.slice(0, 1)}</span>
+                  <div>
+                    <strong>{t.autor}</strong>
+                    <small>{t.tipoObra} · {t.municipio}</small>
+                  </div>
+                </div>
+                {idx === 0 && (
+                  <a
+                    href={EMPRESA.googleBusiness.hasMap}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="font-size:12.5px;font-weight:600;color:var(--color-primary);text-decoration:underline"
+                  >
+                    Comprobar en Google Maps ↗
+                  </a>
+                )}
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+
+      <div class="testi-dots" role="tablist" aria-label="Seleccionar reseña de cliente">
         {TESTIMONIOS_REALES.map((t, idx) => (
-          <blockquote class="testi-slide" data-testi-idx={idx} hidden={idx !== 0}>
-            <h3>{t.titulo}</h3>
-            <p class="testi-quote">{t.cita}</p>
-            <footer class="who">
-              <span class="who-avatar" aria-hidden="true">{t.autor.slice(0, 1)}</span>
-              <div>
-                <strong>{t.autor}</strong>
-                <small>{t.tipoObra} · {t.municipio}</small>
-              </div>
-            </footer>
-          </blockquote>
+          <button
+            type="button"
+            class={`testi-dot ${idx === 0 ? 'on' : ''}`}
+            data-testi-dot={idx}
+            aria-label={`Leer opinión de ${t.autor}`}
+          >
+            {t.autor.split(' ')[0]}
+          </button>
         ))}
       </div>
 
       <div class="ctrl">
-        <button type="button" class="arr light on" aria-label="Opinión anterior" data-testi-prev>←</button>
-        <button type="button" class="arr light" aria-label="Opinión siguiente" data-testi-next>→</button>
+        <button type="button" class="arr light on" aria-label="Opinión anterior" data-testi-prev>
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lt" /></svg>
+        </button>
+        <button type="button" class="arr light" aria-label="Opinión siguiente" data-testi-next>
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-rt" /></svg>
+        </button>
         <a
           class="btn-outline"
           href={EMPRESA.googleBusiness.hasMap}
@@ -400,7 +482,7 @@ const schemaGraph = [
           rel="noopener noreferrer"
           style="margin-left:8px"
         >
-          Ver ficha en Google Maps →
+          Ver las {EMPRESA.googleBusiness.totalResenas} reseñas en Google →
         </a>
       </div>
     </div>
@@ -412,11 +494,28 @@ const schemaGraph = [
         widths={[540, 880]}
         sizes="(max-width: 900px) 100vw, 48vw"
       />
+      <div class="gbp-badge-card">
+        <div class="gbp-score">
+          <strong>{EMPRESA.googleBusiness.ratingValor}</strong>
+          <div>
+            <span style="font-weight:600;font-size:14px">Valoración en Google Maps</span>
+            <small>{EMPRESA.googleBusiness.totalResenas} opiniones reales · Gijón, Asturias</small>
+          </div>
+        </div>
+        <a
+          class="pill pill-white"
+          href={EMPRESA.googleBusiness.reviewUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Valorar obra
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ================= 8. ZONAS DE ACTUACIÓN (Tarjetas limpias estilo 7/8) ================= -->
-  <section class="sec" style="padding-top:16px" aria-labelledby="zonas-title">
+  <!-- ================= 8. ZONAS DE ACTUACIÓN ================= -->
+  <section class="sec sec-tint" aria-labelledby="zonas-title" data-reveal>
     <span class="sec-kicker">Cobertura local sin sobrecoste de desplazamiento</span>
     <h2 class="sec-title" id="zonas-title">Reformas en Gijón, Oviedo y Avilés</h2>
     <div class="zonas-grid">
@@ -451,7 +550,7 @@ const schemaGraph = [
   <!-- ================= 9. EQUIPO E-E-A-T + GUÍAS + FAQS ================= -->
   <EquipoEEAT compact />
 
-  <section class="sec" style="padding-top:16px" aria-labelledby="blog-home-title">
+  <section class="sec" style="padding-top:16px" aria-labelledby="blog-home-title" data-reveal>
     <div class="sec-header-row">
       <div>
         <span class="sec-kicker">Innovación Sostenible · Guías técnicas 2026</span>
@@ -494,6 +593,12 @@ const schemaGraph = [
 </BaseLayout>
 
 <script>
+  const animateEl = (el: HTMLElement) => {
+    el.classList.remove('is-animating');
+    void el.offsetWidth;
+    el.classList.add('is-animating');
+  };
+
   // 1. Filtrado accesible de tabs de servicios
   const tabBtns = document.querySelectorAll<HTMLButtonElement>('[data-service-tab]');
   const serviceCards = document.querySelectorAll<HTMLElement>('#services-cards-grid [data-service-cat]');
@@ -508,7 +613,9 @@ const schemaGraph = [
       });
       serviceCards.forEach((card) => {
         const cat = card.getAttribute('data-service-cat');
-        card.hidden = targetCat !== 'todos' && cat !== targetCat;
+        const show = targetCat === 'todos' || cat === targetCat;
+        card.hidden = !show;
+        if (show) animateEl(card);
       });
     });
   });
@@ -520,7 +627,9 @@ const schemaGraph = [
     if (methodSteps.length === 0) return;
     methodIdx = (nextIdx + methodSteps.length) % methodSteps.length;
     methodSteps.forEach((el, i) => {
-      el.hidden = i !== methodIdx;
+      const active = i === methodIdx;
+      el.hidden = !active;
+      if (active) animateEl(el);
     });
   }
   document.querySelector('[data-method-prev]')?.addEventListener('click', () => showMethod(methodIdx - 1));
@@ -534,7 +643,9 @@ const schemaGraph = [
     if (totalPages <= 1) return;
     projPage = (nextPage + totalPages) % totalPages;
     choiceCards.forEach((el, idx) => {
-      el.hidden = Math.floor(idx / 2) !== projPage;
+      const active = Math.floor(idx / 2) === projPage;
+      el.hidden = !active;
+      if (active) animateEl(el);
     });
   }
   document.querySelector('[data-proj-prev]')?.addEventListener('click', () => showProjPair(projPage - 1));
@@ -547,22 +658,33 @@ const schemaGraph = [
     if (galSlides.length === 0) return;
     galIdx = (nextIdx + galSlides.length) % galSlides.length;
     galSlides.forEach((el, i) => {
-      el.hidden = i !== galIdx;
+      const active = i === galIdx;
+      el.hidden = !active;
+      if (active) animateEl(el);
     });
   }
   document.querySelector('[data-gal-prev]')?.addEventListener('click', () => showGal(galIdx - 1));
   document.querySelector('[data-gal-next]')?.addEventListener('click', () => showGal(galIdx + 1));
 
-  // 5. Carrusel testimonios reales
+  // 5. Carrusel testimonios reales + selector directo por cliente
   const testiSlides = document.querySelectorAll<HTMLElement>('.testi-slide');
+  const testiDots = document.querySelectorAll<HTMLButtonElement>('[data-testi-dot]');
   let testiIdx = 0;
   function showTesti(nextIdx: number) {
     if (testiSlides.length === 0) return;
     testiIdx = (nextIdx + testiSlides.length) % testiSlides.length;
     testiSlides.forEach((el, i) => {
-      el.hidden = i !== testiIdx;
+      const active = i === testiIdx;
+      el.hidden = !active;
+      if (active) animateEl(el);
+    });
+    testiDots.forEach((dot, i) => {
+      dot.classList.toggle('on', i === testiIdx);
     });
   }
   document.querySelector('[data-testi-prev]')?.addEventListener('click', () => showTesti(testiIdx - 1));
   document.querySelector('[data-testi-next]')?.addEventListener('click', () => showTesti(testiIdx + 1));
+  testiDots.forEach((dot, i) => {
+    dot.addEventListener('click', () => showTesti(i));
+  });
 </script>

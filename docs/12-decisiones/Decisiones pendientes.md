@@ -15,7 +15,7 @@ Registro centralizado de las decisiones tecnológicas y de arquitectura para Con
 | ID | Título | Estado | Artefactos afectados |
 |---|---|---|---|
 | [[ADR-001]] | Adopción de Astro con generación estática (SSG) e islas interactivas | `aceptado` | [[OBJ-001]], [[OBJ-006]], [[RNF-REND-001]], [[RNF-REND-002]], [[RNF-SEO-001]] |
-| [[ADR-002]] | Sistema visual editorial basado en mbl-maqueta y tokens CSS propios | `aceptado` | [[OBJ-004]], [[RF-NAV-002]], [[RNF-ACC-001]], [[RNF-REND-003]] |
+| [[ADR-002]] | Sistema visual editorial basado en mbl-maqueta y paleta corporativa MBL WCAG AA | `aceptado` | [[OBJ-004]], [[RF-NAV-002]], [[RNF-ACC-001]], [[RNF-REND-003]] |
 | [[ADR-003]] | Saneamiento de slugs, taxonomías y mapa de redirecciones 301/410 | `aceptado` | [[OBJ-001]], [[RF-MIG-001]], [[RF-BLOG-001]], [[RNF-SEO-002]] |
 | [[ADR-004]] | Gestión tipada de contenidos con Content Collections frente a CMS externo | `aceptado` | [[OBJ-003]], [[RNF-MANT-001]], [[RNF-MANT-002]], [[RF-BLOG-002]] |
 | [[ADR-005]] | Arquitectura del simulador de presupuestos y envío serverless de leads | `aceptado` | [[RF-LEAD-001]], [[RF-LEAD-002]], [[RF-LEAD-004]], [[IE-001]], [[RNF-SEG-002]] |

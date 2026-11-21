@@ -9,6 +9,7 @@ import TablaComparativa from '../components/TablaComparativa.astro';
 import BloqueFaq from '../components/BloqueFaq.astro';
 import EquipoEEAT from '../components/EquipoEEAT.astro';
 import CtaSimulador from '../components/CtaSimulador.astro';
+import FormularioRapidoServicio from '../components/FormularioRapidoServicio.astro';
 import { EMPRESA } from '../data/empresa';
 import {
   buildOrganizationNode,
@@ -101,18 +102,24 @@ const schemaGraph = [
     <Breadcrumbs items={breadcrumbs} />
     <ResumenDirecto texto={servicio.data.resumenAeo} />
 
-    <div class="prose" style="max-width:82ch;margin-top:24px">
-      <Content />
-    </div>
+    <div class="service-split-layout">
+      <div>
+        <div class="prose" style="max-width:100%">
+          <Content />
+        </div>
 
-    <div style="margin-top:36px">
-      <span class="sec-kicker">Alcance técnico del servicio</span>
-      <h2 class="sec-title">¿Qué Incluye Nuestro Servicio?</h2>
-      <ul style="margin-top:20px;display:grid;gap:12px;padding-left:20px;font-size:15px;color:#222">
-        {servicio.data.incluye.map((item) => (
-          <li>{item}</li>
-        ))}
-      </ul>
+        <div style="margin-top:36px">
+          <span class="sec-kicker">Alcance técnico del servicio</span>
+          <h2 class="sec-title">¿Qué Incluye Nuestro Servicio?</h2>
+          <ul style="margin-top:20px;display:grid;gap:12px;padding-left:20px;font-size:15px;color:#222">
+            {servicio.data.incluye.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <FormularioRapidoServicio tituloServicio={servicio.data.tituloCorto} />
     </div>
 
     <div style="margin-top:44px">
@@ -132,7 +139,7 @@ const schemaGraph = [
         {servicio.data.pasos.map((p) => (
           <article class="eeat-card">
             <h3>{p.titulo}</h3>
-            <p style="font-size:14.5px;color:#333">{p.detalle}</p>
+            <p style="font-size:14.5px;color:#2f3e34">{p.detalle}</p>
           </article>
         ))}
       </div>
@@ -146,8 +153,16 @@ const schemaGraph = [
       <div class="zonas-grid">
         {guiasRelacionadas.map((g) => (
           <article class="zona-card">
+            <div class="zona-card-img">
+              <Image
+                src={g.data.imagen}
+                alt={g.data.imagenAlt}
+                widths={[400, 700]}
+                sizes="(max-width: 900px) 100vw, 31vw"
+              />
+            </div>
             <div class="zona-card-body">
-              <span class="sec-kicker">{g.data.categoriaNombre}</span>
+              <span class="sec-kicker" style="margin-bottom:0">{g.data.categoriaNombre}</span>
               <h3 style="font-family:var(--f-body);text-transform:none;font-size:18px;font-weight:600">
                 <a href={`/${g.data.categoria}/${g.data.slug}/`}>{g.data.titulo}</a>
               </h3>
@@ -168,6 +183,14 @@ const schemaGraph = [
     <div class="zonas-grid">
       {todosServicios.map((s) => (
         <article class="zona-card">
+          <div class="zona-card-img">
+            <Image
+              src={s.data.imagen}
+              alt={s.data.imagenAlt}
+              widths={[400, 700]}
+              sizes="(max-width: 900px) 100vw, 31vw"
+            />
+          </div>
           <div class="zona-card-body">
             <h3><a href={`/${s.data.slug}/`}>{s.data.tituloCorto}</a></h3>
             <p>{s.data.metaDescription}</p>

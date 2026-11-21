@@ -96,6 +96,30 @@ const proyectos = defineCollection({
       imagenAlt: z.string().min(10),
       destacadoHome: z.boolean().default(false),
       orden: z.number().int().min(1),
+      detalleActivo: z.boolean().default(true),
+      servicioSlug: z.string().default('reformas-integrales-en-asturias'),
+      tarifaKey: z
+        .enum([
+          'reforma-integral',
+          'reforma-cocina',
+          'reforma-bano',
+          'plato-ducha',
+          'construccion-vivienda',
+          'local-comercial',
+          'reforma-parcial',
+        ])
+        .default('reforma-integral'),
+      desafio: z.string().optional(),
+      solucion: z.string().optional(),
+      trabajos: z.array(z.string()).default([]),
+      galeria: z
+        .array(
+          z.object({
+            imagen: image(),
+            alt: z.string().min(10),
+          })
+        )
+        .default([]),
     }),
 });
 

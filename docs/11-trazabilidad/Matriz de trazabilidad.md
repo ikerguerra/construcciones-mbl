@@ -41,14 +41,14 @@ Cobertura verificable por criterios de aceptación (`CA-*`): **43/43 (100.0%)**.
 | [[RF-MIG-001]] | Tabla maestra de redirecciones 301 y bajas 410 para las 393 URLs de WordPress | critica | [[NEC-001]] | [[CA-MIG-001]] | [[ADR-003]], [[ADR-007]] | — |
 | [[RF-MIG-002]] | Normalización de dominio canónico, protocolo HTTPS y barra final | alta | [[NEC-001]], [[NEC-005]] | [[CA-MIG-001]] | [[ADR-007]] | — |
 | [[RF-MIG-003]] | Exclusión de indexación de rutas transaccionales y páginas legales actualizadas | alta | [[NEC-001]], [[NEC-008]] | [[CA-MIG-001]] | — | [[PA-001]] |
-| [[RF-NAV-001]] | Cabecera de navegación en píldoras y menú responsive accesible | alta | [[NEC-002]], [[NEC-007]] | [[CA-NAV-001]] | — | — |
+| [[RF-NAV-001]] | Cabecera de navegación en píldoras, logo centrado, desplegable y barra fija | alta | [[NEC-002]], [[NEC-007]] | [[CA-NAV-001]] | — | — |
 | [[RF-NAV-002]] | Portada editorial adaptada a Construcciones MBL | critica | [[NEC-002]], [[NEC-003]], [[NEC-007]] | [[CA-NAV-002]] | [[ADR-002]] | — |
 | [[RF-NAV-003]] | Selector rápido interactivo en el Hero | alta | [[NEC-004]], [[NEC-007]] | [[CA-NAV-002]] | — | — |
 | [[RF-NAV-004]] | Pie de página corporativo con NAP, accesos legales y buscador/acceso rápido | alta | [[NEC-005]], [[NEC-007]], [[NEC-008]] | [[CA-NAV-001]] | — | — |
-| [[RF-PROY-001]] | Galería de proyectos realizados con filtrado por categoría | alta | [[NEC-003]], [[NEC-007]] | [[CA-PROY-001]] | — | — |
+| [[RF-PROY-001]] | Galería filtrable de proyectos y fichas individuales activables | alta | [[NEC-003]], [[NEC-007]] | [[CA-PROY-001]] | — | — |
 | [[RF-PROY-002]] | Sustitución del feed embebido de Instagram por activos locales optimizados | alta | [[NEC-003]], [[NEC-008]] | [[CA-PROY-001]] | — | — |
 | [[RF-PROY-003]] | Sección de testimonios y reseñas de Google Business Profile verificables | alta | [[NEC-003]], [[NEC-006]] | [[CA-PROY-002]] | — | — |
-| [[RF-SERV-001]] | Hub de servicios y 6 páginas principales por especialidad | critica | [[NEC-002]], [[NEC-005]] | [[CA-SERV-001]] | — | — |
+| [[RF-SERV-001]] | Hub de servicios, 6 páginas por especialidad y formulario lateral | critica | [[NEC-002]], [[NEC-005]] | [[CA-SERV-001]] | — | — |
 | [[RF-SERV-002]] | Ficha estructurada de servicio con precios orientativos, plazos, proceso y garantías | alta | [[NEC-002]], [[NEC-006]], [[NEC-009]] | [[CA-SERV-001]] | — | — |
 | [[RF-SERV-003]] | Gestión de vigencia de ofertas y landing exprés de plato de ducha | alta | [[NEC-002]], [[NEC-009]] | [[CA-SERV-002]] | — | — |
 | [[RF-SERV-004]] | Arquitectura preparada para landings locales por municipio en Asturias | media | [[NEC-005]], [[NEC-006]] | [[CA-SERV-002]] | — | — |

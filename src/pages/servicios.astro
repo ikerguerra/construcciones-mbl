@@ -90,9 +90,16 @@ const schemaGraph = [
             widths={[440, 760]}
             sizes="(max-width: 900px) 100vw, 380px"
           />
-          <span class="card-badge">⏱ {srv.data.plazoVisible}</span>
+          <span class="card-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span>{srv.data.plazoVisible}</span>
+          </span>
           <a class="card-icon" href={`/${srv.data.slug}/`} aria-label={`Ver ${srv.data.tituloCorto}`}>
-            ↗
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7" /><path d="M7 7h10v10" />
+            </svg>
           </a>
           <div class="txt">
             <h3><a href={`/${srv.data.slug}/`}>{srv.data.titulo}</a></h3>
@@ -105,7 +112,7 @@ const schemaGraph = [
 
     <div class="promo-strip">
       <div>
-        <span class="sec-kicker" style="color:var(--warm);margin-bottom:4px">Actuación rápida sin obras largas</span>
+        <span class="sec-kicker" style="margin-bottom:8px">Actuación rápida sin obras largas</span>
         <h3>Cambio de Bañera por Plato de Ducha en 48 Horas</h3>
         <p>
           Retirada de bañera, plato de carga mineral antideslizante Clase 3, adaptación de grifería y revestimiento cerámico en cualquier concejo de Asturias.

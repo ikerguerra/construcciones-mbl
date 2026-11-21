@@ -1,0 +1,189 @@
+---
+import { EMPRESA } from '../data/empresa';
+import { ZONAS_ASTURIAS } from '../data/tarifas';
+
+export interface Props {
+  tituloServicio: string;
+  placeholder?: string;
+}
+
+const {
+  tituloServicio,
+  placeholder = `Indícanos ubicación aproximada, estado actual y cuándo te gustaría iniciar tu ${tituloServicio.toLowerCase()}...`,
+} = Astro.props;
+
+const formId = `srv-lead-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<aside class="service-form-card" aria-labelledby={`${formId}-title`}>
+  <span class="sec-kicker">Visita técnica gratuita en Asturias</span>
+  <h3 id={`${formId}-title`}>Pide presupuesto para {tituloServicio.toLowerCase()}</h3>
+  <p class="service-form-sub">
+    Te respondemos en menos de 24–48 h laborables con medición real y presupuesto cerrado por partidas.
+  </p>
+
+  <form data-service-lead-form data-servicio-nombre={tituloServicio} novalidate>
+    <div class="hp-field" aria-hidden="true">
+      <label for={`${formId}-hp`}>No rellenar</label>
+      <input id={`${formId}-hp`} name="empresa_web" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="service-form-fields">
+      <div class="input-group">
+        <label for={`${formId}-nombre`}>Nombre y apellidos *</label>
+        <input
+          id={`${formId}-nombre`}
+          name="nombre"
+          type="text"
+          class="input-ctrl"
+          required
+          minlength="2"
+          placeholder="Tu nombre"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for={`${formId}-telefono`}>Teléfono *</label>
+        <input
+          id={`${formId}-telefono`}
+          name="telefono"
+          type="tel"
+          class="input-ctrl"
+          required
+          minlength="9"
+          placeholder="Ej. 684 675 898"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for={`${formId}-email`}>Correo electrónico *</label>
+        <input
+          id={`${formId}-email`}
+          name="email"
+          type="email"
+          class="input-ctrl"
+          required
+          placeholder="tu@correo.es"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for={`${formId}-zona`}>Concejo en Asturias *</label>
+        <select id={`${formId}-zona`} name="zona" class="input-ctrl">
+          {ZONAS_ASTURIAS.map((z) => (
+            <option value={z}>{z}</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for={`${formId}-mensaje`}>Detalles de tu obra</label>
+        <textarea
+          id={`${formId}-mensaje`}
+          name="mensaje"
+          rows="3"
+          class="input-ctrl"
+          placeholder={placeholder}
+        ></textarea>
+      </div>
+
+      <label class="check-row">
+        <input name="privacidad" type="checkbox" required />
+        <span>
+          Acepto la{' '}
+          <a href="/politica-de-privacidad/" style="text-decoration:underline;font-weight:500">
+            Política de Privacidad
+          </a>{' '}
+          para atender mi consulta. *
+        </span>
+      </label>
+
+      <button type="submit" class="btn-dark" style="width:100%">
+        Solicitar presupuesto cerrado
+      </button>
+    </div>
+
+    <div class="form-status" hidden role="status" aria-live="polite"></div>
+
+    <p class="service-form-tel">
+      ¿Prefieres atención directa?{' '}
+      <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+        {EMPRESA.telefonoVisible}
+      </a>
+    </p>
+  </form>
+</aside>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-service-lead-form]').forEach((form) => {
+    const statusBox = form.querySelector<HTMLElement>('.form-status');
+    const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const privCheck = form.querySelector<HTMLInputElement>('input[name="privacidad"]');
+    const servicioNombre = form.getAttribute('data-servicio-nombre') || 'Servicio MBL';
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (!statusBox || !submitBtn || !privCheck) return;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const fd = new FormData(form);
+      const rawMsg = String(fd.get('mensaje') || '').trim();
+      const payload = {
+        origen: 'contacto' as const,
+        nombre: String(fd.get('nombre') || '').trim(),
+        telefono: String(fd.get('telefono') || '').trim(),
+        email: String(fd.get('email') || '').trim(),
+        zona: String(fd.get('zona') || 'Asturias').trim(),
+        mensaje: `[Interés en ${servicioNombre}] ${rawMsg || 'Solicita visita técnica gratuita y presupuesto cerrado.'}`,
+        privacidad: privCheck.checked,
+        empresa_web: String(fd.get('empresa_web') || ''),
+      };
+
+      const prevText = submitBtn.textContent || 'Solicitar presupuesto cerrado';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando solicitud...';
+      statusBox.hidden = true;
+
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.ok) {
+          statusBox.className = 'form-status ok';
+          statusBox.textContent =
+            data.message ||
+            '¡Solicitud enviada! Te contactaremos en menos de 24-48 h laborables.';
+          statusBox.hidden = false;
+          form.reset();
+          (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({
+            event: 'submit_servicio_lateral',
+            servicio: servicioNombre,
+            zona: payload.zona,
+          });
+        } else {
+          statusBox.className = 'form-status err';
+          statusBox.textContent =
+            data.error ||
+            'No se pudo enviar en este momento. Llámanos al 684 675 898.';
+          statusBox.hidden = false;
+        }
+      } catch (_e) {
+        statusBox.className = 'form-status err';
+        statusBox.textContent =
+          'Error de red al enviar. Llámanos directamente al 684 675 898.';
+        statusBox.hidden = false;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = prevText;
+      }
+    });
+  });
+</script>
