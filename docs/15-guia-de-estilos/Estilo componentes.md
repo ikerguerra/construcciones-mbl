@@ -24,7 +24,9 @@ Catálogo de componentes derivados de [[mbl-maqueta.html]] y ampliados para cubr
 8. **Acordeón FAQ centrado (`.faq-narrow` + `.faq-item`)**: ancho máximo acotado (`860px`) y centrado en la página con cabecera centrada y botón circular verde `+`/`−`.
 9. **Entradas de blog centradas (`.article-hero-head` + `.article-centered-wrap`)**: título ampliado y centrado (`max-width: 1080px; text-wrap: balance`), contenido + TOC centrados (`max-width: 1140px`) y tarjetas de *Guías Relacionadas* con su imagen optimizada.
 10. **Formulario lateral en páginas de Servicio y Proyecto (`FormularioRapidoServicio`)**: integrado a la derecha de *¿Qué Incluye Nuestro Servicio?* / ficha técnica mediante `.service-split-layout` (`minmax(0, 1fr) minmax(430px, 510px)`) con campos emparejados en 2 columnas (`.service-form-row`) para evitar altura excesiva, conectado a `/api/lead`.
-11. **Componentes específicos AEO / Conversión**:
+11. **Desplegables corporativos unificados (`.mbl-select-wrap`, `.mbl-select-trigger`, `.mbl-select-menu`)**:
+    - Todos los `<select>` de formularios, simuladores y calculadoras (`public/js/mbl-select.js`) adoptan la estética del sistema visual: disparador `.mbl-select-trigger` (`border-radius: var(--r-md)`, borde `#9eae9f`, foco en `--color-primary`, chevron verde) y panel desplegable verde bosque translúcido (`rgba(15, 29, 20, .97)`, `backdrop-filter: blur(14px)`, selección activa `--color-primary`, apertura inteligente hacia arriba o abajo según espacio visible), manteniendo accesibilidad por teclado y envío estándar de formularios.
+12. **Componentes específicos AEO / Conversión**:
     - **Caja *En resumen* (AEO)**: fondo `--bg` (`#eef3ee`), borde izquierdo `4px solid var(--color-primary)`, radio `0 18px 18px 0`, `padding: 20px 24px`.
     - **Tablas comparativas de precios**: encabezados `--bg`, bordes `--line`, radio `18px`, scroll horizontal seguro en móvil.
     - **Banner de cookies RGPD/AEPD**: barra fija sobre `#0f1d14` con borde `--border-dark` y botones equivalentes (*Aceptar todas*, *Rechazar opcionales*, *Configurar*).
