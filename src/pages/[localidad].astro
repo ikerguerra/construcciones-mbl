@@ -7,7 +7,6 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ResumenDirecto from '../components/ResumenDirecto.astro';
 import TablaComparativa from '../components/TablaComparativa.astro';
 import BloqueFaq from '../components/BloqueFaq.astro';
-import EquipoEEAT from '../components/EquipoEEAT.astro';
 import CtaSimulador from '../components/CtaSimulador.astro';
 import { EMPRESA } from '../data/empresa';
 import {
@@ -28,9 +27,9 @@ export async function getStaticPaths() {
 const { loc } = Astro.props;
 const { Content } = await render(loc);
 const servicios = (await getCollection('servicios')).sort((a, b) => a.data.orden - b.data.orden);
-const otrasLocalidades = (await getCollection('localidades')).filter(
-  (l) => l.data.slug !== loc.data.slug
-);
+const otrasLocalidades = (await getCollection('localidades'))
+  .filter((l) => l.data.slug !== loc.data.slug)
+  .sort((a, b) => a.data.orden - b.data.orden);
 
 const pageUrl = `${EMPRESA.dominio}/${loc.data.slug}/`;
 const breadcrumbs = [
@@ -190,7 +189,6 @@ const schemaGraph = [
     </div>
   </section>
 
-  <EquipoEEAT compact />
   <CtaSimulador />
   <BloqueFaq
     titulo={`Preguntas Frecuentes sobre Reformas en ${loc.data.municipio}`}

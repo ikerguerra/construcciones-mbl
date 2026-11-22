@@ -7,7 +7,6 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ResumenDirecto from '../components/ResumenDirecto.astro';
 import TablaComparativa from '../components/TablaComparativa.astro';
 import BloqueFaq from '../components/BloqueFaq.astro';
-import EquipoEEAT from '../components/EquipoEEAT.astro';
 import CtaSimulador from '../components/CtaSimulador.astro';
 import FormularioRapidoServicio from '../components/FormularioRapidoServicio.astro';
 import { EMPRESA, isPromoDuchaActive } from '../data/empresa';
@@ -186,7 +185,6 @@ const schemaGraph = [
     </div>
   </section>
 
-  <EquipoEEAT compact />
   <CtaSimulador tipoPorDefecto="plato-ducha" />
   <BloqueFaq titulo="Preguntas Frecuentes sobre el Cambio a Plato de Ducha" faqs={faqs} />
 </BaseLayout>

@@ -7,7 +7,6 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ResumenDirecto from '../components/ResumenDirecto.astro';
 import TablaComparativa from '../components/TablaComparativa.astro';
 import BloqueFaq from '../components/BloqueFaq.astro';
-import EquipoEEAT from '../components/EquipoEEAT.astro';
 import CtaSimulador from '../components/CtaSimulador.astro';
 import { EMPRESA, FAQS_GENERALES } from '../data/empresa';
 import { TARIFAS } from '../data/tarifas';
@@ -19,7 +18,9 @@ import {
 import heroServiciosImg from '../assets/images/servicios/hero-servicios-construcciones-mbl.webp';
 
 const servicios = (await getCollection('servicios')).sort((a, b) => a.data.orden - b.data.orden);
-const localidades = await getCollection('localidades');
+const localidades = (await getCollection('localidades')).sort(
+  (a, b) => a.data.orden - b.data.orden
+);
 
 const title = 'Servicios de Reformas y Construcción en Asturias | MBL';
 const description =
@@ -163,7 +164,6 @@ const schemaGraph = [
     </div>
   </section>
 
-  <EquipoEEAT compact />
   <CtaSimulador />
   <BloqueFaq faqs={FAQS_GENERALES} />
 </BaseLayout>
