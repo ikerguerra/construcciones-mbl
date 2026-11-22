@@ -14,6 +14,14 @@ orden: 1
 detalleActivo: true
 servicioSlug: reformas-integrales-en-asturias
 tarifaKey: reforma-integral
+inversionOrientativa: "55.000 € – 68.000 € (PEM + IVA)"
+antesDespues:
+  antes: ../../assets/images/proyectos/obra-reforma-integral-2.webp
+  antesAlt: Estado previo de tabiquería y carpintería antigua en vivienda de Gijón
+  despues: ../../assets/images/proyectos/obra-reforma-integral-1.webp
+  despuesAlt: Resultado final con pavimento continuo luminoso y carpintería lacada en Asturias
+  etiquetaAntes: Estado inicial
+  etiquetaDespues: Obra finalizada
 desafio: La vivienda presentaba una distribución compartimentada con pasillo oscuro, instalaciones de fontanería y electricidad obsoletas y pérdidas térmicas en carpintería exterior.
 solucion: Se abrió la zona de día integrando salón y distribuidor, se renovaron por completo las redes de agua y cuadro eléctrico, se instaló pavimento continuo de alta resistencia y carpintería interior lacada en blanco para multiplicar la luz natural.
 trabajos:

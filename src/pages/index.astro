@@ -32,8 +32,15 @@ import testiImg from "../assets/images/proyectos/proyecto-bano-moderno-asturias.
 const servicios = (await getCollection("servicios")).sort(
   (a, b) => a.data.orden - b.data.orden,
 );
-const localidades = (await getCollection("localidades")).sort(
+const todasLocalidades = (await getCollection("localidades")).sort(
   (a, b) => a.data.orden - b.data.orden,
+);
+const ordenPrincipales = ["reformas-en-gijon", "reformas-en-oviedo", "reformas-en-aviles"];
+const localidadesPrincipales = ordenPrincipales
+  .map((slug) => todasLocalidades.find((l) => l.data.slug === slug))
+  .filter(Boolean) as typeof todasLocalidades;
+const localidadesSecundarias = todasLocalidades.filter(
+  (l) => !ordenPrincipales.includes(l.data.slug),
 );
 const proyectosDestacados = (await getCollection("proyectos"))
   .sort((a, b) => a.data.orden - b.data.orden)
@@ -93,7 +100,7 @@ const description =
   "Empresa de reformas integrales, cocinas, baños y construcción en Asturias (Gijón, Oviedo y Avilés). Presupuesto cerrado en 48 h y garantía por escrito.";
 const pageUrl = `${EMPRESA.dominio}/`;
 
-const faqNode = buildFaqNode(FAQS_GENERALES, pageUrl);
+const faqNode = buildFaqNode(FAQS_GENERALES.slice(0, 4), pageUrl);
 const schemaGraph = [
   buildOrganizationNode(),
   buildWebSiteNode(),
@@ -297,8 +304,8 @@ const schemaGraph = [
             src={srv.data.imagen}
             alt={srv.data.imagenAlt}
             class="card-img"
-            widths={[440, 760]}
-            sizes="(max-width: 900px) 100vw, 31vw"
+            width={580}
+            height={380}
           />
           <span class="card-badge">
             <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
@@ -350,6 +357,50 @@ const schemaGraph = [
         </div>
       </div>
     )}
+  </section>
+
+  <!-- ================= 3B. SUITE DE HERRAMIENTAS INTERACTIVAS ================= -->
+  <section class="sec sec-tint" aria-labelledby="tools-title" data-reveal style="padding-top:28px">
+    <div class="sec-header-row">
+      <div>
+        <span class="sec-kicker">Transparencia técnica y fiscal · Asturias 2026</span>
+        <h2 class="sec-title" id="tools-title">
+          Planifica Tu Obra con Nuestras Calculadoras Gratuitas
+        </h2>
+      </div>
+      <a class="btn-outline" href="/calculadora-presupuesto-reforma/">
+        Ver todas las herramientas →
+      </a>
+    </div>
+
+    <div class="cards" style="margin-top:20px">
+      <article class="card">
+        <div class="txt" style="padding-top:10px">
+          <span class="sec-kicker" style="margin-bottom:4px">Módulo 1 · Presupuesto</span>
+          <h3><a href="/calculadora-presupuesto-reforma/">Calculadora de Presupuesto</a></h3>
+          <p>Calcula el PEM real, tipo de ICIO de tu concejo e IVA (10 % o 21 %) con desglose detallado por partidas de obra.</p>
+        </div>
+        <a class="price" href="/calculadora-presupuesto-reforma/">Calcular con PEM e ICIO →</a>
+      </article>
+
+      <article class="card">
+        <div class="txt" style="padding-top:10px">
+          <span class="sec-kicker" style="margin-bottom:4px">Módulo 2 · TROTU Asturias</span>
+          <h3><a href="/licencia-obra-asturias/">Simulador de Licencias e ICIO</a></h3>
+          <p>Comprueba al instante si tu obra requiere Declaración Responsable (art. 228 bis) u Obra Mayor en 18 concejos.</p>
+        </div>
+        <a class="price" href="/licencia-obra-asturias/">Consultar mi concejo →</a>
+      </article>
+
+      <article class="card">
+        <div class="txt" style="padding-top:10px">
+          <span class="sec-kicker" style="margin-bottom:4px">Módulo 3 · Ahorro fiscal</span>
+          <h3><a href="/calculadora-deducciones-irpf-reforma/">Deducciones IRPF Eficiencia</a></h3>
+          <p>Calcula el ahorro fiscal del 20 %, 40 % o 60 % en la Renta (DA 50ª LIRPF) por reducción de demanda energética.</p>
+        </div>
+        <a class="price" href="/calculadora-deducciones-irpf-reforma/">Calcular mi deducción →</a>
+      </article>
+    </div>
   </section>
 
   <!-- ================= 4. BLOQUE OSCURO MÉTODO MBL ================= -->
@@ -457,8 +508,8 @@ const schemaGraph = [
               src={proy.data.imagen}
               alt={proy.data.imagenAlt}
               class="card-img"
-              widths={[540, 860]}
-              sizes="(max-width: 900px) 100vw, 46vw"
+              width={640}
+              height={420}
             />
             <span class="card-badge">
               {proy.data.municipio} · {proy.data.superficieM2}
@@ -797,14 +848,14 @@ const schemaGraph = [
       Reformas en Gijón, Oviedo y Avilés
     </h2>
     <div class="zonas-grid">
-      {localidades.map((loc) => (
+      {localidadesPrincipales.map((loc) => (
         <article class="zona-card">
           <div class="zona-card-img">
             <Image
               src={loc.data.imagen}
               alt={loc.data.imagenAlt}
-              widths={[420, 720]}
-              sizes="(max-width: 900px) 100vw, 31vw"
+              width={540}
+              height={360}
             />
           </div>
           <div class="zona-card-body">
@@ -827,6 +878,25 @@ const schemaGraph = [
         </article>
       ))}
     </div>
+
+    {localidadesSecundarias.length > 0 && (
+      <div class="zonas-extra-bar" style="margin-top:20px;padding:16px 20px;background:var(--color-surface,#fff);border:1px solid var(--color-border,#e5e7eb);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+        <p style="margin:0;font-size:14px;color:var(--color-text,#1f2937);font-weight:500">
+          <strong>Otras zonas de actuación directa:</strong> Presupuesto cerrado sin coste de desplazamiento en el área central y comarcas de Asturias.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          {localidadesSecundarias.map((loc) => (
+            <a
+              href={`/${loc.data.slug}/`}
+              class="pill pill-white"
+              style="font-size:13px;padding:6px 14px"
+            >
+              Reformas en {loc.data.municipio} →
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </section>
 
   <!-- ================= 9. GUÍAS + FAQS ================= -->
@@ -857,8 +927,8 @@ const schemaGraph = [
             <Image
               src={post.data.imagen}
               alt={post.data.imagenAlt}
-              widths={[420, 720]}
-              sizes="(max-width: 900px) 100vw, 31vw"
+              width={540}
+              height={360}
             />
           </div>
           <div class="zona-card-body">

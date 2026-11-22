@@ -19,14 +19,14 @@ articulosRelacionados:
   - "/vivienda-sostenible/tarima-flotante-o-suelo-vinilico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias/"
   - "/vivienda-sostenible/suelo-vinilico-en-asturias-ventajas-tipos-y-por-que-debes-confiar-en-un-profesional/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿Cuál es el mejor suelo para evitar problemas de humedad en Asturias?"
+    respuesta: "El suelo vinílico de núcleo mineral rígido (SPC) y el gres porcelánico rectificado son los más seguros ante la humedad ambiental o posibles fugas, ya que no absorben agua ni sufren dilatación por condensación."
+  - pregunta: "¿Se puede instalar tarima flotante en cocina o cuarto de baño?"
+    respuesta: "Solo si se trata de modelos con tratamiento hidrófugo sellado perimetral o bases vinílicas. Para baños recomendamos gres porcelánico o vinílico SPC clase de uso 33 para máxima durabilidad."
+  - pregunta: "¿Qué coste medio tiene cambiar el suelo de una vivienda en Asturias?"
+    respuesta: "El suministro e instalación de tarima laminada AC5 suele oscilar entre 28 y 48 €/m², el vinílico SPC entre 38 y 65 €/m², y el gres porcelánico colocado con desescombro entre 55 y 90 €/m²."
+  - pregunta: "¿Cuánto tiempo se tarda en renovar el suelo de un piso de 80 m²?"
+    respuesta: "La instalación flotante (laminado o SPC click) suele completarse en 3 a 5 días laborables sobre solera nivelada previa."
 ---
 
 Llega el momento de elegir el suelo de tu casa reformada y te asaltan las dudas. ¿Tarima flotante o cerámico? ¿Vinílico o microcemento? ¿Y la piedra natural? Y encima, **vivimos en Asturias**, con su humedad, sus lluvias y sus cambios de temperatura.

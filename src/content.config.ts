@@ -26,6 +26,8 @@ const servicios = defineCollection({
         'construccion-vivienda',
         'local-comercial',
         'reforma-parcial',
+        'rehabilitacion-fachadas',
+        'rehabilitacion-casas-pueblo',
       ]),
       plazoVisible: z.string(),
       precioDesde: z.string(),
@@ -56,7 +58,14 @@ const localidades = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/localidades' }),
   schema: ({ image }) =>
     z.object({
-      slug: z.enum(['reformas-en-gijon', 'reformas-en-oviedo', 'reformas-en-aviles']),
+      slug: z.enum([
+        'reformas-en-gijon',
+        'reformas-en-oviedo',
+        'reformas-en-aviles',
+        'reformas-en-siero',
+        'reformas-en-villaviciosa',
+        'reformas-en-llanera',
+      ]),
       orden: z.number().int().min(1).default(99),
       municipio: z.string(),
       h1: z.string().min(10),
@@ -112,6 +121,17 @@ const proyectos = defineCollection({
         .default('reforma-integral'),
       desafio: z.string().optional(),
       solucion: z.string().optional(),
+      inversionOrientativa: z.string().optional(),
+      antesDespues: z
+        .object({
+          antes: image(),
+          antesAlt: z.string().default('Estado previo antes de la reforma'),
+          despues: image(),
+          despuesAlt: z.string().default('Resultado tras la reforma'),
+          etiquetaAntes: z.string().default('Estado previo'),
+          etiquetaDespues: z.string().default('Resultado final'),
+        })
+        .optional(),
       trabajos: z.array(z.string()).default([]),
       galeria: z
         .array(

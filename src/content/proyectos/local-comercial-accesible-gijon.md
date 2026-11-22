@@ -14,6 +14,14 @@ orden: 2
 detalleActivo: true
 servicioSlug: reforma-de-locales-comerciales-en-asturias
 tarifaKey: local-comercial
+inversionOrientativa: "38.000 € – 49.000 € (adecuación llave en mano)"
+antesDespues:
+  antes: ../../assets/images/proyectos/proyecto-local-comercial-gijon-2.webp
+  antesAlt: Estructura inicial de perfilería metálica y placas en local comercial en obras
+  despues: ../../assets/images/proyectos/proyecto-local-comercial-interior.webp
+  despuesAlt: Local comercial terminado con pintura, iluminación y suelo uniforme en Gijón
+  etiquetaAntes: En ejecución
+  etiquetaDespues: Local entregado
 desafio: El bajo comercial requería cumplir con las exigencias municipales de aislamiento acústico respecto a las viviendas colindantes y adaptar accesos y aseos a la normativa de accesibilidad PMR en un plazo estricto antes de la apertura.
 solucion: Se ejecutó una estructura autoportante nivelada por láser con doble placa laminada e hidrófuga, lana mineral de alta densidad, nueva red eléctrica comercial libre de halógenos e itinerario accesible a cota cero.
 trabajos:

@@ -19,14 +19,14 @@ articulosRelacionados:
   - "/aislamiento-termico/aislamiento-termico-en-asturias-2026-guia-definitiva-para-ahorrar-energia/"
   - "/ayudas-y-subvenciones/ayudas-y-subvenciones-para-reformas-en-asturias-2026-guia-definitiva/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿Cuándo es más recomendable instalar SATE frente a pintar la fachada en Asturias?"
+    respuesta: "La pintura impermeable solo crea una película superficial temporal que no frena la pérdida térmica. El sistema SATE aísla de forma continua el exterior del edificio, corta puentes térmicos, erradica condensaciones y permite optar a deducciones en IRPF de hasta el 60 %."
+  - pregunta: "¿Qué mantenimiento exige una cubierta de teja o pizarra frente a las lluvias de Asturias?"
+    respuesta: "Se aconseja una revisión anual previa al invierno para limpiar canalones de hojas o musgo, verificar piezas movidas por el viento y comprobar la estanqueidad de limahoyas y encuentros con chimeneas."
+  - pregunta: "¿Qué subvenciones o deducciones fiscales existen para rehabilitar fachadas en 2026?"
+    respuesta: "En Asturias las actuaciones que reducen más del 30 % el consumo de energía primaria no renovable pueden deducir hasta el 60 % en IRPF (DA 50ª LIRPF) y acogerse a convocatorias del Principado para eficiencia energética en edificios."
+  - pregunta: "¿Cuánto tiempo se tarda en rehabilitar una fachada o cambiar un tejado en una vivienda?"
+    respuesta: "Para una vivienda unifamiliar o edificio de baja altura, los trabajos de SATE suelen oscilar entre 3 y 6 semanas, mientras que una renovación integral de cubierta se ejecuta en 2 a 4 semanas según climatología."
 ---
 
 ¿Vives en **Asturias y ves cómo tu fachada se cae a pedazos** o tu tejado tiene goteras cada invierno? No es normal, aunque sea común. La **lluvia, humedad y viento asturiano** castigan nuestros edificios, pero hay soluciones definitivas. En MBL Construcciones te explicamos **cómo rehabilitar para 20 años de tranquilidad**.

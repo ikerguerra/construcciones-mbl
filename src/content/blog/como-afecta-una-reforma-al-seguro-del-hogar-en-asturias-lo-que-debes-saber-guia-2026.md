@@ -18,14 +18,14 @@ articulosRelacionados:
   - "/reforma-integral/10-errores-a-evitar-en-una-reforma-integral-de-vivienda/"
   - "/reforma-integral/reformas-integrales-en-gijon-guia-definitiva-antes-de-empezar/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿Debo avisar a mi compañía de seguros antes de empezar una reforma?"
+    respuesta: "Sí, es muy recomendable comunicar las obras a la aseguradora para evitar que rechacen siniestros por considerarlo agravación del riesgo durante el período de trabajos."
+  - pregunta: "¿Qué seguro debe tener obligatoriamente la empresa de reformas?"
+    respuesta: "La constructora debe disponer de una póliza de Responsabilidad Civil (RC) en vigor con cobertura amplia para daños a elementos comunes del edificio, vecinos y viandantes."
+  - pregunta: "¿Aumenta el valor del seguro de hogar tras terminar una reforma integral?"
+    respuesta: "Sí. Al mejorar calidades de cocina, baños, instalaciones y carpinterías, aumenta el capital de continente y contenido asegurado, debiendo actualizar la póliza para evitar infraseguro."
+  - pregunta: "¿Cubre el seguro de hogar los daños por filtraciones de agua durante la obra?"
+    respuesta: "Si el siniestro es imputable a una negligencia de ejecución de los operarios, debe responder el seguro de responsabilidad civil de la empresa constructora que ejecuta los trabajos."
 ---
 
 Has contratado la reforma de tus sueños. Cocina nueva, baño moderno, distribución abierta… Pero, ¿has pensado en qué pasa con el **seguro del hogar mientras duren las obras** ?

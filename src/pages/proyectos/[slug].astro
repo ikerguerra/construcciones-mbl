@@ -123,6 +123,12 @@ const schemaGraph = [
         <small>Plazo de entrega</small>
         <strong>{proy.data.plazo}</strong>
       </div>
+      {proy.data.inversionOrientativa && (
+        <div class="project-meta-box">
+          <small>Inversión orientativa</small>
+          <strong style="color:var(--color-primary,#1b4332)">{proy.data.inversionOrientativa}</strong>
+        </div>
+      )}
     </div>
 
     <ResumenDirecto
@@ -173,6 +179,39 @@ const schemaGraph = [
         placeholder={`Cuéntanos si buscas una reforma similar a "${proy.data.titulo}" en Asturias...`}
       />
     </div>
+
+    {proy.data.antesDespues && (
+      <div style="margin-top:48px">
+        <span class="sec-kicker">Transformación real</span>
+        <h2 class="sec-title">Comparativa Antes y Después de la Obra</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;margin-top:20px">
+          <div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid #d1d5db;background:#f3f4f6">
+            <span style="position:absolute;top:14px;left:14px;background:rgba(20,20,20,0.82);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:6px;z-index:2;letter-spacing:0.04em;text-transform:uppercase">
+              {proy.data.antesDespues.etiquetaAntes || "Antes"}
+            </span>
+            <Image
+              src={proy.data.antesDespues.antes}
+              alt={proy.data.antesDespues.antesAlt}
+              width={720}
+              height={480}
+              style="width:100%;height:340px;object-fit:cover;display:block"
+            />
+          </div>
+          <div style="position:relative;border-radius:12px;overflow:hidden;border:2px solid var(--color-primary,#1b4332);background:#f0fdf4">
+            <span style="position:absolute;top:14px;left:14px;background:var(--color-primary,#1b4332);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:6px;z-index:2;letter-spacing:0.04em;text-transform:uppercase">
+              {proy.data.antesDespues.etiquetaDespues || "Después"}
+            </span>
+            <Image
+              src={proy.data.antesDespues.despues}
+              alt={proy.data.antesDespues.despuesAlt}
+              width={720}
+              height={480}
+              style="width:100%;height:340px;object-fit:cover;display:block"
+            />
+          </div>
+        </div>
+      </div>
+    )}
 
     {proy.data.galeria.length > 0 && (
       <div style="margin-top:52px">

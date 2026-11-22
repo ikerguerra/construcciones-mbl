@@ -14,7 +14,7 @@ Todas las dudas legales, de negocio, contenido, SEO/GEO/AEO y arquitectura detec
 La tabla siguiente se regenera automáticamente mediante `boveda.py indices`.
 
 <!-- AUTO:lista-pa -->
-Total registradas: **18** (1 abiertas: 0 bloqueantes, 1 altas, 0 medias, 0 bajas).
+Total registradas: **23** (6 abiertas: 0 bloqueantes, 4 altas, 2 medias, 0 bajas).
 
 | ID | Prioridad | Categoría | Título | Estado | Artefactos afectados |
 |---|---|---|---|---|---|
@@ -32,8 +32,13 @@ Total registradas: **18** (1 abiertas: 0 bloqueantes, 1 altas, 0 medias, 0 bajas
 | [[PA-012]] | **alta** | Analítica y privacidad | IDs propios de GTM/GA4, eventos de conversión, Consent Mode v2 y gestor de cookies | `resuelta` | [[OBJ-005]], [[OBJ-006]], [[RF-LEAD-005]], [[RNF-SEG-001]], [[IE-002]] |
 | [[PA-013]] | **alta** | Prueba social y GEO | Estrategia para reseñas de Google Maps y resolución de cifra 27 vs 29 | `resuelta` | [[RF-PROY-003]], [[RNF-SEO-005]], [[RNF-GEO-001]], [[IE-004]] |
 | [[PA-014]] | **alta** | Marca y contenidos | Marca comercial principal, marca de agua del footer y 4 estadísticas oficiales | `resuelta` | [[RF-NAV-001]], [[RF-NAV-002]], [[RF-NAV-004]], [[RNF-MANT-002]], [[ADR-002]] |
+| [[PA-019]] | **alta** | Negocio y Servicios | Incorporación de nuevas líneas de servicio transaccionales de alto ticket en Asturias | `abierta` | [[RF-SERV-001]], [[RF-SERV-002]], [[OBJ-001]] |
+| [[PA-020]] | **alta** | Legal, Confianza y E-E-A-T | Datos de respaldo contractual, seguro de responsabilidad civil y garantías para E-E-A-T | `abierta` | [[RNF-SEG-001]], [[RNF-SEO-002]] |
+| [[PA-023]] | **alta** | Arquitectura SEO y Herramientas | Unificación de endpoints de cálculo de presupuesto para evitar canibalización SEO | `abierta` | [[RF-LEAD-001]], [[RNF-SEO-001]], [[ADR-005]] |
 | [[PA-015]] | **media** | SEO y analítica | Acceso a Google Search Console / GA4 y estructura de URLs del blog | `resuelta` | [[OBJ-001]], [[RF-BLOG-001]], [[IE-002]], [[ADR-003]] |
 | [[PA-016]] | **media** | Alcance y evolución | Idiomas futuros y previsión de siguientes fases tras la web corporativa | `resuelta` | [[Alcance]], [[ADR-001]] |
 | [[PA-017]] | **media** | Negocio y E-E-A-T | Condiciones publicables de garantía por escrito y opciones de financiación | `resuelta` | [[RF-SERV-002]], [[RNF-GEO-003]] |
 | [[PA-018]] | **media** | Contenidos, GEO y AEO | Revisión editorial de los 22 artículos, bloques AEO y solapamientos de tema | `resuelta` | [[RF-BLOG-002]], [[RF-BLOG-003]], [[RNF-GEO-002]], [[ADR-006]] |
+| [[PA-021]] | **media** | Portafolio y Contenidos | Material fotográfico Antes/Después y rangos de inversión orientativos para Proyectos | `abierta` | [[RF-PROY-001]], [[RF-PROY-002]] |
+| [[PA-022]] | **media** | Diseño Visual y UX | Sustitución de imágenes genéricas de catálogo en Reformas Integrales y Locales Comerciales | `abierta` | [[RNF-ACC-001]], [[RF-SERV-001]] |
 <!-- /AUTO:lista-pa -->

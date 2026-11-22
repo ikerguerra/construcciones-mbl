@@ -18,14 +18,14 @@ articulosRelacionados:
   - "/reforma-integral/reforma-integral-en-asturias-cuando-merece-la-pena-hacerla-guia-2026/"
   - "/reforma-integral/como-afecta-una-reforma-al-seguro-del-hogar-en-asturias-lo-que-debes-saber-guia-2026/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿Cuál es el error más costoso al reformar una casa en Asturias?"
+    respuesta: "Aceptar presupuestos abiertos o sin desglosar por partidas. Las 'partidas imprevistas' o partidas alzadas pueden incrementar la factura final entre un 20 % y un 35 % durante la ejecución."
+  - pregunta: "¿Qué garantías debo exigir por escrito antes de firmar el contrato?"
+    respuesta: "Un presupuesto cerrado por capítulos, fecha pactada de finalización con penalizaciones, seguro de responsabilidad civil vigente de la constructora y período de garantía postventa por escrito."
+  - pregunta: "¿Cómo saber si una empresa coordina todos los gremios?"
+    respuesta: "Exige que el contrato nombre a un responsable o jefe de obra único como interlocutor técnico permanente entre tú y los instaladores de albañilería, fontanería, electricidad y carpintería."
+  - pregunta: "¿Con cuánta antelación se deben tramitar las licencias municipales?"
+    respuesta: "En Gijón, Oviedo o Avilés las declaraciones responsables se tramitan en pocos días antes de iniciar, pero si la obra requiere proyecto técnico de arquitecto se deben prever entre 1 y 3 meses."
 ---
 
 ¿Estás planeando una **reforma integral de tu vivienda en Asturias** y quieres evitar sorpresas desagradables? Después de más de 15 años gestionando reformas en Gijón, Oviedo y toda Asturias, en MBL Construcciones hemos visto los mismos errores repetirse una y otra vez. Te los contamos para que tú no los cometas.

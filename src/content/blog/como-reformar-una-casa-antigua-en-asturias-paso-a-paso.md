@@ -18,14 +18,14 @@ articulosRelacionados:
   - "/aislamiento-termico/rehabilitacion-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas/"
   - "/reforma-integral/reforma-integral-en-asturias-cuando-merece-la-pena-hacerla-guia-2026/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿Cómo se tratan las humedades por capilaridad en muros de piedra en Asturias?"
+    respuesta: "En mampostería asturiana se combinan zanjas de drenaje exterior, barreras químicas o cámaras ventiladas y revocos con mortero de cal transpirable, evitando siempre sellados de yeso o plásticos que retengan el agua dentro del muro."
+  - pregunta: "¿Es necesario mantener la madera original de la estructura?"
+    respuesta: "Si las vigas de castaño o roble conservan resistencia y carecen de pudrición profunda por xilófagos, se limpian y tratan; si están debilitadas, se refuerzan con perfiles metálicos o se sustituyen por madera laminada certificada."
+  - pregunta: "¿Cuánto cuesta reformar una casa de piedra antigua en Asturias por m²?"
+    respuesta: "En 2026 una rehabilitación completa con consolidación estructural, cubierta nueva e instalaciones eficientes suele situarse entre 800 y 1.350 €/m² según el estado inicial de la edificación."
+  - pregunta: "¿Qué trámites municipales exige la rehabilitación en suelo rural asturiano?"
+    respuesta: "Dependiendo de si existe alteración de volumen o protección etnográfica (TROTU / Patrimonio), se tramita proyecto técnico para licencia de obra mayor o comunicación previa ante el ayuntamiento del concejo."
 ---
 
 ¿Tienes una **casa asturiana de piedra, de los años 50, 60 o incluso anterior** y quieres reformarla sin perder su esencia? Como **especialistas en reformas de casas antiguas en Asturias**, en MBL Construcciones te guiamos en un proceso que puede parecer abrumador, pero que con planificación, es totalmente viable y gratificante.

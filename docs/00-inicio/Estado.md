@@ -11,8 +11,8 @@ actualizado: 2026-11-22
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.2.1` (último hito: `2026-11-22` · generación de índices: `2026-11-22`)
-- **Preguntas abiertas**: 1 abiertas (0 bloqueantes, 1 altas, 0 medias, 0 bajas) · 17 resueltas/cerradas
+- **Versión del SRS**: `1.3.0` (último hito: `2026-11-22` · generación de índices: `2026-11-22`)
+- **Preguntas abiertas**: 6 abiertas (0 bloqueantes, 4 altas, 2 medias, 0 bajas) · 17 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
 |---|---|
@@ -26,7 +26,7 @@ actualizado: 2026-11-22
 | Entidades del modelo de datos | 10 |
 | Criterios de aceptación (`CA-*`) | 20 |
 | Decisiones de arquitectura (`ADR-*`) | 7 |
-| Preguntas abiertas (`PA-*`) | 18 |
+| Preguntas abiertas (`PA-*`) | 23 |
 <!-- /AUTO:cifras -->
 
 ## Lo ya decidido

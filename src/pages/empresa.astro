@@ -1,0 +1,194 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import CtaSimulador from '../components/CtaSimulador.astro';
+import { EMPRESA } from '../data/empresa';
+import {
+  buildOrganizationNode,
+  buildBreadcrumbNode,
+} from '../lib/schema';
+
+import heroImg from '../assets/images/servicios/hero-servicios-construcciones-mbl.webp';
+import equipoImg from '../assets/images/proyectos/proyecto-local-comercial-gijon-1.webp';
+import garantiaImg from '../assets/images/proyectos/obra-bano-mbl-wide.webp';
+
+const pageUrl = `${EMPRESA.dominio}/empresa/`;
+const title = 'Construcciones MBL | Empresa de Reformas en Asturias';
+const description =
+  'Conoce Construcciones MBL: más de 20 años en reformas y obras en Asturias. Dirección técnica propia, presupuesto cerrado por partidas y garantía escrita.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Empresa', url: '/empresa/' },
+];
+
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={pageUrl}
+  schemaGraph={schemaGraph}
+>
+  <header class="hero hero-sub" slot="header">
+    <Image
+      src={heroImg}
+      alt="Oficina técnica y equipo de Construcciones MBL en Asturias"
+      class="hero-bg"
+      widths={[640, 1024, 1440]}
+      sizes="100vw"
+      loading="eager"
+    />
+    <Header mode="overlay" currentPath="/empresa/" />
+
+    <div class="hero-body">
+      <div>
+        <small>Desde 2005 · Oficio y rigor constructivo en el Principado</small>
+        <h1>Construcciones MBL: Empresa de Reformas y Construcción en Asturias</h1>
+      </div>
+      <div>
+        <p class="lead">
+          Eliminamos la incertidumbre de las obras con dirección técnica diaria,
+          presupuestos cerrados por partidas y garantía por escrito respaldada por más de 20 años de experiencia.
+        </p>
+        <div class="hero-actions">
+          <a class="pill pill-white" href="/calculadora-presupuesto-reforma/">
+            Calcular presupuesto orientativo →
+          </a>
+          <a class="pill" href="/contacto/">
+            Contactar con oficina técnica
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <ResumenDirecto
+      etiqueta="Nuestra propuesta de valor en Asturias"
+      texto="En Construcciones MBL combinamos oficio tradicional y gestión técnica rigurosa. Con sede en Cristasa (Gijón), ejecutamos reformas integrales, cocinas, baños, fachadas y obra nueva en toda la zona central de Asturias, garantizando costes fijos y plazos verificables desde la firma del contrato."
+    />
+
+    <div style="margin-top:36px">
+      <span class="sec-kicker">Los 4 pilares de nuestro método</span>
+      <h2 class="sec-title">Cómo Trabajamos para Darte Tranquilidad Total</h2>
+
+      <div class="cards" style="margin-top:24px">
+        <article class="card">
+          <div class="txt" style="padding-top:12px">
+            <span class="sec-kicker">1. Dirección facultativa</span>
+            <h3>Aparejador y Técnico Propio</h3>
+            <p>
+              Un técnico colegiado supervisa la obra de principio a fin, replantea cada cota, coordina gremios y asegura el cumplimiento del CTE.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="txt" style="padding-top:12px">
+            <span class="sec-kicker">2. Transparencia fiscal</span>
+            <h3>Presupuesto Cerrado por Partidas</h3>
+            <p>
+              Mediciones exactas desglosadas en materiales y mano de obra. El precio fijado en el contrato es el precio final de la liquidación.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="txt" style="padding-top:12px">
+            <span class="sec-kicker">3. Cobertura jurídica</span>
+            <h3>Garantía Escrita y Seguro RC</h3>
+            <p>
+              Cobertura según la LOE (hasta 3 años en instalaciones y acabados y 10 años estructurales) con póliza de Responsabilidad Civil activa.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="txt" style="padding-top:12px">
+            <span class="sec-kicker">4. Solvencia de oficio</span>
+            <h3>Gremios Especializados Propios</h3>
+            <p>
+              Albañilería, fontanería autorizada, electricidad bajo REBT, carpintería a medida y pladuristas con nivelación láser sin subcontratas opacas.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="story-zigzag" style="margin-top:56px">
+      <div class="story-row">
+        <div class="story-photo">
+          <Image
+            src={equipoImg}
+            alt="Control técnico de obra con nivelación láser en Asturias por Construcciones MBL"
+            width={600}
+            height={400}
+          />
+        </div>
+        <div>
+          <span class="sec-kicker">Oficina y trayectoria</span>
+          <h2 class="sec-title">Más de Dos Décadas en el Tejido Asturiano</h2>
+          <p class="story-copy">
+            Fundada en 2005 en Gijón, Construcciones MBL nació para transformar la experiencia del cliente particular y del negocio local. Frente al modelo de presupuestos imprecisos y sobrecostes inesperados, apostamos por la ingeniería de costes previa y la ejecución limpia.
+          </p>
+          <p class="story-copy">
+            Desde nuestra sede operativa en Cristasa (Avda. Argentina 132, Gijón), gestionamos proyectos en Gijón, Oviedo, Avilés, Siero, Villaviciosa, Llanera y concejos colindantes, tramitando licencias municipales y declaraciones responsables (art. 228 bis TROTU) con agilidad.
+          </p>
+        </div>
+      </div>
+
+      <div class="story-row" style="margin-top:40px">
+        <div>
+          <span class="sec-kicker">Compromiso de entrega</span>
+          <h2 class="sec-title">Garantía por Escrito en Cada Proyecto</h2>
+          <p class="story-copy">
+            Cualquier intervención ejecutada por Construcciones MBL cuenta con un contrato formal que especifica la fecha límite de finalización, penalizaciones por demora injustificada y un plan de control de calidad tras la entrega.
+          </p>
+          <p class="story-copy">
+            Tras concluir la obra, entregamos el dossier de instalaciones con esquemas de fontanería, boletín eléctrico REBT sellado y manual de mantenimiento de materiales cerámicos, griferías y sistemas de climatización.
+          </p>
+        </div>
+        <div class="story-photo">
+          <Image
+            src={garantiaImg}
+            alt="Acabado de alta calidad en reforma integral ejecutada en Asturias"
+            width={600}
+            height={400}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:52px;padding:28px;background:var(--color-surface,#fff);border:1px solid var(--color-border,#e5e7eb);border-radius:14px">
+      <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
+        <div>
+          <span class="sec-kicker" style="margin-bottom:4px">Oficina técnica central</span>
+          <h3 style="margin:0 0 6px;font-size:20px;font-family:var(--font-heading)">Visítanos o Solicita Asesoramiento</h3>
+          <p style="margin:0;font-size:14.5px;color:var(--muted)">
+            {EMPRESA.direccion.completa} · {EMPRESA.horario.resumen}
+          </p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="pill" href={`tel:${EMPRESA.telefono}`}>
+            Llamar: {EMPRESA.telefonoVisible}
+          </a>
+          <a class="pill pill-white" href="/contacto/">
+            Pedir cita en oficina →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaSimulador tipoPorDefecto="reforma-integral" />
+</BaseLayout>

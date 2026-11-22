@@ -19,14 +19,14 @@ articulosRelacionados:
   - "/aislamiento-termico/aislamiento-termico-en-asturias-2026-guia-definitiva-para-ahorrar-energia/"
   - "/ayudas-y-subvenciones/ayudas-y-subvenciones-para-reformas-en-asturias-2026-guia-definitiva/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿PVC o aluminio con rotura de puente térmico para el clima de Asturias?"
+    respuesta: "En zonas de costa o valles húmedos de Asturias el PVC de 70–82 mm destaca por su óptimo aislamiento térmico y nula corrosión por salitre. El aluminio con RPT es ideal para grandes ventanales con perfiles muy esbeltos y alta resistencia mecánica."
+  - pregunta: "¿Qué tipo de vidrio es imprescindible para evitar condensaciones interiores?"
+    respuesta: "Un doble o triple acristalamiento bajo emisivo (Low-E) con cámara de gas argón (mínimo 16 mm) e intercalario cálido (warm edge) para evitar el puente térmico perimetral donde suele condensar la humedad."
+  - pregunta: "¿Se pueden deducir las ventanas en la declaración de la renta en Asturias?"
+    respuesta: "Sí. Si la sustitución reduce al menos un 7 % la demanda de calefacción/refrigeración con certificado energético, puedes desgravar el 20 % en IRPF (hasta 1.000 € de ahorro fiscal directo)."
+  - pregunta: "¿Cuánto tiempo lleva cambiar las ventanas de un piso en Asturias?"
+    respuesta: "Un piso estándar de 4 a 6 ventanas suele cambiarse en 1 o 2 jornadas completas de montaje, rematando albañilería interior y sellado perimetral estanco sin dejar la vivienda abierta por la noche."
 ---
 
 ¿Tus ventanas **silban cuando hace viento**? ¿Tocas el cristal en invierno y está **helado**? ¿Tienes **agua corriendo por los marcos** cada mañana? Si vives en Asturias y reconoces estas señales, necesitas leer esto.

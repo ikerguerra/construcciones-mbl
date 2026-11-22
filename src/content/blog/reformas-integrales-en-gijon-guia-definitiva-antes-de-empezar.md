@@ -18,14 +18,14 @@ articulosRelacionados:
   - "/reforma-integral/reforma-integral-en-asturias-cuando-merece-la-pena-hacerla-guia-2026/"
   - "/reforma-integral/10-errores-a-evitar-en-una-reforma-integral-de-vivienda/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿Cuánto cuesta el m² de reforma integral en Gijón en 2026?"
+    respuesta: "El precio medio oscila entre 650 y 1.050 €/m² según la gama de materiales, estado de las bajantes comunitarias y si se cambian ventanas con rotura de puente térmico."
+  - pregunta: "¿Qué trámites se requieren en el Ayuntamiento de Gijón para reformar un piso?"
+    respuesta: "Para obras interiores de distribución, albañilería, fontanería y electricidad sin afectación estructural se tramita la declaración responsable urbanística acompañada del abono del ICIO."
+  - pregunta: "¿Cómo afecta el salitre y la humedad costera a las reformas en Gijón?"
+    respuesta: "En barrios próximos al mar como La Calzada, El Natahoyo, La Arena o Cimadevilla se instalan perfiles y herrajes con protección anticorrosión marina y sistemas de ventilación que eviten humedades de condensación."
+  - pregunta: "¿Dónde tiene la sede física Construcciones MBL en Gijón?"
+    respuesta: "Nuestra oficina técnica se ubica en el Centro Municipal de Empresas Cristasa (Av. Argentina 132, of. 221), desde donde coordinamos visitas técnicas gratuitas en todo el concejo."
 ---
 
 ¿Vas a reformar tu casa en Gijón? Te explicamos todo: precios por m², licencias municipales, errores a evitar y cómo transformar tu vivienda paso a paso. ¡Guía completa!

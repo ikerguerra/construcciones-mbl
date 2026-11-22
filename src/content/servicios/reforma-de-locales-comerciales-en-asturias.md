@@ -11,8 +11,8 @@ tarifaKey: local-comercial
 plazoVisible: 4 – 10 semanas
 precioDesde: Desde 550 €/m²
 garantia: Hasta 3 años por escrito
-imagen: ../../assets/images/servicios/hero-reformas-locales-comerciales.webp
-imagenAlt: Equipo técnico instalando tabiquería y adecuación de local comercial en Asturias
+imagen: ../../assets/images/proyectos/proyecto-local-comercial-interior.webp
+imagenAlt: Interior de local comercial terminado con paramentos nivelados e iluminación técnica en Asturias
 orden: 6
 destacadoHome: true
 incluye:

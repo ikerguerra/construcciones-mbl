@@ -11,7 +11,9 @@ export type TipoObraKey =
   | 'plato-ducha'
   | 'construccion-vivienda'
   | 'local-comercial'
-  | 'reforma-parcial';
+  | 'reforma-parcial'
+  | 'rehabilitacion-fachadas'
+  | 'rehabilitacion-casas-pueblo';
 
 export type CalidadKey = 'funcional' | 'estandar' | 'premium';
 
@@ -235,6 +237,52 @@ export const TARIFAS: Record<TipoObraKey, ConfigTarifa> = {
       { id: 'suelo-vinilico', label: 'Suelo vinílico SPC / tarima AC5 con rodapié lacado', min: 1600, max: 3400 },
       { id: 'pintura-alisado', label: 'Alisado de gotelé y pintura plástica lavable', min: 1400, max: 2900 },
       { id: 'trasdosado-aislamiento', label: 'Trasdosado térmico-acústico en fachadas interiores', min: 1200, max: 2600 },
+    ],
+  },
+  'rehabilitacion-fachadas': {
+    key: 'rehabilitacion-fachadas',
+    nombre: 'Rehabilitación de fachadas, SATE y tejados',
+    nombreCorto: 'Fachadas y tejados',
+    servicioUrl: '/rehabilitacion-de-fachadas-y-tejados-en-asturias/',
+    usaSuperficie: true,
+    etiquetaSuperficie: 'Superficie de fachada o cubierta (m²)',
+    minM2: 40,
+    maxM2: 600,
+    defaultM2: 120,
+    baseFijaMin: 2500,
+    baseFijaMax: 4800,
+    precioM2Min: 75,
+    precioM2Max: 145,
+    rangoVisible: '85 – 160 €/m²',
+    plazoEstimado: '3 – 8 semanas',
+    garantia: 'Hasta 10 años en estanqueidad',
+    extras: [
+      { id: 'sate-grafito', label: 'Aislamiento SATE grafito 80–100 mm de alta resistencia', min: 3800, max: 8200 },
+      { id: 'cubierta-impermeable', label: 'Lámina transpirable bajo teja y canalones de zinc', min: 2400, max: 5600 },
+      { id: 'andamio-seguridad', label: 'Montaje de andamio homologado y plan de seguridad', min: 1800, max: 3900 },
+    ],
+  },
+  'rehabilitacion-casas-pueblo': {
+    key: 'rehabilitacion-casas-pueblo',
+    nombre: 'Rehabilitación de casas de pueblo y casonas de piedra',
+    nombreCorto: 'Casas de pueblo y piedra',
+    servicioUrl: '/rehabilitacion-de-casas-de-pueblo-en-asturias/',
+    usaSuperficie: true,
+    etiquetaSuperficie: 'Superficie construida de la edificación (m²)',
+    minM2: 60,
+    maxM2: 400,
+    defaultM2: 140,
+    baseFijaMin: 8000,
+    baseFijaMax: 16000,
+    precioM2Min: 720,
+    precioM2Max: 1250,
+    rangoVisible: '800 – 1.350 €/m²',
+    plazoEstimado: '12 – 24 semanas',
+    garantia: '10 años estructural LOE',
+    extras: [
+      { id: 'mamposteria-cal', label: 'Encintado de piedra con mortero de cal hidráulica natural', min: 4200, max: 9500 },
+      { id: 'drenaje-capilaridad', label: 'Zanja drenante perimetral y barrera anticarcoma', min: 3100, max: 6800 },
+      { id: 'madera-estructural', label: 'Consolidación de vigas y forjado de madera laminada', min: 5400, max: 12800 },
     ],
   },
 };

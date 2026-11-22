@@ -11,8 +11,8 @@ tarifaKey: reforma-integral
 plazoVisible: 8 – 14 semanas
 precioDesde: Desde 650 €/m²
 garantia: Hasta 3 años por escrito
-imagen: ../../assets/images/servicios/hero-reformas-integrales-asturias.webp
-imagenAlt: Planos técnicos arquitectónicos y herramientas de obra para reforma integral en Asturias
+imagen: ../../assets/images/servicios/hero-home-construcciones-mbl.webp
+imagenAlt: Vivienda reformada integralmente con salón amplio, pavimento continuo y gran luminosidad en Asturias
 orden: 1
 destacadoHome: true
 incluye:

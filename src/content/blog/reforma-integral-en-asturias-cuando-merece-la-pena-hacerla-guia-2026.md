@@ -19,14 +19,14 @@ articulosRelacionados:
   - "/reforma-integral/reformas-integrales-en-gijon-guia-definitiva-antes-de-empezar/"
   - "/reforma-integral/10-errores-a-evitar-en-una-reforma-integral-de-vivienda/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿Cuándo es mejor hacer reforma integral en lugar de reformas por fases?"
+    respuesta: "Cuando las redes de fontanería y electricidad superan los 25 años o se desea cambiar la distribución de la vivienda. Hacerlo de una vez ahorra costes de desplazamiento y reduce el tiempo total de molestias."
+  - pregunta: "¿Cuánto se revaloriza un piso en Asturias tras una reforma integral?"
+    respuesta: "En mercados urbanos de Gijón, Oviedo o Avilés una vivienda actualizada con calidades medias-altas y buena eficiencia energética incrementa su valor de venta o alquiler entre un 15 % y un 25 %."
+  - pregunta: "¿Es imprescindible mudarse fuera de casa durante las obras?"
+    respuesta: "En reformas integrales que implican demolición de tabiques, cambio de suelos y corte de suministros de agua y luz, es altamente aconsejable residir fuera para mayor comodidad y rapidez de los oficios."
+  - pregunta: "¿Cómo influye el clima asturiano en la planificación de la obra?"
+    respuesta: "Cualquier actuación en carpintería exterior, aislamientos de fachada o impermeabilización de terrazas debe programarse asegurando cierres estancos antes de las épocas de lluvias continuadas."
 ---
 
 ¿Vives en **Asturias con una casa que no termina de funcionar**? ¿Te preguntas si es mejor **ir parcheando o hacer una reforma total de una vez**? Como **expertos en reformas integrales en Asturias**, en MBL Construcciones te ayudamos a decidir qué es mejor para TU caso.

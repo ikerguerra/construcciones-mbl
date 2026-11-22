@@ -18,14 +18,14 @@ articulosRelacionados:
   - "/aislamiento-termico/aislamiento-termico-en-asturias-2026-guia-definitiva-para-ahorrar-energia/"
   - "/ayudas-y-subvenciones/ayudas-y-subvenciones-para-reformas-en-asturias-2026-guia-definitiva/"
 faqs:
-  - pregunta: "¿Qué incluye una reforma integral?"
-    respuesta: "Una reforma integral abarca la renovación completa de un espacio, incluyendo estructuras, instalaciones eléctricas, fontanería y acabados."
-  - pregunta: "¿Cómo se gestiona el proyecto de reforma integral?"
-    respuesta: "Nos encargamos de todo el proceso, desde la planificación y diseño hasta la ejecución y supervisión de los trabajos."
-  - pregunta: "¿Cuánto tiempo suele llevar una reforma integral?"
-    respuesta: "El tiempo varía según el tamaño y complejidad del proyecto, pero generalmente puede tomar entre 4 a 12 semanas."
-  - pregunta: "¿Puedo personalizar el diseño de mi reforma integral?"
-    respuesta: "Sí, trabajamos contigo para crear un diseño que se adapte a tus gustos y necesidades específicas."
+  - pregunta: "¿Cuánto se puede ahorrar en calefacción aislando una vivienda en Asturias?"
+    respuesta: "Combinando aislamiento exterior o trasdosado térmico con carpinterías de baja emisividad y aerotermia, el ahorro en factura energética se sitúa entre el 35 % y el 55 % en climas atlánticos."
+  - pregunta: "¿En cuántos años se amortiza una reforma de eficiencia energética?"
+    respuesta: "Con las deducciones en IRPF del 40 % o 60 % y la reducción mensual de consumo, el plazo de amortización media desciende habitualmente a entre 5 y 8 años."
+  - pregunta: "¿Es necesario cambiar la caldera actual si se instala aerotermia?"
+    respuesta: "Sí, la bomba de calor de aerotermia sustituye calderas fósiles de gasóleo o gas, optimizando su rendimiento si se acompaña de suelo radiante o radiadores de baja temperatura."
+  - pregunta: "¿Se solucionan las humedades de condensación con la mejora térmica?"
+    respuesta: "Totalmente. Al elevar la temperatura de las paredes interiores y mejorar la ventilación, se elimina el punto de rocío donde antes proliferaba el moho negro en dormitorios y baños."
 ---
 
 ¿Te has preguntado cuánto podrías ahorrar realmente haciendo tu hogar más sostenible? En MBL Construcciones te mostramos **casos reales de clientes en Asturias** que ya están disfrutando de facturas más bajas y hogares más confortables. ¡Esto es lo que han conseguido!
