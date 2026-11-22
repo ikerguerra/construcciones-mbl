@@ -1,0 +1,390 @@
+---
+import '../../styles/tools-tailwind.css';
+import { ASTURIAS_CONCEJOS } from '../../data/asturiasConcejos';
+import {
+  EMITTER_LABELS,
+  ENERGY_DEFAULTS_2026,
+  INSULATION_LABELS,
+  type EmitterType,
+  type HeatingSystemKey,
+  type InsulationLevel,
+} from '../../data/energyRates';
+import { compareAerotermia } from '../../lib/calculators/aerotermiaEngine';
+import ToolLegalDisclaimer from './ToolLegalDisclaimer.astro';
+
+const initial = compareAerotermia({
+  concejoSlug: 'oviedo',
+  currentSystem: 'gasoil_convencional',
+  annualSpendEur: 2000,
+  emitterType: 'suelo_radiante',
+  electricityPriceEurKwh: ENERGY_DEFAULTS_2026.electricityPriceEurKwh,
+  investmentEur: ENERGY_DEFAULTS_2026.aerotermiaAvgInvestmentEur,
+});
+
+const systems = Object.entries(ENERGY_DEFAULTS_2026.systems) as Array<
+  [HeatingSystemKey, (typeof ENERGY_DEFAULTS_2026.systems)[HeatingSystemKey]]
+>;
+const emitters = Object.entries(EMITTER_LABELS) as Array<[EmitterType, string]>;
+const insulations = Object.entries(INSULATION_LABELS) as Array<[InsulationLevel, string]>;
+const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
+---
+
+<div class="grid gap-6 lg:grid-cols-12 lg:items-start" data-aero-tool>
+  <div class="space-y-5 rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="a-concejo" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+          Concejo (Zona climática CTE)
+        </label>
+        <select
+          id="a-concejo"
+          class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm font-medium text-[#111a14] focus:border-[#164624] focus:outline-none"
+        >
+          {ASTURIAS_CONCEJOS.map((c) => (
+            <option value={c.slug} selected={c.slug === 'oviedo'}>
+              {c.name} (Zona {c.climateZone})
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label for="a-system" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+          Sistema actual de calefacción
+        </label>
+        <select
+          id="a-system"
+          class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm font-medium text-[#111a14] focus:border-[#164624] focus:outline-none"
+        >
+          {systems.map(([k, sys]) => (
+            <option value={k} selected={k === 'gasoil_convencional'}>
+              {sys.label}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#c6d9cb] bg-[#f3f7f4] p-3.5">
+      <input id="a-mountain" type="checkbox" class="mt-0.5 h-4 w-4 accent-[#164624]" />
+      <span class="text-sm text-[#111a14]">
+        La vivienda está a más de 550 m de altitud (zona de montaña CTE <strong>E1</strong>).
+      </span>
+    </label>
+
+    <!-- Modo de estimación -->
+    <div class="rounded-2xl border border-[#d6ddd8] p-4">
+      <div class="mb-3 flex flex-wrap gap-2">
+        <label class="flex cursor-pointer items-center gap-2 rounded-full border border-[#d6ddd8] px-3.5 py-1.5 text-xs font-semibold has-[:checked]:border-[#164624] has-[:checked]:bg-[#164624] has-[:checked]:text-white">
+          <input type="radio" name="calcMode" value="spend" checked class="sr-only" />
+          Sé mi gasto anual (recomendado)
+        </label>
+        <label class="flex cursor-pointer items-center gap-2 rounded-full border border-[#d6ddd8] px-3.5 py-1.5 text-xs font-semibold has-[:checked]:border-[#164624] has-[:checked]:bg-[#164624] has-[:checked]:text-white">
+          <input type="radio" name="calcMode" value="area" class="sr-only" />
+          Estimar por m² y aislamiento
+        </label>
+      </div>
+
+      <div id="a-mode-spend">
+        <label for="a-spend" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+          Gasto anual actual en calefacción (€/año)
+        </label>
+        <input
+          id="a-spend"
+          type="number"
+          min="200"
+          step="100"
+          value="2000"
+          class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+        />
+      </div>
+
+      <div id="a-mode-area" class="hidden grid-cols-1 gap-3 sm:grid-cols-2">
+        <div>
+          <label for="a-area" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+            Superficie calefactada (m²)
+          </label>
+          <input
+            id="a-area"
+            type="number"
+            min="25"
+            max="600"
+            value="120"
+            class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+          />
+        </div>
+        <div>
+          <label for="a-insulation" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+            Aislamiento de la vivienda
+          </label>
+          <select
+            id="a-insulation"
+            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm font-medium text-[#111a14] focus:border-[#164624] focus:outline-none"
+          >
+            {insulations.map(([k, lbl]) => (
+              <option value={k} selected={k === 'aislamiento_medio'}>
+                {lbl}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+        Emisores con la nueva aerotermia (SCOP Asturias)
+      </label>
+      <div class="grid gap-2 sm:grid-cols-3">
+        {emitters.map(([k, lbl]) => (
+          <label class="flex cursor-pointer items-start gap-2 rounded-2xl border border-[#d6ddd8] p-3 text-xs font-semibold text-[#111a14] transition hover:border-[#164624] has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+            <input
+              type="radio"
+              name="emitterType"
+              value={k}
+              checked={k === 'suelo_radiante'}
+              class="mt-0.5 h-4 w-4 accent-[#164624]"
+            />
+            <span>{lbl}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <details class="rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4]/60 p-4">
+      <summary class="cursor-pointer text-xs font-bold tracking-wider text-[#164624] uppercase">
+        Ajustar precios de energía e inversión (2026)
+      </summary>
+      <div class="mt-3 grid gap-3 sm:grid-cols-3">
+        <div>
+          <label for="a-elec" class="mb-1 block text-xs font-semibold text-[#111a14]">
+            Electricidad (€/kWh)
+          </label>
+          <input
+            id="a-elec"
+            type="number"
+            step="0.01"
+            min="0.05"
+            value={ENERGY_DEFAULTS_2026.electricityPriceEurKwh}
+            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3 py-2 text-sm font-semibold text-[#111a14]"
+          />
+        </div>
+        <div>
+          <label for="a-fuel" class="mb-1 block text-xs font-semibold text-[#111a14]">
+            Combustible actual
+          </label>
+          <input
+            id="a-fuel"
+            type="number"
+            step="0.01"
+            min="0.02"
+            value={ENERGY_DEFAULTS_2026.systems.gasoil_convencional.fuelPrice}
+            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3 py-2 text-sm font-semibold text-[#111a14]"
+          />
+        </div>
+        <div>
+          <label for="a-inv" class="mb-1 block text-xs font-semibold text-[#111a14]">
+            Inversión equipo (€)
+          </label>
+          <input
+            id="a-inv"
+            type="number"
+            step="250"
+            min="6000"
+            value={ENERGY_DEFAULTS_2026.aerotermiaAvgInvestmentEur}
+            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3 py-2 text-sm font-semibold text-[#111a14]"
+          />
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <aside class="rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
+        Ahorro anual estimado
+      </span>
+      <span id="a-zone-pill" class="rounded-full bg-[#243a2c] px-3 py-1 text-xs font-semibold text-[#86d195]">
+        Zona {initial.climateZone} · SCOP {initial.scop.toFixed(1)}
+      </span>
+    </div>
+
+    <div id="a-savings" class="mt-2 font-display text-5xl tracking-wide text-[#86d195]">
+      {fmt(initial.annualSavingsEur)} / año ({initial.savingsPercent}%)
+    </div>
+
+    <dl class="mt-5 space-y-2 border-t border-[#243a2c] pt-4 text-sm">
+      <div class="flex justify-between gap-2">
+        <dt class="text-[#c2cec6]">Gasto sistema actual</dt>
+        <dd id="a-curr-cost" class="font-semibold text-white">{fmt(initial.currentAnnualCostEur)} / año</dd>
+      </div>
+      <div class="flex justify-between gap-2">
+        <dt class="text-[#c2cec6]">Gasto estimado con aerotermia</dt>
+        <dd id="a-aero-cost" class="font-semibold text-[#86d195]">{fmt(initial.aerotermiaAnnualCostEur)} / año</dd>
+      </div>
+      <div class="flex justify-between gap-2 text-xs">
+        <dt class="text-[#c2cec6]">Demanda térmica útil estimada</dt>
+        <dd id="a-demand" class="text-[#c2cec6]">{initial.usefulDemandKwh.toLocaleString('es-ES')} kWh/año</dd>
+      </div>
+      <div class="flex justify-between gap-2 border-t border-[#243a2c] pt-2">
+        <dt class="text-[#c2cec6]">Amortización bruta (sin IRPF)</dt>
+        <dd id="a-pb-gross" class="font-semibold text-white">
+          {initial.paybackYearsGross ? `${initial.paybackYearsGross} años` : '—'}
+        </dd>
+      </div>
+      <div class="flex justify-between gap-2">
+        <dt class="text-[#c2cec6]">Amortización con IRPF 40 % (-{fmt(initial.irpf40DeductionEur)})</dt>
+        <dd id="a-pb-40" class="font-bold text-[#86d195]">
+          {initial.paybackYearsWithIrpf40 ? `${initial.paybackYearsWithIrpf40} años` : '—'}
+        </dd>
+      </div>
+      <div class="flex justify-between gap-2 text-xs">
+        <dt class="text-[#c2cec6]">Amortización con IRPF 60 % unifamiliar</dt>
+        <dd id="a-pb-60" class="font-semibold text-white">
+          {initial.paybackYearsWithIrpf60 ? `${initial.paybackYearsWithIrpf60} años` : '—'}
+        </dd>
+      </div>
+      <div class="flex justify-between gap-2 text-xs">
+        <dt class="text-[#c2cec6]">Emisiones CO₂ evitadas</dt>
+        <dd id="a-co2" class="font-semibold text-[#86d195]">
+          {initial.co2SavedKgYear.toLocaleString('es-ES')} kg/año
+        </dd>
+      </div>
+    </dl>
+
+    <div class="mt-5 rounded-2xl border border-[#243a2c] bg-[#14271b] p-3.5 text-xs">
+      <span class="block font-semibold text-[#86d195]">Siguiente paso recomendado</span>
+      <div class="mt-1.5 flex flex-col gap-1.5">
+        <a
+          id="a-link-budget"
+          href="/calculadora-presupuesto-reforma/?concejo=oviedo&m2=120&opt=aerotermia_recuperacion"
+          class="text-white underline hover:text-[#86d195]"
+        >
+          Incluir aerotermia en tu presupuesto integral →
+        </a>
+        <a
+          id="a-link-irpf"
+          href="/calculadora-deducciones-irpf-reforma/?inversion=14250&tipo=energia_30_o_AB"
+          class="text-white underline hover:text-[#86d195]"
+        >
+          Simular deducción IRPF del 40 % / 60 % →
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <ToolLegalDisclaimer />
+    </div>
+  </aside>
+</div>
+
+<script>
+  import {
+    ENERGY_DEFAULTS_2026,
+    type EmitterType,
+    type HeatingSystemKey,
+    type InsulationLevel,
+  } from '../../data/energyRates';
+  import { compareAerotermia } from '../../lib/calculators/aerotermiaEngine';
+  import { buildToolUrl, parseToolQuery } from '../../lib/calculators/urlState';
+
+  const root = document.querySelector('[data-aero-tool]');
+  if (root) {
+    const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
+    const concejoSel = document.getElementById('a-concejo') as HTMLSelectElement | null;
+    const sysSel = document.getElementById('a-system') as HTMLSelectElement | null;
+    const mountainInp = document.getElementById('a-mountain') as HTMLInputElement | null;
+    const spendInp = document.getElementById('a-spend') as HTMLInputElement | null;
+    const areaInp = document.getElementById('a-area') as HTMLInputElement | null;
+    const insSel = document.getElementById('a-insulation') as HTMLSelectElement | null;
+    const elecInp = document.getElementById('a-elec') as HTMLInputElement | null;
+    const fuelInp = document.getElementById('a-fuel') as HTMLInputElement | null;
+    const invInp = document.getElementById('a-inv') as HTMLInputElement | null;
+    const modeSpendBox = document.getElementById('a-mode-spend');
+    const modeAreaBox = document.getElementById('a-mode-area');
+
+    const qs = parseToolQuery(window.location.search);
+    if (qs.concejo && concejoSel && Array.from(concejoSel.options).some((o) => o.value === qs.concejo)) {
+      concejoSel.value = qs.concejo;
+    }
+    if (qs.m2 && areaInp) {
+      areaInp.value = String(qs.m2);
+    }
+
+    sysSel?.addEventListener('change', () => {
+      const k = sysSel.value as HeatingSystemKey;
+      if (fuelInp && ENERGY_DEFAULTS_2026.systems[k]) {
+        fuelInp.value = String(ENERGY_DEFAULTS_2026.systems[k].fuelPrice);
+      }
+      render();
+    });
+
+    function render() {
+      const mode =
+        root!.querySelector<HTMLInputElement>('input[name="calcMode"]:checked')?.value || 'spend';
+      if (modeSpendBox && modeAreaBox) {
+        modeSpendBox.classList.toggle('hidden', mode !== 'spend');
+        modeAreaBox.classList.toggle('hidden', mode !== 'area');
+        modeAreaBox.classList.toggle('grid', mode === 'area');
+      }
+
+      const concejoSlug = concejoSel?.value || 'oviedo';
+      const currentSystem = (sysSel?.value as HeatingSystemKey) || 'gasoil_convencional';
+      const emitterType =
+        (root!.querySelector<HTMLInputElement>('input[name="emitterType"]:checked')?.value as EmitterType) ||
+        'suelo_radiante';
+
+      const res = compareAerotermia({
+        concejoSlug,
+        highAltitudeMountain: mountainInp?.checked ?? false,
+        currentSystem,
+        annualSpendEur: mode === 'spend' ? Number(spendInp?.value) || 0 : undefined,
+        areaM2: mode === 'area' ? Number(areaInp?.value) || 120 : undefined,
+        insulation: (insSel?.value as InsulationLevel) || 'aislamiento_medio',
+        emitterType,
+        electricityPriceEurKwh: Number(elecInp?.value) || ENERGY_DEFAULTS_2026.electricityPriceEurKwh,
+        customFuelPrice: Number(fuelInp?.value) || undefined,
+        investmentEur: Number(invInp?.value) || ENERGY_DEFAULTS_2026.aerotermiaAvgInvestmentEur,
+      });
+
+      const setTxt = (id: string, val: string) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
+
+      setTxt('a-zone-pill', `Zona ${res.climateZone} · SCOP ${res.scop.toFixed(1)}`);
+      setTxt('a-savings', `${fmt(res.annualSavingsEur)} / año (${res.savingsPercent}%)`);
+      setTxt('a-curr-cost', `${fmt(res.currentAnnualCostEur)} / año`);
+      setTxt('a-aero-cost', `${fmt(res.aerotermiaAnnualCostEur)} / año`);
+      setTxt('a-demand', `${res.usefulDemandKwh.toLocaleString('es-ES')} kWh/año`);
+      setTxt('a-pb-gross', res.paybackYearsGross ? `${res.paybackYearsGross} años` : '—');
+      setTxt('a-pb-40', res.paybackYearsWithIrpf40 ? `${res.paybackYearsWithIrpf40} años` : '—');
+      setTxt('a-pb-60', res.paybackYearsWithIrpf60 ? `${res.paybackYearsWithIrpf60} años` : '—');
+      setTxt('a-co2', `${res.co2SavedKgYear.toLocaleString('es-ES')} kg/año`);
+
+      const linkBudget = document.getElementById('a-link-budget') as HTMLAnchorElement | null;
+      if (linkBudget) {
+        linkBudget.href = buildToolUrl('presupuesto', {
+          concejo: res.concejo.slug,
+          m2: Number(areaInp?.value) || 120,
+          opt: 'aerotermia_recuperacion',
+        });
+      }
+      const linkIrpf = document.getElementById('a-link-irpf') as HTMLAnchorElement | null;
+      if (linkIrpf) {
+        linkIrpf.href = buildToolUrl('irpf', {
+          inversion: res.investmentEur,
+          tipo: 'energia_30_o_AB',
+        });
+      }
+    }
+
+    root.querySelectorAll('input, select').forEach((el) => {
+      if (el !== sysSel) {
+        el.addEventListener('change', render);
+        el.addEventListener('input', render);
+      }
+    });
+    render();
+  }
+</script>

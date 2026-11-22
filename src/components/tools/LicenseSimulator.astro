@@ -1,0 +1,275 @@
+---
+import '../../styles/tools-tailwind.css';
+import { ASTURIAS_CONCEJOS } from '../../data/asturiasConcejos';
+import {
+  WORK_CATEGORY_LABELS,
+  simulateLicense,
+  type WorkCategory,
+} from '../../lib/calculators/licenseEngine';
+import ToolLegalDisclaimer from './ToolLegalDisclaimer.astro';
+
+export interface Props {
+  defaultConcejoSlug?: string;
+}
+
+const { defaultConcejoSlug = 'oviedo' } = Astro.props;
+
+const initial = simulateLicense({
+  concejoSlug: defaultConcejoSlug,
+  workCategory: 'reforma_sin_distribucion',
+  isProtectedBuilding: false,
+  occupiesPublicWay: false,
+  estimatedBudgetNoVat: 23800,
+});
+
+const categories = Object.entries(WORK_CATEGORY_LABELS) as Array<
+  [WorkCategory, (typeof WORK_CATEGORY_LABELS)[WorkCategory]]
+>;
+const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
+---
+
+<div class="grid gap-6 lg:grid-cols-12 lg:items-start" data-license-tool data-default-concejo={defaultConcejoSlug}>
+  <div class="space-y-5 rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
+    <div>
+      <label for="l-concejo" class="mb-1.5 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+        1. Concejo de Asturias
+      </label>
+      <select
+        id="l-concejo"
+        name="concejoSlug"
+        class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm font-medium text-[#111a14] focus:border-[#164624] focus:outline-none"
+      >
+        {ASTURIAS_CONCEJOS.map((c) => (
+          <option value={c.slug} selected={c.slug === defaultConcejoSlug}>
+            {c.name} — ICIO {(c.icioRate * 100).toFixed(2).replace(/\.00$/, '')}%
+          </option>
+        ))}
+      </select>
+    </div>
+
+    <div>
+      <span class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+        2. Alcance de la actuación (TROTU Asturias)
+      </span>
+      <div class="space-y-2">
+        {categories.map(([key, cat]) => (
+          <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4]/50 p-3 transition hover:border-[#164624] has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+            <input
+              type="radio"
+              name="workCategory"
+              value={key}
+              checked={key === 'reforma_sin_distribucion'}
+              class="mt-1 h-4 w-4 accent-[#164624]"
+            />
+            <span>
+              <span class="block text-sm font-semibold text-[#111a14]">{cat.label}</span>
+              <span class="block text-xs text-[#516158]">{cat.description}</span>
+            </span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <div class="space-y-2.5 rounded-2xl border border-[#c6d9cb] bg-[#f3f7f4] p-4">
+      <label class="flex cursor-pointer items-start gap-2.5">
+        <input type="checkbox" name="isProtectedBuilding" class="mt-0.5 h-4 w-4 accent-[#164624]" />
+        <span class="text-sm text-[#111a14]">
+          ¿Está el edificio catalogado, en casco histórico o afectado por Patrimonio Cultural?
+        </span>
+      </label>
+
+      <label class="flex cursor-pointer items-start gap-2.5">
+        <input type="checkbox" name="occupiesPublicWay" class="mt-0.5 h-4 w-4 accent-[#164624]" />
+        <span class="text-sm text-[#111a14]">
+          ¿Requiere andamio, grúa o contenedor en vía pública?
+        </span>
+      </label>
+
+      <label id="l-domain-row" class="hidden cursor-pointer items-start gap-2.5">
+        <input type="checkbox" name="isPublicDomainAdjacent" class="mt-0.5 h-4 w-4 accent-[#164624]" />
+        <span class="text-sm text-[#111a14]">
+          ¿El cierre linda con carretera o dominio público?
+        </span>
+      </label>
+    </div>
+
+    <div class="grid gap-3 sm:grid-cols-2 sm:items-end">
+      <div>
+        <label for="l-budget" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+          Presupuesto de ejecución sin IVA (€)
+        </label>
+        <input
+          id="l-budget"
+          type="number"
+          min="500"
+          step="500"
+          value="23800"
+          class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+        />
+      </div>
+      <label class="flex cursor-pointer items-center gap-2 rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-xs font-medium text-[#111a14]">
+        <input id="l-already-pem" type="checkbox" class="h-4 w-4 accent-[#164624]" />
+        <span>Mi cifra ya es PEM (no dividir entre 1,19)</span>
+      </label>
+    </div>
+  </div>
+
+  <aside class="rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
+    <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
+      Trámite urbanístico en <span id="l-concejo-name">{initial.concejo.name}</span>
+    </span>
+    <div id="l-permit-badge" class="mt-2 inline-block rounded-full bg-[#164624] px-4 py-1.5 text-sm font-bold text-[#86d195]">
+      {initial.permitLabel}
+    </div>
+    <p id="l-resolution" class="mt-2 text-xs text-[#c2cec6]">
+      Plazo orientativo: {initial.estimatedResolutionDays}
+    </p>
+
+    <dl class="mt-5 space-y-2 border-t border-[#243a2c] pt-4 text-sm">
+      <div class="flex justify-between gap-2">
+        <dt class="text-[#c2cec6]">PEM estimado (base imponible)</dt>
+        <dd id="l-pem" class="font-semibold text-white">{fmt(initial.pemEstimated)}</dd>
+      </div>
+      <div class="flex justify-between gap-2">
+        <dt id="l-icio-lbl" class="text-[#c2cec6]">ICIO ({initial.icioRatePercent}%)</dt>
+        <dd id="l-icio" class="text-lg font-bold text-[#86d195]">{fmt(initial.icioAmount)}</dd>
+      </div>
+      <div class="flex justify-between gap-2 text-xs">
+        <dt class="text-[#c2cec6]">Tasa administrativa municipal aprox.</dt>
+        <dd id="l-tasa" class="text-[#c2cec6]">
+          {fmt(initial.estimatedFeeRange[0])} – {fmt(initial.estimatedFeeRange[1])}
+        </dd>
+      </div>
+      <div class="flex justify-between gap-2 text-xs">
+        <dt class="text-[#c2cec6]">Proyecto técnico visado</dt>
+        <dd id="l-project" class="font-semibold text-white">
+          {initial.requiresArchitectProject ? 'Sí obligatorio' : 'No requerido'}
+        </dd>
+      </div>
+    </dl>
+
+    <div class="mt-4 border-t border-[#243a2c] pt-4">
+      <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
+        Documentación y permisos adicionales
+      </span>
+      <ul id="l-docs" class="mt-2 list-disc space-y-1 pl-4 text-xs text-[#c2cec6]">
+        {initial.requiredDocuments.map((d) => (
+          <li>{d}</li>
+        ))}
+        {initial.extraPermits.map((p) => (
+          <li class="text-white">{p}</li>
+        ))}
+      </ul>
+      <p id="l-legal" class="mt-3 text-xs leading-relaxed text-[#c2cec6]">
+        {initial.legalNote}
+      </p>
+    </div>
+
+    <div class="mt-5 rounded-2xl border border-[#243a2c] bg-[#14271b] p-3.5 text-xs">
+      <span class="block font-semibold text-[#86d195]">Siguiente paso recomendado</span>
+      <a
+        id="l-next-link"
+        href={`/calculadora-presupuesto-reforma/?concejo=${initial.concejo.slug}&ref=licencias`}
+        class="mt-1 inline-block text-white underline hover:text-[#86d195]"
+      >
+        Calcular presupuesto completo en {initial.concejo.name} →
+      </a>
+    </div>
+
+    <div class="mt-4">
+      <ToolLegalDisclaimer />
+    </div>
+  </aside>
+</div>
+
+<script>
+  import { simulateLicense, type WorkCategory } from '../../lib/calculators/licenseEngine';
+  import { buildToolUrl, parseToolQuery } from '../../lib/calculators/urlState';
+
+  const root = document.querySelector<HTMLElement>('[data-license-tool]');
+  if (root) {
+    const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
+    const concejoSel = document.getElementById('l-concejo') as HTMLSelectElement | null;
+    const budgetInp = document.getElementById('l-budget') as HTMLInputElement | null;
+    const pemToggle = document.getElementById('l-already-pem') as HTMLInputElement | null;
+    const domainRow = document.getElementById('l-domain-row');
+
+    const qs = parseToolQuery(window.location.search);
+    if (qs.concejo && concejoSel && Array.from(concejoSel.options).some((o) => o.value === qs.concejo)) {
+      concejoSel.value = qs.concejo;
+    }
+    if (qs.presupuesto && budgetInp) {
+      budgetInp.value = String(qs.presupuesto);
+    }
+
+    function render() {
+      const concejoSlug = concejoSel?.value || root!.dataset.defaultConcejo || 'oviedo';
+      const workCategory =
+        (root!.querySelector<HTMLInputElement>('input[name="workCategory"]:checked')?.value as WorkCategory) ||
+        'reforma_sin_distribucion';
+      const isProtectedBuilding =
+        root!.querySelector<HTMLInputElement>('input[name="isProtectedBuilding"]')?.checked ?? false;
+      const occupiesPublicWay =
+        root!.querySelector<HTMLInputElement>('input[name="occupiesPublicWay"]')?.checked ?? false;
+      const isPublicDomainAdjacent =
+        root!.querySelector<HTMLInputElement>('input[name="isPublicDomainAdjacent"]')?.checked ?? false;
+
+      if (domainRow) {
+        const showDom = workCategory === 'cierre_parcela';
+        domainRow.classList.toggle('hidden', !showDom);
+        domainRow.classList.toggle('flex', showDom);
+      }
+
+      const res = simulateLicense({
+        concejoSlug,
+        workCategory,
+        isProtectedBuilding,
+        occupiesPublicWay,
+        isPublicDomainAdjacent,
+        estimatedBudgetNoVat: Number(budgetInp?.value) || 0,
+        alreadyPem: pemToggle?.checked ?? false,
+      });
+
+      const setTxt = (id: string, val: string) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
+
+      setTxt('l-concejo-name', res.concejo.name);
+      setTxt('l-permit-badge', res.permitLabel);
+      setTxt('l-resolution', `Plazo orientativo: ${res.estimatedResolutionDays}`);
+      setTxt('l-pem', fmt(res.pemEstimated));
+      setTxt('l-icio-lbl', `ICIO (${res.icioRatePercent}%)`);
+      setTxt('l-icio', fmt(res.icioAmount));
+      setTxt(
+        'l-tasa',
+        `${fmt(res.estimatedFeeRange[0])} – ${fmt(res.estimatedFeeRange[1])}`,
+      );
+      setTxt('l-project', res.requiresArchitectProject ? 'Sí obligatorio' : 'No requerido');
+      setTxt('l-legal', res.legalNote);
+
+      const docsEl = document.getElementById('l-docs');
+      if (docsEl) {
+        docsEl.innerHTML = [
+          ...res.requiredDocuments.map((d) => `<li>${d}</li>`),
+          ...res.extraPermits.map((p) => `<li class="text-white">${p}</li>`),
+        ].join('');
+      }
+
+      const nextLink = document.getElementById('l-next-link') as HTMLAnchorElement | null;
+      if (nextLink) {
+        nextLink.href = buildToolUrl('presupuesto', {
+          concejo: res.concejo.slug,
+          ref: 'licencias',
+        });
+        nextLink.textContent = `Calcular presupuesto completo en ${res.concejo.name} →`;
+      }
+    }
+
+    root.querySelectorAll('input, select').forEach((el) => {
+      el.addEventListener('change', render);
+      el.addEventListener('input', render);
+    });
+    render();
+  }
+</script>

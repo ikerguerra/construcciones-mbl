@@ -1,0 +1,256 @@
+---
+import '../../styles/tools-tailwind.css';
+import {
+  IRPF_PROLONGATION_NOTICE,
+  IRPF_TIERS,
+} from '../../data/taxRules';
+import { calculateIrpfDeduction } from '../../lib/calculators/irpfEngine';
+import ToolLegalDisclaimer from './ToolLegalDisclaimer.astro';
+
+const initial = calculateIrpfDeduction({
+  investmentWithVat: 14000,
+  publicSubsidies: 3000,
+  deductionTier: 'energia_30_o_AB',
+  paidByBankOrCard: true,
+  includesFossilFuelBoiler: false,
+});
+
+const tiers = Object.values(IRPF_TIERS);
+const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
+---
+
+<div class="space-y-4" data-irpf-tool>
+  <div class="rounded-2xl border border-[#c6d9cb] bg-[#eef3ee] p-3.5 text-xs leading-relaxed text-[#164624]">
+    <strong>Vigencia AEAT:</strong> {IRPF_PROLONGATION_NOTICE}
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-12 lg:items-start">
+    <div class="space-y-5 rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
+      <div>
+        <span class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+          1. Tramo de deducción por eficiencia energética (DA 50ª LIRPF)
+        </span>
+        <div class="space-y-2.5">
+          {tiers.map((t) => (
+            <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4]/50 p-3.5 transition hover:border-[#164624] has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+              <input
+                type="radio"
+                name="deductionTier"
+                value={t.key}
+                checked={t.key === 'energia_30_o_AB'}
+                class="mt-1 h-4 w-4 accent-[#164624]"
+              />
+              <span class="flex-1">
+                <span class="flex flex-wrap items-baseline justify-between gap-2">
+                  <span class="text-sm font-semibold text-[#111a14]">{t.shortLabel}</span>
+                  <span class="text-xs font-bold text-[#164624]">
+                    Máx. {fmt(t.maxDeductionTotal)}
+                  </span>
+                </span>
+                <span class="mt-0.5 block text-xs text-[#516158]">{t.requirement}</span>
+                <span class="mt-0.5 block text-[11px] text-[#3e6b47]">
+                  Obra hasta {t.workDeadline.split('-').reverse().join('/')} · CEE antes de {t.ceeDeadline.split('-').reverse().join('/')}
+                </span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="i-investment" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+            Importe pagado con IVA incluido (€)
+          </label>
+          <input
+            id="i-investment"
+            type="number"
+            min="0"
+            step="500"
+            value="14000"
+            class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="i-subsidies" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+            Subvenciones públicas recibidas (€)
+          </label>
+          <input
+            id="i-subsidies"
+            type="number"
+            min="0"
+            step="250"
+            value="3000"
+            class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <div class="space-y-2.5 rounded-2xl border border-[#c6d9cb] bg-[#f3f7f4] p-4">
+        <label class="flex cursor-pointer items-start gap-2.5">
+          <input
+            id="i-bank"
+            type="checkbox"
+            checked
+            class="mt-0.5 h-4 w-4 accent-[#164624]"
+          />
+          <span class="text-sm text-[#111a14]">
+            El pago se realiza por transferencia bancaria, tarjeta o cheque nominativo (los pagos en efectivo tienen 0 € de deducción).
+          </span>
+        </label>
+
+        <label class="flex cursor-pointer items-start gap-2.5">
+          <input
+            id="i-fossil"
+            type="checkbox"
+            class="mt-0.5 h-4 w-4 accent-[#164624]"
+          />
+          <span class="text-sm text-[#111a14]">
+            La factura incluye equipos de combustibles fósiles (caldera de gas natural o gasóleo).
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <aside class="rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
+      <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
+        Ahorro fiscal estimado en Renta
+      </span>
+      <div id="i-deduccion" class="mt-2 font-display text-5xl tracking-wide text-[#86d195]">
+        {fmt(initial.deduccionTotal)}
+      </div>
+      <p id="i-tier-label" class="mt-1 text-xs text-[#c2cec6]">
+        {initial.tier.shortLabel}
+      </p>
+
+      <div id="i-alerts" class="mt-4 hidden space-y-2"></div>
+
+      <dl class="mt-5 space-y-2 border-t border-[#243a2c] pt-4 text-sm">
+        <div class="flex justify-between gap-2">
+          <dt class="text-[#c2cec6]">Base elegible neta (tras subvenciones)</dt>
+          <dd id="i-base-neta" class="font-semibold text-white">{fmt(initial.baseNeta)}</dd>
+        </div>
+        <div class="flex justify-between gap-2">
+          <dt class="text-[#c2cec6]">Base máxima deducible aplicada</dt>
+          <dd id="i-base-apl" class="font-semibold text-white">{fmt(initial.baseAplicable)}</dd>
+        </div>
+        <div class="flex justify-between gap-2 border-t border-[#243a2c] pt-2">
+          <dt class="font-semibold text-white">Coste neto real de la obra</dt>
+          <dd id="i-coste-neto" class="text-lg font-bold text-[#86d195]">{fmt(initial.costeNetoReal)}</dd>
+        </div>
+      </dl>
+
+      <div class="mt-5 border-t border-[#243a2c] pt-4">
+        <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
+          Calendario de aplicación en IRPF
+        </span>
+        <ul id="i-schedule" class="mt-2 space-y-1.5 text-xs text-[#c2cec6]">
+          {initial.yearlySchedule.map((amt, idx) => (
+            <li class="flex justify-between rounded-lg bg-[#14271b] px-3 py-1.5">
+              <span>Ejercicio {idx + 1}</span>
+              <strong class="text-white">{fmt(amt)}</strong>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mt-5 rounded-2xl border border-[#243a2c] bg-[#14271b] p-3.5 text-xs">
+        <span class="block font-semibold text-[#86d195]">Siguiente paso recomendado</span>
+        <div class="mt-1.5 flex flex-wrap gap-3">
+          <a href="/comparador-aerotermia-asturias/" class="text-white underline hover:text-[#86d195]">
+            Simular ahorro anual con aerotermia →
+          </a>
+          <a href="/calculadora-presupuesto-reforma/" class="text-white underline hover:text-[#86d195]">
+            Calcular presupuesto de reforma →
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <ToolLegalDisclaimer />
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+  import { calculateIrpfDeduction } from '../../lib/calculators/irpfEngine';
+  import { parseToolQuery } from '../../lib/calculators/urlState';
+  import type { IrpfDeductionTier } from '../../data/taxRules';
+
+  const root = document.querySelector('[data-irpf-tool]');
+  if (root) {
+    const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
+    const invInp = document.getElementById('i-investment') as HTMLInputElement | null;
+    const subInp = document.getElementById('i-subsidies') as HTMLInputElement | null;
+    const bankInp = document.getElementById('i-bank') as HTMLInputElement | null;
+    const fossilInp = document.getElementById('i-fossil') as HTMLInputElement | null;
+
+    const qs = parseToolQuery(window.location.search);
+    if (qs.inversion && invInp) {
+      invInp.value = String(qs.inversion);
+    }
+    if (qs.tipo) {
+      const radio = root.querySelector<HTMLInputElement>(`input[name="deductionTier"][value="${qs.tipo}"]`);
+      if (radio) radio.checked = true;
+    }
+
+    function render() {
+      const tier =
+        (root!.querySelector<HTMLInputElement>('input[name="deductionTier"]:checked')?.value as IrpfDeductionTier) ||
+        'energia_30_o_AB';
+
+      const res = calculateIrpfDeduction({
+        investmentWithVat: Number(invInp?.value) || 0,
+        publicSubsidies: Number(subInp?.value) || 0,
+        deductionTier: tier,
+        paidByBankOrCard: bankInp?.checked ?? true,
+        includesFossilFuelBoiler: fossilInp?.checked ?? false,
+      });
+
+      const setTxt = (id: string, val: string) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
+
+      setTxt('i-deduccion', fmt(res.deduccionTotal));
+      setTxt('i-tier-label', res.tier.shortLabel);
+      setTxt('i-base-neta', fmt(res.baseNeta));
+      setTxt('i-base-apl', fmt(res.baseAplicable));
+      setTxt('i-coste-neto', fmt(res.costeNetoReal));
+
+      const alertsEl = document.getElementById('i-alerts');
+      if (alertsEl) {
+        if (res.alerts.length === 0) {
+          alertsEl.classList.add('hidden');
+          alertsEl.innerHTML = '';
+        } else {
+          alertsEl.classList.remove('hidden');
+          alertsEl.innerHTML = res.alerts
+            .map((a) => `<div class="rounded-xl border border-[#f2c4bf] bg-[#fdecea] p-3 text-xs font-medium text-[#61120c]">${a}</div>`)
+            .join('');
+        }
+      }
+
+      const schedEl = document.getElementById('i-schedule');
+      if (schedEl) {
+        schedEl.innerHTML =
+          res.yearlySchedule.length === 0
+            ? '<li class="rounded-lg bg-[#14271b] px-3 py-1.5 text-[#c2cec6]">Sin deducción aplicable</li>'
+            : res.yearlySchedule
+                .map(
+                  (amt, idx) =>
+                    `<li class="flex justify-between rounded-lg bg-[#14271b] px-3 py-1.5"><span>Ejercicio ${idx + 1}</span><strong class="text-white">${fmt(amt)}</strong></li>`,
+                )
+                .join('');
+      }
+    }
+
+    root.querySelectorAll('input').forEach((el) => {
+      el.addEventListener('change', render);
+      el.addEventListener('input', render);
+    });
+    render();
+  }
+</script>

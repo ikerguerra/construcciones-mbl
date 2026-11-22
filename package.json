@@ -10,6 +10,7 @@
     "preview": "astro preview",
     "check": "node --experimental-require-module ./node_modules/astro/astro.js check",
     "check:functions": "tsc -p functions/tsconfig.json --noEmit",
+    "test": "vitest run",
     "verify": "python scripts/verify-build.py"
   },
   "dependencies": {
@@ -24,6 +25,9 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@cloudflare/workers-types": "^4.20250401.0",
-    "typescript": "^5.9.3"
+    "@tailwindcss/vite": "^4.3.5",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.1"
   }
 }

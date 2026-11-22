@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ResumenDirecto from '../../components/ResumenDirecto.astro';
+import LicenseSimulator from '../../components/tools/LicenseSimulator.astro';
+import TablaComparativa from '../../components/TablaComparativa.astro';
+import BloqueFaq from '../../components/BloqueFaq.astro';
+import {
+  CONCEJOS_PROGRAMATICOS,
+  type ConcejoAsturias,
+} from '../../data/asturiasConcejos';
+import { EMPRESA } from '../../data/empresa';
+import {
+  buildBreadcrumbNode,
+  buildFaqNode,
+  buildOrganizationNode,
+  buildWebApplicationNode,
+} from '../../lib/schema';
+
+export async function getStaticPaths() {
+  return CONCEJOS_PROGRAMATICOS.map((concejo) => ({
+    params: { concejo: concejo.slug },
+    props: { concejo },
+  }));
+}
+
+interface Props {
+  concejo: ConcejoAsturias;
+}
+
+const { concejo } = Astro.props;
+const icioPct = (concejo.icioRate * 100).toFixed(2).replace(/\.00$/, '');
+const pageUrl = `${EMPRESA.dominio}/licencia-obra-asturias/${concejo.slug}/`;
+
+const title = `Licencia de Obra e ICIO en ${concejo.name} (2026)`;
+const description = `Calcula el ICIO en ${concejo.name} (${icioPct}% en 2026) y comprueba si tu reforma necesita Declaración Responsable, Obra Menor u Obra Mayor.`;
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Licencias de obra en Asturias', url: '/licencia-obra-asturias/' },
+  { name: concejo.name, url: `/licencia-obra-asturias/${concejo.slug}/` },
+];
+
+const faqs = [
+  {
+    pregunta: `¿Cuál es el tipo de gravamen del ICIO en ${concejo.name} en 2026?`,
+    respuesta: `El tipo vigente en la ordenanza fiscal de ${concejo.name} es del ${icioPct} % sobre el Presupuesto de Ejecución Material (PEM), dentro del límite legal estatal del 4 % fijado por el artículo 103.2 del TRLRHL.`,
+  },
+  {
+    pregunta: `¿Cuándo basta con Declaración Responsable para reformar en ${concejo.name}?`,
+    respuesta: `En aplicación del art. 228 bis del TROTU en Asturias, las reformas interiores en ${concejo.name} sin modificación de tabiquería, sin cambio de uso, sin afección estructural ni intervención en fachadas o inmuebles protegidos pueden tramitarse por Declaración Responsable.`,
+  },
+  {
+    pregunta: `¿Cómo se calcula la base imponible (PEM) del ICIO en ${concejo.name}?`,
+    respuesta: `Si cuentas con un presupuesto de ejecución por contrata (sin IVA), la base imponible del ICIO se obtiene descontando el 13 % de Gastos Generales y el 6 % de Beneficio Industrial (dividiendo entre 1,19) y excluyendo honorarios de arquitecto.`,
+  },
+  {
+    pregunta: `¿Qué zona climática CTE tiene ${concejo.name} si quiero pedir ayudas o deducción IRPF?`,
+    respuesta: `${concejo.name} tiene una altitud media orientativa de ${concejo.avgAltitudeM} m y está clasificado en Zona Climática ${concejo.climateZone} del Código Técnico de la Edificación (DB-HE), un dato clave para dimensionar aerotermia y envolvente térmica.`,
+  },
+];
+
+const otrosConcejos = CONCEJOS_PROGRAMATICOS.filter((c) => c.slug !== concejo.slug).slice(0, 6);
+const faqNode = buildFaqNode(faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildWebApplicationNode({
+    name: `Calculadora de Licencia de Obra e ICIO en ${concejo.name}`,
+    description,
+    url: pageUrl,
+    applicationCategory: 'UtilitiesApplication',
+  }),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header slot="header" mode="solid" currentPath="/licencia-obra-asturias/" />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Ordenanza Fiscal 2026 · {concejo.name} · Zona CTE {concejo.climateZone}</span>
+    <h1 class="sec-title" style="font-size:clamp(34px,4.5vw,58px)">
+      Calculadora de Licencia de Obra e ICIO en {concejo.name} (2026)
+    </h1>
+
+    <ResumenDirecto
+      texto={`En ${concejo.name}, el Impuesto sobre Construcciones, Instalaciones y Obras (ICIO) vigente en 2026 es del ${icioPct} % sobre el PEM sin IVA, con una tasa administrativa orientativa entre ${concejo.estimatedLicenseFeeRange[0]} € y ${concejo.estimatedLicenseFeeRange[1]} €. Simula abajo qué permiso urbanístico exige el TROTU para tu reforma.`}
+    />
+
+    <div style="margin-top:28px">
+      <LicenseSimulator defaultConcejoSlug={concejo.slug} />
+    </div>
+
+    <div style="margin-top:48px">
+      <span class="sec-kicker">Datos municipales verificados · Ejercicio 2026</span>
+      <h2 class="sec-title">Resumen Fiscal y Técnico para Obras en {concejo.name}</h2>
+      <TablaComparativa
+        caption={`Parámetros urbanísticos y climáticos de ${concejo.name} (Asturias)`}
+        columnas={['Parámetro en ' + concejo.name, 'Valor vigente 2026', 'Referencia normativa']}
+        filas={[
+          ['Tipo de gravamen ICIO', `${icioPct} % sobre PEM (sin IVA)`, 'Art. 103 TRLRHL / Ordenanza municipal'],
+          ['Tasa administrativa orientativa', `${concejo.estimatedLicenseFeeRange[0]} € – ${concejo.estimatedLicenseFeeRange[1]} €`, 'Tramitación de expediente urbanístico'],
+          ['Zona Climática CTE (DB-HE)', `Zona ${concejo.climateZone} (${concejo.avgAltitudeM} m altitud ref.)`, 'CTE DB-HE Anejo B (Principado de Asturias)'],
+          ['Bonificación potestativa solar / térmica', concejo.allowsSolarIcioBonus ? 'Contemplable según ordenanza vigente' : 'No especificada', 'Art. 103.2.b TRLRHL'],
+          ['Factor logístico de ejecución', `×${concejo.logisticsFactor.toFixed(2)}`, 'Transporte y acopio de materiales en obra'],
+        ]}
+      />
+    </div>
+
+    <article class="prose" style="margin-top:40px;max-width:86ch">
+      <h2>Cómo tramitar tu licencia de obra o declaración responsable en {concejo.name}</h2>
+      <p>
+        Antes de iniciar una reforma integral, cambio de distribución, rehabilitación energética o construcción de vivienda en <strong>{concejo.name}</strong>, la normativa urbanística del Principado de Asturias —regulada por el Texto Refundido de las disposiciones legales vigentes en materia de ordenación del territorio y urbanismo (<strong>TROTU</strong>, Decreto Legislativo 1/2004)— distingue tres grandes vías de tramitación en función de la entidad técnica de los trabajos y de la protección del inmueble.
+      </p>
+      <p>
+        Cuando se trata de renovaciones interiores que no alteran la distribución ni afectan a elementos estructurales, huecos de fachada o instalaciones comunes —por ejemplo, sustituir pavimentos, alicatar baños, renovar mobiliario de cocina o cambiar ventanas manteniendo exactamente las dimensiones y estética de fachada—, resulta aplicable el régimen de <strong>Declaración Responsable Urbanística (art. 228 bis del TROTU)</strong>. Este procedimiento permite iniciar la obra de forma inmediata desde el registro de entrada en el Ayuntamiento de {concejo.name}, siempre acompañado de la memoria descriptiva y la autoliquidación tributaria correspondiente.
+      </p>
+      <p>
+        Por el contrario, si tu proyecto contempla tirar o levantar tabiques de distribución interior en {concejo.name}, el consistorio suele exigir una <strong>Licencia de Obra Menor</strong> respaldada por plano de estado actual y reformado junto con un certificado técnico que acredite la ausencia de afección estructural. Y en actuaciones de mayor calado —como obras de nueva planta, ampliaciones, rehabilitación de cubiertas con cambio estructural, sistemas SATE en fachada o intervenciones sobre inmuebles incluidos en el catálogo urbanístico o entornos de Patrimonio Cultural— será preceptiva la <strong>Licencia de Obra Mayor</strong> con proyecto visado y dirección facultativa.
+      </p>
+      <h3>Cálculo real del ICIO ({icioPct}%) y diferencia frente al presupuesto de contrata</h3>
+      <p>
+        Uno de los errores más habituales al planificar una reforma en {concejo.name} es calcular el {icioPct} % del ICIO directamente sobre el importe total con IVA que entrega el contratista. Conforme al artículo 102 del Real Decreto Legislativo 2/2004 (TRLRHL), el ICIO grava exclusivamente el coste real y efectivo de la ejecución material (<strong>PEM</strong>), excluyendo el IVA, los honorarios de proyecto técnico y el 19 % estándar de Gastos Generales (13 %) y Beneficio Industrial (6 %) de la constructora. En consecuencia, un presupuesto de contrata de 23.800 € sin IVA equivale a un PEM aproximado de 20.000 €, lo que supone en {concejo.name} una cuota de ICIO cercana a {Math.round(20000 * concejo.icioRate).toLocaleString('es-ES')} €.
+      </p>
+      <p>
+        Desde nuestra oficina técnica en Asturias nos encargamos de preparar la memoria valorada, la gestión de residuos de construcción y demolición (RCD), la solicitud de ocupación de vía pública para contenedor o andamio si tu calle en {concejo.name} lo requiere, y la coordinación completa de gremios con presupuesto cerrado por partidas.
+      </p>
+    </article>
+
+    <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:10px">
+      <a class="pill" href={`/calculadora-presupuesto-reforma/?concejo=${concejo.slug}&ref=licencias`}>
+        Calcular presupuesto de reforma en {concejo.name}
+      </a>
+      <a class="pill pill-white" href={`/comparador-aerotermia-asturias/?concejo=${concejo.slug}`}>
+        Simular aerotermia en {concejo.name} (Zona {concejo.climateZone})
+      </a>
+    </div>
+
+    <div style="margin-top:44px">
+      <span class="sec-kicker">Otros municipios cercanos</span>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
+        {otrosConcejos.map((o) => (
+          <a class="btn-outline" href={`/licencia-obra-asturias/${o.slug}/`}>
+            Licencia e ICIO en {o.name} ({(o.icioRate * 100).toFixed(2).replace(/\.00$/, '')}%)
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BloqueFaq
+    titulo={`Preguntas Frecuentes sobre Licencias e ICIO en ${concejo.name}`}
+    faqs={faqs}
+  />
+</BaseLayout>

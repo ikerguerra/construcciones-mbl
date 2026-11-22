@@ -136,6 +136,30 @@ export function buildServiceNode(opts: {
   };
 }
 
+export function buildWebApplicationNode(opts: {
+  name: string;
+  description: string;
+  url: string;
+  applicationCategory?: 'FinanceApplication' | 'UtilitiesApplication';
+}) {
+  return {
+    '@type': 'WebApplication',
+    '@id': `${opts.url}#webapp`,
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    applicationCategory: opts.applicationCategory ?? 'UtilitiesApplication',
+    operatingSystem: 'All',
+    inLanguage: 'es-ES',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'EUR',
+    },
+    provider: { '@id': `${EMPRESA.dominio}/#organization` },
+  };
+}
+
 export function buildBlogPostingNode(opts: {
   title: string;
   description: string;

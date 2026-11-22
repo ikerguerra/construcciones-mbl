@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import AerotermiaComparator from '../components/tools/AerotermiaComparator.astro';
+import BloqueFaq from '../components/BloqueFaq.astro';
+import { EMPRESA } from '../data/empresa';
+import {
+  buildBreadcrumbNode,
+  buildFaqNode,
+  buildOrganizationNode,
+  buildWebApplicationNode,
+} from '../lib/schema';
+
+const slug = 'comparador-aerotermia-asturias';
+const pageUrl = `${EMPRESA.dominio}/${slug}/`;
+const title = 'Comparador de Aerotermia en Asturias (2026) | Ahorro Real';
+const description =
+  'Compara el gasto de tu caldera actual frente a aerotermia en Asturias según zona climática CTE (C1, D1, E1), amortización con IRPF y ahorro de CO2.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Comparador de aerotermia en Asturias', url: `/${slug}/` },
+];
+
+const faqs = [
+  {
+    pregunta: '¿Funciona bien la aerotermia en zonas húmedas o frías de Asturias (C1, D1 y E1)?',
+    respuesta:
+      'Sí. Ajustando el SCOP estacional a cada zona climática CTE de Asturias (costa C1, valles centrales D1 y montaña E1 > 550 m), una instalación de aerotermia con suelo radiante alcanza rendimientos medios anuales de entre 3,3 y 4,0 kWh térmicos por cada kWh eléctrico consumido.',
+  },
+  {
+    pregunta: '¿Qué diferencia hay entre instalar aerotermia con suelo radiante o con radiadores existentes?',
+    respuesta:
+      'El suelo radiante trabaja a baja temperatura (30–35 °C) maximizando el SCOP y el ahorro mensual. Con radiadores convencionales de alta temperatura el rendimiento baja ligeramente, aunque sigue ofreciendo ahorros relevantes frente a gasóleo C o emisores eléctricos directos.',
+  },
+  {
+    pregunta: '¿Cuánto se acorta la amortización al aplicar la deducción del IRPF?',
+    respuesta:
+      'Al reducir habitualmente más de un 30 % el consumo de energía primaria no renovable, la sustitución de una caldera fósil por aerotermia suele encajar en la deducción del 40 % en IRPF (hasta 3.000 € de ahorro fiscal) o del 60 % en viviendas unifamiliares dentro de rehabilitación integral.',
+  },
+];
+
+const faqNode = buildFaqNode(faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildWebApplicationNode({
+    name: 'Comparador de Aerotermia vs. Caldera en Asturias',
+    description,
+    url: pageUrl,
+    applicationCategory: 'UtilitiesApplication',
+  }),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header slot="header" mode="solid" currentPath={`/${slug}/`} />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Módulo 4 · Climatización Eficiente por Zona CTE (C1 / D1 / E1)</span>
+    <h1 class="sec-title" style="font-size:clamp(36px,4.8vw,62px)">
+      Comparador de Aerotermia vs. Sistema Actual en Asturias
+    </h1>
+
+    <ResumenDirecto
+      texto="Introduce tu gasto anual en calefacción (o estima según los m² y aislamiento de tu casa), elige tu concejo en Asturias y comprueba al instante el ahorro anual con aerotermia, el plazo de amortización bruto y con IRPF del 40 % / 60 %, y las emisiones de CO2 evitadas."
+    />
+
+    <div style="margin-top:28px">
+      <AerotermiaComparator />
+    </div>
+  </section>
+
+  <BloqueFaq
+    titulo="Preguntas Frecuentes sobre Aerotermia en el Clima de Asturias"
+    faqs={faqs}
+  />
+</BaseLayout>

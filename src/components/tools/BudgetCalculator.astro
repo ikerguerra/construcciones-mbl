@@ -1,0 +1,658 @@
+---
+import '../../styles/tools-tailwind.css';
+import { ASTURIAS_CONCEJOS } from '../../data/asturiasConcejos';
+import {
+  OPTIONAL_PACKAGES,
+  PATHOLOGY_COSTS,
+  PROPERTY_MULTIPLIERS,
+  QUALITY_MULTIPLIERS,
+  REFORM_BASE_PRICING,
+  type OptionalPackageKey,
+  type PathologyKey,
+  type PropertyType,
+  type QualityLevel,
+} from '../../data/budgetPricing';
+import { calculateBudget } from '../../lib/calculators/budgetEngine';
+import LeadCaptureModal from './LeadCaptureModal.astro';
+import ToolLegalDisclaimer from './ToolLegalDisclaimer.astro';
+
+const initial = calculateBudget({
+  concejoSlug: 'oviedo',
+  reformType: 'integral',
+  areaM2: 100,
+  propertyType: 'piso_con_ascensor',
+  quality: 'media',
+  pathologies: [],
+  optionalPackages: [],
+  clientType: 'particular_vivienda_habitual',
+  buildingOlderThan2Years: true,
+  contractorMaterialsUnder40Pct: true,
+});
+
+const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
+const reformTypes = Object.values(REFORM_BASE_PRICING);
+const qualityLevels = Object.entries(QUALITY_MULTIPLIERS) as Array<
+  [QualityLevel, (typeof QUALITY_MULTIPLIERS)[QualityLevel]]
+>;
+const propertyTypes = Object.entries(PROPERTY_MULTIPLIERS) as Array<
+  [PropertyType, (typeof PROPERTY_MULTIPLIERS)[PropertyType]]
+>;
+const optionalList = Object.values(OPTIONAL_PACKAGES) as Array<
+  (typeof OPTIONAL_PACKAGES)[OptionalPackageKey]
+>;
+const pathologyList: Array<{ key: PathologyKey; label: string; description: string }> = [
+  {
+    key: 'humedades_capilaridad',
+    label: PATHOLOGY_COSTS.humedades_capilaridad.label,
+    description: PATHOLOGY_COSTS.humedades_capilaridad.description,
+  },
+  {
+    key: 'rehabilitacion_cubierta',
+    label: PATHOLOGY_COSTS.rehabilitacion_cubierta.label,
+    description: PATHOLOGY_COSTS.rehabilitacion_cubierta.description,
+  },
+  {
+    key: 'refuerzo_estructural',
+    label: PATHOLOGY_COSTS.refuerzo_estructural.label,
+    description: PATHOLOGY_COSTS.refuerzo_estructural.description,
+  },
+];
+---
+
+<div class="grid gap-6 lg:grid-cols-12 lg:items-start" data-budget-tool>
+  <!-- Columna izquierda: Wizard 3 pasos -->
+  <div class="rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
+    <!-- Indicador de pasos -->
+    <div class="mb-6 grid grid-cols-3 gap-2" role="tablist" aria-label="Pasos de la calculadora">
+      <button
+        type="button"
+        data-step-tab="1"
+        class="rounded-2xl border border-[#164624] bg-[#164624] px-3 py-2.5 text-left text-xs font-semibold text-white transition sm:text-sm"
+      >
+        <span class="block text-[11px] opacity-80">Paso 1</span>
+        Inmueble y alcance
+      </button>
+      <button
+        type="button"
+        data-step-tab="2"
+        class="rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-3 py-2.5 text-left text-xs font-semibold text-[#516158] transition hover:border-[#3e6b47] sm:text-sm"
+      >
+        <span class="block text-[11px] opacity-80">Paso 2</span>
+        Calidades y extras
+      </button>
+      <button
+        type="button"
+        data-step-tab="3"
+        class="rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-3 py-2.5 text-left text-xs font-semibold text-[#516158] transition hover:border-[#3e6b47] sm:text-sm"
+      >
+        <span class="block text-[11px] opacity-80">Paso 3</span>
+        Perfil fiscal (IVA)
+      </button>
+    </div>
+
+    <!-- PASO 1 -->
+    <div data-step-panel="1" class="space-y-5">
+      <div>
+        <label class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+          Tipo de actuación
+        </label>
+        <div class="grid gap-2.5 sm:grid-cols-2">
+          {reformTypes.map((rt) => (
+            <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4]/60 p-3.5 transition hover:border-[#164624] has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+              <input
+                type="radio"
+                name="reformType"
+                value={rt.key}
+                checked={rt.key === 'integral'}
+                class="mt-1 h-4 w-4 accent-[#164624]"
+              />
+              <span>
+                <span class="block text-sm font-semibold text-[#111a14]">{rt.label}</span>
+                <span class="mt-0.5 block text-xs text-[#516158]">
+                  {rt.minEurM2.toLocaleString('es-ES')}–{rt.maxEurM2.toLocaleString('es-ES')} €/m² base
+                </span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="b-concejo" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+            Concejo en Asturias
+          </label>
+          <select
+            id="b-concejo"
+            name="concejoSlug"
+            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm font-medium text-[#111a14] focus:border-[#164624] focus:outline-none"
+          >
+            {ASTURIAS_CONCEJOS.map((c) => (
+              <option value={c.slug} selected={c.slug === 'oviedo'}>
+                {c.name} (ICIO {(c.icioRate * 100).toFixed(2).replace(/\.00$/, '')}%)
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label for="b-property" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
+            Tipología y accesos
+          </label>
+          <select
+            id="b-property"
+            name="propertyType"
+            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm font-medium text-[#111a14] focus:border-[#164624] focus:outline-none"
+          >
+            {propertyTypes.map(([k, v]) => (
+              <option value={k} selected={k === 'piso_con_ascensor'}>
+                {v.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <div class="mb-1.5 flex items-center justify-between">
+          <label for="b-area" class="text-xs font-semibold text-[#111a14]">
+            Superficie útil / construida (m²)
+          </label>
+          <span id="b-area-badge" class="rounded-full bg-[#eef3ee] px-3 py-0.5 text-xs font-bold text-[#164624]">
+            100 m²
+          </span>
+        </div>
+        <input
+          id="b-area"
+          name="areaM2"
+          type="range"
+          min="15"
+          max="450"
+          step="5"
+          value="100"
+          class="w-full accent-[#164624]"
+        />
+        <div class="mt-2 flex items-center gap-3">
+          <input
+            id="b-area-num"
+            type="number"
+            min="15"
+            max="1000"
+            value="100"
+            aria-label="Superficie exacta en metros cuadrados"
+            class="w-28 rounded-xl border border-[#d6ddd8] px-3 py-1.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+          />
+          <span class="text-xs text-[#516158]">Rango validado: 15 a 1.000 m²</span>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button
+          type="button"
+          data-goto-step="2"
+          class="rounded-full bg-[#164624] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0f331a]"
+        >
+          Siguiente: Calidades y extras →
+        </button>
+      </div>
+    </div>
+
+    <!-- PASO 2 -->
+    <div data-step-panel="2" class="hidden space-y-5">
+      <div>
+        <label class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+          Nivel de calidades
+        </label>
+        <div class="grid gap-2.5 sm:grid-cols-3">
+          {qualityLevels.map(([k, q]) => (
+            <label class="flex cursor-pointer flex-col rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4]/60 p-3.5 transition hover:border-[#164624] has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+              <span class="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="quality"
+                  value={k}
+                  checked={k === 'media'}
+                  class="h-4 w-4 accent-[#164624]"
+                />
+                <span class="text-sm font-semibold text-[#111a14]">{q.label}</span>
+              </span>
+              <span class="mt-1 text-xs text-[#516158]">{q.hint}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <span class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+          Patologías habituales en Asturias (opcional)
+        </span>
+        <div class="space-y-2">
+          {pathologyList.map((pat) => (
+            <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] p-3 transition hover:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+              <input
+                type="checkbox"
+                name="pathologies"
+                value={pat.key}
+                class="mt-0.5 h-4 w-4 accent-[#164624]"
+              />
+              <span>
+                <span class="block text-sm font-semibold text-[#111a14]">{pat.label}</span>
+                <span class="block text-xs text-[#516158]">{pat.description}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <span class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+          Partidas frecuentes MBL (sin IVA)
+        </span>
+        <div class="space-y-2">
+          {optionalList.map((pkg) => (
+            <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] p-3 transition hover:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+              <input
+                type="checkbox"
+                name="optionalPackages"
+                value={pkg.key}
+                class="mt-0.5 h-4 w-4 accent-[#164624]"
+              />
+              <span class="flex-1">
+                <span class="flex flex-wrap items-baseline justify-between gap-2">
+                  <span class="text-sm font-semibold text-[#111a14]">{pkg.label}</span>
+                  <span class="text-xs font-bold text-[#164624]">
+                    +{pkg.minEur.toLocaleString('es-ES')} a {pkg.maxEur.toLocaleString('es-ES')} €
+                  </span>
+                </span>
+                <span class="block text-xs text-[#516158]">{pkg.description}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-between gap-3 pt-2">
+        <button
+          type="button"
+          data-goto-step="1"
+          class="rounded-full border border-[#d6ddd8] px-5 py-2.5 text-sm font-semibold text-[#516158] hover:bg-[#eef3ee]"
+        >
+          ← Volver
+        </button>
+        <button
+          type="button"
+          data-goto-step="3"
+          class="rounded-full bg-[#164624] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0f331a]"
+        >
+          Siguiente: Perfil fiscal (IVA) →
+        </button>
+      </div>
+    </div>
+
+    <!-- PASO 3 -->
+    <div data-step-panel="3" class="hidden space-y-5">
+      <div>
+        <span class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
+          Perfil del promotor (Art. 91 Ley 37/1992 del IVA)
+        </span>
+        <div class="grid gap-2.5 sm:grid-cols-2">
+          <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] p-3.5 has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+            <input
+              type="radio"
+              name="clientType"
+              value="particular_vivienda_habitual"
+              checked
+              class="mt-0.5 h-4 w-4 accent-[#164624]"
+            />
+            <span>
+              <span class="block text-sm font-semibold text-[#111a14]">Particular (vivienda habitual)</span>
+              <span class="block text-xs text-[#516158]">Opta al IVA reducido del 10 % si cumple requisitos</span>
+            </span>
+          </label>
+          <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] p-3.5 has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+            <input
+              type="radio"
+              name="clientType"
+              value="inversor_alquiler_o_empresa"
+              class="mt-0.5 h-4 w-4 accent-[#164624]"
+            />
+            <span>
+              <span class="block text-sm font-semibold text-[#111a14]">Empresa / alquiler / local</span>
+              <span class="block text-xs text-[#516158]">Tributa al tipo general del 21 % de IVA</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 rounded-2xl border border-[#c6d9cb] bg-[#f3f7f4] p-4">
+        <label class="flex cursor-pointer items-start gap-2.5">
+          <input
+            type="checkbox"
+            name="buildingOlderThan2Years"
+            checked
+            class="mt-0.5 h-4 w-4 accent-[#164624]"
+          />
+          <span class="text-sm text-[#111a14]">
+            La construcción o última rehabilitación de la vivienda tiene más de 2 años.
+          </span>
+        </label>
+
+        <label class="flex cursor-pointer items-start gap-2.5">
+          <input
+            type="checkbox"
+            name="contractorMaterialsUnder40Pct"
+            checked
+            class="mt-0.5 h-4 w-4 accent-[#164624]"
+          />
+          <span class="text-sm text-[#111a14]">
+            Los materiales aportados por la constructora no superan el 40 % de la base imponible (regla AEAT para IVA al 10 %).
+          </span>
+        </label>
+      </div>
+
+      <div class="flex justify-start pt-2">
+        <button
+          type="button"
+          data-goto-step="2"
+          class="rounded-full border border-[#d6ddd8] px-5 py-2.5 text-sm font-semibold text-[#516158] hover:bg-[#eef3ee]"
+        >
+          ← Volver al paso 2
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha: Resumen sticky en escritorio -->
+  <aside class="rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
+        Estimación llave en mano
+      </span>
+      <span id="b-iva-pill" class="rounded-full bg-[#243a2c] px-3 py-1 text-xs font-semibold text-[#86d195]">
+        IVA obra {Math.round(initial.ivaObraRate * 100)} %
+      </span>
+    </div>
+
+    <div id="b-total-range" class="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
+      {fmt(initial.totalMin)} – {fmt(initial.totalMax)}
+    </div>
+    <p id="b-meta-line" class="mt-1 text-xs text-[#c2cec6]">
+      {initial.concejo.name} · {initial.areaM2} m² · Plazo estimado {initial.estimatedWeeksMin}–{initial.estimatedWeeksMax} semanas
+    </p>
+
+    <dl class="mt-5 space-y-2 border-t border-[#243a2c] pt-4 text-sm">
+      <div class="flex justify-between gap-2">
+        <dt class="text-[#c2cec6]">Subtotal ejecución de obra (sin IVA)</dt>
+        <dd id="b-subtotal" class="font-semibold text-white">
+          {fmt(initial.subtotalObraMin)} – {fmt(initial.subtotalObraMax)}
+        </dd>
+      </div>
+      <div id="b-honorarios-row" class="hidden justify-between gap-2">
+        <dt class="text-[#c2cec6]">Honorarios técnicos (21 % IVA aparte)</dt>
+        <dd id="b-honorarios" class="font-semibold text-white">0 €</dd>
+      </div>
+      <div class="flex justify-between gap-2">
+        <dt class="text-[#c2cec6]">PEM estimado (Base ICIO ÷ 1,19)</dt>
+        <dd id="b-pem" class="font-semibold text-white">
+          {fmt(initial.pemMin)} – {fmt(initial.pemMax)}
+        </dd>
+      </div>
+      <div class="flex justify-between gap-2">
+        <dt id="b-icio-label" class="text-[#c2cec6]">
+          ICIO {initial.concejo.name} ({(initial.concejo.icioRate * 100).toFixed(2).replace(/\.00$/, '')}%)
+        </dt>
+        <dd id="b-icio" class="font-semibold text-[#86d195]">
+          {fmt(initial.icioMin)} – {fmt(initial.icioMax)}
+        </dd>
+      </div>
+      <div class="flex justify-between gap-2">
+        <dt class="text-[#c2cec6]">IVA total estimado</dt>
+        <dd id="b-iva" class="font-semibold text-white">
+          {fmt(initial.ivaTotalMin)} – {fmt(initial.ivaTotalMax)}
+        </dd>
+      </div>
+      <div class="flex justify-between gap-2 text-xs">
+        <dt class="text-[#c2cec6]">Tasa administrativa licencia (informativa)</dt>
+        <dd id="b-tasa" class="text-[#c2cec6]">
+          {fmt(initial.estimatedLicenseFeeRange[0])} – {fmt(initial.estimatedLicenseFeeRange[1])}
+        </dd>
+      </div>
+    </dl>
+
+    <!-- Desglose por partidas -->
+    <div class="mt-5 border-t border-[#243a2c] pt-4">
+      <span class="mb-2.5 block text-xs font-semibold tracking-wider text-[#86d195] uppercase">
+        Desglose orientativo por capítulos
+      </span>
+      <div id="b-breakdown" class="space-y-2">
+        {initial.breakdown.map((item) => (
+          <div>
+            <div class="flex justify-between text-xs text-[#c2cec6]">
+              <span>{item.label}</span>
+              <span class="font-semibold text-white">{item.pct} %</span>
+            </div>
+            <div class="mt-1 h-1.5 overflow-hidden rounded-full bg-[#243a2c]">
+              <div class="h-full rounded-full bg-[#86d195]" style={`width:${item.pct}%`} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-5 space-y-2.5">
+      <button
+        type="button"
+        id="b-download-btn"
+        class="w-full cursor-pointer rounded-full bg-white px-5 py-3 text-center text-sm font-bold text-[#164624] transition hover:bg-[#eef3ee]"
+      >
+        Descargar presupuesto detallado en PDF + Checklist de permisos en <span id="b-btn-concejo">{initial.concejo.name}</span>
+      </button>
+
+      <div class="rounded-2xl border border-[#243a2c] bg-[#14271b] p-3.5 text-xs">
+        <span class="block font-semibold text-[#86d195]">Siguiente paso recomendado</span>
+        <div class="mt-1.5 flex flex-wrap gap-3">
+          <a id="b-link-licencia" href={`/licencia-obra-asturias/${initial.concejo.slug}/`} class="text-white underline hover:text-[#86d195]">
+            Ver licencia e ICIO en {initial.concejo.name} →
+          </a>
+          <a id="b-link-irpf" href="/calculadora-deducciones-irpf-reforma/?inversion=14250&tipo=energia_30_o_AB" class="hidden text-white underline hover:text-[#86d195]">
+            Calcular deducción IRPF (40 % / 60 %) →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <ToolLegalDisclaimer />
+    </div>
+  </aside>
+</div>
+
+<LeadCaptureModal />
+
+<script>
+  import { calculateBudget, type BudgetInput } from '../../lib/calculators/budgetEngine';
+  import { buildToolUrl, parseToolQuery } from '../../lib/calculators/urlState';
+  import type {
+    OptionalPackageKey,
+    PathologyKey,
+    PropertyType,
+    QualityLevel,
+    ReformType,
+  } from '../../data/budgetPricing';
+  import type { ClientType } from '../../data/taxRules';
+
+  const root = document.querySelector('[data-budget-tool]');
+  if (root) {
+    const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
+
+    // Leer query params iniciales si llegan desde otra calculadora o desde el Hero
+    const qs = parseToolQuery(window.location.search);
+    if (qs.concejo) {
+      const sel = root.querySelector<HTMLSelectElement>('#b-concejo');
+      if (sel && Array.from(sel.options).some((o) => o.value === qs.concejo)) {
+        sel.value = qs.concejo;
+      }
+    }
+    if (qs.m2) {
+      const r = root.querySelector<HTMLInputElement>('#b-area');
+      const n = root.querySelector<HTMLInputElement>('#b-area-num');
+      if (r) r.value = String(Math.min(450, qs.m2));
+      if (n) n.value = String(qs.m2);
+    }
+    if (qs.opt) {
+      const cb = root.querySelector<HTMLInputElement>(`input[name="optionalPackages"][value="${qs.opt}"]`);
+      if (cb) cb.checked = true;
+    }
+
+    // Navegación 3 pasos
+    const stepTabs = root.querySelectorAll<HTMLButtonElement>('[data-step-tab]');
+    const stepPanels = root.querySelectorAll<HTMLElement>('[data-step-panel]');
+    function setStep(step: string) {
+      stepTabs.forEach((b) => {
+        const active = b.dataset.stepTab === step;
+        b.className = active
+          ? 'rounded-2xl border border-[#164624] bg-[#164624] px-3 py-2.5 text-left text-xs font-semibold text-white transition sm:text-sm'
+          : 'rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-3 py-2.5 text-left text-xs font-semibold text-[#516158] transition hover:border-[#3e6b47] sm:text-sm';
+      });
+      stepPanels.forEach((p) => {
+        p.classList.toggle('hidden', p.dataset.stepPanel !== step);
+      });
+    }
+    stepTabs.forEach((b) => b.addEventListener('click', () => setStep(b.dataset.stepTab || '1')));
+    root.querySelectorAll<HTMLButtonElement>('[data-goto-step]').forEach((b) => {
+      b.addEventListener('click', () => setStep(b.dataset.gotoStep || '1'));
+    });
+
+    // Sincronizar range + input numérico
+    const rangeEl = root.querySelector<HTMLInputElement>('#b-area');
+    const numEl = root.querySelector<HTMLInputElement>('#b-area-num');
+    const badgeEl = root.querySelector('#b-area-badge');
+    rangeEl?.addEventListener('input', () => {
+      if (numEl) numEl.value = rangeEl.value;
+      render();
+    });
+    numEl?.addEventListener('input', () => {
+      if (rangeEl) rangeEl.value = String(Math.min(450, Math.max(15, Number(numEl.value) || 15)));
+      render();
+    });
+
+    let lastSummary = '';
+    let lastConcejoName = 'Oviedo';
+
+    function readInput(): BudgetInput {
+      const reformType =
+        (root!.querySelector<HTMLInputElement>('input[name="reformType"]:checked')?.value as ReformType) ||
+        'integral';
+      const concejoSlug = root!.querySelector<HTMLSelectElement>('#b-concejo')?.value || 'oviedo';
+      const propertyType =
+        (root!.querySelector<HTMLSelectElement>('#b-property')?.value as PropertyType) || 'piso_con_ascensor';
+      const areaM2 = Number(numEl?.value) || 100;
+      const quality =
+        (root!.querySelector<HTMLInputElement>('input[name="quality"]:checked')?.value as QualityLevel) ||
+        'media';
+      const pathologies = Array.from(
+        root!.querySelectorAll<HTMLInputElement>('input[name="pathologies"]:checked'),
+      ).map((el) => el.value as PathologyKey);
+      const optionalPackages = Array.from(
+        root!.querySelectorAll<HTMLInputElement>('input[name="optionalPackages"]:checked'),
+      ).map((el) => el.value as OptionalPackageKey);
+      const clientType =
+        (root!.querySelector<HTMLInputElement>('input[name="clientType"]:checked')?.value as ClientType) ||
+        'particular_vivienda_habitual';
+      const buildingOlderThan2Years =
+        root!.querySelector<HTMLInputElement>('input[name="buildingOlderThan2Years"]')?.checked ?? true;
+      const contractorMaterialsUnder40Pct =
+        root!.querySelector<HTMLInputElement>('input[name="contractorMaterialsUnder40Pct"]')?.checked ?? true;
+
+      return {
+        concejoSlug,
+        reformType,
+        areaM2,
+        propertyType,
+        quality,
+        pathologies,
+        optionalPackages,
+        clientType,
+        buildingOlderThan2Years,
+        contractorMaterialsUnder40Pct,
+      };
+    }
+
+    function render() {
+      const inp = readInput();
+      const res = calculateBudget(inp);
+      lastConcejoName = res.concejo.name;
+      if (badgeEl) badgeEl.textContent = `${res.areaM2} m²`;
+
+      const setTxt = (id: string, val: string) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
+
+      setTxt('b-iva-pill', `IVA obra ${Math.round(res.ivaObraRate * 100)} %`);
+      setTxt('b-total-range', `${fmt(res.totalMin)} – ${fmt(res.totalMax)}`);
+      setTxt(
+        'b-meta-line',
+        `${res.concejo.name} · ${res.areaM2} m² · Plazo estimado ${res.estimatedWeeksMin}–${res.estimatedWeeksMax} semanas`,
+      );
+      setTxt('b-subtotal', `${fmt(res.subtotalObraMin)} – ${fmt(res.subtotalObraMax)}`);
+      setTxt('b-pem', `${fmt(res.pemMin)} – ${fmt(res.pemMax)}`);
+      setTxt(
+        'b-icio-label',
+        `ICIO ${res.concejo.name} (${(res.concejo.icioRate * 100).toFixed(2).replace(/\.00$/, '')}%)`,
+      );
+      setTxt('b-icio', `${fmt(res.icioMin)} – ${fmt(res.icioMax)}`);
+      setTxt('b-iva', `${fmt(res.ivaTotalMin)} – ${fmt(res.ivaTotalMax)}`);
+      setTxt(
+        'b-tasa',
+        `${fmt(res.estimatedLicenseFeeRange[0])} – ${fmt(res.estimatedLicenseFeeRange[1])}`,
+      );
+      setTxt('b-btn-concejo', res.concejo.name);
+
+      const honRow = document.getElementById('b-honorarios-row');
+      if (honRow) {
+        const hasHon = res.honorariosMax > 0;
+        honRow.classList.toggle('hidden', !hasHon);
+        honRow.classList.toggle('flex', hasHon);
+        if (hasHon) setTxt('b-honorarios', `${fmt(res.honorariosMin)} – ${fmt(res.honorariosMax)}`);
+      }
+
+      const linkLic = document.getElementById('b-link-licencia') as HTMLAnchorElement | null;
+      if (linkLic) {
+        linkLic.href = buildToolUrl('licencia', {
+          concejo: res.concejo.slug,
+          presupuesto: Math.round((res.subtotalObraMin + res.subtotalObraMax) / 2),
+        });
+        linkLic.textContent = `Ver licencia e ICIO en ${res.concejo.name} →`;
+      }
+
+      const linkIrpf = document.getElementById('b-link-irpf') as HTMLAnchorElement | null;
+      if (linkIrpf) {
+        linkIrpf.classList.toggle('hidden', !res.hasEnergyUpgrade);
+        const invEst = inp.optionalPackages?.includes('aerotermia_recuperacion')
+          ? 14250
+          : Math.round((res.totalMin + res.totalMax) / 2);
+        linkIrpf.href = buildToolUrl('irpf', {
+          inversion: invEst,
+          tipo: 'energia_30_o_AB',
+        });
+      }
+
+      lastSummary = `Presupuesto ${inp.reformType} en ${res.concejo.name} (${res.areaM2} m²): ${fmt(res.totalMin)}–${fmt(res.totalMax)} (PEM ${fmt(res.pemMin)}–${fmt(res.pemMax)}, ICIO ${fmt(res.icioMin)}–${fmt(res.icioMax)}).`;
+    }
+
+    root.querySelectorAll('input, select').forEach((el) => {
+      el.addEventListener('change', render);
+    });
+
+    document.getElementById('b-download-btn')?.addEventListener('click', () => {
+      window.dispatchEvent(
+        new CustomEvent('mbl:open-lead-modal', {
+          detail: { concejo: lastConcejoName, resumen: lastSummary },
+        }),
+      );
+    });
+
+    render();
+  }
+</script>

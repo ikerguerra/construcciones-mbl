@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ResumenDirecto from '../components/ResumenDirecto.astro';
+import IrpfCalculator from '../components/tools/IrpfCalculator.astro';
+import BloqueFaq from '../components/BloqueFaq.astro';
+import { EMPRESA } from '../data/empresa';
+import {
+  buildBreadcrumbNode,
+  buildFaqNode,
+  buildOrganizationNode,
+  buildWebApplicationNode,
+} from '../lib/schema';
+
+const slug = 'calculadora-deducciones-irpf-reforma';
+const pageUrl = `${EMPRESA.dominio}/${slug}/`;
+const title = 'Calculadora Deducciones IRPF Reforma Energética (2026)';
+const description =
+  'Calcula tu deducción IRPF del 20 %, 40 % o 60 % por eficiencia energética en Asturias (DA 50ª LIRPF), calendario plurianual y coste neto real.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Deducciones IRPF por eficiencia energética', url: `/${slug}/` },
+];
+
+const faqs = [
+  {
+    pregunta: '¿Qué documentos exige Hacienda para aplicar la deducción del 20 %, 40 % o 60 %?',
+    respuesta:
+      'Es imprescindible disponer de dos Certificados de Eficiencia Energética (CEE) registrados: uno previo al inicio de la obra (con máximo 2 años de antigüedad) y otro posterior que acredite la mejora exigida en demanda (≥ 7 %) o consumo de energía primaria no renovable (≥ 30 % o letra A/B).',
+  },
+  {
+    pregunta: '¿Puedo deducir la reforma si pago una parte en efectivo?',
+    respuesta:
+      'No. La AEAT establece expresamente que cualquier cantidad abonada en metálico queda excluida de la base deducible. Todo pago debe realizarse mediante transferencia bancaria, tarjeta de crédito/débito, cheque nominativo o ingreso en cuenta.',
+  },
+  {
+    pregunta: '¿Cómo funciona el reparto plurianual en la deducción del 60 %?',
+    respuesta:
+      'En rehabilitación energética de edificio completo o vivienda unifamiliar (tramo 60 %), la base máxima anual deducible es de 5.000 €/año (3.000 € de deducción anual), pudiendo trasladar el exceso no aplicado a los 4 ejercicios siguientes hasta un máximo acumulado de 15.000 € de base (9.000 € de ahorro fiscal).',
+  },
+];
+
+const faqNode = buildFaqNode(faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildWebApplicationNode({
+    name: 'Calculadora de Deducciones IRPF por Eficiencia Energética',
+    description,
+    url: pageUrl,
+    applicationCategory: 'FinanceApplication',
+  }),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header slot="header" mode="solid" currentPath={`/${slug}/`} />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Módulo 3 · Disposición Adicional 50ª LIRPF (AEAT 2026)</span>
+    <h1 class="sec-title" style="font-size:clamp(36px,4.8vw,62px)">
+      Calculadora de Deducciones IRPF por Reforma Energética
+    </h1>
+
+    <ResumenDirecto
+      texto="Introduce el importe pagado con IVA, descuenta las subvenciones públicas recibidas y comprueba tu ahorro fiscal exacto en la Declaración de la Renta (tramos del 20 %, 40 % o 60 %), el calendario de aplicación anual y el coste neto real de tu obra en Asturias."
+    />
+
+    <div style="margin-top:28px">
+      <IrpfCalculator />
+    </div>
+  </section>
+
+  <BloqueFaq
+    titulo="Preguntas Frecuentes sobre Deducciones IRPF en Reformas Energéticas"
+    faqs={faqs}
+  />
+</BaseLayout>

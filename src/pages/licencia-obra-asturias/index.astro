@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ResumenDirecto from '../../components/ResumenDirecto.astro';
+import LicenseSimulator from '../../components/tools/LicenseSimulator.astro';
+import BloqueFaq from '../../components/BloqueFaq.astro';
+import { CONCEJOS_PROGRAMATICOS } from '../../data/asturiasConcejos';
+import { EMPRESA } from '../../data/empresa';
+import {
+  buildBreadcrumbNode,
+  buildFaqNode,
+  buildOrganizationNode,
+  buildWebApplicationNode,
+} from '../../lib/schema';
+
+const slug = 'licencia-obra-asturias';
+const pageUrl = `${EMPRESA.dominio}/${slug}/`;
+const title = 'Licencia de Obra e ICIO en Asturias (2026) | Simulador';
+const description =
+  'Descubre en 30 segundos si tu reforma en Asturias requiere Declaración Responsable, Obra Menor u Obra Mayor y calcula el ICIO exacto de tu concejo.';
+
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Licencias de obra e ICIO en Asturias', url: `/${slug}/` },
+];
+
+const faqs = [
+  {
+    pregunta: '¿Qué obras se pueden hacer con Declaración Responsable en Asturias?',
+    respuesta:
+      'Conforme al art. 228 bis del TROTU, las reformas interiores que no modifiquen tabiquería, distribución, estructura, huecos de fachada ni afecten a inmuebles catalogados pueden iniciarse mediante Declaración Responsable desde su registro y abono del ICIO.',
+  },
+  {
+    pregunta: '¿Qué diferencia hay entre el ICIO y la tasa de licencia urbanística?',
+    respuesta:
+      'El ICIO es un impuesto municipal porcentual (hasta el 4 % en 2026 según concejo) aplicado sobre el PEM sin IVA. La tasa administrativa es una cuantía fija o por tramos destinada a sufragar la tramitación del expediente en el Ayuntamiento.',
+  },
+  {
+    pregunta: '¿Cuándo es obligatorio presentar proyecto técnico de arquitecto?',
+    respuesta:
+      'Es obligatorio en obra nueva, ampliaciones de volumen, intervenciones estructurales (cubiertas, vigas, forjados), alteración de fachada o actuaciones en edificios protegidos por Patrimonio Cultural.',
+  },
+];
+
+const faqNode = buildFaqNode(faqs, pageUrl);
+const schemaGraph = [
+  buildOrganizationNode(),
+  buildWebApplicationNode({
+    name: 'Simulador de Licencias de Obra e ICIO en Asturias',
+    description,
+    url: pageUrl,
+    applicationCategory: 'UtilitiesApplication',
+  }),
+  buildBreadcrumbNode(breadcrumbs, pageUrl),
+  ...(faqNode ? [faqNode] : []),
+];
+---
+
+<BaseLayout title={title} description={description} canonical={pageUrl} schemaGraph={schemaGraph}>
+  <Header slot="header" mode="solid" currentPath={`/${slug}/`} />
+
+  <section class="sec">
+    <Breadcrumbs items={breadcrumbs} />
+    <span class="sec-kicker">Módulo 2 · TROTU Asturias (Art. 228 y 228 bis)</span>
+    <h1 class="sec-title" style="font-size:clamp(36px,4.8vw,62px)">
+      Asistente de Licencias de Obra e ICIO en Asturias
+    </h1>
+
+    <ResumenDirecto
+      texto="Selecciona tu concejo asturiano, el tipo de actuación y si el inmueble cuenta con protección patrimonial para saber al instante si necesitas Declaración Responsable, Obra Menor u Obra Mayor, la documentación exigida y el importe estimado del ICIO sobre el PEM."
+    />
+
+    <div style="margin-top:28px">
+      <LicenseSimulator defaultConcejoSlug="oviedo" />
+    </div>
+
+    <div style="margin-top:48px">
+      <span class="sec-kicker">Guías locales por municipio (2026)</span>
+      <h2 class="sec-title">Consulta el ICIO y Tramitación por Concejo en Asturias</h2>
+      <div style="margin-top:20px;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+        {CONCEJOS_PROGRAMATICOS.map((c) => (
+          <a class="zona-card" href={`/licencia-obra-asturias/${c.slug}/`} style="padding:18px">
+            <h3 style="font-size:20px;margin-bottom:4px">{c.name}</h3>
+            <p style="font-size:13px;margin:0">
+              ICIO {(c.icioRate * 100).toFixed(2).replace(/\.00$/, '')}% · Zona CTE {c.climateZone}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BloqueFaq
+    titulo="Preguntas Frecuentes sobre Licencias Urbanísticas e ICIO en Asturias"
+    faqs={faqs}
+  />
+</BaseLayout>
