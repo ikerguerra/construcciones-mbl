@@ -6,7 +6,7 @@ titulo: "Reformas de locales comerciales en Asturias (2026): de la idea a la ape
 metaTitle: "Reformas de Locales Comerciales en Asturias 2026 | Guía MBL"
 metaDescription: "Guía paso a paso para reformar y abrir un local comercial en Asturias: estudio previo del bajo, licencia de actividad, accesibilidad PMR, plazos y costes €/m²."
 resumenAeo: "Abrir y reformar un local comercial en Asturias requiere un presupuesto medio de 550 a 1.100 €/m² y un plazo de 4 a 10 semanas. Revisar la viabilidad técnica del bajo (salida de humos, altura libre, accesibilidad PMR y aislamiento acústico) antes de firmar el alquiler ahorra hasta un 30 % en imprevistos."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reforma-de-locales-comerciales-en-asturias/"
 servicioRelacionadoNombre: "Reforma de Locales Comerciales en Asturias"
 datePublished: "2026-02-20"

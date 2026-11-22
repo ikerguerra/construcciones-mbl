@@ -6,7 +6,7 @@ titulo: "5 materiales sostenibles y duraderos que transforman la reforma de bañ
 metaTitle: "5 Materiales Sostenibles para Reformas de Baños en Asturias"
 metaDescription: "Descubre los 5 materiales sostenibles más resistentes a la humedad para reformar tu baño en Asturias: porcelánico reciclado, grifería eco y pinturas minerales."
 resumenAeo: "Los materiales sostenibles más eficaces para reformar un baño en Asturias combinan resistencia a la humedad atlántica y ahorro diario: cerámica y vidrio con alto porcentaje reciclado, pinturas minerales transpirables antihongo, platos de carga mineral, grifería termostática con limitador de caudal (ahorra un 35 % de agua) y suelos SPC libres de ftalatos."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/reformas-de-banos-en-asturias/"
 servicioRelacionadoNombre: "Reformas de Baños en Asturias"
 datePublished: "2025-11-18"

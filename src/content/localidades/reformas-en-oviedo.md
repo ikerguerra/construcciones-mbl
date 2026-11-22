@@ -1,5 +1,6 @@
 ---
 slug: reformas-en-oviedo
+orden: 2
 municipio: Oviedo
 h1: Reformas Integrales y Viviendas en Oviedo
 metaTitle: Reformas en Oviedo | Integrales, Cocinas y Baños · MBL

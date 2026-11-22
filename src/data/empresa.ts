@@ -89,7 +89,7 @@ export const EMPRESA = {
 } as const;
 
 export interface AutorInfo {
-  id: 'borja-direccion' | 'equipo-tecnico';
+  id: 'direccion-mbl' | 'equipo-tecnico';
   nombre: string;
   rol: string;
   bio: string;
@@ -97,11 +97,11 @@ export interface AutorInfo {
 }
 
 export const AUTORES: Record<AutorInfo['id'], AutorInfo> = {
-  'borja-direccion': {
-    id: 'borja-direccion',
-    nombre: 'Borja — Dirección de Construcciones MBL',
+  'direccion-mbl': {
+    id: 'direccion-mbl',
+    nombre: 'Dirección de Construcciones MBL',
     rol: 'Dirección general y coordinación técnica de obra en Asturias',
-    bio: 'Responsable de la planificación de obra, elaboración de presupuestos cerrados por partidas y seguimiento diario junto al cliente en Gijón, Oviedo, Avilés y resto del Principado.',
+    bio: 'Equipo de dirección responsable de la planificación de obra, elaboración de presupuestos cerrados por partidas y seguimiento diario junto al cliente en Gijón, Oviedo, Avilés y resto del Principado.',
     especialidades: [
       'Reformas integrales llave en mano',
       'Presupuestos cerrados y licencias en Asturias',
@@ -110,7 +110,7 @@ export const AUTORES: Record<AutorInfo['id'], AutorInfo> = {
   },
   'equipo-tecnico': {
     id: 'equipo-tecnico',
-    nombre: 'Equipo Técnico de Construcciones MBL',
+    nombre: 'Dirección de Construcciones MBL',
     rol: 'Albañilería, fontanería, electricidad, carpintería y eficiencia energética',
     bio: 'Equipo multidisciplinar con más de 20 años ejecutando reformas en viviendas, baños, cocinas y locales comerciales en Asturias, adaptado al clima húmedo atlántico y normativa municipal.',
     especialidades: [
@@ -140,7 +140,7 @@ export const TESTIMONIOS_REALES: TestimonioItem[] = [
     tipoObra: 'Reforma integral de vivienda',
     municipio: 'Pola de Siero',
     titulo: 'Cumplimiento estricto de plazos y presupuesto acordado',
-    cita: 'Profesionalidad y buen gusto. Nos realizaron la reforma integral de nuestra vivienda en Pola de Siero y no podemos estar más satisfechos con el resultado. Cumplieron con todos los plazos previstos y se adaptaron perfectamente al presupuesto acordado, con Borja siempre pendiente de cada detalle.',
+    cita: 'Profesionalidad y buen gusto. Nos realizaron la reforma integral de nuestra vivienda en Pola de Siero y no podemos estar más satisfechos con el resultado. Cumplieron con todos los plazos previstos y se adaptaron perfectamente al presupuesto acordado, siempre pendientes de cada detalle.',
     imagenKey: 'integral',
   },
   {
@@ -176,7 +176,7 @@ export const TESTIMONIOS_REALES: TestimonioItem[] = [
     tipoObra: 'Proyecto de reforma',
     municipio: 'Asturias',
     titulo: 'Confianza y seriedad de principio a fin',
-    cita: 'Buena experiencia con ellos. Confianza y seriedad, la base para que nuestro proyecto saliera perfecto. Muy agradecida a Borja y a todo el equipo durante toda la ejecución.',
+    cita: 'Buena experiencia con ellos. Confianza y seriedad, la base para que nuestro proyecto saliera perfecto. Muy agradecida a todo el equipo durante toda la ejecución.',
     imagenKey: 'integral',
   },
   {

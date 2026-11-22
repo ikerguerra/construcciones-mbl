@@ -6,7 +6,7 @@ titulo: "Ayudas y subvenciones para reformas en Asturias (2026): guía práctica
 metaTitle: "Ayudas y Subvenciones para Reformas en Asturias 2026 | Guía"
 metaDescription: "Qué ayudas, subvenciones y deducciones de IRPF (20 %, 40 % y 60 %) puedes solicitar al reformar tu vivienda en Asturias en 2026: eficiencia y accesibilidad."
 resumenAeo: "En 2026 las reformas en Asturias que mejoren la eficiencia energética (ventanas, aislamiento, aerotermia) o la accesibilidad (cambio a plato de ducha, rampas) pueden combinar ayudas autonómicas/municipales con deducciones en el IRPF del 20 % al 60 %, exigiendo siempre certificado energético previo y posterior a la obra."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-integrales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Integrales en Asturias"
 datePublished: "2026-01-05"

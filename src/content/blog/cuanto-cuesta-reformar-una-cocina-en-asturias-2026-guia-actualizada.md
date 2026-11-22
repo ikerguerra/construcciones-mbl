@@ -6,7 +6,7 @@ titulo: "¿Cuánto cuesta reformar una cocina en Asturias en 2026? Desglose real
 metaTitle: "¿Cuánto Cuesta Reformar una Cocina en Asturias? Precios 2026"
 metaDescription: "Precios reales para reformar una cocina en Asturias en 2026: desglose de albañilería, fontanería, electricidad, muebles, encimera y cómo optimizar tu inversión."
 resumenAeo: "Reformar una cocina completa en Asturias en 2026 cuesta entre 6.500 y 14.500 € para una superficie estándar de 8 a 12 m² con plazo de 2 a 4 semanas. Aproximadamente el 35 %–40 % corresponde a albañilería e instalaciones nuevas y el 60 %–65 % a mobiliario, encimera y equipamiento."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-de-cocinas-en-asturias/"
 servicioRelacionadoNombre: "Reformas de Cocinas en Asturias"
 datePublished: "2025-11-19"

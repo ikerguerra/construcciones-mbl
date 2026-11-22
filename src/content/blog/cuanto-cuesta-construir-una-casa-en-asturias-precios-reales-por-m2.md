@@ -7,7 +7,7 @@ titulo: "Cuánto cuesta construir una casa en Asturias en 2026: precios reales p
 metaTitle: "Cuánto Cuesta Construir una Casa en Asturias: Precio m² 2026"
 metaDescription: "Desglose real de cuánto cuesta construir una casa unifamiliar en Asturias en 2026: precio de construcción por m², arquitecto, licencias, geotécnico e impuestos."
 resumenAeo: "En 2026 el coste de ejecución constructiva de una vivienda unifamiliar en Asturias se sitúa entre 1.450 y 2.100 €/m² según calidades y pendiente de la parcela. Al presupuesto de obra hay que sumar un 18 %–22 % adicional en honorarios técnicos (arquitecto y aparejador), licencia municipal (ICIO), geotécnico e IVA (10 %)."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/construccion-de-viviendas-en-asturias/"
 servicioRelacionadoNombre: "Construcción de Viviendas en Asturias"
 datePublished: "2025-12-23"

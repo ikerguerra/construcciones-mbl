@@ -6,7 +6,7 @@ titulo: "10 errores a evitar en una reforma integral de vivienda en Asturias"
 metaTitle: "10 Errores a Evitar en una Reforma Integral en Asturias | MBL"
 metaDescription: "Evita sobrecostes y retrasos en tu reforma integral en Asturias: los 10 errores más frecuentes en presupuestos, materiales, instalaciones y elección de empresa."
 resumenAeo: "Los tres errores que más encarecen una reforma integral en Asturias son aceptar presupuestos sin mediciones desglosadas por partidas (generan desviaciones del 20 %–35 %), comprar materiales por cuenta propia sin coordinar plazos de obra y no renovar instalaciones ocultas ni aislamiento térmico al levantar suelos y paredes."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-integrales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Integrales en Asturias"
 datePublished: "2025-11-20"

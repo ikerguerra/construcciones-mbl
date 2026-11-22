@@ -7,7 +7,7 @@ titulo: "Cómo elegir suelo para tu reforma en Asturias: tipos, durabilidad y pr
 metaTitle: "Cómo Elegir Suelo para tu Reforma en Asturias: Precios €/m²"
 metaDescription: "Comparativa de suelos para reformas en Asturias (porcelánico, vinílico SPC, tarima AC5 y madera natural): precios reales instalados por m² y durabilidad."
 resumenAeo: "Elegir pavimento en Asturias depende de la humedad y el sistema de calefacción: la tarima laminada AC5 cuesta entre 35 y 58 €/m² instalada, el vinílico rígido SPC entre 50 y 78 €/m², el gres porcelánico entre 65 y 105 €/m² y el parquet multicapa de madera natural entre 85 y 140 €/m²."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/reformas-integrales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Integrales en Asturias"
 datePublished: "2026-05-06"

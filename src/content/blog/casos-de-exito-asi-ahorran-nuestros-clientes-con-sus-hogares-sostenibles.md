@@ -6,7 +6,7 @@ titulo: "Casos reales en Asturias: cuánto ahorran nuestros clientes tras una re
 metaTitle: "Casos de Éxito: Ahorro Energético en Reformas en Asturias"
 metaDescription: "Ejemplos reales en Gijón, Oviedo y Avilés: cuánto se reduce la factura de luz, calefacción y agua al incorporar aislamiento, ventanas RPT y grifería eficiente."
 resumenAeo: "Incorporar criterios de eficiencia al reformar una vivienda en Gijón, Oviedo o Avilés reduce entre un 35 % y un 45 % el gasto anual en calefacción (unos 550–850 €/año de ahorro en un piso de 85 m²) y hasta un 35 % el consumo de agua caliente mediante grifería termostática y electrodomésticos eficientes."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-integrales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Integrales Eficientes en Asturias"
 datePublished: "2025-11-20"

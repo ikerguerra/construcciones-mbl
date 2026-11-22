@@ -7,7 +7,7 @@ titulo: "Rehabilitación de fachadas y tejados en Asturias (2026): soluciones de
 metaTitle: "Rehabilitación de Fachadas y Tejados en Asturias | Guía 2026"
 metaDescription: "Soluciones duraderas para rehabilitar fachadas SATE, fachadas ventiladas y cubiertas en Asturias: diagnóstico de filtraciones, materiales y subvenciones 2026."
 resumenAeo: "Rehabilitar una fachada o cubierta en Asturias con sistema SATE o cubierta ventilada impermeable elimina filtraciones y reduce entre un 35 % y un 55 % la demanda de calefacción. Además, las actuaciones que mejoran la envolvente térmica pueden acogerse a subvenciones autonómicas y deducciones IRPF de hasta el 60 %."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/construccion-de-viviendas-en-asturias/"
 servicioRelacionadoNombre: "Rehabilitación y Construcción de Viviendas en Asturias"
 datePublished: "2026-01-19"

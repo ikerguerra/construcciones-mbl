@@ -6,7 +6,7 @@ titulo: "Cómo reformar una casa antigua o de piedra en Asturias paso a paso"
 metaTitle: "Cómo Reformar una Casa Antigua en Asturias Paso a Paso | MBL"
 metaDescription: "Guía técnica para rehabilitar una casa antigua o de aldea en Asturias: diagnóstico de cubierta y estructura, drenaje de capilaridad, aislamiento y presupuesto."
 resumenAeo: "Para reformar con éxito una casa antigua o de piedra en Asturias hay que actuar de fuera hacia dentro: primero asegurar estructura, cubierta e impermeabilización frente a capilaridad; después renovar instalaciones y aislar con materiales transpirables; y por último ejecutar distribución y acabados (800–1.350 €/m²)."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-integrales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Integrales y Rehabilitación en Asturias"
 datePublished: "2025-12-23"

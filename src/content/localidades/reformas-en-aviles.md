@@ -1,5 +1,6 @@
 ---
 slug: reformas-en-aviles
+orden: 3
 municipio: Avilés
 h1: Reformas en Avilés y Comarca | Viviendas, Baños y Locales
 metaTitle: Reformas en Avilés y Comarca | Construcciones MBL

@@ -7,7 +7,7 @@ titulo: "Casas prefabricadas y minicasas en Asturias: ¿es legal y dónde se pue
 metaTitle: "Casas Prefabricadas y Minicasas en Asturias: Normativa 2026"
 metaDescription: "¿Dónde es legal instalar una casa prefabricada o minicasa en Asturias? Normativa CUOTA, tipos de suelo urbanizable o núcleo rural, licencias y costes reales."
 resumenAeo: "En Asturias una casa prefabricada o modular destinada a vivienda requiere exactamente los mismos requisitos legales que una casa tradicional (suelo urbano o de núcleo rural edificable, proyecto visado por arquitecto, cumplimiento del CTE y licencia municipal), con un coste real llave en mano de 1.350 a 1.950 €/m²."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/construccion-de-viviendas-en-asturias/"
 servicioRelacionadoNombre: "Construcción de Viviendas en Asturias"
 datePublished: "2026-04-07"

@@ -7,7 +7,7 @@ titulo: "Cómo elegir ventanas para tu casa en Asturias: PVC o aluminio RPT, vid
 metaTitle: "Cómo Elegir Ventanas en Asturias: PVC vs Aluminio RPT (2026)"
 metaDescription: "Guía para cambiar ventanas en Asturias: diferencias entre PVC y aluminio con rotura de puente térmico, vidrio bajo emisivo, control solar y precios por ventana."
 resumenAeo: "Para el clima húmedo y ventoso de Asturias la configuración óptima combina carpintería de PVC (5–7 cámaras) o aluminio con rotura de puente térmico (RPT), apertura oscilobatiente, vidrio doble bajo emisivo con gas argón y cajón de persiana aislado, con un coste medio instalado de 480 a 950 € por ventana."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/reformas-parciales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Parciales y Ventanas en Asturias"
 datePublished: "2026-02-20"

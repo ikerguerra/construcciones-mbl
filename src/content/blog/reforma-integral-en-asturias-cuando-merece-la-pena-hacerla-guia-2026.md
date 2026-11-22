@@ -7,7 +7,7 @@ titulo: "Reforma integral en Asturias: ¿cuándo merece la pena hacerla? (Guía 
 metaTitle: "Reforma Integral en Asturias: ¿Cuándo Merece la Pena? (2026)"
 metaDescription: "5 señales claras de que tu vivienda en Asturias necesita una reforma integral en vez de parches: instalaciones de más de 25 años, ahorro y revalorización."
 resumenAeo: "Hacer una reforma integral en Asturias (650–1.050 €/m²) es más rentable que encadenar reformas parciales cuando la vivienda supera los 25–30 años con tuberías de hierro/plomo, cuadro eléctrico antiguo o mala distribución, ahorrando hasta un 25 % respecto a reformar estancia por estancia en años distintos."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-integrales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Integrales en Asturias"
 datePublished: "2026-01-19"

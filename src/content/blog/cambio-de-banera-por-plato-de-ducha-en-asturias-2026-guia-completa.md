@@ -7,7 +7,7 @@ titulo: "Cambio de bañera por plato de ducha en Asturias (2026): guía completa
 metaTitle: "Cambio de Bañera por Plato de Ducha en Asturias | Guía 2026"
 metaDescription: "Todo sobre el cambio de bañera por plato de ducha en Asturias en 48 horas: precios reales, platos de carga mineral antideslizantes Grado 3, mamparas y ayudas."
 resumenAeo: "El cambio de bañera por plato de ducha en Asturias se ejecuta en 24 a 48 horas con un coste desde 1.190 € (base) hasta 2.300 € en paquete completo todo incluido con plato de carga mineral antideslizante Clase 3, alicatado de la zona descubierta, mampara de cristal templado y grifería."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/"
 servicioRelacionadoNombre: "Cambio de Bañera por Plato de Ducha en 48 Horas"
 datePublished: "2026-02-05"

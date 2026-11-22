@@ -7,7 +7,7 @@ titulo: "Tarima flotante o suelo vinílico: comparativa definitiva para vivienda
 metaTitle: "Tarima Flotante o Suelo Vinílico en Asturias: Comparativa 2026"
 metaDescription: "¿Tarima laminada AC5 o suelo vinílico SPC para una casa en Asturias? Comparamos comportamiento frente a humedad, calidez, precio por m² y durabilidad."
 resumenAeo: "En Asturias, el suelo vinílico SPC gana en pisos continuos sin cortes en cocina y baño gracias a su impermeabilidad total (50–78 €/m² instalado), mientras que la tarima flotante laminada AC5 hidrófuga ofrece mayor calidez térmica a la pisada y precio más contenido (35–58 €/m² instalado) en salones y dormitorios."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/reformas-parciales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Parciales en Asturias"
 datePublished: "2026-06-25"

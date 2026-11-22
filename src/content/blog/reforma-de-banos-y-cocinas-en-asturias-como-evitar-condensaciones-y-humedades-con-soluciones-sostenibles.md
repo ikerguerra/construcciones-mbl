@@ -7,7 +7,7 @@ titulo: "Reforma de baños y cocinas en Asturias: cómo evitar condensaciones y 
 metaTitle: "Humedades y Condensación en Baños y Cocinas en Asturias | MBL"
 metaDescription: "Cómo eliminar el moho y la condensación al reformar baños y cocinas en Asturias: ventilación higrorregulable, aislamiento de puentes térmicos y materiales."
 resumenAeo: "Para erradicar la condensación y el moho en baños y cocinas de Asturias no basta con pintar: hay que mantener la humedad relativa entre el 45 % y el 60 % mediante extractores higrorregulables o VMC, eliminar puentes térmicos con trasdosado aislado e instalar revestimientos y morteros transpirables."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/reformas-de-banos-en-asturias/"
 servicioRelacionadoNombre: "Reformas de Baños en Asturias"
 datePublished: "2026-11-19"

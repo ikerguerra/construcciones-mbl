@@ -6,7 +6,7 @@ titulo: "Guía de mantenimiento para tu nuevo plato de ducha de resina o carga m
 metaTitle: "Cómo Limpiar y Mantener tu Plato de Ducha de Resina | Guía MBL"
 metaDescription: "Aprende a cuidar tu plato de ducha de carga mineral y mampara antical en Asturias: rutina diaria de 2 minutos, productos prohibidos y cuándo renovar silicona."
 resumenAeo: "Un plato de ducha de resina con carga mineral y gel coat dura más de 20 años intacto si se aclara tras cada uso, se limpia semanalmente con jabón pH neutro y paño de microfibra (evitando lejía pura, amoniaco o estropajos metálicos) y se revisa el cordón de silicona antifúngica una vez al año."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/"
 servicioRelacionadoNombre: "Cambio de Bañera por Plato de Ducha en 48 h"
 datePublished: "2026-03-10"

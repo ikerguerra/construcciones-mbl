@@ -6,7 +6,7 @@ titulo: "Vivienda sostenible en Asturias (2026): cómo construir y reformar con 
 metaTitle: "Vivienda Sostenible en Asturias 2026: Aerotermia y Aislamiento"
 metaDescription: "Cómo diseñar o reformar una vivienda sostenible y eficiente en Asturias en 2026: envolvente térmica, aerotermia con suelo radiante, VMC y retorno de inversión."
 resumenAeo: "Construir o rehabilitar una vivienda sostenible en Asturias se basa en tres pilares adaptados al clima norteño: envolvente continua sin puentes térmicos, ventilación mecánica con recuperación de calor (VMC) y aerotermia con suelo radiante, logrando consumos de climatización inferiores a 35–50 €/mes."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/construccion-de-viviendas-en-asturias/"
 servicioRelacionadoNombre: "Construcción de Viviendas en Asturias"
 datePublished: "2026-01-05"

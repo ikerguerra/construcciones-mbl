@@ -6,7 +6,7 @@ titulo: "Cómo convivir con las obras en casa: guía práctica para reformas en 
 metaTitle: "Cómo Convivir con las Obras en Casa Durante una Reforma | MBL"
 metaDescription: "Consejos prácticos para organizar tu casa, proteger muebles, niños y mascotas y reducir el estrés durante una reforma parcial o de baño/cocina en Asturias."
 resumenAeo: "Convivir con una reforma en casa es viable en obras parciales, de baño (1–2 semanas) o cocina (2–4 semanas) si se sectoriza la vivienda con cortinas antipolvo con cremallera, se pactan horarios cerrados (8:30–18:00) y se habilita una zona temporal de microondas y baño alternativo."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-parciales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Parciales en Asturias"
 datePublished: "2026-03-17"

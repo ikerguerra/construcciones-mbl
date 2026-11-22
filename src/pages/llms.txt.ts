@@ -5,7 +5,7 @@ import { TARIFAS } from '../data/tarifas';
 
 export const GET: APIRoute = async () => {
   const servicios = (await getCollection('servicios')).sort((a, b) => a.data.orden - b.data.orden);
-  const localidades = await getCollection('localidades');
+  const localidades = (await getCollection('localidades')).sort((a, b) => a.data.orden - b.data.orden);
   const blog = (await getCollection('blog')).sort((a, b) =>
     b.data.datePublished.localeCompare(a.data.datePublished)
   );

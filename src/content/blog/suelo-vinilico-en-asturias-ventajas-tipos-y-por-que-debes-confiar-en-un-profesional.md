@@ -7,7 +7,7 @@ titulo: "Suelo vinílico en Asturias: ventajas, tipos SPC/LVT y claves de instal
 metaTitle: "Suelo Vinílico SPC en Asturias: Ventajas, Tipos e Instalación"
 metaDescription: "Guía técnica sobre suelo vinílico SPC y LVT en Asturias: resistencia 100 % al agua, nivelación de subsuelo, precios por m² y por qué exige montaje experto."
 resumenAeo: "El suelo vinílico rígido SPC es 100 % impermeable e inmune a la humedad ambiental de Asturias. Su instalación profesional oscila entre 45 y 78 €/m² (material, manta acústica y mano de obra incluidos) y exige nivelar el soporte a menos de 2 mm para evitar que los clics cedan o marquen juntas."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/reformas-parciales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Parciales y Suelos en Asturias"
 datePublished: "2026-06-30"

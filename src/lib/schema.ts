@@ -182,18 +182,11 @@ export function buildBlogPostingNode(opts: {
     articleSection: opts.section,
     datePublished: opts.datePublished,
     dateModified: opts.dateModified,
-    author: opts.authorName.toLowerCase().includes('borja')
-      ? {
-          '@type': 'Person',
-          name: opts.authorName,
-          jobTitle: opts.authorRole,
-          worksFor: { '@id': `${EMPRESA.dominio}/#organization` },
-        }
-      : {
-          '@type': 'Organization',
-          name: opts.authorName,
-          url: `${EMPRESA.dominio}/`,
-        },
+    author: {
+      '@type': 'Organization',
+      name: opts.authorName,
+      url: `${EMPRESA.dominio}/`,
+    },
     publisher: { '@id': `${EMPRESA.dominio}/#organization` },
   };
 }

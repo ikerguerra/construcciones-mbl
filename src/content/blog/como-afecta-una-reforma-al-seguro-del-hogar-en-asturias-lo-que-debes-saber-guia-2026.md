@@ -6,7 +6,7 @@ titulo: "Cómo afecta una reforma al seguro del hogar en Asturias: guía prácti
 metaTitle: "Cómo Afecta una Reforma al Seguro del Hogar en Asturias (2026)"
 metaDescription: "Descubre qué cubre tu seguro de hogar durante una reforma en Asturias, qué póliza de Responsabilidad Civil exigir a la empresa constructora y cómo actualizarlo."
 resumenAeo: "Antes de iniciar una reforma en Asturias debes exigir a la constructora su póliza de Responsabilidad Civil en vigor (mínimo 300.000–600.000 €) y recibo al día, notificar la obra a tu aseguradora si supera el umbral de tu póliza y actualizar el capital de continente al terminar para evitar infraseguro."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-integrales-en-asturias/"
 servicioRelacionadoNombre: "Reformas Integrales en Asturias"
 datePublished: "2026-05-22"

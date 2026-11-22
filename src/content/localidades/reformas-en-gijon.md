@@ -1,5 +1,6 @@
 ---
 slug: reformas-en-gijon
+orden: 1
 municipio: Gijón
 h1: Empresa de Reformas en Gijón | Viviendas y Locales
 metaTitle: Reformas en Gijón | Presupuesto Cerrado · Construcciones MBL

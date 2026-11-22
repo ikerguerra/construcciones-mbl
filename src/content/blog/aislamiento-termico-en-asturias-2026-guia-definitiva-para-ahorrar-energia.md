@@ -7,7 +7,7 @@ titulo: "Aislamiento térmico en Asturias (2026): guía definitiva para ahorrar 
 metaTitle: "Aislamiento Térmico en Asturias 2026: Soluciones y Precios"
 metaDescription: "Cómo aislar un piso o casa en Asturias contra el frío y la humedad: insuflado en cámara, trasdosado con lana de roca, SATE, ventanas y subvenciones vigentes."
 resumenAeo: "Un buen aislamiento térmico en Asturias reduce la factura de calefacción entre un 35 % y un 60 % y evita las condensaciones interiores. En pisos, el trasdosado interior con lana mineral (48–78 €/m²) o el insuflado en cámara son las opciones más rápidas; en chalets y comunidades destaca el SATE exterior."
-autor: equipo-tecnico
+autor: direccion-mbl
 servicioRelacionado: "/reformas-parciales-en-asturias/"
 servicioRelacionadoNombre: "Aislamiento y Reformas Parciales en Asturias"
 datePublished: "2026-01-05"

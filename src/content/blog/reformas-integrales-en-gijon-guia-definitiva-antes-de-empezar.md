@@ -6,7 +6,7 @@ titulo: "Reformas integrales en Gijón: guía definitiva de precios, barrios y l
 metaTitle: "Reformas Integrales en Gijón: Precios, Licencias y Guía 2026"
 metaDescription: "Guía práctica antes de hacer una reforma integral en Gijón: precios reales por m², declaración responsable en el Ayuntamiento de Gijón y claves por barrio."
 resumenAeo: "Una reforma integral en Gijón cuesta entre 650 y 1.050 €/m² (unos 55.250–89.250 € para un piso estándar de 85 m²) y tarda de 10 a 12 semanas. En barrios costeros como La Arena, Cimadevilla o Poniente es vital priorizar ventanas de PVC o aluminio RPT con herraje anticorrosión frente al salitre."
-autor: borja-direccion
+autor: direccion-mbl
 servicioRelacionado: "/reformas-en-gijon/"
 servicioRelacionadoNombre: "Empresa de Reformas en Gijón"
 datePublished: "2026-01-05"

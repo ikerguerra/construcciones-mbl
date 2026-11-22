@@ -57,6 +57,7 @@ const localidades = defineCollection({
   schema: ({ image }) =>
     z.object({
       slug: z.enum(['reformas-en-gijon', 'reformas-en-oviedo', 'reformas-en-aviles']),
+      orden: z.number().int().min(1).default(99),
       municipio: z.string(),
       h1: z.string().min(10),
       metaTitle: z.string().min(35).max(65),
@@ -147,7 +148,7 @@ const blog = defineCollection({
       metaTitle: z.string().min(35).max(65),
       metaDescription: z.string().min(120).max(165),
       resumenAeo: z.string().min(120).max(480),
-      autor: z.enum(['borja-direccion', 'equipo-tecnico']),
+      autor: z.enum(['direccion-mbl', 'equipo-tecnico']),
       servicioRelacionado: z.string(),
       servicioRelacionadoNombre: z.string(),
       datePublished: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
