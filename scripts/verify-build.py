@@ -90,9 +90,13 @@ def path_exists_in_dist(url_path: str) -> bool:
 
 def verify_sitemaps_and_redirects(rules: dict[str, tuple[str, int]]) -> list[str]:
     errors: list[str] = []
-    sitemap_files = sorted(glob.glob(str(ROOT / "wp-sitemap-*.xml")))
+    # Los sitemaps originales de WordPress residen en docs/90-anexos/sitemaps/ (o en raíz por compatibilidad)
+    sitemap_dir = ROOT / "docs" / "90-anexos" / "sitemaps"
+    sitemap_files = sorted(glob.glob(str(sitemap_dir / "wp-sitemap-*.xml")))
+    if not sitemap_files:
+        sitemap_files = sorted(glob.glob(str(ROOT / "wp-sitemap-*.xml")))
     if len(sitemap_files) != 4:
-        errors.append(f"Se esperaban 4 sitemaps en la raíz, encontrados: {len(sitemap_files)}")
+        errors.append(f"Se esperaban 4 sitemaps en {sitemap_dir}, encontrados: {len(sitemap_files)}")
 
     all_legacy_urls: list[str] = []
     for sf in sitemap_files:
