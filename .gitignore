@@ -20,6 +20,10 @@ assets-maqueta/
 .env.*
 !.env.example
 
+# Entornos y agentes IA locales
+.agents/
+.claude/
+
 # Sistema operativo
 .DS_Store
 Thumbs.db
