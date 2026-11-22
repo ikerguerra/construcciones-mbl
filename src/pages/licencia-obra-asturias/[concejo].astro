@@ -130,11 +130,11 @@ const schemaGraph = [
       </p>
     </article>
 
-    <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:10px">
-      <a class="pill" href={`/calculadora-presupuesto-reforma/?concejo=${concejo.slug}&ref=licencias`}>
-        Calcular presupuesto de reforma en {concejo.name}
+    <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:12px">
+      <a class="btn-dark" href={`/calculadora-presupuesto-reforma/?concejo=${concejo.slug}&ref=licencias`}>
+        Calcular presupuesto de reforma en {concejo.name} →
       </a>
-      <a class="pill pill-white" href={`/comparador-aerotermia-asturias/?concejo=${concejo.slug}`}>
+      <a class="btn-outline" href={`/comparador-aerotermia-asturias/?concejo=${concejo.slug}`}>
         Simular aerotermia en {concejo.name} (Zona {concejo.climateZone})
       </a>
     </div>
