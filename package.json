@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Web corporativa en Astro (SSG) para Construcciones MBL en Asturias con SEO, GEO y AEO.",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
     "check": "node --experimental-require-module ./node_modules/astro/astro.js check",

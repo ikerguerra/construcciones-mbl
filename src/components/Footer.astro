@@ -1,7 +1,5 @@
 ---
-import { Image } from 'astro:assets';
 import { EMPRESA } from '../data/empresa';
-import footerImg from '../assets/images/proyectos/obra-reforma-integral-1.webp';
 import logoFullLight from '../assets/brand/logo-mbl-full-light.svg';
 ---
 
@@ -121,28 +119,19 @@ import logoFullLight from '../assets/brand/logo-mbl-full-light.svg';
         <li><a href="/reformas-en-aviles/">Reformas en Avilés</a></li>
         <li><a href="/proyectos/">Proyectos realizados</a></li>
         <li><a href="/innovacion-sostenible/">Blog Innovación Sostenible</a></li>
-        <li><a href="/calcula-el-precio-de-tu-reforma-en-asturias/">Simulador de presupuesto</a></li>
         <li><a href="/contacto/">Solicitar visita técnica</a></li>
       </ul>
     </div>
 
     <div>
-      <div class="foot-photo">
-        <Image
-          src={footerImg}
-          alt="Reforma interior acabada en Asturias por Construcciones MBL"
-          widths={[420, 760]}
-          sizes="(max-width: 640px) 100vw, (max-width: 1080px) 48vw, 380px"
-          loading="lazy"
-        />
-      </div>
-      <a class="fsearch" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="7" />
-          <path d="m20 20-3.5-3.5" />
-        </svg>
-        <span>Simula el precio de tu reforma...</span>
-      </a>
+      <h2 class="foot-heading">Calculadoras y herramientas</h2>
+      <ul>
+        <li><a href="/calculadora-presupuesto-reforma/">Calculadora de presupuesto</a></li>
+        <li><a href="/licencia-obra-asturias/">Simulador de licencia e ICIO</a></li>
+        <li><a href="/calculadora-deducciones-irpf-reforma/">Calculadora deducciones IRPF</a></li>
+        <li><a href="/comparador-aerotermia-asturias/">Comparador de aerotermia</a></li>
+        <li><a href="/calcula-el-precio-de-tu-reforma-en-asturias/">Simulador rápido de reforma</a></li>
+      </ul>
     </div>
   </div>
 
