@@ -187,7 +187,7 @@ const serviciosSubmenu = [
     });
   }
 
-  // Barra de navegación fija con aparición fluida tras superar el Hero
+  // Barra de navegación fija: aparece al subir y se oculta al bajar tras superar el Hero
   const navAnchor = document.querySelector<HTMLElement>('[data-nav-anchor]');
   const navWrap = navAnchor?.querySelector<HTMLElement>('.nav-wrap');
   const heroEl = document.querySelector<HTMLElement>('.hero');
@@ -195,6 +195,7 @@ const serviciosSubmenu = [
   if (navAnchor && navWrap) {
     let cachedHeight = 0;
     let cachedThreshold = 200;
+    let lastScrollY = Math.max(0, window.scrollY);
 
     const measureStickyBounds = () => {
       if (!navWrap.classList.contains('is-sticky')) {
@@ -204,16 +205,32 @@ const serviciosSubmenu = [
     };
 
     const applyStickyState = () => {
-      const shouldStick = window.scrollY > cachedThreshold;
+      const currentY = Math.max(0, window.scrollY);
+      const delta = currentY - lastScrollY;
+      const shouldStick = currentY > cachedThreshold;
+      const drawerOpen = Boolean(drawer && !drawer.hidden);
+
       if (shouldStick) {
         if (!navWrap.classList.contains('is-sticky')) {
           if (cachedHeight > 0) navAnchor.style.minHeight = `${cachedHeight}px`;
           navWrap.classList.add('is-sticky');
         }
-      } else if (navWrap.classList.contains('is-sticky')) {
-        navWrap.classList.remove('is-sticky');
-        navAnchor.style.minHeight = '';
+        if (drawerOpen) {
+          navWrap.classList.remove('is-hidden');
+        } else if (delta > 6) {
+          navWrap.classList.add('is-hidden');
+        } else if (delta < -6) {
+          navWrap.classList.remove('is-hidden');
+        }
+      } else {
+        if (navWrap.classList.contains('is-sticky')) {
+          navWrap.classList.remove('is-sticky');
+          navAnchor.style.minHeight = '';
+        }
+        navWrap.classList.remove('is-hidden');
       }
+
+      lastScrollY = currentY;
     };
 
     let rafId = 0;

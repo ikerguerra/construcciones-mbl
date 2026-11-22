@@ -178,16 +178,22 @@ const schemaGraph = [
       <div style="margin-top:52px">
         <span class="sec-kicker">Documentación visual de obra</span>
         <h2 class="sec-title">Galería Fotográfica del Proyecto</h2>
-        <div class="project-gallery-grid">
+        <div class="project-gallery-grid" data-lightbox-group="proyecto">
           {proy.data.galeria.map((foto) => (
-            <div class="project-gallery-item">
+            <button
+              type="button"
+              class="project-gallery-item"
+              data-lightbox-item
+              aria-label={`Ampliar imagen: ${foto.alt}`}
+            >
               <Image
                 src={foto.imagen}
                 alt={foto.alt}
-                widths={[440, 760]}
+                widths={[440, 880, 1400]}
                 sizes="(max-width: 900px) 100vw, 31vw"
               />
-            </div>
+              <span class="gallery-zoom-badge" aria-hidden="true">+</span>
+            </button>
           ))}
         </div>
       </div>
@@ -227,3 +233,5 @@ const schemaGraph = [
 
   <CtaSimulador tipoPorDefecto={proy.data.tarifaKey} />
 </BaseLayout>
+
+<script is:inline defer src="/js/lightbox.js"></script>

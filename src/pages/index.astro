@@ -5,7 +5,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import HeroQuickSelector from "../components/HeroQuickSelector.astro";
 import BloqueFaq from "../components/BloqueFaq.astro";
-import EquipoEEAT from "../components/EquipoEEAT.astro";
 import {
   EMPRESA,
   FAQS_GENERALES,
@@ -19,7 +18,7 @@ import {
   buildFaqNode,
 } from "../lib/schema";
 
-import heroHomeImg from "../assets/images/servicios/hero-home-construcciones-mbl.webp";
+import heroHomeImg from "../assets/images/proyectos/obra-bano-mbl-wide.webp";
 import storyImg1 from "../assets/images/proyectos/obra-reforma-integral-1.webp";
 import storyImg2 from "../assets/images/proyectos/obra-bano-mbl-wide.webp";
 import darkImg from "../assets/images/proyectos/proyecto-local-comercial-gijon-1.webp";
@@ -33,7 +32,9 @@ import testiImg from "../assets/images/proyectos/proyecto-bano-moderno-asturias.
 const servicios = (await getCollection("servicios")).sort(
   (a, b) => a.data.orden - b.data.orden,
 );
-const localidades = await getCollection("localidades");
+const localidades = (await getCollection("localidades")).sort(
+  (a, b) => a.data.orden - b.data.orden,
+);
 const proyectosDestacados = (await getCollection("proyectos"))
   .sort((a, b) => a.data.orden - b.data.orden)
   .slice(0, 4);
@@ -126,6 +127,12 @@ const schemaGraph = [
       <symbol id="i-rt" viewBox="0 0 24 24">
         <path d="m9 18 6-6-6-6" />
       </symbol>
+      <symbol id="i-up" viewBox="0 0 24 24">
+        <path d="m18 15-6-6-6 6" />
+      </symbol>
+      <symbol id="i-dn" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
     </defs>
   </svg>
 
@@ -187,7 +194,7 @@ const schemaGraph = [
       </div>
 
       <div>
-        <span class="sec-kicker">Desde 2005 en Asturias</span>
+        <span class="sec-kicker">Construcciones MBL</span>
         <h2 class="sec-title" id="historia-title">
           Nuestra Historia
         </h2>
@@ -363,10 +370,14 @@ const schemaGraph = [
         />
       </div>
 
-      <div>
+      <div class="dark-content-col">
         <div id="method-steps-container" aria-live="polite">
           {fasesMetodo.map((f, idx) => (
-            <div class="method-step" data-method-idx={idx} hidden={idx !== 0}>
+            <div
+              class={`method-step ${idx === 0 ? "is-active" : ""}`}
+              data-method-idx={idx}
+              aria-hidden={idx !== 0 ? "true" : "false"}
+            >
               <span class="sec-kicker">{f.paso}</span>
               <h3>{f.titulo}</h3>
               <p>{f.texto}</p>
@@ -374,7 +385,21 @@ const schemaGraph = [
           ))}
         </div>
 
-        <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <div class="carousel-progress-row" aria-hidden="true">
+          <div class="carousel-progress-dots">
+            {fasesMetodo.map((_, idx) => (
+              <span
+                class={`carousel-dot ${idx === 0 ? "is-active" : ""}`}
+                data-method-dot={idx}
+              ></span>
+            ))}
+          </div>
+          <div class="carousel-progress-track">
+            <div class="carousel-progress-bar" data-method-progress></div>
+          </div>
+        </div>
+
+        <div class="dark-cta-row">
           <a class="pill" href="/calcula-el-precio-de-tu-reforma-en-asturias/">
             Solicitar presupuesto cerrado
           </a>
@@ -393,7 +418,7 @@ const schemaGraph = [
         data-method-prev
       >
         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-          <use href="#i-lt" />
+          <use href="#i-up" />
         </svg>
       </button>
       <button
@@ -403,7 +428,7 @@ const schemaGraph = [
         data-method-next
       >
         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-          <use href="#i-rt" />
+          <use href="#i-dn" />
         </svg>
       </button>
     </div>
@@ -423,7 +448,11 @@ const schemaGraph = [
           ? `/proyectos/${proy.data.slug}/`
           : "/proyectos/";
         return (
-          <article class="card" data-choice-idx={idx} hidden={idx >= 2}>
+          <article
+            class={`card ${idx < 2 ? "is-active" : ""}`}
+            data-choice-idx={idx}
+            aria-hidden={idx >= 2 ? "true" : "false"}
+          >
             <Image
               src={proy.data.imagen}
               alt={proy.data.imagenAlt}
@@ -482,6 +511,14 @@ const schemaGraph = [
           </svg>
         </button>
       </div>
+      <div
+        class="carousel-progress-row carousel-progress-light"
+        aria-hidden="true"
+      >
+        <div class="carousel-progress-track">
+          <div class="carousel-progress-bar" data-proj-progress></div>
+        </div>
+      </div>
       <a class="btn-outline" href="/proyectos/">
         Ver todos los proyectos →
       </a>
@@ -499,37 +536,65 @@ const schemaGraph = [
       Explora Nuestra Galería de Obras
     </h2>
 
-    <div class="gallery">
+    <div class="gallery" data-lightbox-group="home-galeria">
       <div class="gallery-side">
-        <div class="photo-tile">
+        <button
+          type="button"
+          class="photo-tile"
+          data-lightbox-item
+          aria-label="Ampliar imagen: Cocina moderna reformada a medida en Asturias"
+        >
           <Image
             src={galImgSide1}
             alt="Cocina moderna reformada a medida en Asturias"
-            widths={[400, 680]}
+            widths={[400, 680, 1200]}
             sizes="(max-width: 900px) 50vw, 30vw"
           />
-        </div>
-        <div class="photo-tile">
+          <span class="gallery-zoom-badge" aria-hidden="true">
+            +
+          </span>
+        </button>
+        <button
+          type="button"
+          class="photo-tile"
+          data-lightbox-item
+          aria-label="Ampliar imagen: Alicatado porcelánico rectificado ejecutado por Construcciones MBL"
+        >
           <Image
             src={galImgSide2}
             alt="Alicatado porcelánico rectificado ejecutado por Construcciones MBL"
-            widths={[400, 680]}
+            widths={[400, 680, 1400]}
             sizes="(max-width: 900px) 50vw, 30vw"
           />
-        </div>
+          <span class="gallery-zoom-badge" aria-hidden="true">
+            +
+          </span>
+        </button>
       </div>
 
-      <div class="gallery-main" id="gallery-main-slides" aria-live="polite">
+      <div
+        class="gallery-main"
+        id="gallery-main-slides"
+        aria-live="polite"
+        data-lightbox-trigger
+        role="button"
+        tabindex="0"
+        aria-label="Ampliar imagen activa de la galería de obras"
+      >
         {galeriaSlides.map((img, idx) => (
           <Image
             src={img.src}
             alt={img.alt}
-            widths={[640, 1080]}
+            widths={[640, 1080, 1440]}
             sizes="(max-width: 900px) 100vw, 60vw"
             data-gal-idx={idx}
+            data-lightbox-item
             hidden={idx !== 0}
           />
         ))}
+        <span class="gallery-zoom-badge" aria-hidden="true">
+          +
+        </span>
       </div>
     </div>
 
@@ -574,7 +639,11 @@ const schemaGraph = [
 
       <div class="testi-card">
         <div class="testi-card-top">
-          <div class="testi-stars" role="img" aria-label="Valoración 5 de 5 estrellas">
+          <div
+            class="testi-stars"
+            role="img"
+            aria-label="Valoración 5 de 5 estrellas"
+          >
             <svg
               width="88"
               height="16"
@@ -760,9 +829,7 @@ const schemaGraph = [
     </div>
   </section>
 
-  <!-- ================= 9. EQUIPO E-E-A-T + GUÍAS + FAQS ================= -->
-  <EquipoEEAT compact />
-
+  <!-- ================= 9. GUÍAS + FAQS ================= -->
   <section
     class="sec"
     style="padding-top:16px"
@@ -824,3 +891,4 @@ const schemaGraph = [
 </BaseLayout>
 
 <script is:inline defer src="/js/home-carousels.js"></script>
+<script is:inline defer src="/js/lightbox.js"></script>
