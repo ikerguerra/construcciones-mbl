@@ -1,13 +1,15 @@
 (() => {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const anim = (el, dir = 0) => {
+    if (reduced) return;
     el.classList.remove('is-animating', 'is-animating-next', 'is-animating-prev');
     void el.offsetWidth;
     el.classList.add(dir > 0 ? 'is-animating-next' : dir < 0 ? 'is-animating-prev' : 'is-animating');
   };
 
-  // 1. Tabs de servicios
+  // 1. Tabs de servicios con reinicio de carril móvil
   const tabBtns = document.querySelectorAll('[data-service-tab]');
+  const servicesGrid = document.getElementById('services-cards-grid');
   const serviceCards = document.querySelectorAll('#services-cards-grid [data-service-cat]');
   tabBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -22,10 +24,13 @@
         c.hidden = !show;
         if (show) anim(c, 0);
       });
+      if (servicesGrid) {
+        servicesGrid.scrollTo({ left: 0, behavior: 'auto' });
+      }
     });
   });
 
-  // 2. Carruseles avanzados con transición entrada/salida y barra de progreso en viewport
+  // 2. Carrusel vertical Método MBL con barra de progreso y pausa al interactuar
   function initAnimatedCarousel({
     secSel,
     itemSel,
@@ -57,6 +62,8 @@
 
     let page = 0;
     let leaveTimer;
+    let paused = false;
+    let touchResumeTimer = 0;
 
     const updateDots = (currentPage) => {
       dots.forEach((d, idx) => d.classList.toggle('is-active', idx === currentPage));
@@ -103,7 +110,7 @@
           items.forEach((el) => {
             el.classList.remove('is-leaving', ...animClasses);
           });
-        }, 540);
+        }, 480);
       }
     };
 
@@ -128,7 +135,7 @@
     };
 
     const tick = (now) => {
-      if (!vis || reduced || document.hidden) {
+      if (!vis || paused || reduced || document.hidden) {
         stopLoop();
         return;
       }
@@ -150,7 +157,7 @@
         elapsed = 0;
         renderProgress(0);
       }
-      if (!reduced && vis && !document.hidden && !rafId) {
+      if (!reduced && vis && !paused && !document.hidden && !rafId) {
         lastTs = 0;
         rafId = window.requestAnimationFrame(tick);
       }
@@ -166,9 +173,43 @@
         { threshold: 0.2 },
       ).observe(sec);
 
+      sec.addEventListener('pointerenter', () => {
+        paused = true;
+        stopLoop();
+      });
+      sec.addEventListener('pointerleave', () => {
+        paused = false;
+        startLoop(false);
+      });
+      sec.addEventListener('focusin', () => {
+        paused = true;
+        stopLoop();
+      });
+      sec.addEventListener('focusout', () => {
+        window.requestAnimationFrame(() => {
+          if (!sec.contains(document.activeElement)) {
+            paused = false;
+            startLoop(false);
+          }
+        });
+      });
+      sec.addEventListener(
+        'touchstart',
+        () => {
+          paused = true;
+          stopLoop();
+          if (touchResumeTimer) clearTimeout(touchResumeTimer);
+          touchResumeTimer = window.setTimeout(() => {
+            paused = false;
+            startLoop(false);
+          }, 4000);
+        },
+        { passive: true },
+      );
+
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) stopLoop();
-        else if (vis) startLoop(false);
+        else if (vis && !paused) startLoop(false);
       });
     }
 
@@ -182,7 +223,122 @@
     });
   }
 
-  // 3. Carruseles simples para galería y testimonios
+  // 3. Carril horizontal con peek y auto-avance silencioso para Proyectos Destacados
+  function initSnapCarousel({ trackSel, itemSel, prevSel, nextSel, ms }) {
+    const track = document.querySelector(trackSel);
+    if (!track) return;
+    const items = Array.from(track.querySelectorAll(itemSel));
+    if (items.length <= 1) return;
+
+    const prevBtn = document.querySelector(prevSel);
+    const nextBtn = document.querySelector(nextSel);
+
+    let vis = false;
+    let paused = false;
+    let tid;
+    let pauseTimer = 0;
+
+    const getStepWidth = () => {
+      if (items.length > 1) {
+        const diff = items[1].offsetLeft - items[0].offsetLeft;
+        if (diff > 0) return diff;
+      }
+      return (items[0]?.offsetWidth || 320) + 16;
+    };
+
+    const scrollByDir = (dir) => {
+      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+      if (maxScroll <= 4) return;
+
+      const step = getStepWidth();
+      const left = track.scrollLeft;
+      const behavior = reduced ? 'auto' : 'smooth';
+
+      if (dir > 0) {
+        if (left >= maxScroll - 8) {
+          track.scrollTo({ left: 0, behavior });
+        } else {
+          track.scrollTo({ left: Math.min(maxScroll, left + step), behavior });
+        }
+      } else if (left <= 8) {
+        track.scrollTo({ left: maxScroll, behavior });
+      } else {
+        track.scrollTo({ left: Math.max(0, left - step), behavior });
+      }
+    };
+
+    const stop = () => {
+      if (tid !== undefined) {
+        clearInterval(tid);
+        tid = undefined;
+      }
+    };
+
+    const start = () => {
+      stop();
+      if (!reduced && vis && !paused && !document.hidden) {
+        tid = window.setInterval(() => scrollByDir(1), ms);
+      }
+    };
+
+    const pauseTemporarily = (delayMs = 4500) => {
+      paused = true;
+      stop();
+      if (pauseTimer) clearTimeout(pauseTimer);
+      pauseTimer = window.setTimeout(() => {
+        paused = false;
+        start();
+      }, delayMs);
+    };
+
+    new IntersectionObserver(
+      (entries) => {
+        vis = entries[0]?.isIntersecting ?? false;
+        if (vis) start();
+        else stop();
+      },
+      { threshold: 0.25 },
+    ).observe(track);
+
+    track.addEventListener('pointerenter', () => {
+      paused = true;
+      stop();
+    });
+    track.addEventListener('pointerleave', () => {
+      paused = false;
+      start();
+    });
+    track.addEventListener('focusin', () => {
+      paused = true;
+      stop();
+    });
+    track.addEventListener('focusout', () => {
+      window.requestAnimationFrame(() => {
+        if (!track.contains(document.activeElement)) {
+          paused = false;
+          start();
+        }
+      });
+    });
+    track.addEventListener('touchstart', () => pauseTemporarily(5000), { passive: true });
+    track.addEventListener('wheel', () => pauseTemporarily(4500), { passive: true });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (vis && !paused) start();
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      scrollByDir(-1);
+      pauseTemporarily(5500);
+    });
+    nextBtn?.addEventListener('click', () => {
+      scrollByDir(1);
+      pauseTemporarily(5500);
+    });
+  }
+
+  // 4. Carrusel simple para Testimonios con pausa al interactuar
   function initSimpleCarousel(secSel, itemSel, prevSel, nextSel, ms) {
     const items = Array.from(document.querySelectorAll(itemSel));
     if (items.length <= 1) return;
@@ -200,6 +356,8 @@
     const sec = document.querySelector(secSel);
     let tid;
     let vis = false;
+    let paused = false;
+    let touchTimer = 0;
 
     const stop = () => {
       if (tid !== undefined) {
@@ -210,7 +368,7 @@
 
     const start = () => {
       stop();
-      if (!reduced && vis && !document.hidden) {
+      if (!reduced && vis && !paused && !document.hidden) {
         tid = window.setInterval(() => go(page + 1, 1), ms);
       }
     };
@@ -224,6 +382,45 @@
         },
         { threshold: 0.25 },
       ).observe(sec);
+
+      sec.addEventListener('pointerenter', () => {
+        paused = true;
+        stop();
+      });
+      sec.addEventListener('pointerleave', () => {
+        paused = false;
+        start();
+      });
+      sec.addEventListener('focusin', () => {
+        paused = true;
+        stop();
+      });
+      sec.addEventListener('focusout', () => {
+        window.requestAnimationFrame(() => {
+          if (!sec.contains(document.activeElement)) {
+            paused = false;
+            start();
+          }
+        });
+      });
+      sec.addEventListener(
+        'touchstart',
+        () => {
+          paused = true;
+          stop();
+          if (touchTimer) clearTimeout(touchTimer);
+          touchTimer = window.setTimeout(() => {
+            paused = false;
+            start();
+          }, 4500);
+        },
+        { passive: true },
+      );
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop();
+        else if (vis && !paused) start();
+      });
     }
 
     document.querySelector(prevSel)?.addEventListener('click', () => {
@@ -248,17 +445,13 @@
     axis: 'vertical',
   });
 
-  initAnimatedCarousel({
-    secSel: '#choice-projects-grid',
-    itemSel: '#choice-projects-grid [data-choice-idx]',
+  initSnapCarousel({
+    trackSel: '#choice-projects-grid',
+    itemSel: '[data-choice-idx]',
     prevSel: '[data-proj-prev]',
     nextSel: '[data-proj-next]',
-    progressSel: '[data-proj-progress]',
-    ms: 6000,
-    perPage: 2,
-    axis: 'horizontal',
+    ms: 5500,
   });
 
-  initSimpleCarousel('.gallery-section', '#gallery-main-slides [data-gal-idx]', '[data-gal-prev]', '[data-gal-next]', 5500);
   initSimpleCarousel('.testi', '.testi-slide', '[data-testi-prev]', '[data-testi-next]', 8500);
 })();

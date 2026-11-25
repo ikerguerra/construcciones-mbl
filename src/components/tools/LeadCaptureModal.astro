@@ -37,8 +37,8 @@ import { EMPRESA } from '../../data/empresa';
         <input id="modal-hp" name="empresa_web" type="text" tabindex="-1" autocomplete="off" />
       </div>
 
-      <div class="grid gap-3.5 sm:grid-cols-2">
-        <div>
+      <div class="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+        <div class="min-w-0">
           <label for="modal-nombre" class="mb-1 block text-xs font-semibold text-[#111a14]">
             Nombre y apellidos *
           </label>
@@ -49,10 +49,10 @@ import { EMPRESA } from '../../data/empresa';
             required
             minlength="2"
             placeholder="Tu nombre"
-            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm text-[#111a14] focus:border-[#164624] focus:outline-none"
+            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-base text-[#111a14] focus:border-[#164624] focus:outline-none sm:text-sm"
           />
         </div>
-        <div>
+        <div class="min-w-0">
           <label for="modal-telefono" class="mb-1 block text-xs font-semibold text-[#111a14]">
             Teléfono / WhatsApp *
           </label>
@@ -63,7 +63,7 @@ import { EMPRESA } from '../../data/empresa';
             required
             minlength="9"
             placeholder="684 675 898"
-            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm text-[#111a14] focus:border-[#164624] focus:outline-none"
+            class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-base text-[#111a14] focus:border-[#164624] focus:outline-none sm:text-sm"
           />
         </div>
       </div>
@@ -78,7 +78,7 @@ import { EMPRESA } from '../../data/empresa';
           type="email"
           required
           placeholder="tu@correo.es"
-          class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-sm text-[#111a14] focus:border-[#164624] focus:outline-none"
+          class="w-full rounded-xl border border-[#d6ddd8] bg-white px-3.5 py-2.5 text-base text-[#111a14] focus:border-[#164624] focus:outline-none sm:text-sm"
         />
       </div>
 

@@ -50,6 +50,11 @@
   --pad: 40px;
   --content-max: 1640px;
   --pad-x: max(clamp(28px, 4vw, 64px), calc((100% - var(--content-max)) / 2));
+
+  /* Sistema unificado de movimiento y fluidez */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 0.2s;
+  --t-med: 0.42s;
 }
 
 @media (max-width: 900px) {

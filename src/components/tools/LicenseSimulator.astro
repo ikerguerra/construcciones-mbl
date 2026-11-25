@@ -28,8 +28,8 @@ const categories = Object.entries(WORK_CATEGORY_LABELS) as Array<
 const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
 ---
 
-<div class="grid gap-6 lg:grid-cols-12 lg:items-start" data-license-tool data-default-concejo={defaultConcejoSlug}>
-  <div class="space-y-5 rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start" data-license-tool data-default-concejo={defaultConcejoSlug}>
+  <div class="min-w-0 space-y-5 rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
     <div>
       <label for="l-concejo" class="mb-1.5 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
         1. Concejo de Asturias
@@ -93,8 +93,8 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
       </label>
     </div>
 
-    <div class="grid gap-3 sm:grid-cols-2 sm:items-end">
-      <div>
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:items-end">
+      <div class="min-w-0">
         <label for="l-budget" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
           Presupuesto de ejecución sin IVA (€)
         </label>
@@ -102,9 +102,9 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
           id="l-budget"
           type="number"
           min="500"
-          step="500"
+          step="100"
           value="23800"
-          class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+          class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-base font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none sm:text-sm"
         />
       </div>
       <label class="flex cursor-pointer items-center gap-2 rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-xs font-medium text-[#111a14]">
@@ -114,7 +114,7 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
     </div>
   </div>
 
-  <aside class="rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
+  <aside class="min-w-0 rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
     <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
       Trámite urbanístico en <span id="l-concejo-name">{initial.concejo.name}</span>
     </span>
@@ -126,23 +126,23 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
     </p>
 
     <dl class="mt-5 space-y-2 border-t border-[#243a2c] pt-4 text-sm">
-      <div class="flex justify-between gap-2">
-        <dt class="text-[#c2cec6]">PEM estimado (base imponible)</dt>
-        <dd id="l-pem" class="font-semibold text-white">{fmt(initial.pemEstimated)}</dd>
+      <div class="flex justify-between gap-3">
+        <dt class="min-w-0 text-[#c2cec6]">PEM estimado (base imponible)</dt>
+        <dd id="l-pem" class="shrink-0 whitespace-nowrap text-right font-semibold text-white">{fmt(initial.pemEstimated)}</dd>
       </div>
-      <div class="flex justify-between gap-2">
-        <dt id="l-icio-lbl" class="text-[#c2cec6]">ICIO ({initial.icioRatePercent}%)</dt>
-        <dd id="l-icio" class="text-lg font-bold text-[#86d195]">{fmt(initial.icioAmount)}</dd>
+      <div class="flex justify-between gap-3">
+        <dt id="l-icio-lbl" class="min-w-0 text-[#c2cec6]">ICIO ({initial.icioRatePercent}%)</dt>
+        <dd id="l-icio" class="shrink-0 whitespace-nowrap text-right text-lg font-bold text-[#86d195]">{fmt(initial.icioAmount)}</dd>
       </div>
-      <div class="flex justify-between gap-2 text-xs">
-        <dt class="text-[#c2cec6]">Tasa administrativa municipal aprox.</dt>
-        <dd id="l-tasa" class="text-[#c2cec6]">
+      <div class="flex justify-between gap-3 text-xs">
+        <dt class="min-w-0 text-[#c2cec6]">Tasa administrativa municipal aprox.</dt>
+        <dd id="l-tasa" class="shrink-0 whitespace-nowrap text-right text-[#c2cec6]">
           {fmt(initial.estimatedFeeRange[0])} – {fmt(initial.estimatedFeeRange[1])}
         </dd>
       </div>
-      <div class="flex justify-between gap-2 text-xs">
-        <dt class="text-[#c2cec6]">Proyecto técnico visado</dt>
-        <dd id="l-project" class="font-semibold text-white">
+      <div class="flex justify-between gap-3 text-xs">
+        <dt class="min-w-0 text-[#c2cec6]">Proyecto técnico visado</dt>
+        <dd id="l-project" class="shrink-0 whitespace-nowrap text-right font-semibold text-white">
           {initial.requiresArchitectProject ? 'Sí obligatorio' : 'No requerido'}
         </dd>
       </div>

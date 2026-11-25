@@ -50,6 +50,15 @@ const serviciosSubmenu = [
   { href: '/reforma-de-locales-comerciales-en-asturias/', label: 'Locales comerciales' },
   { href: '/servicios/', label: 'Ver catálogo y tarifas →' },
 ];
+
+const zonasSubmenu = [
+  { href: '/reformas-en-gijon/', label: 'Gijón' },
+  { href: '/reformas-en-oviedo/', label: 'Oviedo' },
+  { href: '/reformas-en-aviles/', label: 'Avilés' },
+  { href: '/reformas-en-siero/', label: 'Siero' },
+  { href: '/reformas-en-villaviciosa/', label: 'Villaviciosa' },
+  { href: '/reformas-en-llanera/', label: 'Llanera' },
+];
 ---
 
 <Wrapper>
@@ -180,133 +189,141 @@ const serviciosSubmenu = [
         <span>Menú</span>
       </button>
     </nav>
+  </div>
+</div>
 
-    <div class="mobile-drawer" id={menuId} data-open="false" hidden>
-      <a href="/">Inicio</a>
-      <a href="/servicios/">Servicios (Catálogo completo)</a>
-      <div class="mobile-drawer-sub">
-        <a href="/reformas-integrales-en-asturias/">· Reformas integrales</a>
-        <a href="/reformas-de-cocinas-en-asturias/">· Reformas de cocinas</a>
-        <a href="/reformas-de-banos-en-asturias/">· Reformas de baños</a>
-        <a href="/cambio-de-banera-por-plato-de-ducha-en-asturias-oferta-expres-48-horas/">· Plato de ducha 48 h</a>
-        <a href="/rehabilitacion-de-fachadas-y-tejados-en-asturias/">· Fachadas, SATE y tejados</a>
-        <a href="/rehabilitacion-de-casas-de-pueblo-en-asturias/">· Casas de pueblo y piedra</a>
-        <a href="/construccion-de-viviendas-en-asturias/">· Construcción de viviendas</a>
-        <a href="/reformas-parciales-en-asturias/">· Reformas parciales</a>
-        <a href="/reforma-de-locales-comerciales-en-asturias/">· Locales comerciales</a>
+<div
+  class="mobile-drawer"
+  id={menuId}
+  data-open="false"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+  hidden
+>
+  <div class="mob-drawer-backdrop" data-nav-backdrop></div>
+  <div class="mob-drawer-panel">
+    <div class="mob-drawer-head">
+      <a class="mob-drawer-logo" href="/" aria-label={`${EMPRESA.marca} — Ir a inicio`}>
+        <img
+          src={logoFullLight.src}
+          alt={EMPRESA.marca}
+          width="76"
+          height="48"
+        />
+      </a>
+      <button
+        type="button"
+        class="mob-drawer-close"
+        aria-label="Cerrar menú"
+        data-nav-close
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="mob-drawer-body">
+      <nav class="mob-nav-links" aria-label="Navegación móvil">
+        <a class={`mob-nav-link ${isActive('/') ? 'is-current' : ''}`} href="/">Inicio</a>
+        <a class={`mob-nav-link ${isActive('/proyectos/') ? 'is-current' : ''}`} href="/proyectos/">Proyectos realizados</a>
+        <a class={`mob-nav-link ${isActive('/empresa/') ? 'is-current' : ''}`} href="/empresa/">Empresa</a>
+        <a class={`mob-nav-link ${isActive('/innovacion-sostenible/') ? 'is-current' : ''}`} href="/innovacion-sostenible/">Guías e Innovación</a>
+        <a class={`mob-nav-link ${isActive('/contacto/') ? 'is-current' : ''}`} href="/contacto/">Contacto</a>
+      </nav>
+
+      <details class="mob-acc" open={isServiciosActive ? true : undefined}>
+        <summary>
+          <span>Servicios y Reformas</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </summary>
+        <div class="mob-acc-list">
+          {serviciosSubmenu.map((item) => (
+            <a
+              href={item.href}
+              class={currentPath === item.href ? 'is-current' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </details>
+
+      <details class="mob-acc" open={isHerramientasActive ? true : undefined}>
+        <summary>
+          <span>Calculadoras Gratuitas</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </summary>
+        <div class="mob-acc-list">
+          {herramientasSubmenu.map((item) => (
+            <a
+              href={item.href}
+              class={currentPath === item.href ? 'is-current' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </details>
+
+      <details class="mob-acc">
+        <summary>
+          <span>Zonas en Asturias</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </summary>
+        <div class="mob-zone-grid">
+          {zonasSubmenu.map((z) => (
+            <a
+              href={z.href}
+              class={currentPath === z.href ? 'is-current' : undefined}
+            >
+              {z.label}
+            </a>
+          ))}
+        </div>
+      </details>
+    </div>
+
+    <div class="mob-drawer-foot">
+      <a
+        class="pill pill-white mob-drawer-cta"
+        href="/calcula-el-precio-de-tu-reforma-en-asturias/"
+      >
+        Calcular presupuesto →
+      </a>
+      <div class="mob-drawer-quick">
+        <a class="mob-quick-btn" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
+          Llamar · {EMPRESA.telefonoVisible}
+        </a>
+        <a
+          class="mob-quick-btn mob-quick-wa"
+          href={EMPRESA.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track="wa"
+        >
+          WhatsApp
+        </a>
       </div>
-      <a href="/proyectos/">Proyectos realizados</a>
-      <a href="/empresa/">Quiénes somos (Empresa)</a>
-      <a href="/reformas-en-gijon/">Reformas en Gijón</a>
-      <a href="/reformas-en-oviedo/">Reformas en Oviedo</a>
-      <a href="/reformas-en-aviles/">Reformas en Avilés</a>
-      <a href="/reformas-en-siero/">Reformas en Siero</a>
-      <a href="/reformas-en-villaviciosa/">Reformas en Villaviciosa</a>
-      <a href="/reformas-en-llanera/">Reformas en Llanera</a>
-      <a href="/innovacion-sostenible/">Innovación Sostenible (Guías)</a>
-      <a href="/contacto/">Contacto</a>
-      <a href="/calcula-el-precio-de-tu-reforma-en-asturias/">Calculadoras y Simulador</a>
-      <div class="mobile-drawer-sub">
-        <a href="/calcula-el-precio-de-tu-reforma-en-asturias/">· Simulador rápido de reforma</a>
-        <a href="/calculadora-presupuesto-reforma/">· Calculadora completa (PEM + ICIO)</a>
-        <a href="/licencia-obra-asturias/">· Simulador licencias e ICIO (18 concejos)</a>
-        <a href="/calculadora-deducciones-irpf-reforma/">· Calculadora deducciones IRPF</a>
-        <a href="/comparador-aerotermia-asturias/">· Comparador de aerotermia</a>
-      </div>
-      <a href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">Llamar: {EMPRESA.telefonoVisible}</a>
     </div>
   </div>
 </div>
 </Wrapper>
-
-<script>
-  const toggleBtn = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
-  const drawer = document.getElementById('mobile-nav-drawer');
-
-  if (toggleBtn && drawer) {
-    const closeDrawer = () => {
-      toggleBtn.setAttribute('aria-expanded', 'false');
-      drawer.setAttribute('data-open', 'false');
-      drawer.hidden = true;
-    };
-
-    toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!expanded));
-      drawer.setAttribute('data-open', String(!expanded));
-      drawer.hidden = expanded;
-    });
-
-    drawer.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeDrawer);
-    });
-
-    document.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Escape' && !drawer.hidden) {
-        closeDrawer();
-        toggleBtn.focus();
-      }
-    });
-  }
-
-  // Barra de navegación fija: aparece al subir y se oculta al bajar tras superar el Hero
-  const navAnchor = document.querySelector<HTMLElement>('[data-nav-anchor]');
-  const navWrap = navAnchor?.querySelector<HTMLElement>('.nav-wrap');
-  const heroEl = document.querySelector<HTMLElement>('.hero');
-
-  if (navAnchor && navWrap) {
-    let cachedHeight = 0;
-    let cachedThreshold = 200;
-    let lastScrollY = Math.max(0, window.scrollY);
-
-    const measureStickyBounds = () => {
-      if (!navWrap.classList.contains('is-sticky')) {
-        cachedHeight = navWrap.offsetHeight;
-      }
-      cachedThreshold = heroEl ? heroEl.offsetTop + heroEl.offsetHeight - 60 : 200;
-    };
-
-    const applyStickyState = () => {
-      const currentY = Math.max(0, window.scrollY);
-      const delta = currentY - lastScrollY;
-      const shouldStick = currentY > cachedThreshold;
-      const drawerOpen = Boolean(drawer && !drawer.hidden);
-
-      if (shouldStick) {
-        if (!navWrap.classList.contains('is-sticky')) {
-          if (cachedHeight > 0) navAnchor.style.minHeight = `${cachedHeight}px`;
-          navWrap.classList.add('is-sticky');
-        }
-        if (drawerOpen) {
-          navWrap.classList.remove('is-hidden');
-        } else if (delta > 6) {
-          navWrap.classList.add('is-hidden');
-        } else if (delta < -6) {
-          navWrap.classList.remove('is-hidden');
-        }
-      } else {
-        if (navWrap.classList.contains('is-sticky')) {
-          navWrap.classList.remove('is-sticky');
-          navAnchor.style.minHeight = '';
-        }
-        navWrap.classList.remove('is-hidden');
-      }
-
-      lastScrollY = currentY;
-    };
-
-    let rafId = 0;
-    const scheduleStickyCheck = (remeasure = false) => {
-      if (rafId) return;
-      rafId = window.requestAnimationFrame(() => {
-        rafId = 0;
-        if (remeasure || cachedHeight === 0) measureStickyBounds();
-        applyStickyState();
-      });
-    };
-
-    window.addEventListener('scroll', () => scheduleStickyCheck(false), { passive: true });
-    window.addEventListener('resize', () => scheduleStickyCheck(true), { passive: true });
-    scheduleStickyCheck(true);
-  }
-</script>

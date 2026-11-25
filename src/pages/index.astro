@@ -80,18 +80,31 @@ const fasesMetodo = [
   },
 ];
 
-const galeriaSlides = [
+const galeriaBento = [
   {
     src: galImgMain,
     alt: "Reforma completa de baño moderno con ducha y mueble suspendido en Asturias",
+    cap: "Baño completo · Asturias",
+  },
+  {
+    src: galImgSide1,
+    alt: "Cocina moderna reformada a medida en Asturias",
+    cap: "Cocina a medida",
+  },
+  {
+    src: galImgSide2,
+    alt: "Alicatado porcelánico rectificado ejecutado por Construcciones MBL",
+    cap: "Porcelánico rectificado",
   },
   {
     src: galImgAlt1,
     alt: "Cocina reformada a medida con mobiliario luminoso en Asturias",
+    cap: "Cocina luminosa",
   },
   {
     src: galImgAlt2,
     alt: "Cambio de bañera por plato de ducha antideslizante con mampara en Asturias",
+    cap: "Ducha exprés 48 h",
   },
 ];
 
@@ -163,6 +176,12 @@ const schemaGraph = [
         <h1>
           Reformas Integrales y Construcción en Asturias con Presupuesto Cerrado
         </h1>
+
+        <ul class="hero-mobile-chips" aria-label="Garantías de Construcciones MBL">
+          <li>+20 años</li>
+          <li>Dirección técnica</li>
+          <li>Garantía escrita</li>
+        </ul>
 
         <p class="hero-lead-right">
           Transformamos viviendas, cocinas, baños y locales comerciales en todo
@@ -297,7 +316,7 @@ const schemaGraph = [
       </button>
     </div>
 
-    <div class="cards" id="services-cards-grid">
+    <div class="cards home-rail-mobile" id="services-cards-grid">
       {servicios.map((srv) => (
         <article class="card" data-service-cat={srv.data.categoriaTab}>
           <Image
@@ -373,7 +392,7 @@ const schemaGraph = [
       </a>
     </div>
 
-    <div class="cards" style="margin-top:20px">
+    <div class="cards home-rail-mobile home-tools-rail" style="margin-top:20px">
       <article class="card">
         <div class="txt" style="padding-top:10px">
           <span class="sec-kicker" style="margin-bottom:4px">Módulo 1 · Presupuesto</span>
@@ -499,11 +518,7 @@ const schemaGraph = [
           ? `/proyectos/${proy.data.slug}/`
           : "/proyectos/";
         return (
-          <article
-            class={`card ${idx < 2 ? "is-active" : ""}`}
-            data-choice-idx={idx}
-            aria-hidden={idx >= 2 ? "true" : "false"}
-          >
+          <article class="card" data-choice-idx={idx}>
             <Image
               src={proy.data.imagen}
               alt={proy.data.imagenAlt}
@@ -562,14 +577,6 @@ const schemaGraph = [
           </svg>
         </button>
       </div>
-      <div
-        class="carousel-progress-row carousel-progress-light"
-        aria-hidden="true"
-      >
-        <div class="carousel-progress-track">
-          <div class="carousel-progress-bar" data-proj-progress></div>
-        </div>
-      </div>
       <a class="btn-outline" href="/proyectos/">
         Ver todos los proyectos →
       </a>
@@ -583,93 +590,40 @@ const schemaGraph = [
     aria-labelledby="galeria-home-title"
     data-reveal
   >
-    <h2 class="sec-title" id="galeria-home-title">
-      Explora Nuestra Galería de Obras
-    </h2>
-
-    <div class="gallery" data-lightbox-group="home-galeria">
-      <div class="gallery-side">
-        <button
-          type="button"
-          class="photo-tile"
-          data-lightbox-item
-          aria-label="Ampliar imagen: Cocina moderna reformada a medida en Asturias"
-        >
-          <Image
-            src={galImgSide1}
-            alt="Cocina moderna reformada a medida en Asturias"
-            widths={[400, 680, 1200]}
-            sizes="(max-width: 900px) 50vw, 30vw"
-          />
-          <span class="gallery-zoom-badge" aria-hidden="true">
-            +
-          </span>
-        </button>
-        <button
-          type="button"
-          class="photo-tile"
-          data-lightbox-item
-          aria-label="Ampliar imagen: Alicatado porcelánico rectificado ejecutado por Construcciones MBL"
-        >
-          <Image
-            src={galImgSide2}
-            alt="Alicatado porcelánico rectificado ejecutado por Construcciones MBL"
-            widths={[400, 680, 1400]}
-            sizes="(max-width: 900px) 50vw, 30vw"
-          />
-          <span class="gallery-zoom-badge" aria-hidden="true">
-            +
-          </span>
-        </button>
+    <div class="sec-header-row">
+      <div>
+        <span class="sec-kicker">Acabados reales ejecutados por gremios propios</span>
+        <h2 class="sec-title" id="galeria-home-title">
+          Explora Nuestra Galería de Obras
+        </h2>
       </div>
-
-      <div
-        class="gallery-main"
-        id="gallery-main-slides"
-        aria-live="polite"
-        data-lightbox-trigger
-        role="button"
-        tabindex="0"
-        aria-label="Ampliar imagen activa de la galería de obras"
-      >
-        {galeriaSlides.map((img, idx) => (
-          <Image
-            src={img.src}
-            alt={img.alt}
-            widths={[640, 1080, 1440]}
-            sizes="(max-width: 900px) 100vw, 60vw"
-            data-gal-idx={idx}
-            data-lightbox-item
-            hidden={idx !== 0}
-          />
-        ))}
-        <span class="gallery-zoom-badge" aria-hidden="true">
-          +
-        </span>
-      </div>
+      <a class="btn-outline" href="/proyectos/">
+        Ver más obras reales →
+      </a>
     </div>
 
-    <div class="gallery-nav-row">
-      <button
-        type="button"
-        class="arr light"
-        aria-label="Foto anterior"
-        data-gal-prev
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-          <use href="#i-lt" />
-        </svg>
-      </button>
-      <button
-        type="button"
-        class="arr light on"
-        aria-label="Foto siguiente"
-        data-gal-next
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-          <use href="#i-rt" />
-        </svg>
-      </button>
+    <div class="bento-gallery" data-lightbox-group="home-galeria">
+      {galeriaBento.map((foto, idx) => (
+        <button
+          type="button"
+          class={`bento-item ${idx === 0 ? "bento-item-lead" : ""}`}
+          data-lightbox-item
+          aria-label={`Ampliar imagen: ${foto.alt}`}
+        >
+          <Image
+            src={foto.src}
+            alt={foto.alt}
+            widths={idx === 0 ? [480, 900, 1440] : [400, 720, 1200]}
+            sizes={
+              idx === 0
+                ? "(max-width: 640px) 84vw, (max-width: 900px) 100vw, 50vw"
+                : "(max-width: 640px) 84vw, (max-width: 900px) 48vw, 25vw"
+            }
+          />
+          <span class="bento-cap">{foto.cap}</span>
+          <span class="gallery-zoom-badge" aria-hidden="true">+</span>
+        </button>
+      ))}
     </div>
 
     <div class="gallery-ghost" aria-hidden="true">
@@ -847,7 +801,7 @@ const schemaGraph = [
     <h2 class="sec-title" id="zonas-title">
       Reformas en Gijón, Oviedo y Avilés
     </h2>
-    <div class="zonas-grid">
+    <div class="zonas-grid home-rail-mobile">
       {localidadesPrincipales.map((loc) => (
         <article class="zona-card">
           <div class="zona-card-img">
@@ -920,7 +874,7 @@ const schemaGraph = [
       </a>
     </div>
 
-    <div class="zonas-grid">
+    <div class="zonas-grid home-rail-mobile">
       {ultimosArticulos.map((post) => (
         <article class="zona-card">
           <div class="zona-card-img">

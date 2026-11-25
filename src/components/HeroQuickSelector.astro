@@ -25,7 +25,7 @@ const calidadesList = Object.values(CALIDADES);
   method="get"
   aria-label="Selector rápido para calcular tu reforma en Asturias"
 >
-  <div class="field field-select" data-hero-dd>
+  <div class="field field-select field-tipo" data-hero-dd>
     <input type="hidden" id="hero-tipo" name="tipo" value="reforma-integral" />
     <span class="field-label" id="hero-tipo-l">Tipo de obra</span>
     <button
@@ -47,7 +47,7 @@ const calidadesList = Object.values(CALIDADES);
     </ul>
   </div>
 
-  <div class="field field-select" data-hero-dd>
+  <div class="field field-select field-zona" data-hero-dd>
     <input type="hidden" id="hero-zona" name="zona" value={ZONAS_ASTURIAS[0]} />
     <span class="field-label" id="hero-zona-l">Zona en Asturias</span>
     <button
@@ -69,8 +69,8 @@ const calidadesList = Object.values(CALIDADES);
     </ul>
   </div>
 
-  <div class="field field-number" data-hero-num>
-    <label for="hero-m2">Superficie aprox. (m²)</label>
+  <div class="field field-number field-m2" data-hero-num>
+    <label for="hero-m2">Superficie (m²)</label>
     <input
       id="hero-m2"
       name="m2"
@@ -82,7 +82,7 @@ const calidadesList = Object.values(CALIDADES);
     />
   </div>
 
-  <div class="field field-select" data-hero-dd>
+  <div class="field field-select field-calidad" data-hero-dd>
     <input type="hidden" id="hero-calidad" name="calidad" value="estandar" />
     <span class="field-label" id="hero-calidad-l">Nivel de calidades</span>
     <button
@@ -95,6 +95,19 @@ const calidadesList = Object.values(CALIDADES);
       <span id="hero-calidad-v" data-hd>{CALIDADES.estandar.label}</span>
       <span class="hero-select-chev" aria-hidden="true"></span>
     </button>
+    <div class="hero-seg-group" role="radiogroup" aria-labelledby="hero-calidad-l">
+      {calidadesList.map((cal) => (
+        <button
+          type="button"
+          class="hero-seg-btn"
+          role="radio"
+          data-seg-v={cal.key}
+          aria-checked={cal.key === "estandar" ? "true" : "false"}
+        >
+          {cal.label}
+        </button>
+      ))}
+    </div>
     <ul class="hero-select-menu" role="listbox" aria-labelledby="hero-calidad-l" hidden>
       {calidadesList.map((cal) => (
         <li role="option" data-v={cal.key} aria-selected={cal.key === "estandar" ? "true" : undefined}>

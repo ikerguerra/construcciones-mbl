@@ -24,8 +24,8 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
     <strong>Vigencia AEAT:</strong> {IRPF_PROLONGATION_NOTICE}
   </div>
 
-  <div class="grid gap-6 lg:grid-cols-12 lg:items-start">
-    <div class="space-y-5 rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start">
+    <div class="min-w-0 space-y-5 rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
       <div>
         <span class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
           1. Tramo de deducción por eficiencia energética (DA 50ª LIRPF)
@@ -57,8 +57,8 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
         </div>
       </div>
 
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="min-w-0">
           <label for="i-investment" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
             Importe pagado con IVA incluido (€)
           </label>
@@ -68,11 +68,11 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
             min="0"
             step="500"
             value="14000"
-            class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+            class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-base font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none sm:text-sm"
           />
         </div>
 
-        <div>
+        <div class="min-w-0">
           <label for="i-subsidies" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
             Subvenciones públicas recibidas (€)
           </label>
@@ -82,7 +82,7 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
             min="0"
             step="250"
             value="3000"
-            class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+            class="w-full rounded-xl border border-[#d6ddd8] px-3.5 py-2.5 text-base font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none sm:text-sm"
           />
         </div>
       </div>
@@ -113,11 +113,11 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
       </div>
     </div>
 
-    <aside class="rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
+    <aside class="min-w-0 rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
       <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
         Ahorro fiscal estimado en Renta
       </span>
-      <div id="i-deduccion" class="mt-2 font-display text-5xl tracking-wide text-[#86d195]">
+      <div id="i-deduccion" class="mt-2 font-display text-4xl tracking-wide text-[#86d195] sm:text-5xl">
         {fmt(initial.deduccionTotal)}
       </div>
       <p id="i-tier-label" class="mt-1 text-xs text-[#c2cec6]">
@@ -127,17 +127,17 @@ const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
       <div id="i-alerts" class="mt-4 hidden space-y-2"></div>
 
       <dl class="mt-5 space-y-2 border-t border-[#243a2c] pt-4 text-sm">
-        <div class="flex justify-between gap-2">
-          <dt class="text-[#c2cec6]">Base elegible neta (tras subvenciones)</dt>
-          <dd id="i-base-neta" class="font-semibold text-white">{fmt(initial.baseNeta)}</dd>
+        <div class="flex justify-between gap-3">
+          <dt class="min-w-0 text-[#c2cec6]">Base elegible neta (tras subvenciones)</dt>
+          <dd id="i-base-neta" class="shrink-0 whitespace-nowrap text-right font-semibold text-white">{fmt(initial.baseNeta)}</dd>
         </div>
-        <div class="flex justify-between gap-2">
-          <dt class="text-[#c2cec6]">Base máxima deducible aplicada</dt>
-          <dd id="i-base-apl" class="font-semibold text-white">{fmt(initial.baseAplicable)}</dd>
+        <div class="flex justify-between gap-3">
+          <dt class="min-w-0 text-[#c2cec6]">Base máxima deducible aplicada</dt>
+          <dd id="i-base-apl" class="shrink-0 whitespace-nowrap text-right font-semibold text-white">{fmt(initial.baseAplicable)}</dd>
         </div>
-        <div class="flex justify-between gap-2 border-t border-[#243a2c] pt-2">
-          <dt class="font-semibold text-white">Coste neto real de la obra</dt>
-          <dd id="i-coste-neto" class="text-lg font-bold text-[#86d195]">{fmt(initial.costeNetoReal)}</dd>
+        <div class="flex justify-between gap-3 border-t border-[#243a2c] pt-2">
+          <dt class="min-w-0 font-semibold text-white">Coste neto real de la obra</dt>
+          <dd id="i-coste-neto" class="shrink-0 whitespace-nowrap text-right text-lg font-bold text-[#86d195]">{fmt(initial.costeNetoReal)}</dd>
         </div>
       </dl>
 

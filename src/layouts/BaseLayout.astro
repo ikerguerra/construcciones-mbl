@@ -42,26 +42,7 @@ const seoProps = Astro.props;
     <WhatsAppFloat />
     <CookieBanner />
 
-    <script>
-      const revealEls = document.querySelectorAll<HTMLElement>('[data-reveal]');
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduceMotion || !('IntersectionObserver' in window)) {
-        revealEls.forEach((el) => el.classList.add('is-revealed'));
-      } else {
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-revealed');
-                io.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12, rootMargin: '0px 0px -32px 0px' }
-        );
-        revealEls.forEach((el) => io.observe(el));
-      }
-    </script>
+    <script is:inline defer src="/js/site-ui.js"></script>
     <script is:inline defer src="/js/mbl-select.js"></script>
   </body>
 </html>

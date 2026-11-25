@@ -59,34 +59,34 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
 ];
 ---
 
-<div class="grid gap-6 lg:grid-cols-12 lg:items-start" data-budget-tool>
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start" data-budget-tool>
   <!-- Columna izquierda: Wizard 3 pasos -->
-  <div class="rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
+  <div class="min-w-0 rounded-3xl border border-[#d6ddd8] bg-white p-5 shadow-sm sm:p-7 lg:col-span-7">
     <!-- Indicador de pasos -->
     <div class="mb-6 grid grid-cols-3 gap-2" role="tablist" aria-label="Pasos de la calculadora">
       <button
         type="button"
         data-step-tab="1"
-        class="rounded-2xl border border-[#164624] bg-[#164624] px-3 py-2.5 text-left text-xs font-semibold text-white transition sm:text-sm"
+        class="rounded-2xl border border-[#164624] bg-[#164624] px-2.5 py-2 text-left text-xs font-semibold leading-snug text-white transition sm:px-3.5 sm:py-2.5 sm:text-sm"
       >
         <span class="block text-[11px] opacity-80">Paso 1</span>
-        Inmueble y alcance
+        <span class="sm:hidden">Inmueble</span><span class="hidden sm:inline">Inmueble y alcance</span>
       </button>
       <button
         type="button"
         data-step-tab="2"
-        class="rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-3 py-2.5 text-left text-xs font-semibold text-[#516158] transition hover:border-[#3e6b47] sm:text-sm"
+        class="rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-2.5 py-2 text-left text-xs font-semibold leading-snug text-[#516158] transition hover:border-[#3e6b47] sm:px-3.5 sm:py-2.5 sm:text-sm"
       >
         <span class="block text-[11px] opacity-80">Paso 2</span>
-        Calidades y extras
+        <span class="sm:hidden">Calidades</span><span class="hidden sm:inline">Calidades y extras</span>
       </button>
       <button
         type="button"
         data-step-tab="3"
-        class="rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-3 py-2.5 text-left text-xs font-semibold text-[#516158] transition hover:border-[#3e6b47] sm:text-sm"
+        class="rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-2.5 py-2 text-left text-xs font-semibold leading-snug text-[#516158] transition hover:border-[#3e6b47] sm:px-3.5 sm:py-2.5 sm:text-sm"
       >
         <span class="block text-[11px] opacity-80">Paso 3</span>
-        Perfil fiscal (IVA)
+        <span class="sm:hidden">IVA / Fiscal</span><span class="hidden sm:inline">Perfil fiscal (IVA)</span>
       </button>
     </div>
 
@@ -96,9 +96,9 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
         <label class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
           Tipo de actuación
         </label>
-        <div class="grid gap-2.5 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
           {reformTypes.map((rt) => (
-            <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4]/60 p-3.5 transition hover:border-[#164624] has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
+            <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4]/60 p-3.5 transition hover:border-[#164624] has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee] odd:last:sm:col-span-2">
               <input
                 type="radio"
                 name="reformType"
@@ -117,8 +117,8 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
         </div>
       </div>
 
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="min-w-0">
           <label for="b-concejo" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
             Concejo en Asturias
           </label>
@@ -135,7 +135,7 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
           </select>
         </div>
 
-        <div>
+        <div class="min-w-0">
           <label for="b-property" class="mb-1.5 block text-xs font-semibold text-[#111a14]">
             Tipología y accesos
           </label>
@@ -180,7 +180,7 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
             max="1000"
             value="100"
             aria-label="Superficie exacta en metros cuadrados"
-            class="w-28 rounded-xl border border-[#d6ddd8] px-3 py-1.5 text-sm font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none"
+            class="w-28 rounded-xl border border-[#d6ddd8] px-3 py-1.5 text-base font-semibold text-[#111a14] focus:border-[#164624] focus:outline-none sm:text-sm"
           />
           <span class="text-xs text-[#516158]">Rango validado: 15 a 1.000 m²</span>
         </div>
@@ -203,7 +203,7 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
         <label class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
           Nivel de calidades
         </label>
-        <div class="grid gap-2.5 sm:grid-cols-3">
+        <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
           {qualityLevels.map(([k, q]) => (
             <label class="flex cursor-pointer flex-col rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4]/60 p-3.5 transition hover:border-[#164624] has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
               <span class="flex items-center gap-2">
@@ -271,18 +271,18 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
         </div>
       </div>
 
-      <div class="flex flex-wrap justify-between gap-3 pt-2">
+      <div class="flex flex-col-reverse gap-2.5 pt-2 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="button"
           data-goto-step="1"
-          class="rounded-full border border-[#d6ddd8] px-5 py-2.5 text-sm font-semibold text-[#516158] hover:bg-[#eef3ee]"
+          class="w-full rounded-full border border-[#d6ddd8] px-5 py-2.5 text-center text-sm font-semibold text-[#516158] hover:bg-[#eef3ee] sm:w-auto"
         >
           ← Volver
         </button>
         <button
           type="button"
           data-goto-step="3"
-          class="rounded-full bg-[#164624] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0f331a]"
+          class="w-full rounded-full bg-[#164624] px-6 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-[#0f331a] sm:w-auto"
         >
           Siguiente: Perfil fiscal (IVA) →
         </button>
@@ -295,7 +295,7 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
         <span class="mb-2 block text-xs font-semibold tracking-wider text-[#3e6b47] uppercase">
           Perfil del promotor (Art. 91 Ley 37/1992 del IVA)
         </span>
-        <div class="grid gap-2.5 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
           <label class="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[#d6ddd8] p-3.5 has-[:checked]:border-[#164624] has-[:checked]:bg-[#eef3ee]">
             <input
               type="radio"
@@ -363,17 +363,17 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
   </div>
 
   <!-- Columna derecha: Resumen sticky en escritorio -->
-  <aside class="rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
+  <aside class="min-w-0 rounded-3xl border border-[#243a2c] bg-[#0f1d14] p-5 text-white shadow-xl sm:p-7 lg:sticky lg:top-24 lg:col-span-5">
     <div class="flex items-center justify-between gap-2">
       <span class="text-xs font-semibold tracking-wider text-[#86d195] uppercase">
         Estimación llave en mano
       </span>
-      <span id="b-iva-pill" class="rounded-full bg-[#243a2c] px-3 py-1 text-xs font-semibold text-[#86d195]">
+      <span id="b-iva-pill" class="shrink-0 rounded-full bg-[#243a2c] px-3 py-1 text-xs font-semibold text-[#86d195]">
         IVA obra {Math.round(initial.ivaObraRate * 100)} %
       </span>
     </div>
 
-    <div id="b-total-range" class="mt-2 font-display text-4xl tracking-wide text-white sm:text-5xl">
+    <div id="b-total-range" class="mt-2 font-display text-3xl tracking-wide text-white sm:text-4xl xl:text-5xl">
       {fmt(initial.totalMin)} – {fmt(initial.totalMax)}
     </div>
     <p id="b-meta-line" class="mt-1 text-xs text-[#c2cec6]">
@@ -381,39 +381,39 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
     </p>
 
     <dl class="mt-5 space-y-2 border-t border-[#243a2c] pt-4 text-sm">
-      <div class="flex justify-between gap-2">
-        <dt class="text-[#c2cec6]">Subtotal ejecución de obra (sin IVA)</dt>
-        <dd id="b-subtotal" class="font-semibold text-white">
+      <div class="flex justify-between gap-3">
+        <dt class="min-w-0 text-[#c2cec6]">Subtotal ejecución de obra (sin IVA)</dt>
+        <dd id="b-subtotal" class="shrink-0 whitespace-nowrap text-right font-semibold text-white">
           {fmt(initial.subtotalObraMin)} – {fmt(initial.subtotalObraMax)}
         </dd>
       </div>
-      <div id="b-honorarios-row" class="hidden justify-between gap-2">
-        <dt class="text-[#c2cec6]">Honorarios técnicos (21 % IVA aparte)</dt>
-        <dd id="b-honorarios" class="font-semibold text-white">0 €</dd>
+      <div id="b-honorarios-row" class="hidden justify-between gap-3">
+        <dt class="min-w-0 text-[#c2cec6]">Honorarios técnicos (21 % IVA aparte)</dt>
+        <dd id="b-honorarios" class="shrink-0 whitespace-nowrap text-right font-semibold text-white">0 €</dd>
       </div>
-      <div class="flex justify-between gap-2">
-        <dt class="text-[#c2cec6]">PEM estimado (Base ICIO ÷ 1,19)</dt>
-        <dd id="b-pem" class="font-semibold text-white">
+      <div class="flex justify-between gap-3">
+        <dt class="min-w-0 text-[#c2cec6]">PEM estimado (Base ICIO ÷ 1,19)</dt>
+        <dd id="b-pem" class="shrink-0 whitespace-nowrap text-right font-semibold text-white">
           {fmt(initial.pemMin)} – {fmt(initial.pemMax)}
         </dd>
       </div>
-      <div class="flex justify-between gap-2">
-        <dt id="b-icio-label" class="text-[#c2cec6]">
+      <div class="flex justify-between gap-3">
+        <dt id="b-icio-label" class="min-w-0 text-[#c2cec6]">
           ICIO {initial.concejo.name} ({(initial.concejo.icioRate * 100).toFixed(2).replace(/\.00$/, '')}%)
         </dt>
-        <dd id="b-icio" class="font-semibold text-[#86d195]">
+        <dd id="b-icio" class="shrink-0 whitespace-nowrap text-right font-semibold text-[#86d195]">
           {fmt(initial.icioMin)} – {fmt(initial.icioMax)}
         </dd>
       </div>
-      <div class="flex justify-between gap-2">
-        <dt class="text-[#c2cec6]">IVA total estimado</dt>
-        <dd id="b-iva" class="font-semibold text-white">
+      <div class="flex justify-between gap-3">
+        <dt class="min-w-0 text-[#c2cec6]">IVA total estimado</dt>
+        <dd id="b-iva" class="shrink-0 whitespace-nowrap text-right font-semibold text-white">
           {fmt(initial.ivaTotalMin)} – {fmt(initial.ivaTotalMax)}
         </dd>
       </div>
-      <div class="flex justify-between gap-2 text-xs">
-        <dt class="text-[#c2cec6]">Tasa administrativa licencia (informativa)</dt>
-        <dd id="b-tasa" class="text-[#c2cec6]">
+      <div class="flex justify-between gap-3 text-xs">
+        <dt class="min-w-0 text-[#c2cec6]">Tasa administrativa licencia (informativa)</dt>
+        <dd id="b-tasa" class="shrink-0 whitespace-nowrap text-right text-[#c2cec6]">
           {fmt(initial.estimatedLicenseFeeRange[0])} – {fmt(initial.estimatedLicenseFeeRange[1])}
         </dd>
       </div>
@@ -511,8 +511,8 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
       stepTabs.forEach((b) => {
         const active = b.dataset.stepTab === step;
         b.className = active
-          ? 'rounded-2xl border border-[#164624] bg-[#164624] px-3 py-2.5 text-left text-xs font-semibold text-white transition sm:text-sm'
-          : 'rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-3 py-2.5 text-left text-xs font-semibold text-[#516158] transition hover:border-[#3e6b47] sm:text-sm';
+          ? 'rounded-2xl border border-[#164624] bg-[#164624] px-2.5 py-2 text-left text-xs font-semibold leading-snug text-white transition sm:px-3.5 sm:py-2.5 sm:text-sm'
+          : 'rounded-2xl border border-[#d6ddd8] bg-[#f3f7f4] px-2.5 py-2 text-left text-xs font-semibold leading-snug text-[#516158] transition hover:border-[#3e6b47] sm:px-3.5 sm:py-2.5 sm:text-sm';
       });
       stepPanels.forEach((p) => {
         p.classList.toggle('hidden', p.dataset.stepPanel !== step);

@@ -16,18 +16,3 @@ import { EMPRESA } from '../data/empresa';
   </svg>
   <span class="wa-float-label">{EMPRESA.telefonoVisible}</span>
 </a>
-
-<script>
-  const waBtn = document.querySelector<HTMLElement>('[data-wa-float]');
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (waBtn && !prefersReduced) {
-    const triggerExpand = () => {
-      waBtn.classList.add('is-expanded');
-      window.setTimeout(() => {
-        waBtn.classList.remove('is-expanded');
-      }, 3600);
-    };
-    window.setTimeout(triggerExpand, 2500);
-    window.setInterval(triggerExpand, 9500);
-  }
-</script>

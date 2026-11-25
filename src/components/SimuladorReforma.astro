@@ -20,7 +20,7 @@ const calidadesJson = JSON.stringify(CALIDADES);
 
 <div class="article-layout" id="simulador-app" data-tarifas={tarifasJson} data-calidades={calidadesJson}>
   <!-- PANEL IZQUIERDO: PARÁMETROS Y FORMULARIO -->
-  <div style="display:grid;gap:28px">
+  <div style="display:grid;gap:28px;min-width:0">
     <div class="eeat-card" style="background:var(--white)">
       <span class="sec-kicker">Paso 1 · Configura tu proyecto en Asturias</span>
       <h2 class="sec-title" style="font-size:32px;margin-bottom:18px">
@@ -64,14 +64,14 @@ const calidadesJson = JSON.stringify(CALIDADES);
             </label>
             <strong id="sim-m2-badge" style="font-size:15px">85 m²</strong>
           </div>
-          <div style="display:flex;gap:14px;align-items:center">
+          <div style="display:flex;gap:12px;align-items:center;min-width:0">
             <input
               id="sim-m2-range"
               type="range"
               min="35"
               max="260"
               value="85"
-              style="flex:1;accent-color:var(--black)"
+              style="flex:1;min-width:0;accent-color:var(--black)"
               aria-label="Selector deslizante de superficie"
             />
             <input
@@ -81,7 +81,7 @@ const calidadesJson = JSON.stringify(CALIDADES);
               min="35"
               max="260"
               value="85"
-              style="width:100px"
+              style="width:100px;flex-shrink:0"
             />
           </div>
           <small id="sim-calidad-desc" style="font-size:12.5px;color:var(--muted)">
@@ -185,7 +185,7 @@ const calidadesJson = JSON.stringify(CALIDADES);
       <span style="font-size:12px;color:#cccccc;display:block">Horquilla orientativa (IVA no incl.)</span>
       <strong
         id="res-rango"
-        style="font-family:var(--f-display);font-size:40px;line-height:1.05;color:var(--white);display:block;margin-top:4px"
+        style="font-family:var(--f-display);font-size:clamp(30px,7vw,40px);line-height:1.05;color:var(--white);display:block;margin-top:4px"
       >
         {formatearEuros(inicial.min)} – {formatearEuros(inicial.max)}
       </strong>
