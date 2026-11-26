@@ -238,33 +238,33 @@
     let tid;
     let pauseTimer = 0;
 
-    const getStepWidth = () => {
-      if (items.length > 1) {
-        const diff = items[1].offsetLeft - items[0].offsetLeft;
-        if (diff > 0) return diff;
-      }
-      return (items[0]?.offsetWidth || 320) + 16;
-    };
-
     const scrollByDir = (dir) => {
       const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
       if (maxScroll <= 4) return;
 
-      const step = getStepWidth();
-      const left = track.scrollLeft;
-      const behavior = reduced ? 'auto' : 'smooth';
-
-      if (dir > 0) {
-        if (left >= maxScroll - 8) {
-          track.scrollTo({ left: 0, behavior });
-        } else {
-          track.scrollTo({ left: Math.min(maxScroll, left + step), behavior });
+      const viewCenter = track.scrollLeft + track.clientWidth / 2;
+      let currentIdx = 0;
+      let bestDist = Infinity;
+      items.forEach((el, idx) => {
+        const elCenter = el.offsetLeft + el.offsetWidth / 2;
+        const d = Math.abs(elCenter - viewCenter);
+        if (d < bestDist) {
+          bestDist = d;
+          currentIdx = idx;
         }
-      } else if (left <= 8) {
-        track.scrollTo({ left: maxScroll, behavior });
-      } else {
-        track.scrollTo({ left: Math.max(0, left - step), behavior });
-      }
+      });
+
+      const targetIdx = (currentIdx + dir + items.length) % items.length;
+      const targetEl = items[targetIdx];
+      const targetLeft = Math.max(
+        0,
+        Math.min(
+          maxScroll,
+          targetEl.offsetLeft - (track.clientWidth - targetEl.offsetWidth) / 2,
+        ),
+      );
+      const behavior = reduced ? 'auto' : 'smooth';
+      track.scrollTo({ left: targetLeft, behavior });
     };
 
     const stop = () => {

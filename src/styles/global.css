@@ -115,7 +115,7 @@
   width: 100%;
   margin: 0;
   background: var(--white);
-  padding: 16px;
+  padding: 0;
 }
 
 .sec {
@@ -128,9 +128,12 @@
 
 .sec-tint {
   background: var(--bg-tint);
-  border-radius: var(--r-xl);
-  border: 1px solid var(--line);
-  margin-block: 8px;
+  border-radius: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-left: 0;
+  border-right: 0;
+  margin-block: 0;
 }
 
 .sec-title {
@@ -297,9 +300,9 @@
 .nav-solid {
   background: var(--black);
   color: var(--white);
-  border-radius: var(--r-xl);
+  border-radius: 0;
   padding: 16px var(--pad-x);
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
 .nav .logo-link {
@@ -700,9 +703,9 @@ html.has-mobile-nav body {
 
 .hero {
   position: relative;
-  min-height: calc(100vh - 32px);
-  min-height: max(640px, calc(100svh - 32px));
-  border-radius: var(--r-xl);
+  min-height: 100vh;
+  min-height: max(640px, 100svh);
+  border-radius: 0;
   color: var(--white);
   padding: clamp(24px, 3vh, 36px) var(--pad-x) clamp(26px, 3.6vh, 42px);
   display: flex;
@@ -1467,7 +1470,7 @@ html.has-hero-sheet {
 .dark {
   background: var(--black);
   color: var(--white);
-  border-radius: var(--r-xl);
+  border-radius: 0;
   padding: 64px var(--pad-x) 76px;
   position: relative;
   overflow: hidden;
@@ -1688,12 +1691,13 @@ html.has-hero-sheet {
    ========================================================================== */
 
 .choice-grid {
+  --rail-w: 74%;
+  --rail-gap: var(--gap);
   position: relative;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: calc(46% - 12px);
-  gap: var(--gap);
+  display: flex;
+  gap: var(--rail-gap);
   margin-top: 24px;
+  margin-inline: calc(var(--pad-x) * -1);
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
@@ -1703,13 +1707,21 @@ html.has-hero-sheet {
   -webkit-overflow-scrolling: touch;
 }
 
+.choice-grid::before,
+.choice-grid::after {
+  content: '';
+  flex: 0 0 max(0px, calc((100% - var(--rail-w)) / 2 - var(--rail-gap)));
+}
+
 .choice-grid::-webkit-scrollbar {
   display: none;
 }
 
 .choice-grid .card {
-  scroll-snap-align: start;
-  height: clamp(310px, 24vw, 375px);
+  flex: 0 0 var(--rail-w);
+  min-width: 0;
+  scroll-snap-align: center;
+  height: clamp(340px, 30vw, 450px);
 }
 
 .choice-grid .card h3 {
@@ -2275,7 +2287,7 @@ html.has-hero-sheet {
 .foot {
   background: var(--black);
   color: var(--white);
-  border-radius: var(--r-xl);
+  border-radius: 0;
   padding: 52px var(--pad-x) 0;
   position: relative;
   overflow: hidden;
@@ -3399,21 +3411,9 @@ html.has-hero-sheet {
 }
 
 @media (max-width: 900px) {
-  .frame {
-    margin: 0;
-    padding: 12px;
-  }
-
-  .hero,
-  .nav-solid,
-  .dark,
-  .foot {
-    border-radius: 24px;
-  }
-
   .hero {
-    min-height: calc(100svh - 24px);
-    padding: 16px 18px calc(18px + env(safe-area-inset-bottom, 0px));
+    min-height: 100svh;
+    padding: 16px var(--pad-x) calc(18px + env(safe-area-inset-bottom, 0px));
   }
 
   .hero-sub {
@@ -3434,19 +3434,19 @@ html.has-hero-sheet {
   }
 
   .sec {
-    padding: 44px 12px;
+    padding: 44px var(--pad-x);
   }
 
   .sec-compact {
-    padding: 28px 12px;
+    padding: 28px var(--pad-x);
   }
 
   .dark {
-    padding: 40px 20px 48px;
+    padding: 40px var(--pad-x) 48px;
   }
 
   .foot {
-    padding: 36px 20px 0;
+    padding: 36px var(--pad-x) 0;
   }
 
   .nav {
@@ -3485,8 +3485,8 @@ html.has-hero-sheet {
   }
 
   .choice-grid {
-    grid-auto-columns: 64%;
-    gap: 16px;
+    --rail-w: 74%;
+    --rail-gap: 16px;
   }
 
   .bento-gallery {
@@ -3542,7 +3542,7 @@ html.has-hero-sheet {
   }
 
   .choice-grid .card {
-    height: 290px;
+    height: 310px;
   }
 
   .mbl-lightbox-box {
@@ -3645,20 +3645,9 @@ html.has-hero-sheet {
 }
 
 @media (max-width: 640px) {
-  .frame {
-    padding: 8px;
-  }
-
-  .hero,
-  .nav-solid,
-  .dark,
-  .foot {
-    border-radius: 20px;
-  }
-
   .hero:not(.hero-sub) {
-    min-height: calc(100svh - 16px);
-    padding: 12px 14px calc(16px + env(safe-area-inset-bottom, 0px));
+    min-height: 100svh;
+    padding: 14px var(--pad-x) calc(16px + env(safe-area-inset-bottom, 0px));
   }
 
   .hero .nav-wrap:not(.is-sticky) .nav-logo-img {
@@ -3816,19 +3805,24 @@ html.has-hero-sheet {
   }
 
   .home-rail-mobile {
-    display: grid;
-    grid-template-columns: none !important;
-    grid-auto-flow: column;
-    grid-auto-columns: 83%;
-    gap: 14px;
+    --rail-w: 78%;
+    --rail-gap: 14px;
+    display: flex;
+    gap: var(--rail-gap);
+    margin-inline: calc(var(--pad-x) * -1);
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
-    scroll-padding-left: 0;
-    padding-bottom: 6px;
-    padding-right: 4px;
+    scroll-behavior: smooth;
+    padding-block: 4px 12px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .home-rail-mobile::before,
+  .home-rail-mobile::after {
+    content: '';
+    flex: 0 0 max(0px, calc((100% - var(--rail-w)) / 2 - var(--rail-gap)));
   }
 
   .home-rail-mobile::-webkit-scrollbar {
@@ -3836,7 +3830,8 @@ html.has-hero-sheet {
   }
 
   .home-rail-mobile > * {
-    scroll-snap-align: start;
+    flex: 0 0 var(--rail-w);
+    scroll-snap-align: center;
     min-width: 0;
   }
 
@@ -3853,9 +3848,8 @@ html.has-hero-sheet {
   }
 
   .choice-grid {
-    grid-auto-columns: 84%;
-    gap: 14px;
-    padding-right: 4px;
+    --rail-w: 78%;
+    --rail-gap: 14px;
   }
 
   .choice-grid .card {
@@ -3863,18 +3857,23 @@ html.has-hero-sheet {
   }
 
   .bento-gallery {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: none;
-    grid-template-rows: none;
-    grid-auto-columns: 82%;
-    gap: 12px;
+    --rail-w: 78%;
+    --rail-gap: 12px;
+    display: flex;
+    gap: var(--rail-gap);
+    margin-inline: calc(var(--pad-x) * -1);
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    padding-right: 4px;
+  }
+
+  .bento-gallery::before,
+  .bento-gallery::after {
+    content: '';
+    flex: 0 0 max(0px, calc((100% - var(--rail-w)) / 2 - var(--rail-gap)));
   }
 
   .bento-gallery::-webkit-scrollbar {
@@ -3883,10 +3882,11 @@ html.has-hero-sheet {
 
   .bento-item,
   .bento-item-lead {
+    flex: 0 0 var(--rail-w);
     grid-column: auto;
     grid-row: auto;
     height: 250px;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
   }
 
   .input-group.full {
@@ -3896,9 +3896,16 @@ html.has-hero-sheet {
   .tabs {
     flex-wrap: nowrap;
     overflow-x: auto;
+    margin-inline: calc(var(--pad-x) * -1);
+    padding-inline: var(--pad-x);
     padding-bottom: 4px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .tabs::after {
+    content: '';
+    flex: 0 0 max(0px, calc(var(--pad-x) - 10px));
   }
 
   .tabs::-webkit-scrollbar {
