@@ -29,4 +29,4 @@ Catálogo de componentes derivados de [[mbl-maqueta.html]] y ampliados para cubr
 12. **Componentes específicos AEO / Conversión**:
     - **Caja *En resumen* (AEO)**: fondo `--bg` (`#eef3ee`), borde izquierdo `4px solid var(--color-primary)`, radio `0 18px 18px 0`, `padding: 20px 24px`.
     - **Tablas comparativas de precios**: encabezados `--bg`, bordes `--line`, radio `18px`, scroll horizontal seguro en móvil.
-    - **Banner de cookies RGPD/AEPD**: barra fija sobre `#0f1d14` con borde `--border-dark` y botones equivalentes (*Aceptar todas*, *Rechazar opcionales*, *Configurar*).
+    - **Banner de cookies RGPD/AEPD/LSSI-CE**: barra fija sobre `#0f1d14` con borde `--border-dark`, simetría visual estricta entre *Aceptar todas* y *Rechazar todas* (`.cookie-btn-equal`), botón *Configurar* (`.cookie-btn-config`), rejilla móvil de 2 columnas + ancho completo sin desbordamiento horizontal (`max-height: calc(100dvh - 24px)`), caducidad automática a 12 meses y borrado activo de cookies analíticas al revocar.

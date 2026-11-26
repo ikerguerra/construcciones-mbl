@@ -3545,13 +3545,16 @@ html.has-hero-sheet {
   margin-left: 8px;
 }
 
-/* Banner de cookies nativo (barra compacta que despeja el Hero en escritorio y WhatsApp) */
+/* Banner de cookies nativo (barra compacta AEPD/RGPD con simetría visual y cero recorte móvil) */
 .cookie-banner {
   position: fixed;
   left: 20px;
   right: 20px;
   bottom: 14px;
   max-width: min(980px, calc(100vw - 260px));
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   margin: 0 auto;
   z-index: 90;
   background: var(--black);
@@ -3568,15 +3571,46 @@ html.has-hero-sheet {
 }
 
 .cookie-banner-copy {
-  flex: 1 1 340px;
+  flex: 1 1 320px;
   min-width: 0;
 }
 
 .cookie-actions {
   display: flex;
   flex-wrap: wrap;
+  flex: 0 1 auto;
+  max-width: 100%;
+  min-width: 0;
   gap: 8px;
-  flex-shrink: 0;
+}
+
+.cookie-actions .pill {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.cookie-btn-equal {
+  background: var(--white);
+  color: var(--color-primary);
+  border-color: var(--white);
+  font-weight: 600;
+}
+
+.cookie-btn-equal:hover {
+  background: var(--bg);
+  color: var(--color-primary-hover);
+}
+
+.cookie-btn-config {
+  background: #14271b;
+  color: var(--white);
+  border-color: rgba(196, 228, 203, 0.55);
+}
+
+.cookie-btn-config:hover {
+  background: #1e3a28;
+  border-color: var(--warm);
 }
 
 .cookie-prefs-panel {
@@ -3597,11 +3631,34 @@ html.has-hero-sheet {
 
 @media (max-width: 900px) {
   .cookie-banner {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
     max-width: none;
-    padding: 16px 18px;
+    padding: 14px 14px;
+    gap: 12px;
+  }
+
+  .cookie-banner-copy {
+    flex: 1 1 100%;
+  }
+
+  .cookie-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .cookie-actions .pill {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  #cookie-toggle-prefs,
+  #cookie-save-prefs {
+    grid-column: 1 / -1;
   }
 
   html.has-cookie-banner .wa-float {
@@ -3610,11 +3667,17 @@ html.has-hero-sheet {
   }
 
   html.has-cookie-banner body {
-    padding-bottom: 196px;
+    padding-bottom: 240px;
   }
 
   body {
     padding-bottom: 72px;
+  }
+}
+
+@media (max-width: 340px) {
+  .cookie-actions {
+    grid-template-columns: 1fr;
   }
 }
 

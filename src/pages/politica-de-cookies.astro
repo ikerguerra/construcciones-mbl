@@ -33,9 +33,12 @@ const schemaGraph = [buildOrganizationNode(), buildBreadcrumbNode(breadcrumbs, p
         Las cookies y tecnologías similares (como <code>localStorage</code> del navegador) son pequeños archivos o registros que el sitio web almacena en su dispositivo para recordar sus preferencias de privacidad y, únicamente si usted lo autoriza de forma expresa, obtener estadísticas anónimas de uso.
       </p>
 
-      <h2>2. Cómo aplicamos el consentimiento previo</h2>
+      <h2>2. Cómo aplicamos el consentimiento previo, rechazo y revocación</h2>
       <p>
-        En {EMPRESA.marca} aplicamos un gestor de consentimiento nativo con <strong>Google Consent Mode v2</strong> configurado por defecto en estado denegado (<code>denied</code>). Mientras no pulse «Aceptar todas» o active la casilla de analítica en el panel de configuración, no se carga ningún script de medición ni se instalan cookies analíticas en su navegador.
+        En cumplimiento del artículo 22.2 de la LSSI-CE, los artículos 4.11 y 7 del RGPD y la Guía sobre el uso de las cookies de la AEPD, en {EMPRESA.marca} aplicamos un gestor de consentimiento nativo con <strong>Google Consent Mode v2</strong> configurado por defecto en estado denegado (<code>denied</code>).
+      </p>
+      <p>
+        En la primera capa del banner ofrecemos opciones equivalentes para <strong>«Aceptar todas»</strong>, <strong>«Rechazar todas»</strong> y <strong>«Configurar»</strong> con idéntica visibilidad y accesibilidad en escritorio y móvil. Mientras no consienta expresamente, no se carga ningún script de medición ni se instalan cookies analíticas. Su elección se conserva un máximo de 12 meses, tras los cuales volveremos a solicitar confirmación, y puede modificarla o revocarla en cualquier momento (lo que elimina de inmediato las cookies analíticas <code>_ga</code> / <code>_ga_*</code> previamente creadas).
       </p>
 
       <p style="margin:20px 0">
@@ -44,26 +47,26 @@ const schemaGraph = [buildOrganizationNode(), buildBreadcrumbNode(breadcrumbs, p
         </button>
       </p>
 
-      <h2>3. Inventario de cookies y registros utilizados</h2>
+      <h2>3. Inventario de cookies y transferencias internacionales</h2>
     </div>
 
     <TablaComparativa
       caption="Detalle de almacenamiento local y cookies en construccionesmbl.com"
-      columnas={['Nombre', 'Titular', 'Categoría', 'Duración', 'Finalidad']}
+      columnas={['Nombre', 'Titular', 'Categoría', 'Duración', 'Finalidad y base jurídica']}
       filas={[
         [
           'mbl_consent_v1',
           'Propia (construccionesmbl.com)',
           'Técnica necesaria (localStorage)',
           '12 meses',
-          'Guarda su decisión de aceptar o rechazar las cookies analíticas para no mostrarle el banner en cada página.',
+          'Guarda su decisión de aceptar o rechazar las cookies analíticas (exenta por ser estrictamente necesaria conforme al art. 22.2 LSSI-CE).',
         ],
         [
           '_ga / _ga_*',
-          'Google Ireland Limited (cuenta propia de MBL)',
+          'Tercero: Google Ireland Limited (cuenta propia de MBL)',
           'Analítica (opcional)',
-          'Hasta 2 años',
-          'Solo se activan si acepta la medición. Permiten distinguir visitas únicas y páginas más consultadas de forma agregada.',
+          'Hasta 2 años (revocable en cualquier momento)',
+          'Solo se activan si otorga consentimiento expreso (art. 6.1.a RGPD y art. 22.2 LSSI-CE). Pueden implicar transferencias internacionales a EE. UU. amparadas por el Marco de Privacidad de Datos UE-EE. UU. y cláusulas contractuales tipo.',
         ],
       ]}
     />

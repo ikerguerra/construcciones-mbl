@@ -8,6 +8,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
   class="cookie-banner"
   role="region"
   aria-labelledby="cookie-title"
+  tabindex="-1"
   hidden
 >
   <div class="cookie-banner-copy">
@@ -15,16 +16,16 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
       Tu privacidad en Construcciones MBL
     </h2>
     <p style="font-size:13px;color:#d4d4d4;line-height:1.45">
-      Usamos cookies técnicas necesarias y, solo si aceptas, medición anónima para mejorar nuestros contenidos y simulador en Asturias. Puedes aceptar, rechazar o revisar la{' '}
+      Construcciones MBL utiliza cookies propias técnicas y, solo si las aceptas, analíticas de terceros (Google) para medición estadística anónima. Puedes aceptar, rechazar o revisar la{' '}
       <a href="/politica-de-cookies/" style="color:#fff;text-decoration:underline">Política de Cookies</a>.
     </p>
   </div>
 
   <div class="cookie-actions">
-    <button type="button" class="pill pill-white" id="cookie-accept-all">Aceptar todas</button>
-    <button type="button" class="pill" id="cookie-reject-all">Rechazar opcionales</button>
-    <button type="button" class="pill" id="cookie-toggle-prefs" aria-expanded="false" aria-controls="cookie-prefs-panel">Configurar</button>
-    <button type="button" class="pill pill-white" id="cookie-save-prefs" hidden>Guardar selección</button>
+    <button type="button" class="pill cookie-btn-equal" id="cookie-accept-all">Aceptar todas</button>
+    <button type="button" class="pill cookie-btn-equal" id="cookie-reject-all">Rechazar todas</button>
+    <button type="button" class="pill cookie-btn-config" id="cookie-toggle-prefs" aria-expanded="false" aria-controls="cookie-prefs-panel">Configurar</button>
+    <button type="button" class="pill cookie-btn-equal" id="cookie-save-prefs" hidden>Guardar selección</button>
   </div>
 
   <div id="cookie-prefs-panel" hidden class="cookie-prefs-panel">
@@ -34,7 +35,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
     </label>
     <label style="display:flex;gap:8px;align-items:center;cursor:pointer">
       <input type="checkbox" id="cookie-opt-analytics" />
-      <span>Medición y analítica web propia (Google Analytics / Consent Mode v2)</span>
+      <span>Medición y analítica web de terceros (Google Analytics / Consent Mode v2)</span>
     </label>
   </div>
 </div>

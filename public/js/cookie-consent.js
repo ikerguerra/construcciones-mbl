@@ -1,5 +1,7 @@
 (function () {
   var STORAGE_KEY = 'mbl_consent_v1';
+  var MAX_CONSENT_AGE_MS = 365 * 24 * 60 * 60 * 1000; // 12 meses (Guía AEPD)
+
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     window.dataLayer.push(arguments);
@@ -41,6 +43,28 @@
     }
   }
 
+  function clearAnalyticsCookies() {
+    if (!document.cookie) return;
+    var host = window.location.hostname;
+    var parts = host.split('.');
+    var domains = ['', host];
+    if (parts.length >= 2) {
+      domains.push('.' + parts.slice(-2).join('.'));
+      domains.push('.' + host);
+    }
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var name = cookies[i].split('=')[0].trim();
+      if (!name) continue;
+      if (name === '_ga' || name === '_gid' || name === '_gat' || name.indexOf('_ga_') === 0) {
+        for (var j = 0; j < domains.length; j++) {
+          var domAttr = domains[j] ? '; domain=' + domains[j] : '';
+          document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + domAttr + '; SameSite=Lax';
+        }
+      }
+    }
+  }
+
   function applyConsent(analyticsGranted, persist) {
     gtag('consent', 'update', {
       analytics_storage: analyticsGranted ? 'granted' : 'denied',
@@ -51,6 +75,8 @@
 
     if (analyticsGranted) {
       loadOwnAnalytics();
+    } else {
+      clearAnalyticsCookies();
     }
 
     if (persist) {
@@ -69,15 +95,29 @@
   var saveBtn = document.getElementById('cookie-save-prefs');
   var configBtn = document.getElementById('cookie-toggle-prefs');
 
-  function showBanner() {
+  function setPrefsOpen(open) {
+    if (!prefsPanel || !saveBtn || !configBtn) return;
+    prefsPanel.hidden = !open;
+    saveBtn.hidden = !open;
+    configBtn.setAttribute('aria-expanded', String(open));
+  }
+
+  function showBanner(expandPrefs) {
     if (!banner) return;
     banner.hidden = false;
     document.documentElement.classList.add('has-cookie-banner');
+    if (expandPrefs) {
+      setPrefsOpen(true);
+      try {
+        banner.focus();
+      } catch (_e) {}
+    }
   }
 
   function hideBanner() {
     if (!banner) return;
     banner.hidden = true;
+    setPrefsOpen(false);
     document.documentElement.classList.remove('has-cookie-banner');
   }
 
@@ -85,31 +125,36 @@
     var saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       var parsed = JSON.parse(saved);
-      if (optAnalytics) optAnalytics.checked = Boolean(parsed.analytics);
-      applyConsent(Boolean(parsed.analytics), false);
+      var updatedMs = parsed && parsed.updatedAt ? Date.parse(parsed.updatedAt) : NaN;
+      if (!Number.isFinite(updatedMs) || Date.now() - updatedMs > MAX_CONSENT_AGE_MS) {
+        localStorage.removeItem(STORAGE_KEY);
+        showBanner(false);
+      } else {
+        if (optAnalytics) optAnalytics.checked = Boolean(parsed.analytics);
+        applyConsent(Boolean(parsed.analytics), false);
+      }
     } else {
-      showBanner();
+      showBanner(false);
     }
   } catch (_e) {
-    showBanner();
+    showBanner(false);
   }
 
   document.getElementById('cookie-accept-all')?.addEventListener('click', function () {
+    if (optAnalytics) optAnalytics.checked = true;
     applyConsent(true, true);
     hideBanner();
   });
 
   document.getElementById('cookie-reject-all')?.addEventListener('click', function () {
+    if (optAnalytics) optAnalytics.checked = false;
     applyConsent(false, true);
     hideBanner();
   });
 
   configBtn?.addEventListener('click', function () {
-    if (prefsPanel && saveBtn) {
-      var willShow = prefsPanel.hidden;
-      prefsPanel.hidden = !willShow;
-      saveBtn.hidden = !willShow;
-      configBtn.setAttribute('aria-expanded', String(willShow));
+    if (prefsPanel) {
+      setPrefsOpen(prefsPanel.hidden);
     }
   });
 
@@ -121,7 +166,7 @@
 
   document.querySelectorAll('[data-open-cookies]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      showBanner();
+      showBanner(true);
     });
   });
 
