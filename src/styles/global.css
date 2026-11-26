@@ -320,23 +320,11 @@
 }
 
 .hero .nav-wrap:not(.is-sticky) .nav-logo-img {
-  height: clamp(54px, 5vw, 64px);
+  height: clamp(66px, 6vw, 78px);
 }
 
 .nav-wrap.is-sticky .nav-logo-img {
   height: 36px;
-}
-
-.nav-logo-img.nav-logo-sticky {
-  display: none;
-}
-
-.nav-wrap.is-sticky .nav-logo-img.nav-logo-hero {
-  display: none;
-}
-
-.nav-wrap.is-sticky .nav-logo-img.nav-logo-sticky {
-  display: block;
 }
 
 .pills {
@@ -363,9 +351,11 @@
     font-size: 12.5px;
     gap: 4px;
   }
-  .hero .nav-wrap:not(.is-sticky) .nav-logo-img,
   .nav-logo-img {
     height: 38px;
+  }
+  .hero .nav-wrap:not(.is-sticky) .nav-logo-img {
+    height: clamp(46px, 4.4vw, 56px);
   }
 }
 
@@ -783,8 +773,8 @@ html.has-mobile-nav body {
   display: block;
   font-size: clamp(14px, 1.15vw, 18px);
   font-style: italic;
-  font-weight: 500;
-  color: var(--color-primary-hover);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
   margin-bottom: clamp(10px, 1.6vh, 18px);
 }
 
@@ -3687,7 +3677,7 @@ html.has-hero-sheet {
   }
 
   .hero .nav-wrap:not(.is-sticky) .nav-logo-img {
-    height: 50px;
+    height: 60px;
   }
 
   .nav .pills,
@@ -4052,7 +4042,7 @@ html.has-hero-sheet {
   }
 
   .hero .nav-wrap:not(.is-sticky) .nav-logo-img {
-    height: 42px;
+    height: 52px;
   }
 
   .hero-stack {
@@ -4065,7 +4055,7 @@ html.has-hero-sheet {
     font-weight: 600;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: var(--color-primary-hover);
+    color: var(--warm);
     line-height: 1.25;
     margin-bottom: 10px;
   }

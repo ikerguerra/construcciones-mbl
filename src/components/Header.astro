@@ -1,17 +1,14 @@
 ---
 import logoFullLight from '../assets/brand/logo-mbl-full-light.svg';
-import logoFullDark from '../assets/brand/logo-mbl-full.svg';
 import { EMPRESA } from '../data/empresa';
 
 export interface Props {
   mode?: 'overlay' | 'solid';
-  logoTone?: 'light' | 'dark';
   currentPath?: string;
 }
 
-const { mode = 'solid', logoTone = 'light', currentPath = Astro.url.pathname } = Astro.props;
+const { mode = 'solid', currentPath = Astro.url.pathname } = Astro.props;
 const Wrapper = mode === 'solid' ? 'header' : Fragment;
-const useDarkHeroLogo = mode === 'overlay' && logoTone === 'dark';
 
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
@@ -109,33 +106,13 @@ const zonasSubmenu = [
       </div>
 
       <a class="logo-link" href="/" aria-label={`${EMPRESA.marca} — Ir a inicio`}>
-        {useDarkHeroLogo ? (
-          <>
-            <img
-              src={logoFullDark.src}
-              alt={EMPRESA.marca}
-              class="nav-logo-img nav-logo-hero"
-              width="76"
-              height="48"
-            />
-            <img
-              src={logoFullLight.src}
-              alt=""
-              aria-hidden="true"
-              class="nav-logo-img nav-logo-sticky"
-              width="76"
-              height="48"
-            />
-          </>
-        ) : (
-          <img
-            src={logoFullLight.src}
-            alt={EMPRESA.marca}
-            class="nav-logo-img"
-            width="76"
-            height="48"
-          />
-        )}
+        <img
+          src={logoFullLight.src}
+          alt={EMPRESA.marca}
+          class="nav-logo-img"
+          width="76"
+          height="48"
+        />
       </a>
 
       <div class="pills end">
