@@ -4,15 +4,15 @@ tipo: inicio
 titulo: Estado del SRS — Construcciones MBL
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-22
+actualizado: 2026-11-26
 ---
 
 # Estado del proyecto
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.3.0` (último hito: `2026-11-22` · generación de índices: `2026-11-22`)
-- **Preguntas abiertas**: 6 abiertas (0 bloqueantes, 4 altas, 2 medias, 0 bajas) · 17 resueltas/cerradas
+- **Versión del SRS**: `1.3.1` (último hito: `2026-11-26` · generación de índices: `2026-11-26`)
+- **Preguntas abiertas**: 7 abiertas (0 bloqueantes, 5 altas, 2 medias, 0 bajas) · 17 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
 |---|---|
@@ -20,13 +20,13 @@ actualizado: 2026-11-22
 | Actores (`ACT-*`) | 5 |
 | Necesidades (`NEC-*`) | 10 |
 | Casos de uso (`CU-*`) | 8 |
-| Requisitos funcionales (`RF-*`) | 23 |
+| Requisitos funcionales (`RF-*`) | 24 |
 | Requisitos no funcionales (`RNF-*`) | 20 |
 | Interfaces externas (`IE-*`) | 6 |
 | Entidades del modelo de datos | 10 |
 | Criterios de aceptación (`CA-*`) | 20 |
 | Decisiones de arquitectura (`ADR-*`) | 7 |
-| Preguntas abiertas (`PA-*`) | 23 |
+| Preguntas abiertas (`PA-*`) | 24 |
 <!-- /AUTO:cifras -->
 
 ## Lo ya decidido
@@ -62,5 +62,12 @@ actualizado: 2026-11-22
   - Corregidos todos los hallazgos detectados en vivo: contraste `10.85:1` en botones `.btn-dark` dentro de `.prose`, barra horizontal de cookies sin solapamiento sobre el selector Hero ni `.wa-float`, precarga `.woff2` + fallbacks métricos en `tokens.css` (reduciendo el CLS móvil en `Fast 3G` de `0,25` a `0,01`), landmark `banner` de nivel superior, jerarquía de encabezados sin saltos (`heading-order`), `role="img"` en reseñas, `autocomplete` estándar, áreas táctiles `>= 44 px` y eliminación de `ForcedReflow` (`0 ms`), logrando **`100` en Accessibility, SEO y Agentic Browsing** en Lighthouse.
 
 ## Siguiente paso
-1. **Pre-producción (`PA-001` y variables de entorno)**: antes del cambio de DNS hacia Cloudflare Pages, actualizar `cif` y `registroMercantil` definitivos en `src/data/empresa.ts` y configurar en Cloudflare Pages las variables propias (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`, `RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`).
-2. **Despliegue y corte DNS (`ADR-007`)**: conectar el repositorio a Cloudflare Pages, verificar el dominio temporal `.pages.dev` y coordinar el cambio de registros `A`/`CNAME` de `construccionesmbl.com` manteniendo intactos los registros `MX` del correo corporativo.
+1. **Checklist de requisitos pendientes de pre-despliegue (`RF-MIG-004`, `PA-001` y `PA-024`, documentados tras [[Auditoria comparativa WordPress vs Astro Vercel]])**:
+   - **Homologar plataforma de alojamiento (`PA-024`)**: desplegar en **Cloudflare Pages** (donde `functions/api/lead.ts`, `functions/tag/[[path]].ts` y `public/_redirects` operan de forma nativa) o incorporar `vercel.json` + función serverless equivalente en **Vercel** para que `POST /api/lead` deje de devolver `HTTP 404` y se ejecuten las redirecciones `301`/`410` en `construccionesmbl.vercel.app`.
+   - **Añadir 3 reglas `301` adicionales de WordPress en `public/_redirects` (y `vercel.json` si procede, `RF-MIG-001`)**:
+     1. `/reformas-de-ba%C3%B1os-en-asturias` (y variante con `ñ`) $\rightarrow$ `/reformas-de-banos-en-asturias/`.
+     2. `/reformas-de-banos/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/` $\rightarrow$ `/vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/`.
+     3. `/wp-sitemap.xml` $\rightarrow$ `/sitemap-index.xml`.
+   - **Completar datos legales (`PA-001`, `RF-MIG-003`)**: sustituir los avisos provisionales `PA-001` en `src/data/empresa.ts` por el `cif` completo y los datos del `registroMercantil` de `MBL CONSTRUCCIONES S.L.`.
+   - **Sincronizar contador de reseñas (`RF-PROY-003`) y variables de entorno**: actualizar `totalResenas` de `29` a `32` en `src/data/empresa.ts` y configurar en el panel del hosting las variables propias (`RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`, `PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`).
+2. **Despliegue y corte DNS (`ADR-007`)**: verificar en vivo los 3 escenarios de [[CA-MIG-001]] y coordinar el cambio de registros `A`/`CNAME` de `construccionesmbl.com` manteniendo intactos los registros `MX` del correo corporativo.

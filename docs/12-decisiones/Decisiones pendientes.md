@@ -20,5 +20,5 @@ Registro centralizado de las decisiones tecnológicas y de arquitectura para Con
 | [[ADR-004]] | Gestión tipada de contenidos con Content Collections frente a CMS externo | `aceptado` | [[OBJ-003]], [[RNF-MANT-001]], [[RNF-MANT-002]], [[RF-BLOG-002]] |
 | [[ADR-005]] | Arquitectura del simulador de presupuestos y envío serverless de leads | `aceptado` | [[RF-LEAD-001]], [[RF-LEAD-002]], [[RF-LEAD-004]], [[IE-001]], [[RNF-SEG-002]] |
 | [[ADR-006]] | Estrategia integral de posicionamiento SEO local, GEO y AEO | `aceptado` | [[OBJ-002]], [[OBJ-003]], [[RNF-SEO-001]], [[RNF-GEO-001]], [[RNF-GEO-002]], [[RNF-GEO-004]] |
-| [[ADR-007]] | Alojamiento estático en CDN edge, DNS y pipeline CI/CD | `aceptado` | [[OBJ-006]], [[IE-006]], [[RF-MIG-001]], [[RF-MIG-002]], [[RNF-SEG-003]] |
+| [[ADR-007]] | Alojamiento estático en CDN edge, DNS y pipeline CI/CD | `aceptado` | [[OBJ-006]], [[IE-006]], [[RF-MIG-001]], [[RF-MIG-002]], [[RF-MIG-004]], [[RNF-SEG-003]] |
 <!-- /AUTO:lista-adr -->
