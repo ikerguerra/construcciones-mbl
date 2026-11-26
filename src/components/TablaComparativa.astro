@@ -6,6 +6,33 @@ export interface Props {
 }
 
 const { caption, columnas, filas } = Astro.props;
+
+const PRICE_HEADER_RE =
+  /precio|rango|inversión|inversion|coste|tarifa|ahorro|presupuesto|icio/i;
+const FULL_HEADER_RE =
+  /incluye|finalidad|detalle|descripción|descripcion|documentación|documentacion|observaciones|qué|que|trámite|tramite|recomendación|recomendacion|ventaja|solución|solucion/i;
+
+function classifyRow(fila: string[]) {
+  const meta = fila.map((celda, idx) => {
+    const hdr = columnas[idx] ?? '';
+    const isPrice = idx > 0 && PRICE_HEADER_RE.test(hdr);
+    const isFull =
+      idx > 0 &&
+      (fila.length <= 2 ||
+        isPrice ||
+        celda.trim().length > 36 ||
+        FULL_HEADER_RE.test(hdr));
+    return { celda, hdr, isPrice, isFull };
+  });
+
+  const compactIdxs = meta
+    .map((m, i) => (i > 0 && !m.isFull ? i : -1))
+    .filter((i) => i !== -1);
+  if (compactIdxs.length % 2 === 1) {
+    meta[compactIdxs[compactIdxs.length - 1]].isFull = true;
+  }
+  return meta;
+}
 ---
 
 <div class="tabla-wrap" data-cols={String(columnas.length)}>
@@ -17,19 +44,28 @@ const { caption, columnas, filas } = Astro.props;
       </tr>
     </thead>
     <tbody>
-      {filas.map((fila) => (
-        <tr>
-          {fila.map((celda, idx) =>
-            idx === 0 ? (
-              <th scope="row" data-label={columnas[idx] ?? ''}>
-                {celda}
-              </th>
-            ) : (
-              <td data-label={columnas[idx] ?? ''}>{celda}</td>
-            ),
-          )}
-        </tr>
-      ))}
+      {filas.map((fila) => {
+        const cells = classifyRow(fila);
+        return (
+          <tr>
+            {cells.map((cell, idx) =>
+              idx === 0 ? (
+                <th scope="row" data-label={cell.hdr}>
+                  {cell.celda}
+                </th>
+              ) : (
+                <td
+                  data-label={cell.hdr}
+                  data-role={cell.isPrice ? 'price' : undefined}
+                  data-span={cell.isFull ? 'full' : undefined}
+                >
+                  {cell.celda}
+                </td>
+              ),
+            )}
+          </tr>
+        );
+      })}
     </tbody>
   </table>
 </div>

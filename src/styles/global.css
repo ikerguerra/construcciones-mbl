@@ -1038,7 +1038,6 @@ html.has-mobile-nav body {
   color: var(--color-primary-hover);
 }
 
-.hero-mobile-chips,
 .hero-seg-group {
   display: none;
 }
@@ -2587,7 +2586,7 @@ html.has-hero-sheet {
   border-bottom: 0;
 }
 
-/* Tablas anchas (5+ columnas): rejilla de tarjetas también en escritorio */
+/* Tablas anchas (5+ columnas): rejilla de tarjetas UX también en escritorio */
 .tabla-wrap[data-cols='5'],
 .tabla-wrap[data-cols='6'] {
   border: 0;
@@ -2609,7 +2608,7 @@ html.has-hero-sheet {
 .tabla-wrap table[data-cols='5'] caption,
 .tabla-wrap table[data-cols='6'] caption {
   display: block;
-  padding: 0 0 12px;
+  padding: 0 0 14px;
   font-size: 13.5px;
   font-weight: 600;
   color: var(--color-primary);
@@ -2640,20 +2639,25 @@ html.has-hero-sheet {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   width: 100%;
+  counter-reset: mbl-card;
 }
 
 .tabla-wrap table[data-cols='5'] tbody tr,
 .tabla-wrap table[data-cols='6'] tbody tr,
 .prose table[data-cols='5'] tbody tr,
 .prose table[data-cols='6'] tbody tr {
+  counter-increment: mbl-card;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 16px;
+  grid-auto-flow: dense;
+  gap: 10px;
   align-content: start;
-  padding: 18px 20px;
+  padding: 18px;
   border: 1px solid var(--border-sage);
+  border-top: 3px solid var(--color-primary);
   border-radius: var(--r-md);
-  background: var(--bg-tint);
+  background: var(--white);
+  box-shadow: 0 10px 26px rgba(15, 29, 20, 0.055);
 }
 
 .tabla-wrap table[data-cols='5'] tbody th[scope='row'],
@@ -2661,15 +2665,38 @@ html.has-hero-sheet {
 .prose table[data-cols='5'] tbody th[scope='row'],
 .prose table[data-cols='6'] tbody th[scope='row'] {
   grid-column: 1 / -1;
+  order: -2;
+  position: relative;
   display: block;
-  padding: 0 0 10px;
+  padding: 2px 0 12px 36px;
   border-bottom: 1px solid var(--line);
   background: transparent;
   font-family: var(--f-body);
   font-size: 16px;
   font-weight: 600;
   line-height: 1.3;
+  color: var(--ink);
+}
+
+.tabla-wrap table[data-cols='5'] tbody th[scope='row']::before,
+.tabla-wrap table[data-cols='6'] tbody th[scope='row']::before,
+.prose table[data-cols='5'] tbody th[scope='row']::before,
+.prose table[data-cols='6'] tbody th[scope='row']::before {
+  content: counter(mbl-card, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: var(--bg);
   color: var(--color-primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .tabla-wrap table[data-cols='5'] tbody td,
@@ -2677,11 +2704,36 @@ html.has-hero-sheet {
 .prose table[data-cols='5'] tbody td,
 .prose table[data-cols='6'] tbody td {
   display: block;
-  padding: 0;
-  border: 0;
-  font-size: 14px;
-  line-height: 1.5;
+  padding: 10px 12px;
+  border: 1px solid #e5ede7;
+  border-radius: 12px;
+  background: var(--bg-tint);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.45;
   color: var(--ink);
+}
+
+.tabla-wrap table[data-cols='5'] tbody td[data-span='full'],
+.tabla-wrap table[data-cols='6'] tbody td[data-span='full'],
+.prose table[data-cols='5'] tbody td[data-span='full'],
+.prose table[data-cols='6'] tbody td[data-span='full'] {
+  grid-column: 1 / -1;
+}
+
+.tabla-wrap table[data-cols='5'] tbody td[data-role='price'],
+.tabla-wrap table[data-cols='6'] tbody td[data-role='price'],
+.prose table[data-cols='5'] tbody td[data-role='price'],
+.prose table[data-cols='6'] tbody td[data-role='price'] {
+  grid-column: 1 / -1;
+  order: -1;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-color: var(--border-sage);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-primary);
 }
 
 .tabla-wrap table[data-cols='5'] tbody td[data-label]::before,
@@ -2690,12 +2742,19 @@ html.has-hero-sheet {
 .prose table[data-cols='6'] tbody td[data-label]::before {
   content: attr(data-label);
   display: block;
-  margin-bottom: 2px;
-  font-size: 11px;
+  margin-bottom: 3px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+.tabla-wrap table[data-cols='5'] tbody td[data-role='price'][data-label]::before,
+.tabla-wrap table[data-cols='6'] tbody td[data-role='price'][data-label]::before,
+.prose table[data-cols='5'] tbody td[data-role='price'][data-label]::before,
+.prose table[data-cols='6'] tbody td[data-role='price'][data-label]::before {
+  color: var(--color-secondary);
 }
 
 /* FAQ acordeón nativo <details> centrado y acotado */
@@ -3808,7 +3867,7 @@ html.has-hero-sheet {
 
   .tabla-wrap caption {
     display: block;
-    padding: 0 0 12px;
+    padding: 0 0 14px;
     font-size: 13.5px;
     font-weight: 600;
     color: var(--color-primary);
@@ -3845,6 +3904,7 @@ html.has-hero-sheet {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
     width: 100%;
+    counter-reset: mbl-card;
   }
 
   .tabla-wrap tbody:has(> tr:only-child),
@@ -3858,51 +3918,108 @@ html.has-hero-sheet {
   .tabla-wrap table[data-cols='6'] tbody tr,
   .prose table[data-cols='5'] tbody tr,
   .prose table[data-cols='6'] tbody tr {
+    counter-increment: mbl-card;
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: dense;
     gap: 10px;
     align-content: start;
-    padding: 16px 18px;
+    padding: 16px;
     border: 1px solid var(--border-sage);
+    border-top: 3px solid var(--color-primary);
     border-radius: var(--r-md);
-    background: var(--bg-tint);
+    background: var(--white);
+    box-shadow: 0 10px 26px rgba(15, 29, 20, 0.055);
+  }
+
+  .tabla-wrap table[data-cols='2'] tbody tr,
+  .prose table[data-cols='2'] tbody tr {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .tabla-wrap tbody th[scope='row'],
   .prose tbody th[scope='row'] {
+    grid-column: 1 / -1;
+    order: -2;
+    position: relative;
     display: block;
-    padding: 0 0 10px;
+    padding: 2px 0 11px 36px;
     border-bottom: 1px solid var(--line);
     background: transparent;
     font-family: var(--f-body);
     font-size: 15.5px;
     font-weight: 600;
     line-height: 1.3;
-    color: var(--color-primary);
+    color: var(--ink);
     text-align: left;
+  }
+
+  .tabla-wrap tbody th[scope='row']::before,
+  .prose tbody th[scope='row']::before {
+    content: counter(mbl-card, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-grid;
+    place-items: center;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 6px;
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--color-primary);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
   }
 
   .tabla-wrap tbody td,
   .prose tbody td {
     display: block;
-    padding: 0;
-    border: 0;
-    font-size: 14px;
-    line-height: 1.5;
+    padding: 9px 11px;
+    border: 1px solid #e5ede7;
+    border-radius: 12px;
+    background: var(--bg-tint);
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.45;
     color: var(--ink);
     text-align: left;
+  }
+
+  .tabla-wrap tbody td[data-span='full'],
+  .prose tbody td[data-span='full'] {
+    grid-column: 1 / -1;
+  }
+
+  .tabla-wrap tbody td[data-role='price'],
+  .prose tbody td[data-role='price'] {
+    grid-column: 1 / -1;
+    order: -1;
+    padding: 11px 13px;
+    background: var(--bg);
+    border-color: var(--border-sage);
+    font-size: 16.5px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-primary);
   }
 
   .tabla-wrap tbody td[data-label]::before,
   .prose tbody td[data-label]::before {
     content: attr(data-label);
     display: block;
-    margin-bottom: 2px;
-    font-size: 11px;
+    margin-bottom: 3px;
+    font-size: 10.5px;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--muted);
+  }
+
+  .tabla-wrap tbody td[data-role='price'][data-label]::before,
+  .prose tbody td[data-role='price'][data-label]::before {
+    color: var(--color-secondary);
   }
 }
 
@@ -3919,7 +4036,7 @@ html.has-hero-sheet {
 
   .hero:not(.hero-sub) {
     min-height: calc(100svh - 16px);
-    padding: 12px 14px calc(16px + env(safe-area-inset-bottom, 0px));
+    padding: 12px 14px calc(14px + env(safe-area-inset-bottom, 0px));
   }
 
   .hero .nav-wrap:not(.is-sticky) .nav-logo-img {
@@ -3927,23 +4044,24 @@ html.has-hero-sheet {
   }
 
   .hero-stack {
-    padding-top: 8px;
+    padding-top: 10px;
   }
 
   .hero-stack small {
     font-style: normal;
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
     color: var(--warm);
     line-height: 1.25;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .hero-stack h1 {
-    font-size: clamp(30px, 8.2vw, 38px);
-    line-height: 0.96;
+    font-size: clamp(38px, 10.6vw, 48px);
+    line-height: 0.94;
+    letter-spacing: 0.01em;
   }
 
   .hero-lead-right {
@@ -3954,37 +4072,17 @@ html.has-hero-sheet {
     display: none;
   }
 
-  .hero-mobile-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    list-style: none;
-    margin-top: 12px;
-    padding: 0;
-  }
-
-  .hero-mobile-chips li {
-    font-size: 11.5px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: var(--r-pill);
-    background: rgba(15, 29, 20, 0.56);
-    border: 1px solid rgba(134, 209, 149, 0.34);
-    color: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(8px);
-  }
-
   .hero-bottom {
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .search {
     margin-top: 0;
-    padding: 10px;
-    gap: 8px;
-    border-radius: 18px;
+    padding: 8px;
+    gap: 6px;
+    border-radius: 16px;
     display: grid;
-    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
   }
 
   .field-tipo,
@@ -3993,30 +4091,35 @@ html.has-hero-sheet {
   }
 
   .field {
-    padding: 7px 11px 5px;
-    border-radius: 12px;
+    padding: 5px 10px 4px;
+    border-radius: 11px;
     min-width: 0;
   }
 
   .field label,
   .field-label {
-    font-size: 10.5px;
-    line-height: 1.15;
+    font-size: 10px;
+    line-height: 1.1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .hero-select-trigger,
-  .field input,
   .field select {
-    min-height: 32px;
-    padding: 2px 0;
+    min-height: 28px;
+    padding: 1px 0;
+    font-size: 14px;
+  }
+
+  .field input {
+    min-height: 28px;
+    padding: 1px 0;
     font-size: 16px;
   }
 
   .field-calidad {
-    padding: 7px 10px 8px;
+    padding: 5px 9px 6px;
     cursor: default;
   }
 
@@ -4028,18 +4131,18 @@ html.has-hero-sheet {
   .hero-seg-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    margin-top: 6px;
+    gap: 5px;
+    margin-top: 4px;
   }
 
   .hero-seg-btn {
-    min-height: 36px;
-    padding: 6px 4px;
-    border-radius: 9px;
+    min-height: 30px;
+    padding: 4px 3px;
+    border-radius: 8px;
     border: 1px solid rgba(213, 234, 216, 0.25);
     background: rgba(255, 255, 255, 0.08);
     color: rgba(255, 255, 255, 0.9);
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 500;
     text-align: center;
     white-space: nowrap;
@@ -4055,10 +4158,11 @@ html.has-hero-sheet {
 
   .search .go {
     grid-column: 1 / -1;
-    height: 46px;
-    min-height: 46px;
-    border-radius: 12px;
+    height: 44px;
+    min-height: 44px;
+    border-radius: 11px;
     width: 100%;
+    font-size: 13.5px;
   }
 
   .wa-float.is-hero-hidden {
