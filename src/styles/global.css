@@ -1693,7 +1693,7 @@ html.has-hero-sheet {
    ========================================================================== */
 
 .choice-grid {
-  --rail-w: 74%;
+  --rail-w: min(580px, 42%);
   --rail-gap: var(--gap);
   position: relative;
   display: flex;
@@ -1709,7 +1709,11 @@ html.has-hero-sheet {
   -webkit-overflow-scrolling: touch;
 }
 
-.choice-grid::before,
+.choice-grid::before {
+  content: '';
+  flex: 0 0 max(0px, calc(var(--pad-x) - var(--rail-gap)));
+}
+
 .choice-grid::after {
   content: '';
   flex: 0 0 max(0px, calc((100% - var(--rail-w)) / 2 - var(--rail-gap)));
@@ -1723,7 +1727,19 @@ html.has-hero-sheet {
   flex: 0 0 var(--rail-w);
   min-width: 0;
   scroll-snap-align: center;
-  height: clamp(340px, 30vw, 450px);
+  height: clamp(300px, 24vw, 375px);
+}
+
+.choice-grid .card:first-child {
+  scroll-snap-align: start;
+  scroll-margin-inline-start: var(--pad-x);
+}
+
+@media (max-width: 1279px) {
+  .choice-grid {
+    --rail-w: 44%;
+    --rail-gap: 20px;
+  }
 }
 
 .choice-grid .card h3 {
@@ -3489,7 +3505,7 @@ html.has-hero-sheet {
   }
 
   .choice-grid {
-    --rail-w: 74%;
+    --rail-w: 56%;
     --rail-gap: 16px;
   }
 
@@ -3828,7 +3844,11 @@ html.has-hero-sheet {
     -webkit-overflow-scrolling: touch;
   }
 
-  .home-rail-mobile::before,
+  .home-rail-mobile::before {
+    content: '';
+    flex: 0 0 max(0px, calc(var(--pad-x) - var(--rail-gap)));
+  }
+
   .home-rail-mobile::after {
     content: '';
     flex: 0 0 max(0px, calc((100% - var(--rail-w)) / 2 - var(--rail-gap)));
@@ -3842,6 +3862,12 @@ html.has-hero-sheet {
     flex: 0 0 var(--rail-w);
     scroll-snap-align: center;
     min-width: 0;
+  }
+
+  .home-rail-mobile > :first-child,
+  .home-rail-mobile > .is-rail-first {
+    scroll-snap-align: start;
+    scroll-margin-inline-start: var(--pad-x);
   }
 
   .home-rail-mobile .card {
@@ -3879,7 +3905,11 @@ html.has-hero-sheet {
     -webkit-overflow-scrolling: touch;
   }
 
-  .bento-gallery::before,
+  .bento-gallery::before {
+    content: '';
+    flex: 0 0 max(0px, calc(var(--pad-x) - var(--rail-gap)));
+  }
+
   .bento-gallery::after {
     content: '';
     flex: 0 0 max(0px, calc((100% - var(--rail-w)) / 2 - var(--rail-gap)));
@@ -3896,6 +3926,11 @@ html.has-hero-sheet {
     grid-row: auto;
     height: 250px;
     scroll-snap-align: center;
+  }
+
+  .bento-gallery > :first-child {
+    scroll-snap-align: start;
+    scroll-margin-inline-start: var(--pad-x);
   }
 
   .input-group.full {

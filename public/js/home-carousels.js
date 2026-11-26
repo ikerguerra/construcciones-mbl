@@ -11,6 +11,16 @@
   const tabBtns = document.querySelectorAll('[data-service-tab]');
   const servicesGrid = document.getElementById('services-cards-grid');
   const serviceCards = document.querySelectorAll('#services-cards-grid [data-service-cat]');
+  const syncFirstServiceCard = () => {
+    let foundFirst = false;
+    serviceCards.forEach((c) => {
+      const isFirst = !c.hidden && !foundFirst;
+      c.classList.toggle('is-rail-first', isFirst);
+      if (isFirst) foundFirst = true;
+    });
+  };
+  syncFirstServiceCard();
+
   tabBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const cat = btn.dataset.serviceTab || 'todos';
@@ -24,6 +34,7 @@
         c.hidden = !show;
         if (show) anim(c, 0);
       });
+      syncFirstServiceCard();
       if (servicesGrid) {
         servicesGrid.scrollTo({ left: 0, behavior: 'auto' });
       }
@@ -242,27 +253,32 @@
       const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
       if (maxScroll <= 4) return;
 
-      const viewCenter = track.scrollLeft + track.clientWidth / 2;
       let currentIdx = 0;
-      let bestDist = Infinity;
-      items.forEach((el, idx) => {
-        const elCenter = el.offsetLeft + el.offsetWidth / 2;
-        const d = Math.abs(elCenter - viewCenter);
-        if (d < bestDist) {
-          bestDist = d;
-          currentIdx = idx;
-        }
-      });
+      if (track.scrollLeft > 12) {
+        const viewCenter = track.scrollLeft + track.clientWidth / 2;
+        let bestDist = Infinity;
+        items.forEach((el, idx) => {
+          const elCenter = el.offsetLeft + el.offsetWidth / 2;
+          const d = Math.abs(elCenter - viewCenter);
+          if (d < bestDist) {
+            bestDist = d;
+            currentIdx = idx;
+          }
+        });
+      }
 
       const targetIdx = (currentIdx + dir + items.length) % items.length;
       const targetEl = items[targetIdx];
-      const targetLeft = Math.max(
-        0,
-        Math.min(
-          maxScroll,
-          targetEl.offsetLeft - (track.clientWidth - targetEl.offsetWidth) / 2,
-        ),
-      );
+      const targetLeft =
+        targetIdx === 0
+          ? 0
+          : Math.max(
+              0,
+              Math.min(
+                maxScroll,
+                targetEl.offsetLeft - (track.clientWidth - targetEl.offsetWidth) / 2,
+              ),
+            );
       const behavior = reduced ? 'auto' : 'smooth';
       track.scrollTo({ left: targetLeft, behavior });
     };
