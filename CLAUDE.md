@@ -12,6 +12,7 @@ Todo el contenido de la documentación y del sitio web está en **español** y l
 Este archivo se complementa con [AGENTS.md](AGENTS.md) (regla compacta automática del workspace) y no almacena cifras ni estado operativo del SRS para no quedar desfasado. Consulta siempre:
 - **`docs/00-inicio/Inicio.md`**: punto de entrada a la bóveda.
 - **`docs/00-inicio/Estado.md`**: cifras generadas automáticamente, lo ya decidido, el siguiente paso y las preguntas abiertas bloqueantes. Léelo antes de trabajar en el contenido del SRS o de iniciar el código en Astro.
+- **`docs/00-inicio/Backlog de tareas pendientes.md`**: registro vivo de tareas técnicas, visuales, SEO y de marca (`T-001`..`T-NNN`). Cuando el usuario pregunte por tareas pendientes, léelo y presenta las abiertas para que elija cuál abordar.
 
 ---
 

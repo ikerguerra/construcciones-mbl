@@ -11,8 +11,8 @@ actualizado: 2026-11-26
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.3.1` (último hito: `2026-11-26` · generación de índices: `2026-11-26`)
-- **Preguntas abiertas**: 7 abiertas (0 bloqueantes, 5 altas, 2 medias, 0 bajas) · 17 resueltas/cerradas
+- **Versión del SRS**: `1.3.2` (último hito: `2026-11-26` · generación de índices: `2026-11-26`)
+- **Preguntas abiertas**: 9 abiertas (0 bloqueantes, 7 altas, 2 medias, 0 bajas) · 17 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
 |---|---|
@@ -26,7 +26,7 @@ actualizado: 2026-11-26
 | Entidades del modelo de datos | 10 |
 | Criterios de aceptación (`CA-*`) | 20 |
 | Decisiones de arquitectura (`ADR-*`) | 7 |
-| Preguntas abiertas (`PA-*`) | 24 |
+| Preguntas abiertas (`PA-*`) | 26 |
 <!-- /AUTO:cifras -->
 
 ## Lo ya decidido
@@ -43,7 +43,7 @@ actualizado: 2026-11-26
   - Simulador y leads (`ADR-005`): simulador interactivo real en pantalla con tarifas orientativas coherentes unificadas y confirmación inline; endpoint en Cloudflare Pages Functions + **Resend** con auto-respuesta gobernable mediante `SEND_AUTO_REPLY` y webhook opcional a Google Sheets ([[PA-004]], [[PA-005]]).
   - Datos legales (`PA-001`): domicilio y correo confirmados; CIF completo y Registro Mercantil quedan pendientes únicamente para antes de publicar en producción (prioridad `alta`).
 - **Bloque 2 resuelto (`PA-007`..`PA-014`) y `ADR-004` aceptado**:
-  - UX/Marca (`PA-007`, `PA-014`): selector rápido del Hero (4 parámetros) hacia simulador preseleccionado; marca principal `Construcciones MBL`, marcas de agua `ASTURIAS` y `CONSTRUCCIONES MBL`, y 4 métricas oficiales (`+20 años`, `+260 proyectos`, `48 h` ducha exprés, `Hasta 10 años` garantía).
+  - UX/Marca (`PA-007`, `PA-014`): selector rápido del Hero (4 parámetros) hacia simulador preseleccionado; marca principal `Construcciones MBL`, marcas de agua `ASTURIAS` y `CONSTRUCCIONES MBL`. *(Rectificación 2026-11-26: la métrica `+20 años` queda invalidada por inexacta y pendiente de sustitución mediante [[PA-025]] / `T-003`).*
   - SEO local y ofertas (`PA-008`, `PA-009`): 3 landings locales en **Fase 1** (`/reformas-en-gijon/`, `/reformas-en-oviedo/`, `/reformas-en-aviles/`); landing/reclamo de Oferta Exprés 48h de plato de ducha incluida con interruptor configurable (`PUBLIC_SHOW_PROMO_DUCHA=true|false`).
   - Contenidos, E-E-A-T y reseñas (`PA-010`, `PA-011`, `PA-013`): Content Collections en Git + Zod sin CMS externo (`ADR-004`); autoría E-E-A-T (`Borja — Dirección de Construcciones MBL` y `Equipo Técnico`) + bloque de equipo; carrusel nativo sin Trustindex con cifras unificadas y `hasMap` público.
   - Analítica y cookies (`PA-012`): variables opcionales `PUBLIC_GTM_ID` / `PUBLIC_GA4_ID` listas para rellenar después y banner de consentimiento nativo ultraligero con Consent Mode v2.
@@ -62,7 +62,8 @@ actualizado: 2026-11-26
   - Corregidos todos los hallazgos detectados en vivo: contraste `10.85:1` en botones `.btn-dark` dentro de `.prose`, barra horizontal de cookies sin solapamiento sobre el selector Hero ni `.wa-float`, precarga `.woff2` + fallbacks métricos en `tokens.css` (reduciendo el CLS móvil en `Fast 3G` de `0,25` a `0,01`), landmark `banner` de nivel superior, jerarquía de encabezados sin saltos (`heading-order`), `role="img"` en reseñas, `autocomplete` estándar, áreas táctiles `>= 44 px` y eliminación de `ForcedReflow` (`0 ms`), logrando **`100` en Accessibility, SEO y Agentic Browsing** en Lighthouse.
 
 ## Siguiente paso
-1. **Checklist de requisitos pendientes de pre-despliegue (`RF-MIG-004`, `PA-001` y `PA-024`, documentados tras [[Auditoria comparativa WordPress vs Astro Vercel]])**:
+1. **Backlog interactivo de ajustes pendientes ([[Backlog de tareas pendientes]], `T-001`..`T-011`)**: abordar de forma incremental las correcciones visuales/CSS (`T-001` hover WhatsApp, `T-002` tarjeta en `/empresa/`), el análisis fotográfico SEO+UX con 3 opciones por ubicación (`T-004` → `T-005` → `T-006`), la retirada de menciones a 20 años (`T-003` tras resolver [[PA-025]]) y la documentación verídica de proyectos reales (`T-007` tras resolver [[PA-026]] y [[PA-021]]).
+2. **Checklist de requisitos pendientes de pre-despliegue (`T-008`..`T-011`, `RF-MIG-004`, `PA-001` y `PA-024`, documentados tras [[Auditoria comparativa WordPress vs Astro Vercel]])**:
    - **Homologar plataforma de alojamiento (`PA-024`)**: desplegar en **Cloudflare Pages** (donde `functions/api/lead.ts`, `functions/tag/[[path]].ts` y `public/_redirects` operan de forma nativa) o incorporar `vercel.json` + función serverless equivalente en **Vercel** para que `POST /api/lead` deje de devolver `HTTP 404` y se ejecuten las redirecciones `301`/`410` en `construccionesmbl.vercel.app`.
    - **Añadir 3 reglas `301` adicionales de WordPress en `public/_redirects` (y `vercel.json` si procede, `RF-MIG-001`)**:
      1. `/reformas-de-ba%C3%B1os-en-asturias` (y variante con `ñ`) $\rightarrow$ `/reformas-de-banos-en-asturias/`.

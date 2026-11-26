@@ -10,6 +10,7 @@ Al comenzar cualquier tarea, lee [CLAUDE.md](CLAUDE.md) y [docs/00-inicio/Estado
 3. **Orden SRS → Astro**: no inicializar ni generar páginas definitivas de producción en Astro mientras sigan abiertas preguntas `bloqueante` (`PA-001`..`PA-006`), salvo autorización expresa del usuario.
 4. **Validación de la bóveda**: tras cualquier cambio en `docs/`, ejecuta `python docs/90-anexos/scripts/boveda.py indices`, `validar` y `listar`, exigiendo `Errores: 0`.
 5. **Control de versiones (Git)**: trabaja en `main` previa comprobación con `git fetch` y `git status -sb` (sin `pull` automático si está detrás/divergido). Realiza commits locales al cerrar hitos o nuevas versiones de `docs/00-inicio/Historial de cambios.md`. Nunca hagas `git push` sin confirmación explícita del usuario.
+6. **Backlog interactivo de tareas pendientes**: consulta [docs/00-inicio/Backlog de tareas pendientes.md](docs/00-inicio/Backlog%20de%20tareas%20pendientes.md) (`T-001`..`T-NNN`). Cuando el usuario pregunte por tareas pendientes, lista las abiertas diferenciando las ejecutables de inmediato de las bloqueadas por `PA-NNN` para que elija cuál abordar, y actualiza su estado al completarla.
 
 ## Skills del proyecto (`.agents/skills/`)
 - `validar-boveda`: regenera índices, valida el SRS y guía el cierre en Git.

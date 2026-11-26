@@ -42,12 +42,12 @@ Cobertura verificable por criterios de aceptación (`CA-*`): **44/44 (100.0%)**.
 | [[RF-MIG-002]] | Normalización de dominio canónico, protocolo HTTPS y barra final | alta | [[NEC-001]], [[NEC-005]] | [[CA-MIG-001]] | [[ADR-007]] | — |
 | [[RF-MIG-003]] | Exclusión de indexación de rutas transaccionales y páginas legales actualizadas | alta | [[NEC-001]], [[NEC-008]] | [[CA-MIG-001]] | — | [[PA-001]] |
 | [[RF-MIG-004]] | Verificación pre-despliegue en vivo del endpoint de leads, redirecciones 301/410 y datos corporativos sincronizados | critica | [[NEC-001]], [[NEC-004]], [[NEC-008]], [[NEC-009]] | [[CA-MIG-001]] | [[ADR-007]] | [[PA-024]] |
-| [[RF-NAV-001]] | Cabecera de navegación en píldoras, logo centrado, desplegable y barra fija | alta | [[NEC-002]], [[NEC-007]] | [[CA-NAV-001]] | — | — |
-| [[RF-NAV-002]] | Portada editorial adaptada a Construcciones MBL | critica | [[NEC-002]], [[NEC-003]], [[NEC-007]] | [[CA-NAV-002]] | [[ADR-002]] | — |
+| [[RF-NAV-001]] | Cabecera de navegación en píldoras, logo centrado, desplegable y barra fija | alta | [[NEC-002]], [[NEC-007]] | [[CA-NAV-001]] | — | [[PA-025]] |
+| [[RF-NAV-002]] | Portada editorial adaptada a Construcciones MBL | critica | [[NEC-002]], [[NEC-003]], [[NEC-007]] | [[CA-NAV-002]] | [[ADR-002]] | [[PA-025]] |
 | [[RF-NAV-003]] | Selector rápido interactivo en el Hero | alta | [[NEC-004]], [[NEC-007]] | [[CA-NAV-002]] | — | — |
 | [[RF-NAV-004]] | Pie de página corporativo con NAP, accesos legales y buscador/acceso rápido | alta | [[NEC-005]], [[NEC-007]], [[NEC-008]] | [[CA-NAV-001]] | — | — |
-| [[RF-PROY-001]] | Galería filtrable de proyectos y fichas individuales activables | alta | [[NEC-003]], [[NEC-007]] | [[CA-PROY-001]] | — | [[PA-021]] |
-| [[RF-PROY-002]] | Sustitución del feed embebido de Instagram por activos locales optimizados | alta | [[NEC-003]], [[NEC-008]] | [[CA-PROY-001]] | — | [[PA-021]] |
+| [[RF-PROY-001]] | Galería filtrable de proyectos y fichas individuales activables | alta | [[NEC-003]], [[NEC-007]] | [[CA-PROY-001]] | — | [[PA-021]], [[PA-026]] |
+| [[RF-PROY-002]] | Sustitución del feed embebido de Instagram por activos locales optimizados | alta | [[NEC-003]], [[NEC-008]] | [[CA-PROY-001]] | — | [[PA-021]], [[PA-022]], [[PA-026]] |
 | [[RF-PROY-003]] | Sección de testimonios y reseñas de Google Business Profile verificables | alta | [[NEC-003]], [[NEC-006]] | [[CA-PROY-002]] | — | — |
 | [[RF-SERV-001]] | Hub de servicios, 6 páginas por especialidad y formulario lateral | critica | [[NEC-002]], [[NEC-005]] | [[CA-SERV-001]] | — | [[PA-019]], [[PA-022]] |
 | [[RF-SERV-002]] | Ficha estructurada de servicio con precios orientativos, plazos, proceso y garantías | alta | [[NEC-002]], [[NEC-006]], [[NEC-009]] | [[CA-SERV-001]] | — | [[PA-019]] |
@@ -57,10 +57,10 @@ Cobertura verificable por criterios de aceptación (`CA-*`): **44/44 (100.0%)**.
 | [[RNF-ACC-002]] | Navegación por teclado, foco visible y semántica ARIA en controles interactivos | alta | [[NEC-008]] | [[CA-ACC-001]] | — | — |
 | [[RNF-GEO-001]] | Grafo Schema.org JSON-LD granular y válido por plantilla | critica | [[NEC-006]], [[NEC-005]] | [[CA-GEO-001]] | [[ADR-006]] | — |
 | [[RNF-GEO-002]] | Contenido estructurado AEO de respuesta directa y tablas comparativas | alta | [[NEC-006]] | [[CA-GEO-002]] | [[ADR-006]] | — |
-| [[RNF-GEO-003]] | Señales verificables de autoridad E-E-A-T y frescura editorial | alta | [[NEC-006]], [[NEC-003]] | [[CA-GEO-002]] | — | — |
+| [[RNF-GEO-003]] | Señales verificables de autoridad E-E-A-T y frescura editorial | alta | [[NEC-006]], [[NEC-003]] | [[CA-GEO-002]] | — | [[PA-025]] |
 | [[RNF-GEO-004]] | Fichero de contexto semántico llms.txt para agentes generativos | media | [[NEC-006]] | [[CA-GEO-001]] | [[ADR-006]] | — |
 | [[RNF-MANT-001]] | Validación tipada de contenidos, precios y enlaces internos en compilación | alta | [[NEC-009]], [[NEC-001]] | [[CA-MANT-001]] | [[ADR-004]] | — |
-| [[RNF-MANT-002]] | Fuente única de datos corporativos (NAP, estadísticas y tarifas) | alta | [[NEC-009]], [[NEC-005]] | [[CA-MANT-001]] | [[ADR-004]] | [[PA-001]] |
+| [[RNF-MANT-002]] | Fuente única de datos corporativos (NAP, estadísticas y tarifas) | alta | [[NEC-009]], [[NEC-005]] | [[CA-MANT-001]] | [[ADR-004]] | [[PA-001]], [[PA-025]] |
 | [[RNF-REND-001]] | Cumplimiento estricto de Core Web Vitals en móvil y escritorio | critica | [[NEC-008]], [[NEC-005]] | [[CA-REND-001]] | [[ADR-001]] | — |
 | [[RNF-REND-002]] | HTML estático ligero y cero JavaScript en páginas informativas | alta | [[NEC-008]] | [[CA-REND-001]] | [[ADR-001]] | — |
 | [[RNF-REND-003]] | Estrategia de carga óptima de tipografías e imágenes críticas | alta | [[NEC-008]], [[NEC-007]] | [[CA-REND-001]] | [[ADR-002]] | — |

@@ -4,7 +4,7 @@ tipo: inicio
 titulo: Inicio de la bóveda SRS — Construcciones MBL
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-22
+actualizado: 2026-11-26
 ---
 
 # Bóveda SRS — Migración web de Construcciones MBL a Astro
@@ -13,12 +13,13 @@ Bienvenido a la documentación de requisitos (según **ISO/IEC/IEEE 29148**) y a
 
 ## Punto de arranque recomendado
 1. Lee [[Estado]] para conocer la versión actual, cifras del SRS y qué dudas bloquean la fase de implementación.
-2. Revisa [[Auditoria web actual WordPress]] para entender la base real extraída de la web actual y los sitemaps.
-3. Resuelve con el cliente/usuario las preguntas priorizadas en [[Indice de preguntas abiertas]] (empezando por `PA-001` a `PA-006`).
-4. Consulta [[Matriz de trazabilidad]], [[Stack web]] y [[Guia de estilos]] antes de generar el código en Astro.
+2. Revisa [[Backlog de tareas pendientes]] cuando el usuario pregunte por trabajos pendientes para presentarle las tareas activas y dependencias.
+3. Revisa [[Auditoria web actual WordPress]] para entender la base real extraída de la web actual y los sitemaps.
+4. Resuelve con el cliente/usuario las preguntas priorizadas en [[Indice de preguntas abiertas]] (empezando por `PA-001` a `PA-006`).
+5. Consulta [[Matriz de trazabilidad]], [[Stack web]] y [[Guia de estilos]] antes de generar el código en Astro.
 
 ## Mapa rápido de secciones
-- **Contexto y alcance**: [[Introduccion]], [[Glosario]], [[Alcance]], [[Supuestos y restricciones]]
+- **Contexto y alcance**: [[Introduccion]], [[Glosario]], [[Alcance]], [[Supuestos y restricciones]], [[Backlog de tareas pendientes]]
 - **Objetivos y usuarios**: [[OBJ-001]]..[[OBJ-006]], [[NEC-001]]..[[NEC-010]], [[CU-001]]..[[CU-008]]
 - **Especificación**: `06-requisitos-funcionales/` (`RF-*`), `07-requisitos-no-funcionales/` (`RNF-*`), [[Matriz de acceso]]
 - **Interfaces y datos**: `08-interfaces-externas/` (`IE-001`..`IE-006`), [[Modelo de datos]]
