@@ -2542,17 +2542,15 @@ html.has-hero-sheet {
 }
 
 .tabla-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   margin: 24px 0;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   background: var(--white);
+  overflow: hidden;
 }
 
 .tabla-wrap table {
   width: 100%;
-  min-width: 580px;
   border-collapse: collapse;
   font-size: 14px;
   text-align: left;
@@ -2579,8 +2577,125 @@ html.has-hero-sheet {
   color: var(--ink);
 }
 
+.tabla-wrap tbody th {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tabla-wrap tbody tr:last-child th,
 .tabla-wrap tbody tr:last-child td {
   border-bottom: 0;
+}
+
+/* Tablas anchas (5+ columnas): rejilla de tarjetas también en escritorio */
+.tabla-wrap[data-cols='5'],
+.tabla-wrap[data-cols='6'] {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.tabla-wrap table[data-cols='5'],
+.tabla-wrap table[data-cols='6'],
+.prose table[data-cols='5'],
+.prose table[data-cols='6'] {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+.tabla-wrap table[data-cols='5'] caption,
+.tabla-wrap table[data-cols='6'] caption {
+  display: block;
+  padding: 0 0 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: transparent;
+  border: 0;
+}
+
+.tabla-wrap table[data-cols='5'] thead,
+.tabla-wrap table[data-cols='6'] thead,
+.prose table[data-cols='5'] thead,
+.prose table[data-cols='6'] thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.tabla-wrap table[data-cols='5'] tbody,
+.tabla-wrap table[data-cols='6'] tbody,
+.prose table[data-cols='5'] tbody,
+.prose table[data-cols='6'] tbody {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.tabla-wrap table[data-cols='5'] tbody tr,
+.tabla-wrap table[data-cols='6'] tbody tr,
+.prose table[data-cols='5'] tbody tr,
+.prose table[data-cols='6'] tbody tr {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+  align-content: start;
+  padding: 18px 20px;
+  border: 1px solid var(--border-sage);
+  border-radius: var(--r-md);
+  background: var(--bg-tint);
+}
+
+.tabla-wrap table[data-cols='5'] tbody th[scope='row'],
+.tabla-wrap table[data-cols='6'] tbody th[scope='row'],
+.prose table[data-cols='5'] tbody th[scope='row'],
+.prose table[data-cols='6'] tbody th[scope='row'] {
+  grid-column: 1 / -1;
+  display: block;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  font-family: var(--f-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-primary);
+}
+
+.tabla-wrap table[data-cols='5'] tbody td,
+.tabla-wrap table[data-cols='6'] tbody td,
+.prose table[data-cols='5'] tbody td,
+.prose table[data-cols='6'] tbody td {
+  display: block;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.tabla-wrap table[data-cols='5'] tbody td[data-label]::before,
+.tabla-wrap table[data-cols='6'] tbody td[data-label]::before,
+.prose table[data-cols='5'] tbody td[data-label]::before,
+.prose table[data-cols='6'] tbody td[data-label]::before {
+  content: attr(data-label);
+  display: block;
+  margin-bottom: 2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 /* FAQ acordeón nativo <details> centrado y acotado */
@@ -3038,11 +3153,24 @@ html.has-hero-sheet {
   padding: 11px 14px;
   border-bottom: 1px solid var(--line);
   text-align: left;
+  vertical-align: top;
 }
 
-.prose th {
+.prose thead th {
   background: var(--bg);
   font-weight: 600;
+  color: var(--ink);
+}
+
+.prose tbody th {
+  background: transparent;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.prose tbody tr:last-child th,
+.prose tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 /* Bloque E-E-A-T equipo */
@@ -3670,6 +3798,112 @@ html.has-hero-sheet {
     right: 14px;
     bottom: 14px;
   }
+
+  .tabla-wrap {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .tabla-wrap caption {
+    display: block;
+    padding: 0 0 12px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: transparent;
+    border: 0;
+    text-align: left;
+  }
+
+  .tabla-wrap table,
+  .prose table {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .tabla-wrap thead,
+  .prose thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .tabla-wrap tbody,
+  .prose tbody {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+  }
+
+  .tabla-wrap tbody:has(> tr:only-child),
+  .prose tbody:has(> tr:only-child) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tabla-wrap tbody tr,
+  .prose tbody tr,
+  .tabla-wrap table[data-cols='5'] tbody tr,
+  .tabla-wrap table[data-cols='6'] tbody tr,
+  .prose table[data-cols='5'] tbody tr,
+  .prose table[data-cols='6'] tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    align-content: start;
+    padding: 16px 18px;
+    border: 1px solid var(--border-sage);
+    border-radius: var(--r-md);
+    background: var(--bg-tint);
+  }
+
+  .tabla-wrap tbody th[scope='row'],
+  .prose tbody th[scope='row'] {
+    display: block;
+    padding: 0 0 10px;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    font-family: var(--f-body);
+    font-size: 15.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-primary);
+    text-align: left;
+  }
+
+  .tabla-wrap tbody td,
+  .prose tbody td {
+    display: block;
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    text-align: left;
+  }
+
+  .tabla-wrap tbody td[data-label]::before,
+  .prose tbody td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 }
 
 @media (max-width: 640px) {
@@ -3977,5 +4211,15 @@ html.has-hero-sheet {
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
+  }
+
+  .tabla-wrap tbody,
+  .prose tbody,
+  .tabla-wrap table[data-cols='5'] tbody,
+  .tabla-wrap table[data-cols='6'] tbody,
+  .prose table[data-cols='5'] tbody,
+  .prose table[data-cols='6'] tbody {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
   }
 }

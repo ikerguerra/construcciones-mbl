@@ -8,8 +8,8 @@ export interface Props {
 const { caption, columnas, filas } = Astro.props;
 ---
 
-<div class="tabla-wrap">
-  <table>
+<div class="tabla-wrap" data-cols={String(columnas.length)}>
+  <table data-cols={String(columnas.length)}>
     <caption>{caption}</caption>
     <thead>
       <tr>
@@ -20,7 +20,13 @@ const { caption, columnas, filas } = Astro.props;
       {filas.map((fila) => (
         <tr>
           {fila.map((celda, idx) =>
-            idx === 0 ? <th scope="row" style="font-weight:600">{celda}</th> : <td>{celda}</td>
+            idx === 0 ? (
+              <th scope="row" data-label={columnas[idx] ?? ''}>
+                {celda}
+              </th>
+            ) : (
+              <td data-label={columnas[idx] ?? ''}>{celda}</td>
+            ),
           )}
         </tr>
       ))}
