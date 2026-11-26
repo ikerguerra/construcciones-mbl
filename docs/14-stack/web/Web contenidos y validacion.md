@@ -4,7 +4,7 @@ tipo: stack
 titulo: Web — Contenidos tipados, validación Zod y fuente única de datos
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-19
+actualizado: 2026-11-26
 ---
 
 # Web — Contenidos y validación
@@ -15,7 +15,7 @@ actualizado: 2026-11-19
   - `blog`: los 22 artículos migrados (y nuevos) en Markdown/MDX con `slug`, `slugHeredadoWp`, `categoria`, `autor` (`borja-direccion` o `equipo-tecnico`, [[PA-010]]), `servicioRelacionado`, `metaTitle` (validación longitud `<= 65`), `metaDescription` (`120–165`), `resumenAeo`, `datePublished`, `dateModified`, `faqs[]` y `heroImage`.
   - `autores`, `categorias`, `testimonios`, `faqs` y `promociones`.
 - **Fuente única de verdad** (`src/data/empresa.ts` y `src/data/tarifas.ts`):
-  - Datos NAP verificados de `MBL CONSTRUCCIONES S.L.` (marca `Construcciones MBL`, razón social, CIF pendiente de pre-producción en [[PA-001]], dirección, teléfono, horario, coordenadas, `placeId`, `aggregateRating` unificado en `4.9 / 29` y bloque de dirección/equipo técnico).
+  - Datos NAP verificados de `MBL CONSTRUCCIONES S.L.` (marca `Construcciones MBL`, razón social, CIF pendiente de pre-producción en [[PA-001]], dirección, teléfono, horario, coordenadas, `placeId`, `aggregateRating` unificado en `4.9 / 32` y bloque de dirección/equipo técnico).
   - Tabla única de rangos orientativos coherentes y coeficientes del simulador, consumida simultáneamente por el simulador, las tablas de páginas de servicio, el archivo `/llms.txt` y Schema.org (`RNF-MANT-002`).
 - **Control en build e interruptor de promociones**:
   - Regla de validación para impedir publicar promociones con `fechaFin` vencida como oferta vigente ([[RF-SERV-003]], [[CA-MANT-001]]).

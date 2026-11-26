@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Suite automatizada de verificación del build estático (dist/) de Construcciones MBL:
-1. Cobertura 100 % de las 392 URLs de los 4 sitemaps de WordPress + /author/3fwu9/ +
-   /category/uncategorized/ + artículo 23º (/uncategorized/...).
+1. Cobertura 100 % de las 392 URLs de los 4 sitemaps de WordPress + rutas heredadas adicionales
+   (/author/3fwu9/, /category/uncategorized/, artículo 23º en /uncategorized/ y /reformas-de-banos/,
+   /reformas-de-ba%C3%B1os-en-asturias y /wp-sitemap.xml).
 2. Verificación de que public/_redirects contiene únicamente códigos 301 válidos para
    Cloudflare Pages (sin 410 ni cadenas de múltiples saltos) y que functions/tag/[[path]].ts
    cubre /tag/* con HTTP 410.
@@ -11,7 +12,8 @@ Suite automatizada de verificación del build estático (dist/) de Construccione
    - <title> único (35–65 caracteres en páginas indexables).
    - <meta name="description"> única (120–165 caracteres en páginas indexables).
    - <link rel="canonical"> absoluto con barra final /.
-   - JSON-LD (@graph) sintácticamente válido con GeneralContractor.
+   - JSON-LD (@graph) sintácticamente válido con GeneralContractor y coherencia de
+     aggregateRating entre portada, JSON-LD y dist/llms.txt.
    - /mensaje-enviado/ con noindex, nofollow y ausente de sitemap-0.xml.
    - Existencia y validez de dist/llms.txt y dist/robots.txt.
    - Tamaño de dist/index.html < 70 KB.
@@ -109,6 +111,9 @@ def verify_sitemaps_and_redirects(rules: dict[str, tuple[str, int]]) -> list[str
         "https://construccionesmbl.com/author/3fwu9/",
         "https://construccionesmbl.com/category/uncategorized/",
         "https://construccionesmbl.com/uncategorized/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+        "https://construccionesmbl.com/reformas-de-ba%C3%B1os-en-asturias",
+        "https://construccionesmbl.com/reformas-de-banos/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+        "https://construccionesmbl.com/wp-sitemap.xml",
     ]
     all_legacy_urls.extend(extra_legacy)
 
@@ -148,6 +153,16 @@ def verify_sitemaps_and_redirects(rules: dict[str, tuple[str, int]]) -> list[str
         else:
             errors.append(f"URL heredada SIN COBERTURA (404): {full_url}")
 
+    required_literal_rules = [
+        ("/reformas-de-ba%c3%b1os-en-asturias", "/reformas-de-banos-en-asturias/"),
+        ("/reformas-de-ba%C3%B1os-en-asturias", "/reformas-de-banos-en-asturias/"),
+        ("/reformas-de-baños-en-asturias", "/reformas-de-banos-en-asturias/"),
+        ("/wp-sitemap.xml", "/sitemap-index.xml"),
+    ]
+    for req_src, req_dst in required_literal_rules:
+        if rules.get(req_src) != (req_dst, 301):
+            errors.append(f"Falta regla obligatoria en _redirects: {req_src} -> {req_dst} 301")
+
     # Verificar también que todos los destinos de _redirects existen en dist/ y no forman cadenas
     for src, (dst, _code) in rules.items():
         if "*" in src:
@@ -158,7 +173,7 @@ def verify_sitemaps_and_redirects(rules: dict[str, tuple[str, int]]) -> list[str
             errors.append(f"Regla _redirects apunta a destino inexistente en dist/: {src} -> {dst}")
 
     print(
-        f"[Migración 395 URLs] Total verificadas: {len(all_legacy_urls)} "
+        f"[Migración {len(all_legacy_urls)} URLs] Total verificadas: {len(all_legacy_urls)} "
         f"(200 directo: {direct_ok}, 301 en 1 salto: {redirect_301_ok}, 410 /tag/*: {gone_410_ok})"
     )
     return errors
@@ -172,6 +187,7 @@ def audit_html_files() -> list[str]:
 
     titles_seen: dict[str, str] = {}
     descs_seen: dict[str, str] = {}
+    org_ratings_seen: set[tuple[str, str]] = set()
 
     for hf in html_files:
         rel = hf.relative_to(DIST).as_posix()
@@ -261,6 +277,14 @@ def audit_html_files() -> list[str]:
                 parsed = json.loads(blk)
                 if "@graph" not in parsed:
                     errors.append(f"[{rel}] JSON-LD sin '@graph'")
+                else:
+                    for node in parsed["@graph"]:
+                        if isinstance(node, dict) and node.get("@type") == "GeneralContractor":
+                            agg = node.get("aggregateRating") or {}
+                            rv = str(agg.get("ratingValue", "")).strip()
+                            rc = str(agg.get("reviewCount", "")).strip()
+                            if rv and rc:
+                                org_ratings_seen.add((rv, rc))
             except Exception as exc:
                 errors.append(f"[{rel}] JSON-LD inválido: {exc}")
 
@@ -274,13 +298,40 @@ def audit_html_files() -> list[str]:
             if not path_exists_in_dist(target_path):
                 errors.append(f"[{rel}] Enlace interno roto hacia '{href}'")
 
-    # 7. Peso de dist/index.html < 70 KB
+    # 7. Peso de dist/index.html < 70 KB y coherencia de reseñas (CA-PROY-002)
     home_file = DIST / "index.html"
     if home_file.is_file():
+        home_txt = home_file.read_text(encoding="utf-8")
         home_kb = home_file.stat().st_size / 1024
         print(f"[Rendimiento] dist/index.html = {home_kb:.1f} KB (límite < 70 KB)")
         if home_kb >= 70:
             errors.append(f"dist/index.html supera 70 KB ({home_kb:.1f} KB)")
+
+        if len(org_ratings_seen) != 1:
+            errors.append(
+                f"Inconsistencia en aggregateRating JSON-LD entre páginas: {sorted(org_ratings_seen)}"
+            )
+        else:
+            rating_val, review_count = next(iter(org_ratings_seen))
+            home_plain = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(home_txt)))
+            expected_home_snippets = [
+                f"{rating_val} / 5 en Google · {review_count} reseñas verificadas",
+                f"Ver las {review_count} reseñas en Google",
+                f"{review_count} opiniones reales",
+            ]
+            for snippet in expected_home_snippets:
+                if snippet not in home_plain:
+                    errors.append(
+                        f"[index.html] Desajuste con aggregateRating ({rating_val}/{review_count}): falta '{snippet}'"
+                    )
+            llms_file = DIST / "llms.txt"
+            if llms_file.is_file():
+                llms_txt = llms_file.read_text(encoding="utf-8")
+                expected_llms = f"{rating_val}/5 ({review_count} reseñas)"
+                if expected_llms not in llms_txt:
+                    errors.append(
+                        f"[llms.txt] Desajuste con aggregateRating ({rating_val}/{review_count}): falta '{expected_llms}'"
+                    )
 
     # 8. /mensaje-enviado/ con noindex y fuera del sitemap
     msg_file = DIST / "mensaje-enviado" / "index.html"
@@ -289,6 +340,10 @@ def audit_html_files() -> list[str]:
     else:
         if "noindex" not in msg_file.read_text(encoding="utf-8").lower():
             errors.append("dist/mensaje-enviado/index.html no tiene meta noindex")
+
+    sitemap_index = DIST / "sitemap-index.xml"
+    if not sitemap_index.is_file():
+        errors.append("No se generó dist/sitemap-index.xml")
 
     sitemap_0 = DIST / "sitemap-0.xml"
     if not sitemap_0.is_file():

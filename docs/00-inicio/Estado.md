@@ -11,7 +11,7 @@ actualizado: 2026-11-26
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.3.1` (último hito: `2026-11-26` · generación de índices: `2026-11-26`)
+- **Versión del SRS**: `1.3.2` (último hito: `2026-11-26` · generación de índices: `2026-11-26`)
 - **Preguntas abiertas**: 7 abiertas (0 bloqueantes, 5 altas, 2 medias, 0 bajas) · 17 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
@@ -60,14 +60,14 @@ actualizado: 2026-11-26
 - **Integración y auditoría en vivo con Chrome DevTools MCP (`v1.2.1`)**:
   - Incorporada la skill operativa `auditoria-chrome-devtools` en `.agents/skills/` (combinando `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp` y `cookie-debugging`) y documentados sus resultados reales en [[Auditoria Chrome DevTools Astro]].
   - Corregidos todos los hallazgos detectados en vivo: contraste `10.85:1` en botones `.btn-dark` dentro de `.prose`, barra horizontal de cookies sin solapamiento sobre el selector Hero ni `.wa-float`, precarga `.woff2` + fallbacks métricos en `tokens.css` (reduciendo el CLS móvil en `Fast 3G` de `0,25` a `0,01`), landmark `banner` de nivel superior, jerarquía de encabezados sin saltos (`heading-order`), `role="img"` en reseñas, `autocomplete` estándar, áreas táctiles `>= 44 px` y eliminación de `ForcedReflow` (`0 ms`), logrando **`100` en Accessibility, SEO y Agentic Browsing** en Lighthouse.
+- **Cierre técnico parcial del checklist pre-despliegue (`v1.3.2`, [[RF-MIG-001]], [[RF-PROY-003]])**:
+  - Añadidas a `public/_redirects` las 3 reglas `301` adicionales detectadas en el WordPress en vivo (`/reformas-de-ba%C3%B1os-en-asturias` y variantes con `ñ`, `/reformas-de-banos/reforma-de-banos-y-cocinas-...` y `/wp-sitemap.xml`).
+  - Sincronizado `totalResenas: 32` (`4,9 / 5`) en `src/data/empresa.ts`, propagado automáticamente a portada, JSON-LD `AggregateRating` y `/llms.txt`.
+  - Ampliada la verificación automática en `scripts/verify-build.py` (`398` URLs heredadas y coherencia de `aggregateRating`) y añadidos tests unitarios en `src/__tests__/empresaAndRedirects.test.ts`.
 
 ## Siguiente paso
 1. **Checklist de requisitos pendientes de pre-despliegue (`RF-MIG-004`, `PA-001` y `PA-024`, documentados tras [[Auditoria comparativa WordPress vs Astro Vercel]])**:
    - **Homologar plataforma de alojamiento (`PA-024`)**: desplegar en **Cloudflare Pages** (donde `functions/api/lead.ts`, `functions/tag/[[path]].ts` y `public/_redirects` operan de forma nativa) o incorporar `vercel.json` + función serverless equivalente en **Vercel** para que `POST /api/lead` deje de devolver `HTTP 404` y se ejecuten las redirecciones `301`/`410` en `construccionesmbl.vercel.app`.
-   - **Añadir 3 reglas `301` adicionales de WordPress en `public/_redirects` (y `vercel.json` si procede, `RF-MIG-001`)**:
-     1. `/reformas-de-ba%C3%B1os-en-asturias` (y variante con `ñ`) $\rightarrow$ `/reformas-de-banos-en-asturias/`.
-     2. `/reformas-de-banos/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/` $\rightarrow$ `/vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/`.
-     3. `/wp-sitemap.xml` $\rightarrow$ `/sitemap-index.xml`.
    - **Completar datos legales (`PA-001`, `RF-MIG-003`)**: sustituir los avisos provisionales `PA-001` en `src/data/empresa.ts` por el `cif` completo y los datos del `registroMercantil` de `MBL CONSTRUCCIONES S.L.`.
-   - **Sincronizar contador de reseñas (`RF-PROY-003`) y variables de entorno**: actualizar `totalResenas` de `29` a `32` en `src/data/empresa.ts` y configurar en el panel del hosting las variables propias (`RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`, `PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`).
-2. **Despliegue y corte DNS (`ADR-007`)**: verificar en vivo los 3 escenarios de [[CA-MIG-001]] y coordinar el cambio de registros `A`/`CNAME` de `construccionesmbl.com` manteniendo intactos los registros `MX` del correo corporativo.
+   - **Configurar variables de entorno en el alojamiento**: establecer en el panel del hosting las credenciales propias (`RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`, `PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`).
+2. **Despliegue y corte DNS (`ADR-007`)**: verificar en vivo los 3 escenarios de [[CA-MIG-001]] (incluidas las 3 reglas `301` añadidas y `POST /api/lead`) y coordinar el cambio de registros `A`/`CNAME` de `construccionesmbl.com` manteniendo intactos los registros `MX` del correo corporativo.

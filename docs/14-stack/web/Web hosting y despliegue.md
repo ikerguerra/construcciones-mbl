@@ -4,7 +4,7 @@ tipo: stack
 titulo: Web — Hosting estático/edge, redirecciones 301/410 y CI/CD
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-22
+actualizado: 2026-11-26
 ---
 
 # Web — Hosting y despliegue
@@ -19,6 +19,6 @@ actualizado: 2026-11-22
   - `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: SAMEORIGIN`, `Permissions-Policy` y `Content-Security-Policy` adaptada a GTM/endpoint.
   - Cabeceras de caché inmutable (`max-age=31536000, immutable`) para activos con hash en `/_astro/` y caché corta/revalidada para HTML.
 - **Comprobaciones automáticas en CI y pre-despliegue**:
-  1. `astro check` + `tsc` (`check:functions`) + `astro build` (validación Zod de colecciones y generación de HTML + sitemap).
-  2. `scripts/verify-build.py` (`npm run verify`): cobertura del 100 % sobre las 395 URLs heredadas, ausencia de cadenas prohibidas, metadatos únicos, JSON-LD y `dist/index.html < 70 KB`.
+  1. `astro check` + `tsc` (`check:functions`) + `astro build` (validación Zod de colecciones y generación de HTML + sitemap) + `npm test` (Vitest).
+  2. `scripts/verify-build.py` (`npm run verify`): cobertura del 100 % sobre las 398 URLs heredadas (sitemaps originales más rutas heredadas y enlaces rotos detectados en auditoría), ausencia de cadenas prohibidas, metadatos únicos, JSON-LD, coherencia de `aggregateRating` entre portada, Schema.org y `/llms.txt`, y `dist/index.html < 70 KB`.
   3. Auditoría en vivo con Chrome DevTools MCP (skill `auditoria-chrome-devtools`, documentada en [[Auditoria Chrome DevTools Astro]]): Lighthouse CI/MCP (`Accessibility 100`, `SEO 100`, `Agentic Browsing 100`), trace móvil `Fast 3G` (`LCP`, `CLS <= 0,01`, `0` `ForcedReflow`) y flujo RGPD Consent Mode v2 en contexto aislado.

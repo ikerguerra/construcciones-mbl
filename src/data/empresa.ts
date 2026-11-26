@@ -53,7 +53,7 @@ export const EMPRESA = {
     hasMap: 'https://www.google.com/maps/place/?q=place_id:ChIJN_H9_Jyih2MRXyPsrrG4cWg',
     reviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJN_H9_Jyih2MRXyPsrrG4cWg',
     ratingValor: 4.9,
-    totalResenas: 29,
+    totalResenas: 32,
   },
   redes: {
     instagram: 'https://www.instagram.com/construccionesmbl',
