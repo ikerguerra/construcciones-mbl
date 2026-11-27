@@ -64,6 +64,8 @@ describe('Datos corporativos y redirecciones 301 de migración', () => {
         '/vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/',
       ],
       ['/wp-sitemap.xml', '/sitemap-index.xml'],
+      ['/calculadora-presupuesto-reforma', '/calcula-el-precio-de-tu-reforma-en-asturias/'],
+      ['/calculadora-presupuesto-reforma/', '/calcula-el-precio-de-tu-reforma-en-asturias/'],
     ];
 
     for (const [src, dst] of expectedRedirects) {

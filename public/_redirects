@@ -73,3 +73,6 @@
 
 /wp-sitemap.xml /sitemap-index.xml 301
 
+# 6. Consolidación canónica de calculadoras de presupuesto (PA-023)
+/calculadora-presupuesto-reforma /calcula-el-precio-de-tu-reforma-en-asturias/ 301
+/calculadora-presupuesto-reforma/ /calcula-el-precio-de-tu-reforma-en-asturias/ 301

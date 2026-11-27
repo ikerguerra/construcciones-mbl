@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ResumenDirecto from '../components/ResumenDirecto.astro';
 import SimuladorReforma from '../components/SimuladorReforma.astro';
+import BudgetCalculator from '../components/tools/BudgetCalculator.astro';
 import TablaComparativa from '../components/TablaComparativa.astro';
 import BloqueFaq from '../components/BloqueFaq.astro';
 import { EMPRESA } from '../data/empresa';
@@ -12,13 +13,14 @@ import {
   buildOrganizationNode,
   buildBreadcrumbNode,
   buildFaqNode,
+  buildWebApplicationNode,
 } from '../lib/schema';
 
 const slug = 'calcula-el-precio-de-tu-reforma-en-asturias';
 const pageUrl = `${EMPRESA.dominio}/${slug}/`;
-const title = 'Calcula el Precio de tu Reforma en Asturias | Simulador MBL';
+const title = 'Calcula el Precio de tu Reforma en Asturias | PEM e ICIO';
 const description =
-  'Simulador online gratuito para calcular el precio de tu reforma integral, cocina, baño, plato de ducha o local en Asturias en 2 minutos y pedir visita.';
+  'Calcula el precio de tu reforma en Asturias en modo rápido o con desglose completo de PEM, ICIO por concejo, IVA (10 % o 21 %) y solicitud de visita.';
 
 const breadcrumbs = [
   { name: 'Inicio', url: '/' },
@@ -34,25 +36,41 @@ const filasReferencia = Object.values(TARIFAS).map((t) => [
 
 const faqs = [
   {
-    pregunta: '¿Qué fiabilidad tiene el precio que muestra el simulador online?',
+    pregunta: '¿Qué fiabilidad tiene el precio que muestra la calculadora online?',
     respuesta:
-      'El simulador utiliza nuestras horquillas reales de ejecución en Asturias (2026) por metro cuadrado y nivel de calidades. Sirve para conocer la inversión realista antes de nuestra visita técnica gratuita, en la que cerramos el presupuesto exacto por partidas.',
+      'Tanto el simulador rápido como el desglose técnico utilizan nuestras horquillas reales de ejecución en Asturias (2026) por metro cuadrado y calidades. Sirven para conocer la inversión realista antes de nuestra visita técnica gratuita, en la que cerramos el presupuesto exacto por partidas en 48 horas.',
   },
   {
-    pregunta: '¿Solicitar la visita técnica desde el simulador tiene algún coste?',
+    pregunta: '¿Cómo se calcula el PEM y el ICIO municipal en la calculadora de reformas?',
     respuesta:
-      'No. La visita técnica, medición en el inmueble (en Gijón, Oviedo, Avilés y resto de Asturias) y entrega del presupuesto desglosado en 48 horas son totalmente gratuitas y sin compromiso.',
+      'El Presupuesto de Ejecución Material (PEM) se estima dividiendo el subtotal de ejecución por contrata (sin IVA ni honorarios técnicos) entre 1,19 para descontar el 13 % de Gastos Generales y el 6 % de Beneficio Industrial. Sobre ese PEM se aplica el tipo real de ICIO de tu concejo en Asturias.',
   },
   {
-    pregunta: '¿Los importes orientativos del simulador incluyen IVA?',
+    pregunta: '¿Cuándo se aplica el IVA reducido del 10 % frente al 21 % en una reforma?',
     respuesta:
-      'Las horquillas mostradas son importes base antes de impuestos. En reformas de vivienda particular, siempre que el coste de los materiales aportados no supere el 40 % del total, suele aplicarse el IVA reducido del 10 % en lugar del 21 %.',
+      'Las horquillas base mostradas no incluyen impuestos, salvo en el desglose fiscal final. Conforme al art. 91 de la Ley 37/1992 del IVA, se aplica el 10 % cuando el promotor es un particular en vivienda de más de 2 años y los materiales aportados por la constructora no superan el 40 % del total; en locales comerciales, inversores u honorarios técnicos aplica el 21 %.',
+  },
+  {
+    pregunta: '¿Qué sobrecostes reales tiene una reforma en Asturias frente a la media nacional?',
+    respuesta:
+      'En Asturias influyen la logística según el concejo, la ausencia de ascensor en fincas antiguas y patologías frecuentes del clima atlántico como humedades por capilaridad, rehabilitación de cubiertas y refuerzos estructurales en casas de piedra.',
+  },
+  {
+    pregunta: '¿Solicitar la visita técnica o el informe desde la calculadora tiene algún coste?',
+    respuesta:
+      'No. La visita técnica, medición en el inmueble (en Gijón, Oviedo, Avilés y resto de Asturias) y entrega del presupuesto desglosado cerrado son totalmente gratuitas y sin compromiso.',
   },
 ];
 
 const faqNode = buildFaqNode(faqs, pageUrl);
 const schemaGraph = [
   buildOrganizationNode(),
+  buildWebApplicationNode({
+    name: 'Calculadora y Simulador de Presupuesto de Reforma en Asturias',
+    description,
+    url: pageUrl,
+    applicationCategory: 'FinanceApplication',
+  }),
   buildBreadcrumbNode(breadcrumbs, pageUrl),
   ...(faqNode ? [faqNode] : []),
 ];
@@ -63,17 +81,65 @@ const schemaGraph = [
 
   <section class="sec">
     <Breadcrumbs items={breadcrumbs} />
-    <span class="sec-kicker">Calculadora interactiva · Tarifas Asturias 2026</span>
+    <span class="sec-kicker">Calculadora unificada · Tarifas, PEM, ICIO e IVA 2026</span>
     <h1 class="sec-title" style="font-size:clamp(38px,5vw,66px)">
       Calcula el Precio de Tu Reforma en Asturias
     </h1>
 
     <ResumenDirecto
-      texto="Selecciona el tipo de obra, concejo en Asturias, superficie aproximada y nivel de acabados para obtener al instante una horquilla orientativa real y su desglose por partidas. Si el resultado encaja con tu idea, solicita tu visita técnica gratuita con confirmación inmediata."
+      texto="Elige el modo de cálculo que necesites: obtén una horquilla orientativa inmediata en 2 minutos para solicitar tu visita técnica gratuita, o cambia al desglose técnico y fiscal con PEM, ICIO municipal por concejo e IVA reducido (10 % o 21 %)."
     />
 
-    <div style="margin-top:32px">
-      <SimuladorReforma />
+    <div id="desglose-pem" style="margin-top:28px;scroll-margin-top:96px">
+      <div class="calc-mode-tabs" role="tablist" aria-label="Modo de cálculo de presupuesto">
+        <button
+          type="button"
+          id="tab-rapido"
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-rapido"
+          data-calc-tab="rapido"
+          class="calc-mode-tab is-active"
+        >
+          <span class="calc-mode-title">Modo 1 · Simulador rápido (2 min)</span>
+          <span class="calc-mode-sub">Horquilla orientativa inmediata + solicitud de visita gratuita</span>
+        </button>
+
+        <button
+          type="button"
+          id="tab-avanzado"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-avanzado"
+          data-calc-tab="avanzado"
+          tabindex="-1"
+          class="calc-mode-tab"
+        >
+          <span class="calc-mode-title">Modo 2 · Desglose completo (PEM + ICIO + IVA)</span>
+          <span class="calc-mode-sub">PEM ÷ 1,19, ICIO de 18 concejos, IVA 10 % / 21 % e informe PDF</span>
+        </button>
+      </div>
+
+      <div
+        id="panel-rapido"
+        role="tabpanel"
+        aria-labelledby="tab-rapido"
+        data-calc-panel="rapido"
+        style="margin-top:24px"
+      >
+        <SimuladorReforma />
+      </div>
+
+      <div
+        id="panel-avanzado"
+        role="tabpanel"
+        aria-labelledby="tab-avanzado"
+        data-calc-panel="avanzado"
+        style="margin-top:24px"
+        hidden
+      >
+        <BudgetCalculator />
+      </div>
     </div>
 
     <div style="margin-top:56px">
@@ -85,10 +151,168 @@ const schemaGraph = [
         filas={filasReferencia}
       />
     </div>
+
+    <div style="margin-top:44px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      <a class="zona-card" href="/licencia-obra-asturias/" style="padding:20px">
+        <h3>Simulador de Licencias e ICIO</h3>
+        <p>Comprueba si necesitas Declaración Responsable, Obra Menor u Obra Mayor según el TROTU en tu concejo.</p>
+      </a>
+      <a class="zona-card" href="/calculadora-deducciones-irpf-reforma/" style="padding:20px">
+        <h3>Deducciones IRPF Eficiencia</h3>
+        <p>Calcula cuánto puedes recuperar en tu Declaración de la Renta (20 %, 40 % o 60 %) tras la reforma.</p>
+      </a>
+      <a class="zona-card" href="/comparador-aerotermia-asturias/" style="padding:20px">
+        <h3>Comparador de Aerotermia</h3>
+        <p>Compara tu caldera actual frente a aerotermia según la zona climática CTE de tu municipio.</p>
+      </a>
+    </div>
   </section>
 
   <BloqueFaq
-    titulo="Preguntas Frecuentes sobre el Simulador de Presupuestos"
+    titulo="Preguntas Frecuentes sobre Presupuestos, PEM e IVA en Asturias"
     faqs={faqs}
   />
 </BaseLayout>
+
+<style>
+  .calc-mode-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .calc-mode-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-height: 44px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    border: 1px solid #9eae9f;
+    background: var(--bg-tint);
+    color: var(--ink);
+    text-align: left;
+    transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+  }
+
+  .calc-mode-tab:hover {
+    border-color: var(--color-primary);
+    background: var(--bg);
+  }
+
+  .calc-mode-tab.is-active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--white);
+  }
+
+  .calc-mode-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .calc-mode-sub {
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: #425247;
+  }
+
+  .calc-mode-tab.is-active .calc-mode-sub {
+    color: #d8eadc;
+  }
+
+  @media (max-width: 680px) {
+    .calc-mode-tabs {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-calc-tab]'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-calc-panel]'));
+  const switcherRoot = document.getElementById('desglose-pem');
+
+  function activateCalcMode(mode: 'rapido' | 'avanzado') {
+    tabs.forEach((btn) => {
+      const active = btn.dataset.calcTab === mode;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', String(active));
+      btn.setAttribute('tabindex', active ? '0' : '-1');
+    });
+
+    panels.forEach((panel) => {
+      const active = panel.dataset.calcPanel === mode;
+      panel.hidden = !active;
+    });
+  }
+
+  function resolveInitialMode(): 'rapido' | 'avanzado' {
+    const params = new URLSearchParams(window.location.search);
+    const hash = window.location.hash.toLowerCase();
+    if (
+      hash === '#desglose-pem' ||
+      hash === '#avanzado' ||
+      params.get('modo') === 'avanzado' ||
+      params.has('concejo') ||
+      params.has('opt') ||
+      params.has('pem') ||
+      params.has('ref')
+    ) {
+      return 'avanzado';
+    }
+    return 'rapido';
+  }
+
+  if (tabs.length > 0 && panels.length > 0) {
+    activateCalcMode(resolveInitialMode());
+
+    tabs.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.calcTab === 'avanzado' ? 'avanzado' : 'rapido';
+        activateCalcMode(mode);
+      });
+
+      btn.addEventListener('keydown', (ev) => {
+        let nextIdx = -1;
+        if (ev.key === 'ArrowRight') nextIdx = (idx + 1) % tabs.length;
+        else if (ev.key === 'ArrowLeft') nextIdx = (idx - 1 + tabs.length) % tabs.length;
+        else if (ev.key === 'Home') nextIdx = 0;
+        else if (ev.key === 'End') nextIdx = tabs.length - 1;
+
+        if (nextIdx >= 0) {
+          ev.preventDefault();
+          const target = tabs[nextIdx];
+          const mode = target.dataset.calcTab === 'avanzado' ? 'avanzado' : 'rapido';
+          activateCalcMode(mode);
+          target.focus();
+        }
+      });
+    });
+
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#desglose-pem' || window.location.hash === '#avanzado') {
+        activateCalcMode('avanzado');
+      }
+    });
+
+    window.addEventListener('mbl:switch-calc-mode', (ev: Event) => {
+      const custom = ev as CustomEvent<{
+        mode?: 'rapido' | 'avanzado';
+        sync?: { tipo?: string; zona?: string; m2?: number; calidad?: string };
+      }>;
+      const mode = custom.detail?.mode === 'avanzado' ? 'avanzado' : 'rapido';
+      activateCalcMode(mode);
+
+      if (custom.detail?.sync) {
+        window.dispatchEvent(new CustomEvent('mbl:sync-budget', { detail: custom.detail.sync }));
+      }
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      switcherRoot?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+</script>
+

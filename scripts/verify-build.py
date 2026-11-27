@@ -161,10 +161,15 @@ def verify_sitemaps_and_redirects(rules: dict[str, tuple[str, int]]) -> list[str
         ("/reformas-de-ba%C3%B1os-en-asturias", "/reformas-de-banos-en-asturias/"),
         ("/reformas-de-baños-en-asturias", "/reformas-de-banos-en-asturias/"),
         ("/wp-sitemap.xml", "/sitemap-index.xml"),
+        ("/calculadora-presupuesto-reforma", "/calcula-el-precio-de-tu-reforma-en-asturias/"),
+        ("/calculadora-presupuesto-reforma/", "/calcula-el-precio-de-tu-reforma-en-asturias/"),
     ]
     for req_src, req_dst in required_literal_rules:
         if rules.get(req_src) != (req_dst, 301):
             errors.append(f"Falta regla obligatoria en _redirects: {req_src} -> {req_dst} 301")
+
+    if path_exists_in_dist("/calculadora-presupuesto-reforma/"):
+        errors.append("dist/calculadora-presupuesto-reforma/ no debe existir tras consolidar PA-023 (debe servir 301)")
 
     # Verificar también que todos los destinos de _redirects existen en dist/ y no forman cadenas
     for src, (dst, _code) in rules.items():

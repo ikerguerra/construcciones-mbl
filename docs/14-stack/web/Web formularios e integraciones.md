@@ -9,9 +9,10 @@ actualizado: 2026-11-27
 
 # Web — Formularios e integraciones
 
-- **Simulador interactivo** (`/calcula-el-precio-de-tu-reforma-en-asturias/`):
-  - Componente interactivo ligero (TypeScript vanilla o isla Preact/Svelte mínima `< 15 KB`) orientado a SEO y captación de visita técnica/presupuesto cerrado, que adapta dinámicamente los campos según `tipo_obra`, calcula la horquilla orientativa inmediata desde la fuente unificada `src/data/tarifas.ts`, envía el resumen junto al lead y muestra **confirmación inline** ([[PA-005]]).
-  - Pre-relleno automático desde query params procedentes del selector rápido del Hero (`?tipo=...&zona=...&m2=...&calidad=...`) y atributos HTML5 estándar (`autocomplete="name"|"tel"|"email"`) en simulador, formulario lateral (`FormularioRapidoServicio`) y contacto.
+- **Calculadora y simulador unificado** (`/calcula-el-precio-de-tu-reforma-en-asturias/`, [[PA-005]], [[PA-023]]):
+  - Consolida en una sola URL canónica (con redirección `301` desde `/calculadora-presupuesto-reforma/` en `_redirects` y `vercel.json`) dos modos accesibles con pestañas ARIA (`#desglose-pem`):
+    1. **Simulador rápido** (`SimuladorReforma.astro`): horquilla inmediata desde `src/data/tarifas.ts`, pre-relleno desde `HeroQuickSelector` (`?tipo=...&zona=...&m2=...&calidad=...`), salto directo al modo avanzado y **confirmación inline**.
+    2. **Desglose técnico-fiscal completo** (`BudgetCalculator.astro` + `budgetEngine.ts`): cálculo de PEM ÷ 1,19, ICIO de 18 concejos asturianos, IVA (10 % o 21 % según art. 91 Ley IVA), patologías frecuentes, descarga en PDF (`LeadCaptureModal.astro`) e interconexión por query params (`src/lib/calculators/urlState.ts`) con Licencias TROTU, IRPF y Aerotermia.
 - **Endpoint de recepción de leads** (`IE-001`, [[ADR-005]], [[PA-004]], [[PA-024]]):
   - Lógica Web-Standard compartida (`src/lib/server/leadHandler.ts`, ruta `/api/lead`) expuesta en **Cloudflare Pages Functions** (`functions/api/lead.ts`) y en **Vercel Functions** (`api/lead.ts`), con validación estricta en servidor, campo *honeypot* oculto, respuesta JSON `405` ante métodos distintos de `POST` y confirmación **inline** en página.
   - Envío mediante **Resend** (API HTTP nativa en capa gratuita, óptima para edge) hacia `LEADS_TO_EMAIL` (`info@construccionesmbl.com`).

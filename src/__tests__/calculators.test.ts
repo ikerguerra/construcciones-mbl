@@ -152,7 +152,7 @@ describe('Suite de Calculadoras Asturias 2026 (Sección 8)', () => {
       m2: 120,
       opt: 'aerotermia_recuperacion',
     });
-    expect(url).toBe('/calculadora-presupuesto-reforma/?concejo=oviedo&m2=120&opt=aerotermia_recuperacion');
+    expect(url).toBe('/calcula-el-precio-de-tu-reforma-en-asturias/?concejo=oviedo&m2=120&opt=aerotermia_recuperacion');
     const parsed = parseToolQuery('?concejo=oviedo&m2=120&opt=aerotermia_recuperacion');
     expect(parsed.concejo).toBe('oviedo');
     expect(parsed.m2).toBe(120);

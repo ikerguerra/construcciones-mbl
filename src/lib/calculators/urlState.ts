@@ -17,7 +17,7 @@ export interface ToolQueryState {
 
 export function buildToolUrl(route: ToolRouteKey, state: ToolQueryState): string {
   const basePaths: Record<ToolRouteKey, string> = {
-    presupuesto: '/calculadora-presupuesto-reforma/',
+    presupuesto: '/calcula-el-precio-de-tu-reforma-en-asturias/',
     licencia: state.concejo
       ? `/licencia-obra-asturias/${encodeURIComponent(state.concejo)}/`
       : '/licencia-obra-asturias/',

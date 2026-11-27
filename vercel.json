@@ -240,6 +240,16 @@
       "source": "/wp-sitemap.xml",
       "destination": "/sitemap-index.xml",
       "statusCode": 301
+    },
+    {
+      "source": "/calculadora-presupuesto-reforma",
+      "destination": "/calcula-el-precio-de-tu-reforma-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/calculadora-presupuesto-reforma/",
+      "destination": "/calcula-el-precio-de-tu-reforma-en-asturias/",
+      "statusCode": 301
     }
   ],
   "rewrites": [
