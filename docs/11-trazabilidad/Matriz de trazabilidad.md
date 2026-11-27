@@ -36,12 +36,12 @@ Cobertura verificable por criterios de aceptación (`CA-*`): **44/44 (100.0%)**.
 | [[RF-LEAD-001]] | Simulador interactivo de estimación de reforma en Asturias | critica | [[NEC-004]], [[NEC-002]] | [[CA-LEAD-001]] | [[ADR-005]] | [[PA-023]] |
 | [[RF-LEAD-002]] | Formulario de contacto corporativo y consentimiento RGPD en español | critica | [[NEC-004]], [[NEC-008]] | [[CA-LEAD-002]] | [[ADR-005]] | — |
 | [[RF-LEAD-003]] | Canales de contacto directo por teléfono y WhatsApp | alta | [[NEC-004]] | [[CA-LEAD-003]] | — | — |
-| [[RF-LEAD-004]] | Entrega, registro y confirmación de leads recibidos | critica | [[NEC-004]], [[NEC-009]] | [[CA-LEAD-002]] | [[ADR-005]] | [[PA-024]] |
+| [[RF-LEAD-004]] | Entrega, registro y confirmación de leads recibidos | critica | [[NEC-004]], [[NEC-009]] | [[CA-LEAD-002]] | [[ADR-005]] | — |
 | [[RF-LEAD-005]] | Registro de eventos de conversión subordinado al consentimiento | alta | [[NEC-010]], [[NEC-008]] | [[CA-LEAD-003]] | — | — |
-| [[RF-MIG-001]] | Tabla maestra de redirecciones 301 y bajas 410 para las 393 URLs de WordPress | critica | [[NEC-001]] | [[CA-MIG-001]] | [[ADR-003]], [[ADR-007]] | [[PA-024]] |
+| [[RF-MIG-001]] | Tabla maestra de redirecciones 301 y bajas 410 para las 393 URLs de WordPress | critica | [[NEC-001]] | [[CA-MIG-001]] | [[ADR-003]], [[ADR-007]] | — |
 | [[RF-MIG-002]] | Normalización de dominio canónico, protocolo HTTPS y barra final | alta | [[NEC-001]], [[NEC-005]] | [[CA-MIG-001]] | [[ADR-007]] | — |
 | [[RF-MIG-003]] | Exclusión de indexación de rutas transaccionales y páginas legales actualizadas | alta | [[NEC-001]], [[NEC-008]] | [[CA-MIG-001]] | — | [[PA-001]] |
-| [[RF-MIG-004]] | Verificación pre-despliegue en vivo del endpoint de leads, redirecciones 301/410 y datos corporativos sincronizados | critica | [[NEC-001]], [[NEC-004]], [[NEC-008]], [[NEC-009]] | [[CA-MIG-001]] | [[ADR-007]] | [[PA-024]] |
+| [[RF-MIG-004]] | Verificación pre-despliegue en vivo del endpoint de leads, redirecciones 301/410 y datos corporativos sincronizados | critica | [[NEC-001]], [[NEC-004]], [[NEC-008]], [[NEC-009]] | [[CA-MIG-001]] | [[ADR-007]] | — |
 | [[RF-NAV-001]] | Cabecera de navegación en píldoras, logo centrado, desplegable y barra fija | alta | [[NEC-002]], [[NEC-007]] | [[CA-NAV-001]] | — | — |
 | [[RF-NAV-002]] | Portada editorial adaptada a Construcciones MBL | critica | [[NEC-002]], [[NEC-003]], [[NEC-007]] | [[CA-NAV-002]] | [[ADR-002]] | — |
 | [[RF-NAV-003]] | Selector rápido interactivo en el Hero | alta | [[NEC-004]], [[NEC-007]] | [[CA-NAV-002]] | — | — |

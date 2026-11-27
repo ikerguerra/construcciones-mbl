@@ -4,7 +4,7 @@ tipo: stack
 titulo: Web — Formularios, simulador de reformas, analítica y consentimiento
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-22
+actualizado: 2026-11-27
 ---
 
 # Web — Formularios e integraciones
@@ -12,8 +12,8 @@ actualizado: 2026-11-22
 - **Simulador interactivo** (`/calcula-el-precio-de-tu-reforma-en-asturias/`):
   - Componente interactivo ligero (TypeScript vanilla o isla Preact/Svelte mínima `< 15 KB`) orientado a SEO y captación de visita técnica/presupuesto cerrado, que adapta dinámicamente los campos según `tipo_obra`, calcula la horquilla orientativa inmediata desde la fuente unificada `src/data/tarifas.ts`, envía el resumen junto al lead y muestra **confirmación inline** ([[PA-005]]).
   - Pre-relleno automático desde query params procedentes del selector rápido del Hero (`?tipo=...&zona=...&m2=...&calidad=...`) y atributos HTML5 estándar (`autocomplete="name"|"tel"|"email"`) en simulador, formulario lateral (`FormularioRapidoServicio`) y contacto.
-- **Endpoint de recepción de leads** (`IE-001`, [[ADR-005]], [[PA-004]]):
-  - Función serverless en **Cloudflare Pages Functions** (`functions/api/lead.ts`, ruta `/api/lead`) con validación Zod en servidor, campo *honeypot* oculto, limitación/anti-bot no intrusiva y confirmación **inline** en página.
+- **Endpoint de recepción de leads** (`IE-001`, [[ADR-005]], [[PA-004]], [[PA-024]]):
+  - Lógica Web-Standard compartida (`src/lib/server/leadHandler.ts`, ruta `/api/lead`) expuesta en **Cloudflare Pages Functions** (`functions/api/lead.ts`) y en **Vercel Functions** (`api/lead.ts`), con validación estricta en servidor, campo *honeypot* oculto, respuesta JSON `405` ante métodos distintos de `POST` y confirmación **inline** en página.
   - Envío mediante **Resend** (API HTTP nativa en capa gratuita, óptima para edge) hacia `LEADS_TO_EMAIL` (`info@construccionesmbl.com`).
   - **Auto-respuesta al cliente**: envío de correo automático de confirmación al solicitante activable/desactivable mediante la variable de entorno **`SEND_AUTO_REPLY`** (`"true"` / `"false"`).
   - Reenvío opcional vía webhook a una nueva hoja Google Sheets propia (`SHEETS_WEBHOOK_URL`).

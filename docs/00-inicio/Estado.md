@@ -4,15 +4,15 @@ tipo: inicio
 titulo: Estado del SRS — Construcciones MBL
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-26
+actualizado: 2026-11-27
 ---
 
 # Estado del proyecto
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.3.2` (último hito: `2026-11-26` · generación de índices: `2026-11-26`)
-- **Preguntas abiertas**: 7 abiertas (0 bloqueantes, 5 altas, 2 medias, 0 bajas) · 17 resueltas/cerradas
+- **Versión del SRS**: `1.3.3` (último hito: `2026-11-27` · generación de índices: `2026-11-27`)
+- **Preguntas abiertas**: 6 abiertas (0 bloqueantes, 4 altas, 2 medias, 0 bajas) · 18 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
 |---|---|
@@ -64,10 +64,12 @@ actualizado: 2026-11-26
   - Añadidas a `public/_redirects` las 3 reglas `301` adicionales detectadas en el WordPress en vivo (`/reformas-de-ba%C3%B1os-en-asturias` y variantes con `ñ`, `/reformas-de-banos/reforma-de-banos-y-cocinas-...` y `/wp-sitemap.xml`).
   - Sincronizado `totalResenas: 32` (`4,9 / 5`) en `src/data/empresa.ts`, propagado automáticamente a portada, JSON-LD `AggregateRating` y `/llms.txt`.
   - Ampliada la verificación automática en `scripts/verify-build.py` (`398` URLs heredadas y coherencia de `aggregateRating`) y añadidos tests unitarios en `src/__tests__/empresaAndRedirects.test.ts`.
+- **Resolución de [[PA-024]] y compatibilidad dual Cloudflare Pages + Vercel (`v1.3.3`)**:
+  - Confirmado **Cloudflare Pages** como plataforma definitiva de producción ([[ADR-007]]) y habilitada **compatibilidad dual completa en Vercel** para pre-producción (`construccionesmbl.vercel.app`): lógica Web-Standard compartida en `src/lib/server/leadHandler.ts` y `src/lib/server/tagHandler.ts`, adaptadores `api/lead.ts` y `api/tag.ts` (`HTTP 410 Gone`), `vercel.json` (48 reglas `301`, rewrite `/tag/:path*` → `/api/tag` y cabeceras HTTP equivalentes sin `trailingSlash: true`), validación TypeScript (`npm run check:api`), verificación automática de paridad en `scripts/verify-build.py` y 7 tests unitarios en `src/__tests__/serverlessEndpoints.test.ts`.
 
 ## Siguiente paso
-1. **Checklist de requisitos pendientes de pre-despliegue (`RF-MIG-004`, `PA-001` y `PA-024`, documentados tras [[Auditoria comparativa WordPress vs Astro Vercel]])**:
-   - **Homologar plataforma de alojamiento (`PA-024`)**: desplegar en **Cloudflare Pages** (donde `functions/api/lead.ts`, `functions/tag/[[path]].ts` y `public/_redirects` operan de forma nativa) o incorporar `vercel.json` + función serverless equivalente en **Vercel** para que `POST /api/lead` deje de devolver `HTTP 404` y se ejecuten las redirecciones `301`/`410` en `construccionesmbl.vercel.app`.
+1. **Checklist de requisitos pendientes de pre-despliegue (`RF-MIG-004` y `PA-001`)**:
    - **Completar datos legales (`PA-001`, `RF-MIG-003`)**: sustituir los avisos provisionales `PA-001` en `src/data/empresa.ts` por el `cif` completo y los datos del `registroMercantil` de `MBL CONSTRUCCIONES S.L.`.
-   - **Configurar variables de entorno en el alojamiento**: establecer en el panel del hosting las credenciales propias (`RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`, `PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`).
-2. **Despliegue y corte DNS (`ADR-007`)**: verificar en vivo los 3 escenarios de [[CA-MIG-001]] (incluidas las 3 reglas `301` añadidas y `POST /api/lead`) y coordinar el cambio de registros `A`/`CNAME` de `construccionesmbl.com` manteniendo intactos los registros `MX` del correo corporativo.
+   - **Configurar variables de entorno en los paneles de alojamiento (Cloudflare Pages y Vercel)**: establecer las credenciales propias (`RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`, `PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`).
+   - **Revisar decisiones de optimización restantes (prioridad alta/media)**: unificación SEO de las dos calculadoras ([[PA-023]]), coberturas contractuales ([[PA-020]]), servicios alto ticket ([[PA-019]]) y material visual ([[PA-021]], [[PA-022]]).
+2. **Despliegue y corte DNS (`ADR-007`)**: verificar en vivo los 3 escenarios de [[CA-MIG-001]] (incluidas las 3 reglas `301` añadidas, las respuestas `410` de `/tag/*` y `POST /api/lead` en pre-producción y producción) y coordinar el cambio de registros `A`/`CNAME` de `construccionesmbl.com` manteniendo intactos los registros `MX` del correo corporativo.

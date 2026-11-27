@@ -14,7 +14,7 @@ Todas las dudas legales, de negocio, contenido, SEO/GEO/AEO y arquitectura detec
 La tabla siguiente se regenera automáticamente mediante `boveda.py indices`.
 
 <!-- AUTO:lista-pa -->
-Total registradas: **24** (7 abiertas: 0 bloqueantes, 5 altas, 2 medias, 0 bajas).
+Total registradas: **24** (6 abiertas: 0 bloqueantes, 4 altas, 2 medias, 0 bajas).
 
 | ID | Prioridad | Categoría | Título | Estado | Artefactos afectados |
 |---|---|---|---|---|---|
@@ -35,7 +35,7 @@ Total registradas: **24** (7 abiertas: 0 bloqueantes, 5 altas, 2 medias, 0 bajas
 | [[PA-019]] | **alta** | Negocio y Servicios | Incorporación de nuevas líneas de servicio transaccionales de alto ticket en Asturias | `abierta` | [[RF-SERV-001]], [[RF-SERV-002]], [[OBJ-001]] |
 | [[PA-020]] | **alta** | Legal, Confianza y E-E-A-T | Datos de respaldo contractual, seguro de responsabilidad civil y garantías para E-E-A-T | `abierta` | [[RNF-SEG-001]], [[RNF-SEO-002]] |
 | [[PA-023]] | **alta** | Arquitectura SEO y Herramientas | Unificación de endpoints de cálculo de presupuesto para evitar canibalización SEO | `abierta` | [[RF-LEAD-001]], [[RNF-SEO-001]], [[ADR-005]] |
-| [[PA-024]] | **alta** | Infraestructura y despliegue | Homologación de plataforma de despliegue final (Cloudflare Pages vs. Vercel) para endpoint /api/lead y reglas 301/410 | `abierta` | [[OBJ-001]], [[OBJ-005]], [[OBJ-006]], [[RF-MIG-001]], [[RF-MIG-004]], [[RF-LEAD-004]], [[IE-001]], [[IE-006]], [[ADR-005]], [[ADR-007]] |
+| [[PA-024]] | **alta** | Infraestructura y despliegue | Homologación de plataforma de despliegue final (Cloudflare Pages vs. Vercel) para endpoint /api/lead y reglas 301/410 | `resuelta` | [[OBJ-001]], [[OBJ-005]], [[OBJ-006]], [[RF-MIG-001]], [[RF-MIG-004]], [[RF-LEAD-004]], [[IE-001]], [[IE-006]], [[ADR-005]], [[ADR-007]] |
 | [[PA-015]] | **media** | SEO y analítica | Acceso a Google Search Console / GA4 y estructura de URLs del blog | `resuelta` | [[OBJ-001]], [[RF-BLOG-001]], [[IE-002]], [[ADR-003]] |
 | [[PA-016]] | **media** | Alcance y evolución | Idiomas futuros y previsión de siguientes fases tras la web corporativa | `resuelta` | [[Alcance]], [[ADR-001]] |
 | [[PA-017]] | **media** | Negocio y E-E-A-T | Condiciones publicables de garantía por escrito y opciones de financiación | `resuelta` | [[RF-SERV-002]], [[RNF-GEO-003]] |

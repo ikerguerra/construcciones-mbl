@@ -36,6 +36,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 PUBLIC_REDIRECTS = ROOT / "public" / "_redirects"
 TAG_FUNC = ROOT / "functions" / "tag" / "[[path]].ts"
+VERCEL_CONFIG = ROOT / "vercel.json"
+VERCEL_LEAD_FUNC = ROOT / "api" / "lead.ts"
+VERCEL_TAG_FUNC = ROOT / "api" / "tag.ts"
 
 FORBIDDEN_STRINGS = [
     "GTM-TG8LZ5L8",
@@ -366,6 +369,72 @@ def audit_html_files() -> list[str]:
     return errors
 
 
+def verify_vercel_compat() -> list[str]:
+    errors: list[str] = []
+    if not VERCEL_LEAD_FUNC.is_file():
+        errors.append("Falta api/lead.ts para compatibilidad con Vercel Functions")
+    if not VERCEL_TAG_FUNC.is_file() or "status: 410" not in VERCEL_TAG_FUNC.read_text(encoding="utf-8"):
+        errors.append("Falta api/tag.ts con status: 410 para cubrir /tag/* en Vercel")
+    if not VERCEL_CONFIG.is_file():
+        errors.append("Falta vercel.json en raíz para compatibilidad dual de redirecciones y cabeceras")
+        return errors
+
+    try:
+        vcfg = json.loads(VERCEL_CONFIG.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return [f"vercel.json no es JSON válido: {exc}"]
+
+    if vcfg.get("trailingSlash") is True:
+        errors.append("vercel.json no debe fijar trailingSlash=true (rompe POST /api/lead y 301 en 1 salto)")
+
+    v_redirects: dict[str, tuple[str, int]] = {}
+    for entry in vcfg.get("redirects", []):
+        src = entry.get("source", "")
+        dst = entry.get("destination", "")
+        code = entry.get("statusCode")
+        if src:
+            v_redirects[src] = (dst, code)
+        if code != 301:
+            errors.append(f"vercel.json redirect '{src}' tiene statusCode {code} en lugar de 301")
+
+    for raw in PUBLIC_REDIRECTS.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split()
+        if len(parts) != 3:
+            continue
+        cf_src, cf_dst, cf_code_str = parts
+        cf_code = int(cf_code_str.rstrip("!"))
+        v_src = "/author/:path*" if cf_src == "/author/*" else cf_src
+        if v_redirects.get(v_src) != (cf_dst, cf_code):
+            errors.append(
+                f"Desajuste entre _redirects y vercel.json para '{cf_src}': esperado ({cf_dst}, {cf_code}), encontrado {v_redirects.get(v_src)}"
+            )
+
+    for v_src, (v_dst, _code) in v_redirects.items():
+        if ":" in v_src or "*" in v_src:
+            continue
+        if v_dst in v_redirects:
+            errors.append(f"Cadena en vercel.json redirects: {v_src} -> {v_dst}")
+        if not path_exists_in_dist(v_dst):
+            errors.append(f"vercel.json redirect apunta a destino inexistente en dist/: {v_src} -> {v_dst}")
+
+    rewrites = vcfg.get("rewrites", [])
+    if {"source": "/tag/:path*", "destination": "/api/tag"} not in rewrites:
+        errors.append("vercel.json rewrites debe mapear '/tag/:path*' -> '/api/tag'")
+
+    header_sources = {h.get("source"): {x.get("key") for x in h.get("headers", [])} for h in vcfg.get("headers", [])}
+    required_sec_headers = {"Strict-Transport-Security", "X-Content-Type-Options", "Content-Security-Policy"}
+    if not required_sec_headers.issubset(header_sources.get("/(.*)", set())):
+        errors.append("vercel.json headers['/(.*)'] no replica todas las cabeceras de seguridad")
+    if "Cache-Control" not in header_sources.get("/_astro/(.*)", set()):
+        errors.append("vercel.json headers['/_astro/(.*)'] debe fijar Cache-Control immutable")
+
+    print(f"[Compatibilidad Vercel] {len(v_redirects)} reglas 301 sincronizadas, rewrite /tag/* -> 410 y cabeceras verificadas.")
+    return errors
+
+
 def main() -> int:
     if not DIST.is_dir():
         print("ERROR: No existe el directorio dist/. Ejecuta 'npm run build' antes.")
@@ -373,9 +442,10 @@ def main() -> int:
 
     rules, redir_errors = parse_redirects(PUBLIC_REDIRECTS)
     mig_errors = verify_sitemaps_and_redirects(rules)
+    vercel_errors = verify_vercel_compat()
     html_errors = audit_html_files()
 
-    all_errors = redir_errors + mig_errors + html_errors
+    all_errors = redir_errors + mig_errors + vercel_errors + html_errors
     if all_errors:
         print(f"\nFALLO DE VERIFICACIÓN ({len(all_errors)} errores):")
         for e in all_errors:
