@@ -221,6 +221,8 @@
 .btn-dark:hover {
   background: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
+  color: var(--white);
+  text-decoration: none;
 }
 
 .btn-outline {
@@ -715,6 +717,17 @@ html.has-mobile-nav body {
 .mob-quick-wa {
   border-color: rgba(134, 209, 149, 0.38);
   color: var(--warm);
+}
+
+.mob-quick-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--white);
+}
+
+.mob-quick-wa:hover {
+  background: rgba(134, 209, 149, 0.18);
+  border-color: var(--warm);
+  color: var(--white);
 }
 
 /* ==========================================================================
@@ -2991,7 +3004,7 @@ html.has-hero-sheet {
   color: #2f3e34;
 }
 
-.toc-box a:hover {
+.toc-box a:not(.btn-dark):not(.btn-outline):not(.pill):not(.btn-card):hover {
   color: var(--color-primary);
   text-decoration: underline;
 }

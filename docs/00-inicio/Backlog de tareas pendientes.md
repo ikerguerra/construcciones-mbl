@@ -21,10 +21,10 @@ Registro vivo de ajustes visuales, técnicos, de marca, contenidos y despliegue 
 
 | ID | Prioridad | Área | Título | Estado | Dependencias / PA |
 |---|---|---|---|---|---|
-| `T-001` | **alta** | UI / CSS | Corregir estado `:hover` del botón «Escribir por WhatsApp» | `pendiente` | Ninguna (ejecutable ya) |
-| `T-002` | **alta** | UI / CSS | Corregir estilos de la tarjeta «Visítanos o Solicita Asesoramiento» en `/empresa/` | `pendiente` | Ninguna (ejecutable ya) |
+| `T-001` | **alta** | UI / CSS | Corregir estado `:hover` del botón «Escribir por WhatsApp» | `completada` (`2026-11-27`) | Resuelto en `src/styles/global.css` |
+| `T-002` | **alta** | UI / CSS | Corregir estilos de la tarjeta «Visítanos o Solicita Asesoramiento» en `/empresa/` | `completada` (`2026-11-27`) | Resuelto en `src/pages/empresa.astro` |
 | `T-003` | **alta** | Marca / E-E-A-T | Retirar toda referencia a «20 años» / «Desde 2005» / «dos décadas» y aplicar nuevo posicionamiento | `pendiente` | Requiere resolver [[PA-025]] |
-| `T-004` | **alta** | SEO / UX Fotografía | Análisis completo SEO + UX de todas las ubicaciones fotográficas de la web (3 opciones por hueco) | `pendiente` | Ninguna (ejecutable ya) |
+| `T-004` | **alta** | SEO / UX Fotografía | Análisis completo SEO + UX de todas las ubicaciones fotográficas de la web (3 opciones por hueco) | `completada` (`2026-11-27`) | Ver [[Analisis fotografico SEO UX por ubicacion]] |
 | `T-005` | **alta** | Contenidos / Medios | Curación, sustitución y ordenación de las imágenes definitivas en la web | `pendiente` | Depende de `T-004` y [[PA-022]] |
 | `T-006` | **alta** | SEO Técnico / Medios | Renombrado SEO integral de todos los archivos de imagen y atributos `alt` | `pendiente` | Depende de `T-005` |
 | `T-007` | **alta** | Portafolio | Documentar correctamente los proyectos realmente ejecutados | `pendiente` | Requiere resolver [[PA-026]] y [[PA-021]] |

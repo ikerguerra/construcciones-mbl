@@ -169,20 +169,20 @@ const schemaGraph = [
       </div>
     </div>
 
-    <div style="margin-top:52px;padding:28px;background:var(--color-surface,#fff);border:1px solid var(--color-border,#e5e7eb);border-radius:14px">
+    <div style="margin-top:52px;padding:28px 32px;background:var(--bg-tint);border:1px solid var(--border-sage);border-radius:var(--r-lg)">
       <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
         <div>
           <span class="sec-kicker" style="margin-bottom:4px">Oficina técnica central</span>
-          <h3 style="margin:0 0 6px;font-size:20px;font-family:var(--font-heading)">Visítanos o Solicita Asesoramiento</h3>
+          <h3 style="margin:0 0 6px;font-size:26px;font-family:var(--f-display);letter-spacing:0.02em;color:var(--ink)">Visítanos o Solicita Asesoramiento</h3>
           <p style="margin:0;font-size:14.5px;color:var(--muted)">
             {EMPRESA.direccion.completa} · {EMPRESA.horario.resumen}
           </p>
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a class="pill" href={`tel:${EMPRESA.telefono}`}>
+          <a class="btn-outline" href={`tel:${EMPRESA.telefonoE164}`} data-track="tel">
             Llamar: {EMPRESA.telefonoVisible}
           </a>
-          <a class="pill pill-white" href="/contacto/">
+          <a class="btn-dark" href="/contacto/">
             Pedir cita en oficina →
           </a>
         </div>

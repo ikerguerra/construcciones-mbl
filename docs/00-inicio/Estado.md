@@ -11,7 +11,7 @@ actualizado: 2026-11-27
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.3.7` (último hito: `2026-11-27` · generación de índices: `2026-11-27`)
+- **Versión del SRS**: `1.3.8` (último hito: `2026-11-27` · generación de índices: `2026-11-27`)
 - **Preguntas abiertas**: 7 abiertas (0 bloqueantes, 5 altas, 2 medias, 0 bajas) · 19 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
@@ -78,7 +78,7 @@ actualizado: 2026-11-27
   - Documentado en [[Web formularios e integraciones]] el despliegue en 2 fases sin cambios de código para sortear la falta de acceso DNS a `construccionesmbl.com` hasta el corte final: verificar un subdominio personal temporal en Resend (`mbl.<dominio-personal>`, región Irlanda) para probar envío y auto-respuesta en Vercel, y migrar `RESEND_FROM_EMAIL` al dominio `construccionesmbl.com` el día del corte DNS.
 
 ## Siguiente paso
-1. **Backlog interactivo de ajustes pendientes ([[Backlog de tareas pendientes]], `T-001`..`T-011`)**: abordar de forma incremental las correcciones visuales/CSS (`T-001` hover WhatsApp, `T-002` tarjeta en `/empresa/`), el análisis fotográfico SEO+UX con 3 opciones por ubicación (`T-004` → `T-005` → `T-006`), la retirada de menciones a 20 años (`T-003` tras resolver [[PA-025]]) y la documentación verídica de proyectos reales (`T-007` tras resolver [[PA-026]] y [[PA-021]]). *(Nota: `T-008` y `T-009` quedaron completadas en `v1.3.2`–`v1.3.3`).*
+1. **Backlog interactivo de ajustes pendientes ([[Backlog de tareas pendientes]], `T-001`..`T-011`)**: completadas `T-001` (hover botón WhatsApp), `T-002` (tarjeta corporativa en `/empresa/`), `T-004` (análisis SEO+UX con 3 opciones por ubicación en [[Analisis fotografico SEO UX por ubicacion]]), `T-008` y `T-009`. Quedan pendientes de resolución previa con el cliente: retirar menciones a 20 años (`T-003`, [[PA-025]]), curación/ordenación y renombrado SEO de imágenes (`T-005` → `T-006`, [[PA-022]]) y documentación verídica de proyectos reales (`T-007`, [[PA-026]] y [[PA-021]]).
 2. **Checklist de requisitos pendientes de pre-despliegue (`RF-MIG-004` y `PA-001`)**:
    - **Completar datos legales (`PA-001`, `RF-MIG-003`)**: sustituir los avisos provisionales `PA-001` en `src/data/empresa.ts` por el `cif` completo y los datos del `registroMercantil` de `MBL CONSTRUCCIONES S.L.`.
    - **Activación diferida de Resend en Vercel y analítica (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`)**: seguir la operativa de Fase A en [[Web formularios e integraciones]] (subdominio personal `mbl.<dominio-personal>` verificado en Resend + variables `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY=true`) para validar la entrega real de formularios antes del corte DNS.
