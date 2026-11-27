@@ -16,7 +16,4 @@ casos_uso:
 
 # RF-PROY-003 — Sección de testimonios y reseñas de Google Business Profile verificables
 
-El sistema debe eliminar widgets externos pesados y mostrar un carrusel nativo fiel a [[mbl-maqueta.html]] con testimonios reales verificados, puntuación media y conteo total de reseñas coherentes con Google Business Profile (`Place ID: ChIJN_H9_Jyih2MRXyPsrrG4cWg`, unificados entre vista y datos estructurados), controles accesibles y enlace directo a la ficha pública oficial de Google Maps (resuelto en [[PA-013]]).
-
-> [!warning] Hipótesis
-> Pendiente de actualizar en `src/data/empresa.ts` el parámetro `totalResenas` de `29` a `32` reseñas (manteniendo `ratingValor: 4.9`) antes del despliegue definitivo para reflejar las nuevas reseñas verificadas en [[Auditoria comparativa WordPress vs Astro Vercel]] y [[RF-MIG-004]].
+El sistema debe eliminar widgets externos pesados y mostrar un carrusel nativo fiel a [[mbl-maqueta.html]] con testimonios reales verificados, puntuación media y conteo total de reseñas coherentes con Google Business Profile (`Place ID: ChIJN_H9_Jyih2MRXyPsrrG4cWg`, unificados en `4,9 / 32` entre vista, `llms.txt` y datos estructurados), controles accesibles y enlace directo a la ficha pública oficial de Google Maps (resuelto en [[PA-013]] y actualizado tras [[Auditoria comparativa WordPress vs Astro Vercel]]).

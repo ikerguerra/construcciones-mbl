@@ -28,8 +28,10 @@ const isHerramientasActive =
 const menuId = 'mobile-nav-drawer';
 
 const herramientasSubmenu = [
-  { href: '/calcula-el-precio-de-tu-reforma-en-asturias/', label: 'Simulador rápido de reforma' },
-  { href: '/calculadora-presupuesto-reforma/', label: 'Calculadora completa (PEM + ICIO + IVA)' },
+  {
+    href: '/calcula-el-precio-de-tu-reforma-en-asturias/',
+    label: 'Calculadora de presupuesto (Rápida + PEM/ICIO)',
+  },
   { href: '/licencia-obra-asturias/', label: 'Simulador de licencias e ICIO (18 concejos)' },
   { href: '/calculadora-deducciones-irpf-reforma/', label: 'Calculadora de deducciones IRPF' },
   { href: '/comparador-aerotermia-asturias/', label: 'Comparador de aerotermia vs caldera' },
@@ -73,21 +75,7 @@ const zonasSubmenu = [
             class={`pill has-dropdown ${isServiciosActive ? 'active' : ''}`}
             href="/servicios/"
           >
-            <span>Servicios</span>
-            <svg
-              class="nav-chev"
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
+            Servicios
           </a>
           <div class="nav-dropdown-menu" aria-label="Especialidades de Construcciones MBL">
             {serviciosSubmenu.map((item) => (
@@ -121,21 +109,7 @@ const zonasSubmenu = [
             class={`pill has-dropdown ${isHerramientasActive ? 'active' : ''}`}
             href="/calcula-el-precio-de-tu-reforma-en-asturias/"
           >
-            <span>Calculadoras</span>
-            <svg
-              class="nav-chev"
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
+            Calculadoras
           </a>
           <div class="nav-dropdown-menu" aria-label="Calculadoras de reformas y licencias en Asturias">
             {herramientasSubmenu.map((item) => (
@@ -247,9 +221,6 @@ const zonasSubmenu = [
       <details class="mob-acc" open={isServiciosActive ? true : undefined}>
         <summary>
           <span>Servicios y Reformas</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m6 9 6 6 6-6" />
-          </svg>
         </summary>
         <div class="mob-acc-list">
           {serviciosSubmenu.map((item) => (
@@ -266,9 +237,6 @@ const zonasSubmenu = [
       <details class="mob-acc" open={isHerramientasActive ? true : undefined}>
         <summary>
           <span>Calculadoras Gratuitas</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m6 9 6 6 6-6" />
-          </svg>
         </summary>
         <div class="mob-acc-list">
           {herramientasSubmenu.map((item) => (
@@ -285,9 +253,6 @@ const zonasSubmenu = [
       <details class="mob-acc">
         <summary>
           <span>Zonas en Asturias</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m6 9 6 6 6-6" />
-          </svg>
         </summary>
         <div class="mob-zone-grid">
           {zonasSubmenu.map((z) => (

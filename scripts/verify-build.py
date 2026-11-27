@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Suite automatizada de verificación del build estático (dist/) de Construcciones MBL:
-1. Cobertura 100 % de las 392 URLs de los 4 sitemaps de WordPress + /author/3fwu9/ +
-   /category/uncategorized/ + artículo 23º (/uncategorized/...).
+1. Cobertura 100 % de las 392 URLs de los 4 sitemaps de WordPress + rutas heredadas adicionales
+   (/author/3fwu9/, /category/uncategorized/, artículo 23º en /uncategorized/ y /reformas-de-banos/,
+   /reformas-de-ba%C3%B1os-en-asturias y /wp-sitemap.xml).
 2. Verificación de que public/_redirects contiene únicamente códigos 301 válidos para
    Cloudflare Pages (sin 410 ni cadenas de múltiples saltos) y que functions/tag/[[path]].ts
    cubre /tag/* con HTTP 410.
@@ -11,7 +12,8 @@ Suite automatizada de verificación del build estático (dist/) de Construccione
    - <title> único (35–65 caracteres en páginas indexables).
    - <meta name="description"> única (120–165 caracteres en páginas indexables).
    - <link rel="canonical"> absoluto con barra final /.
-   - JSON-LD (@graph) sintácticamente válido con GeneralContractor.
+   - JSON-LD (@graph) sintácticamente válido con GeneralContractor y coherencia de
+     aggregateRating entre portada, JSON-LD y dist/llms.txt.
    - /mensaje-enviado/ con noindex, nofollow y ausente de sitemap-0.xml.
    - Existencia y validez de dist/llms.txt y dist/robots.txt.
    - Tamaño de dist/index.html < 70 KB.
@@ -34,6 +36,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 PUBLIC_REDIRECTS = ROOT / "public" / "_redirects"
 TAG_FUNC = ROOT / "functions" / "tag" / "[[path]].ts"
+VERCEL_CONFIG = ROOT / "vercel.json"
+VERCEL_LEAD_FUNC = ROOT / "api" / "lead.ts"
+VERCEL_TAG_FUNC = ROOT / "api" / "tag.ts"
 
 FORBIDDEN_STRINGS = [
     "GTM-TG8LZ5L8",
@@ -109,6 +114,9 @@ def verify_sitemaps_and_redirects(rules: dict[str, tuple[str, int]]) -> list[str
         "https://construccionesmbl.com/author/3fwu9/",
         "https://construccionesmbl.com/category/uncategorized/",
         "https://construccionesmbl.com/uncategorized/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+        "https://construccionesmbl.com/reformas-de-ba%C3%B1os-en-asturias",
+        "https://construccionesmbl.com/reformas-de-banos/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+        "https://construccionesmbl.com/wp-sitemap.xml",
     ]
     all_legacy_urls.extend(extra_legacy)
 
@@ -148,6 +156,21 @@ def verify_sitemaps_and_redirects(rules: dict[str, tuple[str, int]]) -> list[str
         else:
             errors.append(f"URL heredada SIN COBERTURA (404): {full_url}")
 
+    required_literal_rules = [
+        ("/reformas-de-ba%c3%b1os-en-asturias", "/reformas-de-banos-en-asturias/"),
+        ("/reformas-de-ba%C3%B1os-en-asturias", "/reformas-de-banos-en-asturias/"),
+        ("/reformas-de-baños-en-asturias", "/reformas-de-banos-en-asturias/"),
+        ("/wp-sitemap.xml", "/sitemap-index.xml"),
+        ("/calculadora-presupuesto-reforma", "/calcula-el-precio-de-tu-reforma-en-asturias/"),
+        ("/calculadora-presupuesto-reforma/", "/calcula-el-precio-de-tu-reforma-en-asturias/"),
+    ]
+    for req_src, req_dst in required_literal_rules:
+        if rules.get(req_src) != (req_dst, 301):
+            errors.append(f"Falta regla obligatoria en _redirects: {req_src} -> {req_dst} 301")
+
+    if path_exists_in_dist("/calculadora-presupuesto-reforma/"):
+        errors.append("dist/calculadora-presupuesto-reforma/ no debe existir tras consolidar PA-023 (debe servir 301)")
+
     # Verificar también que todos los destinos de _redirects existen en dist/ y no forman cadenas
     for src, (dst, _code) in rules.items():
         if "*" in src:
@@ -158,7 +181,7 @@ def verify_sitemaps_and_redirects(rules: dict[str, tuple[str, int]]) -> list[str
             errors.append(f"Regla _redirects apunta a destino inexistente en dist/: {src} -> {dst}")
 
     print(
-        f"[Migración 395 URLs] Total verificadas: {len(all_legacy_urls)} "
+        f"[Migración {len(all_legacy_urls)} URLs] Total verificadas: {len(all_legacy_urls)} "
         f"(200 directo: {direct_ok}, 301 en 1 salto: {redirect_301_ok}, 410 /tag/*: {gone_410_ok})"
     )
     return errors
@@ -172,6 +195,7 @@ def audit_html_files() -> list[str]:
 
     titles_seen: dict[str, str] = {}
     descs_seen: dict[str, str] = {}
+    org_ratings_seen: set[tuple[str, str]] = set()
 
     for hf in html_files:
         rel = hf.relative_to(DIST).as_posix()
@@ -261,6 +285,14 @@ def audit_html_files() -> list[str]:
                 parsed = json.loads(blk)
                 if "@graph" not in parsed:
                     errors.append(f"[{rel}] JSON-LD sin '@graph'")
+                else:
+                    for node in parsed["@graph"]:
+                        if isinstance(node, dict) and node.get("@type") == "GeneralContractor":
+                            agg = node.get("aggregateRating") or {}
+                            rv = str(agg.get("ratingValue", "")).strip()
+                            rc = str(agg.get("reviewCount", "")).strip()
+                            if rv and rc:
+                                org_ratings_seen.add((rv, rc))
             except Exception as exc:
                 errors.append(f"[{rel}] JSON-LD inválido: {exc}")
 
@@ -274,13 +306,40 @@ def audit_html_files() -> list[str]:
             if not path_exists_in_dist(target_path):
                 errors.append(f"[{rel}] Enlace interno roto hacia '{href}'")
 
-    # 7. Peso de dist/index.html < 70 KB
+    # 7. Peso de dist/index.html < 70 KB y coherencia de reseñas (CA-PROY-002)
     home_file = DIST / "index.html"
     if home_file.is_file():
+        home_txt = home_file.read_text(encoding="utf-8")
         home_kb = home_file.stat().st_size / 1024
         print(f"[Rendimiento] dist/index.html = {home_kb:.1f} KB (límite < 70 KB)")
         if home_kb >= 70:
             errors.append(f"dist/index.html supera 70 KB ({home_kb:.1f} KB)")
+
+        if len(org_ratings_seen) != 1:
+            errors.append(
+                f"Inconsistencia en aggregateRating JSON-LD entre páginas: {sorted(org_ratings_seen)}"
+            )
+        else:
+            rating_val, review_count = next(iter(org_ratings_seen))
+            home_plain = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(home_txt)))
+            expected_home_snippets = [
+                f"{rating_val} / 5 en Google · {review_count} reseñas verificadas",
+                f"Ver las {review_count} reseñas en Google",
+                f"{review_count} opiniones reales",
+            ]
+            for snippet in expected_home_snippets:
+                if snippet not in home_plain:
+                    errors.append(
+                        f"[index.html] Desajuste con aggregateRating ({rating_val}/{review_count}): falta '{snippet}'"
+                    )
+            llms_file = DIST / "llms.txt"
+            if llms_file.is_file():
+                llms_txt = llms_file.read_text(encoding="utf-8")
+                expected_llms = f"{rating_val}/5 ({review_count} reseñas)"
+                if expected_llms not in llms_txt:
+                    errors.append(
+                        f"[llms.txt] Desajuste con aggregateRating ({rating_val}/{review_count}): falta '{expected_llms}'"
+                    )
 
     # 8. /mensaje-enviado/ con noindex y fuera del sitemap
     msg_file = DIST / "mensaje-enviado" / "index.html"
@@ -289,6 +348,10 @@ def audit_html_files() -> list[str]:
     else:
         if "noindex" not in msg_file.read_text(encoding="utf-8").lower():
             errors.append("dist/mensaje-enviado/index.html no tiene meta noindex")
+
+    sitemap_index = DIST / "sitemap-index.xml"
+    if not sitemap_index.is_file():
+        errors.append("No se generó dist/sitemap-index.xml")
 
     sitemap_0 = DIST / "sitemap-0.xml"
     if not sitemap_0.is_file():
@@ -311,6 +374,81 @@ def audit_html_files() -> list[str]:
     return errors
 
 
+def verify_vercel_compat() -> list[str]:
+    errors: list[str] = []
+    if not VERCEL_LEAD_FUNC.is_file():
+        errors.append("Falta api/lead.ts para compatibilidad con Vercel Functions")
+    if not VERCEL_TAG_FUNC.is_file() or "status: 410" not in VERCEL_TAG_FUNC.read_text(encoding="utf-8"):
+        errors.append("Falta api/tag.ts con status: 410 para cubrir /tag/* en Vercel")
+    if not VERCEL_CONFIG.is_file():
+        errors.append("Falta vercel.json en raíz para compatibilidad dual de redirecciones y cabeceras")
+        return errors
+
+    try:
+        vcfg = json.loads(VERCEL_CONFIG.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return [f"vercel.json no es JSON válido: {exc}"]
+
+    if vcfg.get("trailingSlash") is True:
+        errors.append("vercel.json no debe fijar trailingSlash=true (rompe POST /api/lead y 301 en 1 salto)")
+
+    v_redirects: dict[str, tuple[str, int]] = {}
+    for entry in vcfg.get("redirects", []):
+        src = entry.get("source", "")
+        dst = entry.get("destination", "")
+        code = entry.get("statusCode")
+        if src:
+            v_redirects[src] = (dst, code)
+        if code != 301:
+            errors.append(f"vercel.json redirect '{src}' tiene statusCode {code} en lugar de 301")
+
+    for raw in PUBLIC_REDIRECTS.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split()
+        if len(parts) != 3:
+            continue
+        cf_src, cf_dst, cf_code_str = parts
+        cf_code = int(cf_code_str.rstrip("!"))
+        v_src = "/author/:path*" if cf_src == "/author/*" else cf_src
+        if v_redirects.get(v_src) != (cf_dst, cf_code):
+            errors.append(
+                f"Desajuste entre _redirects y vercel.json para '{cf_src}': esperado ({cf_dst}, {cf_code}), encontrado {v_redirects.get(v_src)}"
+            )
+
+    for v_src, (v_dst, _code) in v_redirects.items():
+        if ":" in v_src or "*" in v_src:
+            continue
+        if v_dst in v_redirects:
+            errors.append(f"Cadena en vercel.json redirects: {v_src} -> {v_dst}")
+        if not path_exists_in_dist(v_dst):
+            errors.append(f"vercel.json redirect apunta a destino inexistente en dist/: {v_src} -> {v_dst}")
+
+    rewrites = vcfg.get("rewrites", [])
+    for tag_src in ("/tag/:path*", "/tag/:path*/"):
+        if {"source": tag_src, "destination": "/api/tag"} not in rewrites:
+            errors.append(f"vercel.json rewrites debe mapear '{tag_src}' -> '/api/tag'")
+
+    api_dir = ROOT / "api"
+    if api_dir.is_dir():
+        for api_file in sorted(api_dir.glob("*.ts")):
+            api_src = api_file.read_text(encoding="utf-8")
+            for imp in re.findall(r"""from\s+['"](\.[^'"]+)['"]""", api_src):
+                if not imp.endswith(".js"):
+                    errors.append(f"{api_file.relative_to(ROOT)} debe usar extension '.js' en import ESM relativo: {imp}")
+
+    header_sources = {h.get("source"): {x.get("key") for x in h.get("headers", [])} for h in vcfg.get("headers", [])}
+    required_sec_headers = {"Strict-Transport-Security", "X-Content-Type-Options", "Content-Security-Policy"}
+    if not required_sec_headers.issubset(header_sources.get("/(.*)", set())):
+        errors.append("vercel.json headers['/(.*)'] no replica todas las cabeceras de seguridad")
+    if "Cache-Control" not in header_sources.get("/_astro/(.*)", set()):
+        errors.append("vercel.json headers['/_astro/(.*)'] debe fijar Cache-Control immutable")
+
+    print(f"[Compatibilidad Vercel] {len(v_redirects)} reglas 301 sincronizadas, rewrite /tag/* -> 410 y cabeceras verificadas.")
+    return errors
+
+
 def main() -> int:
     if not DIST.is_dir():
         print("ERROR: No existe el directorio dist/. Ejecuta 'npm run build' antes.")
@@ -318,9 +456,10 @@ def main() -> int:
 
     rules, redir_errors = parse_redirects(PUBLIC_REDIRECTS)
     mig_errors = verify_sitemaps_and_redirects(rules)
+    vercel_errors = verify_vercel_compat()
     html_errors = audit_html_files()
 
-    all_errors = redir_errors + mig_errors + html_errors
+    all_errors = redir_errors + mig_errors + vercel_errors + html_errors
     if all_errors:
         print(f"\nFALLO DE VERIFICACIÓN ({len(all_errors)} errores):")
         for e in all_errors:

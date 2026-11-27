@@ -4,12 +4,12 @@ tipo: stack
 titulo: Web — Framework, renderizado SSG e islas interactivas
 estado: vigente
 creado: 2026-11-19
-actualizado: 2026-11-19
+actualizado: 2026-11-27
 ---
 
 # Web — Framework y renderizado
 
-- **Framework**: Astro (última rama estable v5.x sobre Node.js v22 LTS) en modo estático puro (`output: 'static'`) alojado en **Cloudflare Pages**, acompañado de **Cloudflare Pages Functions** (`functions/api/lead.ts`) para el endpoint serverless de formularios ([[ADR-001]], [[ADR-005]], [[ADR-007]]).
+- **Framework**: Astro (última rama estable v5.x sobre Node.js v22 LTS) en modo estático puro (`output: 'static'`) alojado en **Cloudflare Pages**, con lógica serverless Web-Standard compartida en `src/lib/server/` expuesta tanto en **Cloudflare Pages Functions** (`functions/`) para producción como en **Vercel Functions** (`api/`) para pre-producción ([[ADR-001]], [[ADR-005]], [[ADR-007]], [[PA-024]]).
 - **Lenguaje**: TypeScript en modo estricto (`tsconfig.json` `strict`) para layouts, esquemas de datos, helpers SEO y lógica del simulador.
 - **Arquitectura de renderizado**:
   - **Cero JS por defecto**: portada estática, páginas de servicios, artículos del blog, portfolio base y legales entregan HTML/CSS puro sin hidratación.

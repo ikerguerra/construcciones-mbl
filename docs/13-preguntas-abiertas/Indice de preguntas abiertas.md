@@ -14,7 +14,7 @@ Todas las dudas legales, de negocio, contenido, SEO/GEO/AEO y arquitectura detec
 La tabla siguiente se regenera automáticamente mediante `boveda.py indices`.
 
 <!-- AUTO:lista-pa -->
-Total registradas: **26** (9 abiertas: 0 bloqueantes, 7 altas, 2 medias, 0 bajas).
+Total registradas: **26** (7 abiertas: 0 bloqueantes, 5 altas, 2 medias, 0 bajas).
 
 | ID | Prioridad | Categoría | Título | Estado | Artefactos afectados |
 |---|---|---|---|---|---|
@@ -34,8 +34,8 @@ Total registradas: **26** (9 abiertas: 0 bloqueantes, 7 altas, 2 medias, 0 bajas
 | [[PA-014]] | **alta** | Marca y contenidos | Marca comercial principal, marca de agua del footer y 4 estadísticas oficiales | `resuelta` | [[RF-NAV-001]], [[RF-NAV-002]], [[RF-NAV-004]], [[RNF-MANT-002]], [[ADR-002]] |
 | [[PA-019]] | **alta** | Negocio y Servicios | Incorporación de nuevas líneas de servicio transaccionales de alto ticket en Asturias | `abierta` | [[RF-SERV-001]], [[RF-SERV-002]], [[OBJ-001]] |
 | [[PA-020]] | **alta** | Legal, Confianza y E-E-A-T | Datos de respaldo contractual, seguro de responsabilidad civil y garantías para E-E-A-T | `abierta` | [[RNF-SEG-001]], [[RNF-SEO-002]] |
-| [[PA-023]] | **alta** | Arquitectura SEO y Herramientas | Unificación de endpoints de cálculo de presupuesto para evitar canibalización SEO | `abierta` | [[RF-LEAD-001]], [[RNF-SEO-001]], [[ADR-005]] |
-| [[PA-024]] | **alta** | Infraestructura y despliegue | Homologación de plataforma de despliegue final (Cloudflare Pages vs. Vercel) para endpoint /api/lead y reglas 301/410 | `abierta` | [[OBJ-001]], [[OBJ-005]], [[OBJ-006]], [[RF-MIG-001]], [[RF-MIG-004]], [[RF-LEAD-004]], [[IE-001]], [[IE-006]], [[ADR-005]], [[ADR-007]] |
+| [[PA-023]] | **alta** | Arquitectura SEO y Herramientas | Unificación de endpoints de cálculo de presupuesto para evitar canibalización SEO | `resuelta` | [[RF-LEAD-001]], [[RNF-SEO-001]], [[ADR-005]] |
+| [[PA-024]] | **alta** | Infraestructura y despliegue | Homologación de plataforma de despliegue final (Cloudflare Pages vs. Vercel) para endpoint /api/lead y reglas 301/410 | `resuelta` | [[OBJ-001]], [[OBJ-005]], [[OBJ-006]], [[RF-MIG-001]], [[RF-MIG-004]], [[RF-LEAD-004]], [[IE-001]], [[IE-006]], [[ADR-005]], [[ADR-007]] |
 | [[PA-025]] | **alta** | Marca y contenidos | Retirada de referencias a «20 años de experiencia / desde 2005» y nuevo enfoque de posicionamiento | `abierta` | [[OBJ-003]], [[OBJ-004]], [[RF-NAV-001]], [[RF-NAV-002]], [[RNF-GEO-003]], [[RNF-MANT-002]] |
 | [[PA-026]] | **alta** | Portafolio y Contenidos | Inventario verídico de proyectos realmente ejecutados para el portafolio | `abierta` | [[RF-PROY-001]], [[RF-PROY-002]], [[CA-PROY-001]] |
 | [[PA-015]] | **media** | SEO y analítica | Acceso a Google Search Console / GA4 y estructura de URLs del blog | `resuelta` | [[OBJ-001]], [[RF-BLOG-001]], [[IE-002]], [[ADR-003]] |

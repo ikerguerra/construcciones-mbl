@@ -485,19 +485,85 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
   if (root) {
     const fmt = (n: number) => `${n.toLocaleString('es-ES')} €`;
 
+    function applyQuickSync(sync: { tipo?: string; zona?: string; m2?: number; calidad?: string }) {
+      const selConcejo = root!.querySelector<HTMLSelectElement>('#b-concejo');
+      if (sync.zona && selConcejo) {
+        const z = sync.zona.toLowerCase();
+        const mappedSlug = z.includes('gij')
+          ? 'gijon'
+          : z.includes('oviedo')
+            ? 'oviedo'
+            : z.includes('avil')
+              ? 'aviles'
+              : z.includes('siero')
+                ? 'siero'
+                : 'otro-asturias';
+        if (Array.from(selConcejo.options).some((o) => o.value === mappedSlug)) {
+          selConcejo.value = mappedSlug;
+        }
+      }
+
+      if (sync.tipo) {
+        const tipoMap: Record<string, ReformType> = {
+          'reforma-integral': 'integral',
+          'reforma-cocina': 'parcial_cocina_banos',
+          'reforma-bano': 'parcial_cocina_banos',
+          'plato-ducha': 'parcial_cocina_banos',
+          'reforma-parcial': 'parcial_cocina_banos',
+          'rehabilitacion-fachadas': 'integral',
+          'rehabilitacion-casas-pueblo': 'rehabilitacion_casa_piedra',
+          'construccion-vivienda': 'obra_nueva',
+          'local-comercial': 'local_comercial',
+        };
+        const mappedReform = tipoMap[sync.tipo];
+        if (mappedReform) {
+          const rfRadio = root!.querySelector<HTMLInputElement>(`input[name="reformType"][value="${mappedReform}"]`);
+          if (rfRadio) rfRadio.checked = true;
+          if (mappedReform === 'local_comercial') {
+            const propSel = root!.querySelector<HTMLSelectElement>('#b-property');
+            const empRadio = root!.querySelector<HTMLInputElement>('input[name="clientType"][value="inversor_alquiler_o_empresa"]');
+            if (propSel) propSel.value = 'local';
+            if (empRadio) empRadio.checked = true;
+          }
+        }
+      }
+
+      if (sync.calidad) {
+        const calMap: Record<string, QualityLevel> = {
+          funcional: 'basica',
+          estandar: 'media',
+          premium: 'alta_premium',
+        };
+        const mappedCal = calMap[sync.calidad];
+        if (mappedCal) {
+          const calRadio = root!.querySelector<HTMLInputElement>(`input[name="quality"][value="${mappedCal}"]`);
+          if (calRadio) calRadio.checked = true;
+        }
+      }
+
+      if (sync.m2 && sync.m2 > 0) {
+        const clamped = Math.max(15, Math.min(1000, Math.round(sync.m2)));
+        const r = root!.querySelector<HTMLInputElement>('#b-area');
+        const n = root!.querySelector<HTMLInputElement>('#b-area-num');
+        if (r) r.value = String(Math.min(450, clamped));
+        if (n) n.value = String(clamped);
+      }
+    }
+
     // Leer query params iniciales si llegan desde otra calculadora o desde el Hero
+    const rawParams = new URLSearchParams(window.location.search);
     const qs = parseToolQuery(window.location.search);
+    applyQuickSync({
+      tipo: rawParams.get('tipo') || undefined,
+      zona: rawParams.get('zona') || undefined,
+      m2: qs.m2,
+      calidad: rawParams.get('calidad') || undefined,
+    });
     if (qs.concejo) {
       const sel = root.querySelector<HTMLSelectElement>('#b-concejo');
       if (sel && Array.from(sel.options).some((o) => o.value === qs.concejo)) {
         sel.value = qs.concejo;
       }
-    }
-    if (qs.m2) {
-      const r = root.querySelector<HTMLInputElement>('#b-area');
-      const n = root.querySelector<HTMLInputElement>('#b-area-num');
-      if (r) r.value = String(Math.min(450, qs.m2));
-      if (n) n.value = String(qs.m2);
     }
     if (qs.opt) {
       const cb = root.querySelector<HTMLInputElement>(`input[name="optionalPackages"][value="${qs.opt}"]`);
@@ -651,6 +717,19 @@ const pathologyList: Array<{ key: PathologyKey; label: string; description: stri
           detail: { concejo: lastConcejoName, resumen: lastSummary },
         }),
       );
+    });
+
+    window.addEventListener('mbl:sync-budget', (ev: Event) => {
+      const custom = ev as CustomEvent<{
+        tipo?: string;
+        zona?: string;
+        m2?: number;
+        calidad?: string;
+      }>;
+      if (custom.detail) {
+        applyQuickSync(custom.detail);
+        render();
+      }
     });
 
     render();

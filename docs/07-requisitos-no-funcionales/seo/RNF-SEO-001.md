@@ -6,7 +6,7 @@ estado: borrador
 prioridad: critica
 categoria: seo
 creado: 2026-11-19
-actualizado: 2026-11-19
+actualizado: 2026-11-27
 necesidades:
   - "[[NEC-005]]"
   - "[[NEC-001]]"
@@ -14,4 +14,4 @@ necesidades:
 
 # RNF-SEO-001 — Metadatos title, meta description, canonical y Open Graph únicos por URL
 
-El sistema debe generar para el 100 % de las URLs públicas un `<title>` único optimizado entre 50 y 60 caracteres (sin sufijos concatenados de 290 caracteres), una `<meta name="description">` única de 145 a 160 caracteres con palabra clave y propuesta de valor, una etiqueta `<link rel="canonical">` absoluta auto-referenciada y el conjunto completo de etiquetas Open Graph y Twitter Card.
+El sistema debe generar para el 100 % de las URLs públicas un `<title>` único optimizado entre 50 y 60 caracteres (sin sufijos concatenados de 290 caracteres), una `<meta name="description">` única de 145 a 160 caracteres con palabra clave y propuesta de valor, una etiqueta `<link rel="canonical">` absoluta auto-referenciada y el conjunto completo de etiquetas Open Graph y Twitter Card, consolidando herramientas de intención equivalente bajo una única URL canónica (`/calcula-el-precio-de-tu-reforma-en-asturias/` con redirección `301` desde `/calculadora-presupuesto-reforma/`) para evitar canibalización en buscadores (resuelto en [[PA-023]]).

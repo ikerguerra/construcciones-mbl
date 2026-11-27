@@ -1,0 +1,345 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/author/3fwu9",
+      "destination": "/innovacion-sostenible/",
+      "statusCode": 301
+    },
+    {
+      "source": "/author/3fwu9/",
+      "destination": "/innovacion-sostenible/",
+      "statusCode": 301
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/innovacion-sostenible/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/uncategorized",
+      "destination": "/innovacion-sostenible/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/uncategorized/",
+      "destination": "/innovacion-sostenible/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/aislamiento-termico/ventanas",
+      "destination": "/category/aislamiento-termico/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/aislamiento-termico/ventanas/",
+      "destination": "/category/aislamiento-termico/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/plato-de-ducha",
+      "destination": "/category/reformas-de-banos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/plato-de-ducha/",
+      "destination": "/category/reformas-de-banos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/mantenimiento",
+      "destination": "/category/reformas-de-banos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/mantenimiento/",
+      "destination": "/category/reformas-de-banos/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/consejos-practicos",
+      "destination": "/category/reforma-integral/",
+      "statusCode": 301
+    },
+    {
+      "source": "/category/consejos-practicos/",
+      "destination": "/category/reforma-integral/",
+      "statusCode": 301
+    },
+    {
+      "source": "/uncategorized/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles",
+      "destination": "/vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+      "statusCode": 301
+    },
+    {
+      "source": "/uncategorized/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+      "destination": "/vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+      "statusCode": 301
+    },
+    {
+      "source": "/vivienda-sostenible/suelo-vinlico-en-asturias-ventajas-tipos-y-por-qu-debes-confiar-en-un-profesional",
+      "destination": "/vivienda-sostenible/suelo-vinilico-en-asturias-ventajas-tipos-y-por-que-debes-confiar-en-un-profesional/",
+      "statusCode": 301
+    },
+    {
+      "source": "/vivienda-sostenible/suelo-vinlico-en-asturias-ventajas-tipos-y-por-qu-debes-confiar-en-un-profesional/",
+      "destination": "/vivienda-sostenible/suelo-vinilico-en-asturias-ventajas-tipos-y-por-que-debes-confiar-en-un-profesional/",
+      "statusCode": 301
+    },
+    {
+      "source": "/vivienda-sostenible/tarima-flotante-o-suelo-vinlico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias",
+      "destination": "/vivienda-sostenible/tarima-flotante-o-suelo-vinilico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/vivienda-sostenible/tarima-flotante-o-suelo-vinlico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias/",
+      "destination": "/vivienda-sostenible/tarima-flotante-o-suelo-vinilico-guia-definitiva-para-elegir-el-mejor-suelo-para-tu-casa-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reforma-integral/cmo-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m-gua-2026",
+      "destination": "/reforma-integral/como-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m2-guia-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reforma-integral/cmo-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m-gua-2026/",
+      "destination": "/reforma-integral/como-elegir-suelo-para-tu-reforma-en-asturias-tipos-durabilidad-y-precio-por-m2-guia-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/construccion-casa/casas-prefabricadas-y-minicasas-en-asturias-es-legal-dnde-se-pueden-instalar-gua-2026",
+      "destination": "/construccion-casa/casas-prefabricadas-y-minicasas-en-asturias-es-legal-donde-se-pueden-instalar-guia-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/construccion-casa/casas-prefabricadas-y-minicasas-en-asturias-es-legal-dnde-se-pueden-instalar-gua-2026/",
+      "destination": "/construccion-casa/casas-prefabricadas-y-minicasas-en-asturias-es-legal-donde-se-pueden-instalar-guia-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/aislamiento-termico/cmo-elegir-ventanas-para-tu-casa-en-asturias-materiales-acristalamiento-e-instalacin-gua-2026",
+      "destination": "/aislamiento-termico/como-elegir-ventanas-para-tu-casa-en-asturias-materiales-acristalamiento-e-instalacion-guia-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/aislamiento-termico/cmo-elegir-ventanas-para-tu-casa-en-asturias-materiales-acristalamiento-e-instalacin-gua-2026/",
+      "destination": "/aislamiento-termico/como-elegir-ventanas-para-tu-casa-en-asturias-materiales-acristalamiento-e-instalacion-guia-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-banos/cambio-de-baera-por-plato-de-ducha-en-asturias-2026-gua-completa",
+      "destination": "/reformas-de-banos/cambio-de-banera-por-plato-de-ducha-en-asturias-2026-guia-completa/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-banos/cambio-de-baera-por-plato-de-ducha-en-asturias-2026-gua-completa/",
+      "destination": "/reformas-de-banos/cambio-de-banera-por-plato-de-ducha-en-asturias-2026-guia-completa/",
+      "statusCode": 301
+    },
+    {
+      "source": "/aislamiento-termico/rehabilitacin-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas",
+      "destination": "/aislamiento-termico/rehabilitacion-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas/",
+      "statusCode": 301
+    },
+    {
+      "source": "/aislamiento-termico/rehabilitacin-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas/",
+      "destination": "/aislamiento-termico/rehabilitacion-de-fachadas-y-tejados-en-asturias-2026-soluciones-definitivas/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reforma-integral/reforma-integral-en-asturias-cundo-merece-la-pena-hacerla-gua-2026",
+      "destination": "/reforma-integral/reforma-integral-en-asturias-cuando-merece-la-pena-hacerla-guia-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reforma-integral/reforma-integral-en-asturias-cundo-merece-la-pena-hacerla-gua-2026/",
+      "destination": "/reforma-integral/reforma-integral-en-asturias-cuando-merece-la-pena-hacerla-guia-2026/",
+      "statusCode": 301
+    },
+    {
+      "source": "/aislamiento-termico/aislamiento-termico-en-asturias-2026-gua-definitiva-para-ahorrar-energia",
+      "destination": "/aislamiento-termico/aislamiento-termico-en-asturias-2026-guia-definitiva-para-ahorrar-energia/",
+      "statusCode": 301
+    },
+    {
+      "source": "/aislamiento-termico/aislamiento-termico-en-asturias-2026-gua-definitiva-para-ahorrar-energia/",
+      "destination": "/aislamiento-termico/aislamiento-termico-en-asturias-2026-guia-definitiva-para-ahorrar-energia/",
+      "statusCode": 301
+    },
+    {
+      "source": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m%c2%b2",
+      "destination": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/",
+      "statusCode": 301
+    },
+    {
+      "source": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m%c2%b2/",
+      "destination": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/",
+      "statusCode": 301
+    },
+    {
+      "source": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m%C2%B2",
+      "destination": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/",
+      "statusCode": 301
+    },
+    {
+      "source": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m%C2%B2/",
+      "destination": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/",
+      "statusCode": 301
+    },
+    {
+      "source": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m²",
+      "destination": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/",
+      "statusCode": 301
+    },
+    {
+      "source": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m²/",
+      "destination": "/construccion-casa/cuanto-cuesta-construir-una-casa-en-asturias-precios-reales-por-m2/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-ba%c3%b1os-en-asturias",
+      "destination": "/reformas-de-banos-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-ba%c3%b1os-en-asturias/",
+      "destination": "/reformas-de-banos-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-ba%C3%B1os-en-asturias",
+      "destination": "/reformas-de-banos-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-ba%C3%B1os-en-asturias/",
+      "destination": "/reformas-de-banos-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-baños-en-asturias",
+      "destination": "/reformas-de-banos-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-baños-en-asturias/",
+      "destination": "/reformas-de-banos-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-banos/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles",
+      "destination": "/vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reformas-de-banos/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+      "destination": "/vivienda-sostenible/reforma-de-banos-y-cocinas-en-asturias-como-evitar-condensaciones-y-humedades-con-soluciones-sostenibles/",
+      "statusCode": 301
+    },
+    {
+      "source": "/wp-sitemap.xml",
+      "destination": "/sitemap-index.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/calculadora-presupuesto-reforma",
+      "destination": "/calcula-el-precio-de-tu-reforma-en-asturias/",
+      "statusCode": 301
+    },
+    {
+      "source": "/calculadora-presupuesto-reforma/",
+      "destination": "/calcula-el-precio-de-tu-reforma-en-asturias/",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/tag/:path*",
+      "destination": "/api/tag"
+    },
+    {
+      "source": "/tag/:path*/",
+      "destination": "/api/tag"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/logo-mbl-schema.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "/og-default.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "/favicon.svg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
+}

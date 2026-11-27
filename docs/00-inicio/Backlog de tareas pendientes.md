@@ -4,7 +4,7 @@ tipo: inicio
 titulo: Backlog de tareas pendientes — Construcciones MBL
 estado: vigente
 creado: 2026-11-26
-actualizado: 2026-11-26
+actualizado: 2026-11-27
 ---
 
 # Backlog de tareas pendientes
@@ -35,10 +35,10 @@ Registro vivo de ajustes visuales, técnicos, de marca, contenidos y despliegue 
 
 | ID | Prioridad | Área | Título | Estado | Artefactos / PA |
 |---|---|---|---|---|---|
-| `T-008` | **alta** | Infraestructura | Homologar plataforma de despliegue (`Cloudflare Pages` vs. `Vercel`) para `POST /api/lead` y `301`/`410` | `pendiente` | [[PA-024]], [[RF-MIG-004]], [[ADR-007]] |
-| `T-009` | **alta** | Migración SEO | Incorporar las 3 reglas `301` adicionales de WordPress en `_redirects` (y `vercel.json` si aplica) | `pendiente` | [[RF-MIG-001]], [[CA-MIG-001]] |
+| `T-008` | **alta** | Infraestructura | Homologar plataforma de despliegue (`Cloudflare Pages` vs. `Vercel`) para `POST /api/lead` y `301`/`410` | `completada` (`v1.3.3`) | [[PA-024]], [[RF-MIG-004]], [[ADR-007]] |
+| `T-009` | **alta** | Migración SEO | Incorporar las 3 reglas `301` adicionales de WordPress en `_redirects` y `vercel.json` | `completada` (`v1.3.2`–`v1.3.3`) | [[RF-MIG-001]], [[CA-MIG-001]] |
 | `T-010` | **alta** | Legal / E-E-A-T | Completar CIF definitivo y Registro Mercantil de `MBL CONSTRUCCIONES S.L.` en `src/data/empresa.ts` | `pendiente` | [[PA-001]], [[RF-MIG-003]] |
-| `T-011` | **media** | Prueba social / Entorno | Sincronizar contador de reseñas GBP (`29` → `32`) y configurar variables de entorno en hosting | `pendiente` | [[RF-PROY-003]], [[IE-002]] |
+| `T-011` | **media** | Entorno / Resend | Configurar variables de entorno en hosting y activación de **Resend** (Fase A/B) *(32 reseñas GBP ya sincronizadas en `src/data/empresa.ts`)* | `pendiente` | [[RF-PROY-003]], [[IE-002]] |
 
 ---
 

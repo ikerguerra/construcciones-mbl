@@ -10,7 +10,6 @@
       <button type="button" class="mbl-lightbox-close" aria-label="Cerrar imagen ampliada">×</button>
       <button type="button" class="mbl-lightbox-nav mbl-lightbox-prev" aria-label="Imagen anterior">‹</button>
       <figure class="mbl-lightbox-figure">
-        <img class="mbl-lightbox-img" src="" alt="" />
         <figcaption class="mbl-lightbox-cap">
           <span class="mbl-lightbox-alt"></span>
           <span class="mbl-lightbox-count"></span>
@@ -21,12 +20,14 @@
   `;
   document.body.appendChild(dialog);
 
-  const imgEl = dialog.querySelector('.mbl-lightbox-img');
+  const figureEl = dialog.querySelector('.mbl-lightbox-figure');
+  const capEl = dialog.querySelector('.mbl-lightbox-cap');
   const altEl = dialog.querySelector('.mbl-lightbox-alt');
   const countEl = dialog.querySelector('.mbl-lightbox-count');
   const closeBtn = dialog.querySelector('.mbl-lightbox-close');
   const prevBtn = dialog.querySelector('.mbl-lightbox-prev');
   const nextBtn = dialog.querySelector('.mbl-lightbox-next');
+  let imgEl = null;
 
   let activeList = [];
   let activeIdx = 0;
@@ -58,6 +59,12 @@
     const sourceImg = item.tagName === 'IMG' ? item : item.querySelector('img');
     if (!sourceImg) return;
 
+    if (!imgEl) {
+      imgEl = document.createElement('img');
+      imgEl.className = 'mbl-lightbox-img';
+      figureEl.insertBefore(imgEl, capEl);
+    }
+
     imgEl.src = getBestSrc(sourceImg);
     imgEl.alt = sourceImg.alt || 'Fotografía de proyecto Construcciones MBL';
     altEl.textContent = sourceImg.alt || '';
@@ -87,7 +94,10 @@
     } else {
       dialog.removeAttribute('open');
     }
-    imgEl.removeAttribute('src');
+    if (imgEl) {
+      imgEl.remove();
+      imgEl = null;
+    }
   };
 
   closeBtn.addEventListener('click', closeLightbox);
