@@ -1,4 +1,4 @@
-import { TAG_GONE_HEADERS, TAG_GONE_HTML } from '../src/lib/server/tagHandler';
+import { TAG_GONE_HEADERS, TAG_GONE_HTML } from '../src/lib/server/tagHandler.js';
 
 export default {
   fetch(): Response {

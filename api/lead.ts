@@ -1,4 +1,4 @@
-import { handleLeadPost, jsonLeadResponse } from '../src/lib/server/leadHandler';
+import { handleLeadPost, jsonLeadResponse } from '../src/lib/server/leadHandler.js';
 
 export default {
   async fetch(request: Request): Promise<Response> {

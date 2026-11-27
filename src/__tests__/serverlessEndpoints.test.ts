@@ -191,6 +191,18 @@ describe('Paridad entre vercel.json y public/_redirects + public/_headers', () =
       source: '/tag/:path*',
       destination: '/api/tag',
     });
+    expect(vercel.rewrites).toContainEqual({
+      source: '/tag/:path*/',
+      destination: '/api/tag',
+    });
+
+    const apiDir = path.join(ROOT, 'api');
+    for (const file of fs.readdirSync(apiDir).filter((f) => f.endsWith('.ts'))) {
+      const code = fs.readFileSync(path.join(apiDir, file), 'utf-8');
+      for (const match of code.matchAll(/from\s+['"](\.[^'"]+)['"]/g)) {
+        expect(match[1].endsWith('.js')).toBe(true);
+      }
+    }
 
     const globalHeaders = vercel.headers?.find((h) => h.source === '/(.*)')?.headers ?? [];
     const headerKeys = new Set(globalHeaders.map((h) => h.key));

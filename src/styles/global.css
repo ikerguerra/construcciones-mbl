@@ -366,16 +366,23 @@
 }
 
 .pill.has-dropdown {
-  gap: 6px;
+  gap: 7px;
 }
 
-.nav-chev {
+.pill.has-dropdown::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.8px solid currentColor;
+  border-bottom: 1.8px solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
-.nav-dropdown:hover .nav-chev,
-.nav-dropdown:focus-within .nav-chev {
-  transform: rotate(180deg);
+.nav-dropdown:hover .pill.has-dropdown::after,
+.nav-dropdown:focus-within .pill.has-dropdown::after {
+  transform: translateY(2px) rotate(-135deg);
 }
 
 .nav-dropdown-menu {
@@ -602,14 +609,20 @@ html.has-mobile-nav body {
   display: none;
 }
 
-.mob-acc summary svg {
-  flex-shrink: 0;
-  color: var(--warm);
+.mob-acc summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-right: 2px solid var(--warm);
+  border-bottom: 2px solid var(--warm);
+  transform: translateY(-2px) rotate(45deg);
   transition: transform var(--t-fast) var(--ease-out);
+  flex-shrink: 0;
 }
 
-.mob-acc[open] summary svg {
-  transform: rotate(180deg);
+.mob-acc[open] summary::after {
+  transform: translateY(2px) rotate(-135deg);
 }
 
 .mob-acc-list {
@@ -1994,10 +2007,23 @@ html.has-hero-sheet {
   color: var(--warm);
 }
 
+.gbp-score-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+}
+
 .gbp-badge-card small {
   display: block;
   font-size: 12.5px;
   color: var(--ink-on-dark-muted);
+}
+
+.testi-verify-link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 .testi h3 {
@@ -2295,6 +2321,43 @@ html.has-hero-sheet {
 .zona-card p {
   font-size: 13.5px;
   color: #3b4a41;
+}
+
+.zona-card .zona-card-tramite {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.zonas-extra-bar {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.zonas-extra-copy {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text, #1f2937);
+  font-weight: 500;
+}
+
+.zonas-extra-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill.zonas-extra-pill {
+  font-size: 13px;
+  padding: 6px 14px;
 }
 
 .zona-card .btn-outline,
@@ -3575,6 +3638,25 @@ html.has-hero-sheet {
   min-width: 0;
 }
 
+.cookie-banner-copy h2 {
+  font-family: var(--f-body);
+  text-transform: none;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cookie-banner-copy p {
+  font-size: 13px;
+  color: #d4d4d4;
+  line-height: 1.45;
+}
+
+.cookie-banner-copy a {
+  color: #fff;
+  text-decoration: underline;
+}
+
 .cookie-actions {
   display: flex;
   flex-wrap: wrap;
@@ -3621,6 +3703,16 @@ html.has-hero-sheet {
   display: grid;
   gap: 8px;
   font-size: 13px;
+}
+
+.cookie-pref-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cookie-pref-opt {
+  cursor: pointer;
 }
 
 @media (min-width: 901px) {

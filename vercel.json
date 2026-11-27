@@ -256,6 +256,10 @@
     {
       "source": "/tag/:path*",
       "destination": "/api/tag"
+    },
+    {
+      "source": "/tag/:path*/",
+      "destination": "/api/tag"
     }
   ],
   "headers": [

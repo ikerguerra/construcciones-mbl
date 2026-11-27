@@ -12,12 +12,10 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
   hidden
 >
   <div class="cookie-banner-copy">
-    <h2 id="cookie-title" style="font-family:var(--f-body);text-transform:none;font-size:16px;font-weight:600;margin-bottom:4px">
-      Tu privacidad en Construcciones MBL
-    </h2>
-    <p style="font-size:13px;color:#d4d4d4;line-height:1.45">
+    <h2 id="cookie-title">Tu privacidad en Construcciones MBL</h2>
+    <p>
       Construcciones MBL utiliza cookies propias técnicas y, solo si las aceptas, analíticas de terceros (Google) para medición estadística anónima. Puedes aceptar, rechazar o revisar la{' '}
-      <a href="/politica-de-cookies/" style="color:#fff;text-decoration:underline">Política de Cookies</a>.
+      <a href="/politica-de-cookies/">Política de Cookies</a>.
     </p>
   </div>
 
@@ -29,11 +27,11 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID ?? '';
   </div>
 
   <div id="cookie-prefs-panel" hidden class="cookie-prefs-panel">
-    <label style="display:flex;gap:8px;align-items:center">
+    <label class="cookie-pref-row">
       <input type="checkbox" checked disabled />
       <span>Cookies técnicas necesarias (siempre activas)</span>
     </label>
-    <label style="display:flex;gap:8px;align-items:center;cursor:pointer">
+    <label class="cookie-pref-row cookie-pref-opt">
       <input type="checkbox" id="cookie-opt-analytics" />
       <span>Medición y analítica web de terceros (Google Analytics / Consent Mode v2)</span>
     </label>

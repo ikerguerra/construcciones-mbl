@@ -321,7 +321,7 @@ const schemaGraph = [
             height={380}
           />
           <span class="card-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+            <svg width="13" height="13" aria-hidden="true">
               <use href="#i-clk" />
             </svg>
             <span>{srv.data.plazoVisible}</span>
@@ -331,7 +331,7 @@ const schemaGraph = [
             href={`/${srv.data.slug}/`}
             aria-label={`Ver ${srv.data.tituloCorto}`}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <svg width="16" height="16" aria-hidden="true">
               <use href="#i-ur" />
             </svg>
           </a>
@@ -481,7 +481,7 @@ const schemaGraph = [
         aria-label="Fase anterior"
         data-method-prev
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+        <svg width="16" height="16" aria-hidden="true">
           <use href="#i-up" />
         </svg>
       </button>
@@ -491,7 +491,7 @@ const schemaGraph = [
         aria-label="Fase siguiente"
         data-method-next
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+        <svg width="16" height="16" aria-hidden="true">
           <use href="#i-dn" />
         </svg>
       </button>
@@ -528,12 +528,7 @@ const schemaGraph = [
               href={proyHref}
               aria-label={`Ver ${proy.data.titulo}`}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
+              <svg width="16" height="16" aria-hidden="true">
                 <use href="#i-ur" />
               </svg>
             </a>
@@ -556,7 +551,7 @@ const schemaGraph = [
           aria-label="Proyectos anteriores"
           data-proj-prev
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <svg width="16" height="16" aria-hidden="true">
             <use href="#i-lt" />
           </svg>
         </button>
@@ -566,7 +561,7 @@ const schemaGraph = [
           aria-label="Siguientes proyectos"
           data-proj-next
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <svg width="16" height="16" aria-hidden="true">
             <use href="#i-rt" />
           </svg>
         </button>
@@ -708,10 +703,10 @@ const schemaGraph = [
                 </div>
                 {idx === 0 && (
                   <a
+                    class="testi-verify-link"
                     href={EMPRESA.googleBusiness.hasMap}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style="font-size:12.5px;font-weight:600;color:var(--color-primary);text-decoration:underline"
                   >
                     Comprobar en Google Maps ↗
                   </a>
@@ -729,7 +724,7 @@ const schemaGraph = [
           aria-label="Opinión anterior"
           data-testi-prev
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <svg width="16" height="16" aria-hidden="true">
             <use href="#i-lt" />
           </svg>
         </button>
@@ -739,7 +734,7 @@ const schemaGraph = [
           aria-label="Opinión siguiente"
           data-testi-next
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <svg width="16" height="16" aria-hidden="true">
             <use href="#i-rt" />
           </svg>
         </button>
@@ -766,7 +761,7 @@ const schemaGraph = [
         <div class="gbp-score">
           <strong>{EMPRESA.googleBusiness.ratingValor}</strong>
           <div>
-            <span style="font-weight:600;font-size:14px">
+            <span class="gbp-score-label">
               Valoración en Google Maps
             </span>
             <small>
@@ -816,7 +811,7 @@ const schemaGraph = [
               <span class="zona-card-price">Desde 650 €/m²</span>
             </div>
             <p>{loc.data.subtituloHero}</p>
-            <p style="font-size:12.5px;color:var(--muted);margin-bottom:8px">
+            <p class="zona-card-tramite">
               Trámites en {loc.data.ayuntamiento} · Visita técnica 48 h
             </p>
             <a class="btn-card" href={`/${loc.data.slug}/`}>
@@ -828,17 +823,13 @@ const schemaGraph = [
     </div>
 
     {localidadesSecundarias.length > 0 && (
-      <div class="zonas-extra-bar" style="margin-top:20px;padding:16px 20px;background:var(--color-surface,#fff);border:1px solid var(--color-border,#e5e7eb);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
-        <p style="margin:0;font-size:14px;color:var(--color-text,#1f2937);font-weight:500">
+      <div class="zonas-extra-bar">
+        <p class="zonas-extra-copy">
           <strong>Otras zonas de actuación directa:</strong> Presupuesto cerrado sin coste de desplazamiento en el área central y comarcas de Asturias.
         </p>
-        <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <div class="zonas-extra-links">
           {localidadesSecundarias.map((loc) => (
-            <a
-              href={`/${loc.data.slug}/`}
-              class="pill pill-white"
-              style="font-size:13px;padding:6px 14px"
-            >
+            <a href={`/${loc.data.slug}/`} class="pill pill-white zonas-extra-pill">
               Reformas en {loc.data.municipio} →
             </a>
           ))}

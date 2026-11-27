@@ -426,8 +426,17 @@ def verify_vercel_compat() -> list[str]:
             errors.append(f"vercel.json redirect apunta a destino inexistente en dist/: {v_src} -> {v_dst}")
 
     rewrites = vcfg.get("rewrites", [])
-    if {"source": "/tag/:path*", "destination": "/api/tag"} not in rewrites:
-        errors.append("vercel.json rewrites debe mapear '/tag/:path*' -> '/api/tag'")
+    for tag_src in ("/tag/:path*", "/tag/:path*/"):
+        if {"source": tag_src, "destination": "/api/tag"} not in rewrites:
+            errors.append(f"vercel.json rewrites debe mapear '{tag_src}' -> '/api/tag'")
+
+    api_dir = ROOT / "api"
+    if api_dir.is_dir():
+        for api_file in sorted(api_dir.glob("*.ts")):
+            api_src = api_file.read_text(encoding="utf-8")
+            for imp in re.findall(r"""from\s+['"](\.[^'"]+)['"]""", api_src):
+                if not imp.endswith(".js"):
+                    errors.append(f"{api_file.relative_to(ROOT)} debe usar extension '.js' en import ESM relativo: {imp}")
 
     header_sources = {h.get("source"): {x.get("key") for x in h.get("headers", [])} for h in vcfg.get("headers", [])}
     required_sec_headers = {"Strict-Transport-Security", "X-Content-Type-Options", "Content-Security-Policy"}
