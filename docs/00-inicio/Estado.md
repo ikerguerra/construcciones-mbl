@@ -11,7 +11,7 @@ actualizado: 2026-11-27
 
 ## Cifras del SRS
 <!-- AUTO:cifras -->
-- **Versión del SRS**: `1.3.5` (último hito: `2026-11-27` · generación de índices: `2026-11-27`)
+- **Versión del SRS**: `1.3.6` (último hito: `2026-11-27` · generación de índices: `2026-11-27`)
 - **Preguntas abiertas**: 5 abiertas (0 bloqueantes, 3 altas, 2 medias, 0 bajas) · 19 resueltas/cerradas
 
 | Tipo de artefacto | Cantidad |
@@ -71,12 +71,15 @@ actualizado: 2026-11-27
   - Eliminada la página duplicada `/calculadora-presupuesto-reforma/` del build estático y sitemap XML, añadiendo redirección `301` en 1 salto (con y sin `/`) en `public/_redirects` y `vercel.json` (`50` reglas `301` sincronizadas), consolidando `Header.astro`, `Footer.astro`, portada (`index.astro`), `/llms.txt`, `/empresa/` y los *deep-links* de `src/lib/calculators/urlState.ts`.
 - **Auditoría en vivo en navegador, corrección ESM/routes en Vercel y optimización HTML de Home (`v1.3.5`)**:
   - Superada la auditoría completa en Chromium (`1440×900` y `375×812`) sobre las 6 plantillas representativas con `0` errores (`CLS 0`, `LCP 96–268 ms`, Consent Mode v2, calculadora unificada, captura `/api/lead`, contraste y tamaño táctil `>= 44 px`), corrigiendo `public/js/lightbox.js` para montar `<img>` solo al abrir el visor y evitar nodos sin `src` con `naturalWidth === 0` en el DOM cerrado.
-  - Corregidos dos fallos detectados en la verificación HTTP de pre-producción (`construccionesmbl.vercel.app`): especificadores ESM `.js` explícitos en `api/lead.ts` y `api/tag.ts` + `NodeNext` en `api/tsconfig.json` (eliminando `HTTP 500 FUNCTION_INVOCATION_FAILED` bajo `"type": "module"`), y rewrite `/tag/:path*/` → `/api/tag` en `vercel.json` para servir `410 Gone` con barra final en lugar de `404` (pendiente `git push` para redespliegue en Vercel).
+  - Corregidos dos fallos detectados en la verificación HTTP de pre-producción (`construccionesmbl.vercel.app`): especificadores ESM `.js` explícitos en `api/lead.ts` y `api/tag.ts` + `NodeNext` en `api/tsconfig.json` (eliminando `HTTP 500 FUNCTION_INVOCATION_FAILED` bajo `"type": "module"`), y rewrite `/tag/:path*/` → `/api/tag` en `vercel.json` para servir `410 Gone` con barra final en lugar de `404`; **verificado en vivo** tras `push` (`6cf78df`) con `/api/lead` (`405`/`422`/`200` honeypot), `/tag/*` y `/tag/*/` (`410 noindex, nofollow`) y `301` operativos.
   - Reducido `dist/index.html` de `70 845 B` (`69,18 KB`) a `68 422 B` (`66,8 KB`, más de `3,1 KB` de margen bajo el umbral de `70 KB`) sustituyendo los 5 `<svg>` chevrones de `Header.astro` por `::after` en CSS puro, extrayendo estilos inline repetidos de `CookieBanner.astro` e `index.astro` a `global.css` y eliminando `viewBox` redundantes en `<svg><use>`.
+- **Operativa diferida de correo transaccional con Resend (`v1.3.6`)**:
+  - Confirmado mantener **Resend** (`fetch` HTTP nativo en [[Web formularios e integraciones]]) frente a Nodemailer (dependencia de sockets TCP/SMTP en Cloudflare Workers y credenciales de buzón) o Brevo.
+  - Documentado en [[Web formularios e integraciones]] el despliegue en 2 fases sin cambios de código para sortear la falta de acceso DNS a `construccionesmbl.com` hasta el corte final: verificar un subdominio personal temporal en Resend (`mbl.<dominio-personal>`, región Irlanda) para probar envío y auto-respuesta en Vercel, y migrar `RESEND_FROM_EMAIL` al dominio `construccionesmbl.com` el día del corte DNS.
 
 ## Siguiente paso
 1. **Checklist de requisitos pendientes de pre-despliegue (`RF-MIG-004` y `PA-001`)**:
    - **Completar datos legales (`PA-001`, `RF-MIG-003`)**: sustituir los avisos provisionales `PA-001` en `src/data/empresa.ts` por el `cif` completo y los datos del `registroMercantil` de `MBL CONSTRUCCIONES S.L.`.
-   - **Configurar variables de entorno en los paneles de alojamiento (Cloudflare Pages y Vercel)**: establecer las credenciales propias (`RESEND_API_KEY`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY`, `PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`).
+   - **Activación diferida de Resend en Vercel y analítica (`PUBLIC_GTM_ID`, `PUBLIC_GA4_ID`)**: seguir la operativa de Fase A en [[Web formularios e integraciones]] (subdominio personal `mbl.<dominio-personal>` verificado en Resend + variables `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `LEADS_TO_EMAIL`, `SEND_AUTO_REPLY=true`) para validar la entrega real de formularios antes del corte DNS.
    - **Revisar decisiones de optimización restantes tras la reunión con MBL (`abierta`)**: servicios alto ticket ([[PA-019]]), coberturas contractuales ([[PA-020]]) y material visual ([[PA-021]], [[PA-022]]).
-2. **Publicación de correcciones en Vercel (`v1.3.5`) y corte DNS definitivo (`ADR-007`)**: tras confirmar `git push` hacia `origin/main`, re-verificar en vivo `/api/lead`, `/api/tag` y `/tag/*/` en `https://construccionesmbl.vercel.app`, y finalmente coordinar el corte DNS de `construccionesmbl.com` hacia Cloudflare Pages manteniendo intactos los registros `MX`.
+2. **Lanzamiento definitivo y corte DNS (`ADR-007`)**: al obtener acceso DNS de `construccionesmbl.com`, completar la Fase B de Resend (`send.construccionesmbl.com` / `construccionesmbl.com` en Cloudflare Pages preservando registros `MX`), cargar las variables en Cloudflare Pages, verificar [[CA-MIG-001]] y ejecutar el corte DNS hacia Cloudflare Pages.
